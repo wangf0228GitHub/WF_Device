@@ -1,0 +1,596 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="全局函数">
+      <UniqueIdentifier>{132c8a7d-8aa3-47b2-bcea-8653c5adfd77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="校验">
+      <UniqueIdentifier>{39de897a-038c-4212-b5a0-c3ef6c4d6a61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="显示">
+      <UniqueIdentifier>{31713497-ba19-4c59-a7f7-7d90ecbc4254}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="显示\LCD1602">
+      <UniqueIdentifier>{c3dc72ba-b9b7-4383-bd0c-7f2251dad3e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="显示\LCD_T6963">
+      <UniqueIdentifier>{3542f66a-cfc5-49a0-bac7-f2adb95abfc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="显示\LCM 二线式串行接口">
+      <UniqueIdentifier>{92cc9c39-4a46-47e3-b2b7-529cbce3f7b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="时间相关操作">
+      <UniqueIdentifier>{968e3f66-d5d6-430d-9d83-7a7cba425577}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="X5045">
+      <UniqueIdentifier>{42ef31bf-14ae-4beb-b3c6-df4d2d3b417a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="显示\HT162X">
+      <UniqueIdentifier>{678dd9bf-f428-42ad-9b62-2e82a124bf54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WTH040语音芯片">
+      <UniqueIdentifier>{d422f7d7-50ee-451d-8696-d35345b67ec6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="库文件">
+      <UniqueIdentifier>{4e46ef8b-3d69-4b6e-bcff-ae33397c1279}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="串口">
+      <UniqueIdentifier>{9f82e46b-9150-4d8d-958b-c319cba89310}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="串口\Uart1">
+      <UniqueIdentifier>{d78e9965-9c34-431f-9106-d400ad788102}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="串口\Uart2">
+      <UniqueIdentifier>{196d2b7a-b711-4337-a49f-cecc8075cdb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CHxxx">
+      <UniqueIdentifier>{cf0027a5-dbc3-447c-b9c9-a37094c336aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="显示\LC160160B">
+      <UniqueIdentifier>{06e4e55d-0f76-46b5-9d95-96c4bde30c62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SI4432">
+      <UniqueIdentifier>{7d16da05-a977-4ff7-afa2-1672ec4d0773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="通信协议">
+      <UniqueIdentifier>{7fe7133a-cb2e-468c-8685-88d4e29ccb30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="通信协议\1616">
+      <UniqueIdentifier>{a06ff322-d1eb-4907-9270-da2b1d78d116}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="通信协议\ModbusRTU">
+      <UniqueIdentifier>{938079ec-6600-4283-8201-ad6ee56870fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="通信协议\GPS">
+      <UniqueIdentifier>{08d88500-588f-42ac-825d-d153946df8e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="通信协议\ModbusASCII">
+      <UniqueIdentifier>{b67f7daa-3907-4243-bc10-65fe54f910ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="通信协议\ModbusTcp">
+      <UniqueIdentifier>{00545553-873b-4c0e-a9bc-042556b2b5b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="按键检测">
+      <UniqueIdentifier>{d54bcd33-0437-42bd-8437-429c6cdd0064}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="显示\MAX7221">
+      <UniqueIdentifier>{11d98722-6c8f-4ead-8857-55b8cab85ddd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="显示\TM1638">
+      <UniqueIdentifier>{b77f85eb-b012-4a47-8d76-3ab766e94aa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="显示\TM1650">
+      <UniqueIdentifier>{1204ad1d-753d-4079-a2c2-4cdcc3b7b164}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="显示\OLED">
+      <UniqueIdentifier>{abc75512-131e-4917-b05f-5ec389a65069}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="显示\ST7565R">
+      <UniqueIdentifier>{22d705a4-427c-4bc2-a037-1f45caa090d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CHxxx\CH45x">
+      <UniqueIdentifier>{31269455-8564-451a-b2bd-741392044f67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="通信协议\AT指令">
+      <UniqueIdentifier>{8b972d98-cc1d-47d0-8273-e8d6202b071f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="通信协议\热表">
+      <UniqueIdentifier>{55b33840-4d19-49dd-a618-449a72cd3a7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="数字电位器">
+      <UniqueIdentifier>{1bcb3d3f-9da6-4ad7-9a5b-6c8ef1253530}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="A/D">
+      <UniqueIdentifier>{63afcf83-f650-41a2-857d-b17deb541836}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="A/D\ADS1112">
+      <UniqueIdentifier>{44d23505-5116-4b8b-9592-cc70881dd393}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="D/A">
+      <UniqueIdentifier>{2f5190d5-90cc-4bff-bb86-eee6743a7c76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="D/A\AD5302">
+      <UniqueIdentifier>{b5ccf87f-d8be-4435-8421-4c58ac61025e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="传感器">
+      <UniqueIdentifier>{37b506c4-a7ad-40ac-a92e-f4be5a6230ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="传感器\18b20">
+      <UniqueIdentifier>{d7fdb40d-469a-46e1-a765-ff2760d765dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="时钟">
+      <UniqueIdentifier>{c4d613c8-da4e-48b3-b1d7-23285412c683}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="时钟\DS12C887_Intel">
+      <UniqueIdentifier>{ba076716-08ac-49a2-bbbf-77185f073823}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="时钟\DS1302">
+      <UniqueIdentifier>{816fa788-81e9-468c-8bb1-e06f90980893}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="存储芯片">
+      <UniqueIdentifier>{5ef8da88-9a2f-496c-9c5d-8734d11bb50e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="存储芯片\EEPROM">
+      <UniqueIdentifier>{1a534af4-d087-4652-9d4f-8108f5de32a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="接口">
+      <UniqueIdentifier>{a50d8766-ea03-44df-a80a-14a028fd5ccc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="接口\I2C">
+      <UniqueIdentifier>{0eaba395-5a1f-4e4b-aa93-b5f90e7ce913}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="接口\I2C\24F_I2C">
+      <UniqueIdentifier>{04210e4c-d7cd-41c9-9df4-a721aec04954}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="传感器\MS5536c">
+      <UniqueIdentifier>{4faf5eb0-e3a0-4582-9177-a1f44d46617a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="传感器\MS5803_02ba">
+      <UniqueIdentifier>{190c1852-2eec-4943-abe3-aa2baab904bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="电话拨号HT9200">
+      <UniqueIdentifier>{bed9c220-1dba-45d3-a731-f7470b295a48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="收音机FM_TEA5767">
+      <UniqueIdentifier>{49b512b5-8dc2-4f68-8f8e-7dd41d1f5b0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="接口\PID">
+      <UniqueIdentifier>{3a020420-7969-4a01-8654-e5e0dce08b38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="传感器\SHT25">
+      <UniqueIdentifier>{beb0f010-0ba9-4f09-a7bc-9c4df49bf8de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="传感器\TCN75">
+      <UniqueIdentifier>{8563cbfd-a438-4f02-a02d-5826ccde01f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="接口\SPI">
+      <UniqueIdentifier>{d239eeb4-1b58-4f50-8c01-25df58b9df89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="接口\SS5060光照度计">
+      <UniqueIdentifier>{f6abc823-9cae-47bd-919c-1fea6e433ca1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="D/A\TLV56XX">
+      <UniqueIdentifier>{0078d41f-eb03-4ec5-a983-3c0cd8858ec2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="D/A\TLV5623备份">
+      <UniqueIdentifier>{a86916b1-23e9-4e9f-945d-92f5200e2e74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="算法">
+      <UniqueIdentifier>{79f58e7e-3487-4410-ace0-26d43e631976}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="传感器\MS8607">
+      <UniqueIdentifier>{cc566b23-b10d-4bfe-a409-f21ca33d33d8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DS12C887_Intel.c">
+      <Filter>时钟\DS12C887_Intel</Filter>
+    </ClCompile>
+    <ClCompile Include="afx.c">
+      <Filter>全局函数</Filter>
+    </ClCompile>
+    <ClCompile Include="Uart.c">
+      <Filter>串口\Uart1</Filter>
+    </ClCompile>
+    <ClCompile Include="UartTx1.c">
+      <Filter>串口\Uart1</Filter>
+    </ClCompile>
+    <ClCompile Include="Uart2.c">
+      <Filter>串口\Uart2</Filter>
+    </ClCompile>
+    <ClCompile Include="UartTx2.c">
+      <Filter>串口\Uart2</Filter>
+    </ClCompile>
+    <ClCompile Include="Verify.c">
+      <Filter>校验</Filter>
+    </ClCompile>
+    <ClCompile Include="LCD160X.c">
+      <Filter>显示\LCD1602</Filter>
+    </ClCompile>
+    <ClCompile Include="LCD_T6963.c">
+      <Filter>显示\LCD_T6963</Filter>
+    </ClCompile>
+    <ClCompile Include="LCM.c">
+      <Filter>显示\LCM 二线式串行接口</Filter>
+    </ClCompile>
+    <ClCompile Include="p24F_I2C2.c">
+      <Filter>接口\I2C\24F_I2C</Filter>
+    </ClCompile>
+    <ClCompile Include="SimSPI.c">
+      <Filter>接口\SPI</Filter>
+    </ClCompile>
+    <ClCompile Include="SPI1TxQueue.c">
+      <Filter>接口\SPI</Filter>
+    </ClCompile>
+    <ClCompile Include="SPIROM.c">
+      <Filter>存储芯片\EEPROM</Filter>
+    </ClCompile>
+    <ClCompile Include="GPS_GPRMC.c">
+      <Filter>通信协议\GPS</Filter>
+    </ClCompile>
+    <ClCompile Include="DS1302.c">
+      <Filter>时钟\DS1302</Filter>
+    </ClCompile>
+    <ClCompile Include="BCDTimeOP.c">
+      <Filter>时间相关操作</Filter>
+    </ClCompile>
+    <ClCompile Include="X5045.c">
+      <Filter>X5045</Filter>
+    </ClCompile>
+    <ClCompile Include="OneWire.c">
+      <Filter>传感器\18b20</Filter>
+    </ClCompile>
+    <ClCompile Include="DS18x20.c">
+      <Filter>传感器\18b20</Filter>
+    </ClCompile>
+    <ClCompile Include="HT162X.c">
+      <Filter>显示\HT162X</Filter>
+    </ClCompile>
+    <ClCompile Include="WTH040.c">
+      <Filter>WTH040语音芯片</Filter>
+    </ClCompile>
+    <ClCompile Include="SimI2C.c">
+      <Filter>接口\I2C</Filter>
+    </ClCompile>
+    <ClCompile Include="M24XX.c">
+      <Filter>存储芯片\EEPROM</Filter>
+    </ClCompile>
+    <ClCompile Include="SHT25.c">
+      <Filter>传感器\SHT25</Filter>
+    </ClCompile>
+    <ClCompile Include="MS5536c.c">
+      <Filter>传感器\MS5536c</Filter>
+    </ClCompile>
+    <ClCompile Include="MS5803_02ba.c">
+      <Filter>传感器\MS5803_02ba</Filter>
+    </ClCompile>
+    <ClCompile Include="TypeDefine.c" />
+    <ClCompile Include="TM1638.c">
+      <Filter>显示\TM1638</Filter>
+    </ClCompile>
+    <ClCompile Include="LC160160B.c">
+      <Filter>显示\LC160160B</Filter>
+    </ClCompile>
+    <ClCompile Include="AD5302.c">
+      <Filter>D/A\AD5302</Filter>
+    </ClCompile>
+    <ClCompile Include="Si4432.c">
+      <Filter>SI4432</Filter>
+    </ClCompile>
+    <ClCompile Include="CP1616_Client.c">
+      <Filter>通信协议\1616</Filter>
+    </ClCompile>
+    <ClCompile Include="Modbus_ASCII.c">
+      <Filter>通信协议\ModbusASCII</Filter>
+    </ClCompile>
+    <ClCompile Include="ModbusTCP_Master.c">
+      <Filter>通信协议\ModbusTcp</Filter>
+    </ClCompile>
+    <ClCompile Include="ModbusRTU_Master.c">
+      <Filter>通信协议\ModbusRTU</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyCheck.c">
+      <Filter>按键检测</Filter>
+    </ClCompile>
+    <ClCompile Include="ADS1112.c">
+      <Filter>A/D\ADS1112</Filter>
+    </ClCompile>
+    <ClCompile Include="Max7221.c">
+      <Filter>显示\MAX7221</Filter>
+    </ClCompile>
+    <ClCompile Include="TM1650.c">
+      <Filter>显示\TM1650</Filter>
+    </ClCompile>
+    <ClCompile Include="CP1616_Master.c">
+      <Filter>通信协议\1616</Filter>
+    </ClCompile>
+    <ClCompile Include="OLED.c">
+      <Filter>显示\OLED</Filter>
+    </ClCompile>
+    <ClCompile Include="PID.c">
+      <Filter>接口\PID</Filter>
+    </ClCompile>
+    <ClCompile Include="ST7565R.c">
+      <Filter>显示\ST7565R</Filter>
+    </ClCompile>
+    <ClCompile Include="wf_flashwrite.c" />
+    <ClCompile Include="FM_TEA5767.c">
+      <Filter>收音机FM_TEA5767</Filter>
+    </ClCompile>
+    <ClCompile Include="HT9200.c">
+      <Filter>电话拨号HT9200</Filter>
+    </ClCompile>
+    <ClCompile Include="TCN75.c">
+      <Filter>传感器\TCN75</Filter>
+    </ClCompile>
+    <ClCompile Include="ModbusRTU_Client.c">
+      <Filter>通信协议\ModbusRTU</Filter>
+    </ClCompile>
+    <ClCompile Include="CH45x.c">
+      <Filter>CHxxx\CH45x</Filter>
+    </ClCompile>
+    <ClCompile Include="ATCommand.c">
+      <Filter>通信协议\AT指令</Filter>
+    </ClCompile>
+    <ClCompile Include="SS5060.c">
+      <Filter>接口\SS5060光照度计</Filter>
+    </ClCompile>
+    <ClCompile Include="Si4463.c">
+      <Filter>SI4432</Filter>
+    </ClCompile>
+    <ClCompile Include="CharTimeOP.c">
+      <Filter>时间相关操作</Filter>
+    </ClCompile>
+    <ClCompile Include="AS1080.c">
+      <Filter>按键检测</Filter>
+    </ClCompile>
+    <ClCompile Include="ReBiaoCP.c">
+      <Filter>通信协议\热表</Filter>
+    </ClCompile>
+    <ClCompile Include="X9C103.c">
+      <Filter>数字电位器</Filter>
+    </ClCompile>
+    <ClCompile Include="TLV56XX.c">
+      <Filter>D/A\TLV56XX</Filter>
+    </ClCompile>
+    <ClCompile Include="TLV5623.c">
+      <Filter>D/A\TLV5623备份</Filter>
+    </ClCompile>
+    <ClCompile Include="lcyHash.c">
+      <Filter>算法</Filter>
+    </ClCompile>
+    <ClCompile Include="NMEA0183.c">
+      <Filter>通信协议\GPS</Filter>
+    </ClCompile>
+    <ClCompile Include="MS8607.c">
+      <Filter>传感器\MS8607</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DS12C887_Intel.h">
+      <Filter>时钟\DS12C887_Intel</Filter>
+    </ClInclude>
+    <ClInclude Include="afx.h">
+      <Filter>全局函数</Filter>
+    </ClInclude>
+    <ClInclude Include="Uart.h">
+      <Filter>串口\Uart1</Filter>
+    </ClInclude>
+    <ClInclude Include="UartTx1.h">
+      <Filter>串口\Uart1</Filter>
+    </ClInclude>
+    <ClInclude Include="Uart2.h">
+      <Filter>串口\Uart2</Filter>
+    </ClInclude>
+    <ClInclude Include="UartTx2.h">
+      <Filter>串口\Uart2</Filter>
+    </ClInclude>
+    <ClInclude Include="Verify.h">
+      <Filter>校验</Filter>
+    </ClInclude>
+    <ClInclude Include="LCD160X.h">
+      <Filter>显示\LCD1602</Filter>
+    </ClInclude>
+    <ClInclude Include="LCD_T6963.h">
+      <Filter>显示\LCD_T6963</Filter>
+    </ClInclude>
+    <ClInclude Include="LCM.h">
+      <Filter>显示\LCM 二线式串行接口</Filter>
+    </ClInclude>
+    <ClInclude Include="I2CDefs.h">
+      <Filter>接口\I2C\24F_I2C</Filter>
+    </ClInclude>
+    <ClInclude Include="p24F_I2C2.h">
+      <Filter>接口\I2C\24F_I2C</Filter>
+    </ClInclude>
+    <ClInclude Include="SimSPI.h">
+      <Filter>接口\SPI</Filter>
+    </ClInclude>
+    <ClInclude Include="SPI1TxQueue.h">
+      <Filter>接口\SPI</Filter>
+    </ClInclude>
+    <ClInclude Include="SPIROM.h">
+      <Filter>存储芯片\EEPROM</Filter>
+    </ClInclude>
+    <ClInclude Include="GPS_GPRMC.h">
+      <Filter>通信协议\GPS</Filter>
+    </ClInclude>
+    <ClInclude Include="DS1302.h">
+      <Filter>时钟\DS1302</Filter>
+    </ClInclude>
+    <ClInclude Include="BCDTimeOP.h">
+      <Filter>时间相关操作</Filter>
+    </ClInclude>
+    <ClInclude Include="X5045.h">
+      <Filter>X5045</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeDefine.h" />
+    <ClInclude Include="OneWire.h">
+      <Filter>传感器\18b20</Filter>
+    </ClInclude>
+    <ClInclude Include="DS18x20.h">
+      <Filter>传感器\18b20</Filter>
+    </ClInclude>
+    <ClInclude Include="HT162X.h">
+      <Filter>显示\HT162X</Filter>
+    </ClInclude>
+    <ClInclude Include="WTH040.h">
+      <Filter>WTH040语音芯片</Filter>
+    </ClInclude>
+    <ClInclude Include="SimI2C.h">
+      <Filter>接口\I2C</Filter>
+    </ClInclude>
+    <ClInclude Include="M24XX.h">
+      <Filter>存储芯片\EEPROM</Filter>
+    </ClInclude>
+    <ClInclude Include="SHT25.h">
+      <Filter>传感器\SHT25</Filter>
+    </ClInclude>
+    <ClInclude Include="MS5536c.h">
+      <Filter>传感器\MS5536c</Filter>
+    </ClInclude>
+    <ClInclude Include="MS5803_02ba.h">
+      <Filter>传感器\MS5803_02ba</Filter>
+    </ClInclude>
+    <ClInclude Include="TM1638.h">
+      <Filter>显示\TM1638</Filter>
+    </ClInclude>
+    <ClInclude Include="LC160160B.h">
+      <Filter>显示\LC160160B</Filter>
+    </ClInclude>
+    <ClInclude Include="AD5302.h">
+      <Filter>D/A\AD5302</Filter>
+    </ClInclude>
+    <ClInclude Include="Si4432.h">
+      <Filter>SI4432</Filter>
+    </ClInclude>
+    <ClInclude Include="CP1616_Client.h">
+      <Filter>通信协议\1616</Filter>
+    </ClInclude>
+    <ClInclude Include="Modbus_ASCII.h">
+      <Filter>通信协议\ModbusASCII</Filter>
+    </ClInclude>
+    <ClInclude Include="ModbusTCP_Master.h">
+      <Filter>通信协议\ModbusTcp</Filter>
+    </ClInclude>
+    <ClInclude Include="ModbusRTU_Master.h">
+      <Filter>通信协议\ModbusRTU</Filter>
+    </ClInclude>
+    <ClInclude Include="Max7221.h">
+      <Filter>显示\MAX7221</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyCheck.h">
+      <Filter>按键检测</Filter>
+    </ClInclude>
+    <ClInclude Include="ADS1112.h">
+      <Filter>A/D\ADS1112</Filter>
+    </ClInclude>
+    <ClInclude Include="TM1650.h">
+      <Filter>显示\TM1650</Filter>
+    </ClInclude>
+    <ClInclude Include="CP1616_Master.h">
+      <Filter>通信协议\1616</Filter>
+    </ClInclude>
+    <ClInclude Include="OLED.h">
+      <Filter>显示\OLED</Filter>
+    </ClInclude>
+    <ClInclude Include="PID.h">
+      <Filter>接口\PID</Filter>
+    </ClInclude>
+    <ClInclude Include="ST7565R.h">
+      <Filter>显示\ST7565R</Filter>
+    </ClInclude>
+    <ClInclude Include="FM_TEA5767.h">
+      <Filter>收音机FM_TEA5767</Filter>
+    </ClInclude>
+    <ClInclude Include="HT9200.h">
+      <Filter>电话拨号HT9200</Filter>
+    </ClInclude>
+    <ClInclude Include="TCN75.h">
+      <Filter>传感器\TCN75</Filter>
+    </ClInclude>
+    <ClInclude Include="ModbusRTU_Client.h">
+      <Filter>通信协议\ModbusRTU</Filter>
+    </ClInclude>
+    <ClInclude Include="CH45x.h">
+      <Filter>CHxxx\CH45x</Filter>
+    </ClInclude>
+    <ClInclude Include="ATCommand.h">
+      <Filter>通信协议\AT指令</Filter>
+    </ClInclude>
+    <ClInclude Include="SS5060.h">
+      <Filter>接口\SS5060光照度计</Filter>
+    </ClInclude>
+    <ClInclude Include="Si4463.h">
+      <Filter>SI4432</Filter>
+    </ClInclude>
+    <ClInclude Include="CharTimeOP.h">
+      <Filter>时间相关操作</Filter>
+    </ClInclude>
+    <ClInclude Include="AS1080.h">
+      <Filter>按键检测</Filter>
+    </ClInclude>
+    <ClInclude Include="ReBiaoCP.h">
+      <Filter>通信协议\热表</Filter>
+    </ClInclude>
+    <ClInclude Include="X9C103.h">
+      <Filter>数字电位器</Filter>
+    </ClInclude>
+    <ClInclude Include="TLV56XX.h">
+      <Filter>D/A\TLV56XX</Filter>
+    </ClInclude>
+    <ClInclude Include="TLV5623.h">
+      <Filter>D/A\TLV5623备份</Filter>
+    </ClInclude>
+    <ClInclude Include="lcyHash.h">
+      <Filter>算法</Filter>
+    </ClInclude>
+    <ClInclude Include="NMEA0183.h">
+      <Filter>通信协议\GPS</Filter>
+    </ClInclude>
+    <ClInclude Include="MS8607.h">
+      <Filter>传感器\MS8607</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="芯片\24cxx.pdf">
+      <Filter>存储芯片\EEPROM</Filter>
+    </None>
+    <None Include="芯片\SPI串行EEPROM系列数据手册.pdf">
+      <Filter>存储芯片\EEPROM</Filter>
+    </None>
+    <None Include="芯片\DS1302中文使用手册.pdf">
+      <Filter>时钟\DS1302</Filter>
+    </None>
+    <None Include="芯片\ht1621b中文资料.pdf">
+      <Filter>显示\HT162X</Filter>
+    </None>
+    <None Include="芯片\ht1622.pdf">
+      <Filter>显示\HT162X</Filter>
+    </None>
+    <None Include="芯片\ch452.pdf">
+      <Filter>CHxxx\CH45x</Filter>
+    </None>
+    <None Include="芯片\ch452官网驱动.rar">
+      <Filter>CHxxx\CH45x</Filter>
+    </None>
+    <None Include="芯片\tm1638.pdf">
+      <Filter>显示\TM1638</Filter>
+    </None>
+    <None Include="芯片\WTH040语音芯片使用资料V1.2.pdf">
+      <Filter>WTH040语音芯片</Filter>
+    </None>
+    <None Include="芯片\LC160160B\LC160160B程序.txt">
+      <Filter>显示\LC160160B</Filter>
+    </None>
+    <None Include="芯片\LC160160B\LC160160B说明书.PDF">
+      <Filter>显示\LC160160B</Filter>
+    </None>
+    <None Include="芯片\LC160160B\UC1698.pdf">
+      <Filter>显示\LC160160B</Filter>
+    </None>
+    <None Include="芯片\AD5302.pdf">
+      <Filter>D/A\AD5302</Filter>
+    </None>
+  </ItemGroup>
+</Project>

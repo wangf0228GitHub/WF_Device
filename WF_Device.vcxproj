@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="2.0|Win32">
+      <Configuration>2.0</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{90B86704-708E-4979-BE79-BAC2870D5B98}</ProjectGuid>
+    <RootNamespace>WF_Device</RootNamespace>
+    <SccProjectName>SAK</SccProjectName>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccProvider>SAK</SccProvider>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='2.0|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='2.0|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='2.0|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='2.0|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='2.0|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='2.0|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='2.0|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='2.0|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Program Files\HI-TECH Software\PICC-18\PRO\9.63\include;D:\Program Files\HI-TECH Software\PICC\9.71a\include;$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='2.0|Win32'">C:\Program Files\HI-TECH Software\PICC-18\PRO\9.63\include;D:\Program Files\HI-TECH Software\PICC\9.71a\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>__PICC__;__PICC18__;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='2.0|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>__PICC__;__PICC18__;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AD5302.c" />
+    <ClCompile Include="ADS1112.c" />
+    <ClCompile Include="AS1080.c" />
+    <ClCompile Include="ATCommand.c" />
+    <ClCompile Include="CH45x.c" />
+    <ClCompile Include="CharTimeOP.c" />
+    <ClCompile Include="CP1616_Client.c" />
+    <ClCompile Include="CP1616_Master.c" />
+    <ClCompile Include="DS12C887_Intel.c" />
+    <ClCompile Include="afx.c" />
+    <ClCompile Include="DS18x20.c" />
+    <ClCompile Include="FM_TEA5767.c" />
+    <ClCompile Include="HT162X.c" />
+    <ClCompile Include="HT9200.c" />
+    <ClCompile Include="KeyCheck.c" />
+    <ClCompile Include="LC160160B.c" />
+    <ClCompile Include="lcyHash.c" />
+    <ClCompile Include="M24XX.c" />
+    <ClCompile Include="Max7221.c" />
+    <ClCompile Include="ModbusRTU_Client.c" />
+    <ClCompile Include="MS5536c.c" />
+    <ClCompile Include="MS5803_02ba.c" />
+    <ClCompile Include="ModbusRTU_Master.c" />
+    <ClCompile Include="ModbusTCP_Master.c" />
+    <ClCompile Include="MS8607.c" />
+    <ClCompile Include="NMEA0183.c" />
+    <ClCompile Include="OLED.c" />
+    <ClCompile Include="OneWire.c" />
+    <ClCompile Include="PID.c" />
+    <ClCompile Include="ReBiaoCP.c" />
+    <ClCompile Include="SHT25.c" />
+    <ClCompile Include="Si4432.c" />
+    <ClCompile Include="Si4463.c" />
+    <ClCompile Include="SimI2C.c" />
+    <ClCompile Include="SS5060.c" />
+    <ClCompile Include="ST7565R.c" />
+    <ClCompile Include="TCN75.c" />
+    <ClCompile Include="TLV5623.c" />
+    <ClCompile Include="TLV56XX.c" />
+    <ClCompile Include="TM1638.c" />
+    <ClCompile Include="TM1650.c" />
+    <ClCompile Include="TypeDefine.c" />
+    <ClCompile Include="Uart.c" />
+    <ClCompile Include="UartTx1.c" />
+    <ClCompile Include="Uart2.c" />
+    <ClCompile Include="UartTx2.c" />
+    <ClCompile Include="Modbus_ASCII.c" />
+    <ClCompile Include="Verify.c" />
+    <ClCompile Include="LCD160X.c" />
+    <ClCompile Include="LCD_T6963.c" />
+    <ClCompile Include="LCM.c" />
+    <ClCompile Include="p24F_I2C2.c" />
+    <ClCompile Include="SimSPI.c" />
+    <ClCompile Include="SPI1TxQueue.c" />
+    <ClCompile Include="SPIROM.c" />
+    <ClCompile Include="GPS_GPRMC.c" />
+    <ClCompile Include="DS1302.c" />
+    <ClCompile Include="BCDTimeOP.c" />
+    <ClCompile Include="wf_flashwrite.c" />
+    <ClCompile Include="WTH040.c" />
+    <ClCompile Include="X5045.c" />
+    <ClCompile Include="X9C103.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AD5302.h" />
+    <ClInclude Include="ADS1112.h" />
+    <ClInclude Include="AS1080.h" />
+    <ClInclude Include="ATCommand.h" />
+    <ClInclude Include="CH45x.h" />
+    <ClInclude Include="CharTimeOP.h" />
+    <ClInclude Include="CP1616_Client.h" />
+    <ClInclude Include="CP1616_Master.h" />
+    <ClInclude Include="DS12C887_Intel.h" />
+    <ClInclude Include="afx.h" />
+    <ClInclude Include="DS18x20.h" />
+    <ClInclude Include="FM_TEA5767.h" />
+    <ClInclude Include="HT162X.h" />
+    <ClInclude Include="HT9200.h" />
+    <ClInclude Include="KeyCheck.h" />
+    <ClInclude Include="LC160160B.h" />
+    <ClInclude Include="lcyHash.h" />
+    <ClInclude Include="M24XX.h" />
+    <ClInclude Include="Max7221.h" />
+    <ClInclude Include="ModbusRTU_Client.h" />
+    <ClInclude Include="MS5536c.h" />
+    <ClInclude Include="MS5803_02ba.h" />
+    <ClInclude Include="ModbusRTU_Master.h" />
+    <ClInclude Include="ModbusTCP_Master.h" />
+    <ClInclude Include="MS8607.h" />
+    <ClInclude Include="NMEA0183.h" />
+    <ClInclude Include="OLED.h" />
+    <ClInclude Include="OneWire.h" />
+    <ClInclude Include="PID.h" />
+    <ClInclude Include="ReBiaoCP.h" />
+    <ClInclude Include="SHT25.h" />
+    <ClInclude Include="Si4432.h" />
+    <ClInclude Include="Si4463.h" />
+    <ClInclude Include="SimI2C.h" />
+    <ClInclude Include="SS5060.h" />
+    <ClInclude Include="ST7565R.h" />
+    <ClInclude Include="TCN75.h" />
+    <ClInclude Include="TLV5623.h" />
+    <ClInclude Include="TLV56XX.h" />
+    <ClInclude Include="TM1638.h" />
+    <ClInclude Include="TM1650.h" />
+    <ClInclude Include="Uart.h" />
+    <ClInclude Include="UartTx1.h" />
+    <ClInclude Include="Uart2.h" />
+    <ClInclude Include="UartTx2.h" />
+    <ClInclude Include="Modbus_ASCII.h" />
+    <ClInclude Include="Verify.h" />
+    <ClInclude Include="LCD160X.h" />
+    <ClInclude Include="LCD_T6963.h" />
+    <ClInclude Include="LCM.h" />
+    <ClInclude Include="I2CDefs.h" />
+    <ClInclude Include="p24F_I2C2.h" />
+    <ClInclude Include="SimSPI.h" />
+    <ClInclude Include="SPI1TxQueue.h" />
+    <ClInclude Include="SPIROM.h" />
+    <ClInclude Include="GPS_GPRMC.h" />
+    <ClInclude Include="DS1302.h" />
+    <ClInclude Include="BCDTimeOP.h" />
+    <ClInclude Include="WTH040.h" />
+    <ClInclude Include="X5045.h" />
+    <ClInclude Include="TypeDefine.h" />
+    <ClInclude Include="X9C103.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="芯片\24cxx.pdf" />
+    <None Include="芯片\AD5302.pdf" />
+    <None Include="芯片\ch452.pdf" />
+    <None Include="芯片\ch452官网驱动.rar" />
+    <None Include="芯片\DS1302中文使用手册.pdf" />
+    <None Include="芯片\ht1621b中文资料.pdf" />
+    <None Include="芯片\ht1622.pdf" />
+    <None Include="芯片\LC160160B\LC160160B程序.txt" />
+    <None Include="芯片\LC160160B\LC160160B说明书.PDF" />
+    <None Include="芯片\LC160160B\UC1698.pdf" />
+    <None Include="芯片\SPI串行EEPROM系列数据手册.pdf" />
+    <None Include="芯片\tm1638.pdf" />
+    <None Include="芯片\WTH040语音芯片使用资料V1.2.pdf" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

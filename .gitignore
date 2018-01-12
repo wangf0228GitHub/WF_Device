@@ -1,0 +1,101 @@
+
+#Ignore thumbnails created by Windows
+Thumbs.db
+#Ignore files built by Visual Studio
+*.obj
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+[Bb]in
+[Dd]ebug*/
+*.lib
+*.sbr
+obj/
+[Rr]elease*/
+_ReSharper*/
+[Tt]est[Rr]esult*
+.vs/
+#Nuget packages folder
+packages/
+[Ii]pch*/
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+
+*.sdf
+#pcb
+*.Sch
+*.SchDoc
+*.pcb
+*.PcbDoc
+*.SchdocPreview
+*.PcbDoc.htm
+*.PcbDocPreview
+
+*.doc
+
+
+#mplab
+
+*.mptags
+*.tagsrc
+*.DBK
+*.PWI
+*.dep
+*.tmp
+*.html
+*.pre
+*.p1
+*.hxl
+
+
+#NET
+[Oo]bj*/
+[Bb]in*/
+[Tt]emp*/
+[Hh]istory*/
+*.opensdf
+芯片*/
