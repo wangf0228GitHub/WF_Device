@@ -25,7 +25,13 @@
 ///---------------------------------------------------------------------------
 typedef union
 {	
-	unsigned char u8;
+	uint8_t u8s[4];
+	float f;
+}float_wf;
+
+typedef union
+{	
+	uint8_t u8;
 	struct
 	{
 		unsigned b0:1;
@@ -37,11 +43,11 @@ typedef union
 		unsigned b6:1;
 		unsigned b7:1;		
 	}bits;
-}uchar;
+}uchar_wf;
 typedef union
 {	
-	unsigned char u8s[2];
-	unsigned int u16;
+	uint8_t u8s[2];
+	uint16_t u16;
 	struct
 	{
 		unsigned b0:1;
@@ -63,22 +69,22 @@ typedef union
 	}bits;
 	struct
 	{
-		unsigned char u8L;
-		unsigned char u8H;
+		uint8_t u8L;
+		uint8_t u8H;
 	};
-}uint;
+}ushort_wf;
 typedef union 
 {	
-	unsigned char u8s[3];	
+	uint8_t u8s[3];	
 	struct
 	{
-		uint	u16_0;
-		unsigned char	u8_1;
+		ushort_wf	u16_0;
+		uint8_t	u8_1;
 	}byte21;
 	struct
 	{
-		unsigned char	u8_0;
-		uint	u16_1;
+		uint8_t	u8_0;
+		ushort_wf	u16_1;
 	}byte12;
 	struct
 	{
@@ -107,18 +113,13 @@ typedef union
 		unsigned b22:1;
 		unsigned b23:1;
 	}bits;
-}uchar3;
+}uchar3_wf;
 
 typedef union 
 {	
-	unsigned char u8s[4];
-	unsigned int u16s[2];
-	unsigned long u32;
-	struct
-	{
-		uint u16L;
-		uint u16H;
-	};
+	uint8_t u8s[4];
+	uint16_t u16s[2];
+	uint32_t u32;
 	struct
 	{
 		unsigned b0:1;
@@ -154,13 +155,8 @@ typedef union
 		unsigned b30:1;
 		unsigned b31:1;
 	}bits;
-}ulong;
-typedef union 
-{	
-	unsigned char u8s[4];
-	unsigned int u16s[2];
-	double f32;
-}float32;
+}uint_wf;
+
 /************************************************************************/
 /* ÓÐ·ûºÅÊý                                                             */
 /************************************************************************/
@@ -168,45 +164,46 @@ typedef union
 {	
 	struct
 	{
-		unsigned char s8_l;
+		uint8_t s8_l;
 		signed char	u8_h;
 	}s8s;
-	int s16;
-	unsigned int u16;
-}sint;
+	short s16;
+	uint16_t u16;
+}sshort_wf;
 
 typedef union 
 {	
 	struct
 	{
-		unsigned char	s8_0;
-		unsigned char	u8_1;
-		unsigned char	u8_2;
+		uint8_t	s8_0;
+		uint8_t	u8_1;
+		uint8_t	u8_2;
 		signed char	s8_3;
 	}s8s;
 	struct
 	{
-		uint	u16_l;
-		sint	s16_h;	
+		ushort_wf	u16_l;
+		sshort_wf	s16_h;	
 	}s16s;
 	struct
 	{
-		unsigned int	u16_l;
-		int	s16_h;	
+		uint16_t	u16_l;
+		short	s16_h;	
 	}s16s1;
-	long s32;
-	unsigned long u32;
-}slong;
+	int s32;
+	uint32_t u32;
+}sint_wf;
 
+#ifdef unsigned64
 typedef struct
 {	
-	unsigned long hi, lo;
+	uint32_t hi, lo;
 }u64;
-u64 u64_Init (unsigned long hi, unsigned long lo);
+u64 u64_Init (uint32_t hi, uint32_t lo);
 /* Return a u64 value representing LO.  */
-u64 u64_lo (unsigned long lo);
-u64 u64_hi (unsigned long hi);
-unsigned char u64_lt (u64 x, u64 y);
+u64 u64_lo (uint32_t lo);
+u64 u64_hi (uint32_t hi);
+uint8_t u64_lt (u64 x, u64 y);
 /* Return X & Y.  */
 u64 u64_and (u64 x, u64 y);
 /* Return X | Y.  */
@@ -214,15 +211,17 @@ u64 u64_or (u64 x, u64 y);
 /* Return X ^ Y.  */
 u64 u64_xor (u64 x, u64 y);
 /* Return X + Y.  */
-u64 u64_plus (u64 x, unsigned long hi,unsigned long lo);
-u64 u64_decrease (u64 x, unsigned long hi,unsigned long lo);
+u64 u64_plus (u64 x, uint32_t hi,uint32_t lo);
+u64 u64_decrease (u64 x, uint32_t hi,uint32_t lo);
 /* Return X << N.  */
 u64 u64_shl (u64 x, int n);
 /* Return X >> N.  */
 u64 u64_shr (u64 x, int n);
-u64 u64_lmul(unsigned long multiplier, unsigned long multiplicand);
-u64 u64_lmuu64(u64 multiplier, unsigned long multiplicand);
-u64 u64_u64muu64(u64 multiplier, unsigned long hi,unsigned long lo);
+u64 u64_lmul(uint32_t multiplier, uint32_t multiplicand);
+u64 u64_lmuu64(u64 multiplier, uint32_t multiplicand);
+u64 u64_u64muu64(u64 multiplier, uint32_t hi,uint32_t lo);
+#endif
+
 #endif
 
 

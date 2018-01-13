@@ -1,11 +1,29 @@
 #ifndef __VERIFY_H__
-#define __VERUFY_H__
-unsigned char GetVerify_Sum(unsigned char* pBuff,unsigned int Count);
-unsigned char GetVerify_CRC8(unsigned char* pBuff, unsigned int Count);
+#define __VERIFY_H__
+
+#include "main.h"
+#include "TypeDefine.h"
+
+#define VERIFYSUM(x,y) ((uint8_t)(x+y))
+#define VERIFYXOR(x,y) ((uint8_t)(x^y))
+
+
+#ifdef Verify_Sum
+uint8_t GetVerify_Sum(uint8_t* pBuff,uint32_t Count);
+#endif
+
+#ifdef Verify_CRC8
+uint8_t GetVerify_CRC8(uint8_t* pBuff, uint32_t Count);
+#endif
+
 
 #ifdef Verify_CRC16
-
-uint GetVerify_CRC16(unsigned char *puchMsg,unsigned int usDataLen);
+#define VERIFYCRC16(x) uIndex = crc.u8H ^ x ;	\
+	crc.u8H = crc.u8L ^ auchCRCHi[uIndex] ;	\
+	crc.u8L = auchCRCLo[uIndex] ;
+extern const uint8_t auchCRCHi[];
+extern const uint8_t auchCRCLo[];
+ushort_wf GetVerify_CRC16(uint8_t *puchMsg,uint32_t usDataLen);
 
 #ifndef Verify_CRC16_Init
 #define Verify_CRC16_Init 0xffff
@@ -13,14 +31,9 @@ uint GetVerify_CRC16(unsigned char *puchMsg,unsigned int usDataLen);
 
 #endif
 
+#ifdef Verify_byteXOR
+uint8_t GetVerify_byteXOR(uint8_t* pBuff, uint32_t Count);
+uint8_t GetVerify_byteXOR_WithOrigV(uint8_t origV,uint8_t* pBuff, uint32_t Count);
+#endif
 
-unsigned char GetVerify_byteXOR(unsigned char* pBuff, unsigned int Count);
-unsigned char GetVerify_byteXOR_WithOrigV(unsigned char origV,unsigned char* pBuff, unsigned int Count);
-#define VERIFYSUM(x,y) ((unsigned char)(x+y))
-extern const unsigned char auchCRCHi[];
-extern const unsigned char auchCRCLo[];
-#define VERIFYCRC16(x) uIndex = crc.u8H ^ x ;	\
-						crc.u8H = crc.u8L ^ auchCRCHi[uIndex] ;	\
-						crc.u8L = auchCRCLo[uIndex] ;
-#define VERIFYXOR(x,y) ((unsigned char)(x^y))
 #endif

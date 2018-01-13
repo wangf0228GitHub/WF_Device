@@ -1,9 +1,9 @@
-#include "HardwareProfile.h"
-
+#include "main.h"
+#include "ADS1112.h"
 #ifdef SimI2C
 #include "SimI2C.h"
 #endif
-uint ADS1112_Result;
+ushort_wf ADS1112_Result;
 _ADS1112_Status ADS1112_Status;
 #ifdef SimI2C
 void ADS1112_Init(void)
@@ -50,7 +50,7 @@ unsigned char ADS1112_Write()
 		break;
 	}
 	SimI2C_Stop();
-	__delay_us(5);
+	//wfDelay_us(5);
 	return bRight;
 }
 #endif

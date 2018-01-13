@@ -1,10 +1,55 @@
-#include "HardwareProfile.h"
-#include "TypeDefine.h"
+
+#include "Verify.h"
+
+#ifdef Verify_Sum
+uint8_t GetVerify_Sum(uint8_t* pBuff,uint32_t Count)
+{
+	uint8_t sum,i;
+	sum=0;
+	for(i=0;i<Count;i++)
+	{
+		sum=(uint8_t)(sum+pBuff[i]);
+	}
+	return sum;
+}
+#endif
+
+#ifdef Verify_CRC8
 #define CRC8INIT	0x00
 #define CRC8POLY	0x18              //0X18 = X^8+X^5+X^4+X^0
+uint8_t GetVerify_CRC8( uint8_t* pBuff, uint32_t Count )
+{
+	uint8_t crc;
+	uint32_t i;
+	uint8_t bit_counter;
+	uint8_t data;
+	uint8_t feedback_bit;
+
+	crc = CRC8INIT;
+
+	for(i = 0; i != Count; i++)
+	{
+		data = pBuff[i];
+		bit_counter = 8;
+		do 
+		{ 
+			feedback_bit = (crc ^ data) & 0x01;
+			if ( feedback_bit == 0x01 ) 
+				crc = crc ^ CRC8POLY;
+			crc = (crc >> 1) & 0x7F;
+			if ( feedback_bit == 0x01 ) 
+				crc = crc | 0x80;
+			data = data >> 1;
+			bit_counter--;
+		}while (bit_counter > 0);
+	}
+	return crc;
+}
+#endif
+
 #ifdef Verify_CRC16
 /* CRC 高位字节值表 */
-const unsigned char auchCRCHi[] = {
+const uint8_t auchCRCHi[] = {
 	0x00, 0xC1, 0x81, 0x40, 0x01, 0xC0, 0x80, 0x41, 0x01, 0xC0,
 	0x80, 0x41, 0x00, 0xC1, 0x81, 0x40, 0x01, 0xC0, 0x80, 0x41,
 	0x00, 0xC1, 0x81, 0x40, 0x00, 0xC1, 0x81, 0x40, 0x01, 0xC0,
@@ -33,7 +78,7 @@ const unsigned char auchCRCHi[] = {
 	0x80, 0x41, 0x00, 0xC1, 0x81, 0x40
 };
 /* CRC低位字节值表*/
-const unsigned char auchCRCLo[] = {
+const uint8_t auchCRCLo[] = {
 	0x00, 0xC0, 0xC1, 0x01, 0xC3, 0x03, 0x02, 0xC2, 0xC6, 0x06,
 	0x07, 0xC7, 0x05, 0xC5, 0xC4, 0x04, 0xCC, 0x0C, 0x0D, 0xCD,
 	0x0F, 0xCF, 0xCE, 0x0E, 0x0A, 0xCA, 0xCB, 0x0B, 0xC9, 0x09,
@@ -61,11 +106,11 @@ const unsigned char auchCRCLo[] = {
 	0x44, 0x84, 0x85, 0x45, 0x87, 0x47, 0x46, 0x86, 0x82, 0x42,
 	0x43, 0x83, 0x41, 0x81, 0x80, 0x40
 };
-uint GetVerify_CRC16(unsigned char *puchMsg,unsigned int usDataLen)
+ushort_wf GetVerify_CRC16(uint8_t *puchMsg,uint32_t usDataLen)
 {
-	uint ret;
+	ushort_wf ret;
 	ret.u16=Verify_CRC16_Init;
-	unsigned char uIndex ; /* CRC循环中的索引 */
+	uint8_t uIndex ; /* CRC循环中的索引 */
 	while (usDataLen--) /* 传输消息缓冲区 */
 	{
 		uIndex = ret.u8H ^ *puchMsg++ ; /* 计算CRC */
@@ -75,49 +120,11 @@ uint GetVerify_CRC16(unsigned char *puchMsg,unsigned int usDataLen)
 	return ret ;
 }
 #endif
-unsigned char GetVerify_Sum( unsigned char* pBuff,unsigned int Count )
+
+#ifdef Verify_byteXOR
+uint8_t GetVerify_byteXOR(uint8_t* pBuff, uint32_t Count)
 {
-	unsigned char sum,i;
-	sum=0;
-	for(i=0;i<Count;i++)
-	{
-		sum=(unsigned char)(sum+pBuff[i]);
-	}
-	return sum;
-}
-
-unsigned char GetVerify_CRC8( unsigned char* pBuff, unsigned int Count )
-{
-	unsigned char crc;
-	unsigned int i;
-	unsigned char bit_counter;
-	unsigned char data;
-	unsigned char feedback_bit;
-
-	crc = CRC8INIT;
-
-	for(i = 0; i != Count; i++)
-	{
-		data = pBuff[i];
-		bit_counter = 8;
-		do 
-		{ 
-			feedback_bit = (crc ^ data) & 0x01;
-			if ( feedback_bit == 0x01 ) 
-				crc = crc ^ CRC8POLY;
-			crc = (crc >> 1) & 0x7F;
-			if ( feedback_bit == 0x01 ) 
-				crc = crc | 0x80;
-			data = data >> 1;
-			bit_counter--;
-		}while (bit_counter > 0);
-	}
-	return crc;
-}
-
-unsigned char GetVerify_byteXOR(unsigned char* pBuff, unsigned int Count)
-{
-	unsigned char ret,i;
+	uint8_t ret,i;
 	ret=*pBuff;
 	for(i=1;i<Count;i++)
 	{
@@ -125,9 +132,9 @@ unsigned char GetVerify_byteXOR(unsigned char* pBuff, unsigned int Count)
 	}
 	return ret;
 }
-unsigned char GetVerify_byteXOR_WithOrigV(unsigned char origV,unsigned char* pBuff, unsigned int Count)
+uint8_t GetVerify_byteXOR_WithOrigV(uint8_t origV,uint8_t* pBuff, uint32_t Count)
 {
-	unsigned char ret,i;
+	uint8_t ret,i;
 	ret=origV;
 	for(i=0;i<Count;i++)
 	{
@@ -135,3 +142,7 @@ unsigned char GetVerify_byteXOR_WithOrigV(unsigned char origV,unsigned char* pBu
 	}
 	return ret;
 }
+#endif
+
+
+

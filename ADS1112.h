@@ -1,6 +1,8 @@
 #ifndef __ADS1112_h__
 #define __ADS1112_h__
 
+#include "TypeDefine.h"
+
 #ifndef ADS1112_RetryCount
 #define ADS1112_RetryCount 2
 #endif
@@ -24,7 +26,7 @@ typedef union
 	};
 	unsigned char AllFlag;
 } _ADS1112_Status;
-extern uint ADS1112_Result;
+extern ushort_wf ADS1112_Result;
 extern _ADS1112_Status ADS1112_Status;
 unsigned char ADS1112_Read(void);
 unsigned char ADS1112_Write(void);

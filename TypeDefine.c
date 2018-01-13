@@ -2,7 +2,8 @@
 
 /* Given the high and low-order 32-bit quantities HI and LO, return a u64
    value representing (HI << 32) + LO.  */
-u64 u64_Init (unsigned long hi, unsigned long lo)
+#ifdef unsigned64
+u64 u64_Init (unsigned int hi, unsigned int lo)
 {
 	u64 r;
 	r.hi = hi;
@@ -10,14 +11,14 @@ u64 u64_Init (unsigned long hi, unsigned long lo)
 	return r;
 }
 /* Return a u64 value representing LO.  */
-u64 u64_lo (unsigned long lo)
+u64 u64_lo (unsigned int lo)
 {
 	u64 r;
 	r.hi = 0;
 	r.lo = lo;
 	return r;
 }
-u64 u64_hi (unsigned long hi)
+u64 u64_hi (unsigned int hi)
 {
 	u64 r;
 	r.hi = hi;
@@ -53,7 +54,7 @@ u64 u64_xor (u64 x, u64 y)
 	return r;
 }
 /* Return X + Y.  */
-u64 u64_plus (u64 x, unsigned long hi,unsigned long lo)
+u64 u64_plus (u64 x, unsigned int hi,unsigned int lo)
 {
 	u64 r;
 	r.lo = x.lo + lo;
@@ -61,7 +62,7 @@ u64 u64_plus (u64 x, unsigned long hi,unsigned long lo)
 	return r;
 }
 /* Return X - Y.  */
-u64 u64_decrease (u64 x, unsigned long hi,unsigned long lo)
+u64 u64_decrease (u64 x, unsigned int hi,unsigned int lo)
 {
 	u64 r;
 	if(x.lo<lo)
@@ -106,7 +107,7 @@ u64 u64_shr (u64 x, int n)
 	}
 	return r;
 }
-u64 u64_lmul(unsigned long multiplier, unsigned long multiplicand)
+u64 u64_lmul(unsigned int multiplier, unsigned int multiplicand)
 {
 	u64	product,m1;
 	product=u64_Init(0,0);
@@ -122,7 +123,7 @@ u64 u64_lmul(unsigned long multiplier, unsigned long multiplicand)
 	} while(multiplier!=0);
 	return product;
 }
-u64 u64_lmuu64(u64 multiplicand, unsigned long multiplier)
+u64 u64_lmuu64(u64 multiplicand, unsigned int multiplier)
 {
 	u64	product;
 	product=u64_Init(0,0);
@@ -137,7 +138,7 @@ u64 u64_lmuu64(u64 multiplicand, unsigned long multiplier)
 	} while(multiplier!= 0 );
 	return product;
 }
-u64 u64_u64muu64(u64 multiplier, unsigned long hi,unsigned long lo)
+u64 u64_u64muu64(u64 multiplier, unsigned int hi,unsigned int lo)
 {
 	u64	product,multiplicand;
 	product=u64_Init(0,0);
@@ -153,6 +154,9 @@ u64 u64_u64muu64(u64 multiplier, unsigned long hi,unsigned long lo)
 	} while(multiplier.lo != 0 || multiplier.hi!=0);
 	return product;
 }
+#endif
+
+
 
 
 

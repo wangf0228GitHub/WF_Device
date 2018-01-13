@@ -6,7 +6,7 @@
 //#define SimI2C_CLK RB6
 //#define SimI2C_DATA RB4
 #ifndef SimI2C_Delay_Ex
-#define SimI2C_Delay() __delay_us(1);
+#define SimI2C_Delay()
 #endif
 
 
