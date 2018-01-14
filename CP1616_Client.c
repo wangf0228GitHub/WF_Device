@@ -16,7 +16,7 @@ void CP1616_Client_EndProcCommand(void)
 	CP1616_Client_NeedRxCount=0xffff;
 	CP1616_Client_RxCount=0;
 }
-void CP1616_Client_ProcRx(unsigned char rx)
+void CP1616_Client_ProcRx(uint8_t rx)
 {
 #ifdef SystemTick
 	CP1616_Client_NoRxTick=SystemTick;
@@ -72,10 +72,10 @@ void CP1616_Client_ProcRx(unsigned char rx)
 		}
 	}	
 }
-void CP1616_Client_SendData(unsigned char CommandIndex,unsigned char* pBuff,unsigned int Count)
+void CP1616_Client_SendData(uint8_t CommandIndex,uint8_t* pBuff,uint16_t Count)
 {
-	unsigned char sum;
-	unsigned int i;
+	uint8_t sum;
+	uint16_t i;
 	sum=0;
 	SetTx_CP1616_Client();
 	CP1616_Client_AddTxHeader();
@@ -90,9 +90,9 @@ void CP1616_Client_SendData(unsigned char CommandIndex,unsigned char* pBuff,unsi
 	SetRx_CP1616_Client();
 	CP1616_Client_EndProcCommand();
 }
-void CP1616_Client_SendOK(unsigned char CommandIndex)
+void CP1616_Client_SendOK(uint8_t CommandIndex)
 {
-	unsigned char sum;
+	uint8_t sum;
 	sum=0;
 	SetTx_CP1616_Client();
 	CP1616_Client_AddTxHeader();
@@ -106,9 +106,9 @@ void CP1616_Client_SendOK(unsigned char CommandIndex)
 	CP1616_Client_EndProcCommand();
 }
 
-void CP1616_Client_SendError( unsigned char CommandIndex )
+void CP1616_Client_SendError( uint8_t CommandIndex )
 {
-	unsigned char sum;
+	uint8_t sum;
 	sum=0;
 	SetTx_CP1616_Client();
 	CP1616_Client_AddTxHeader();
@@ -139,7 +139,7 @@ void CP1616_Client2_EndProcCommand(void)
 	CP1616_Client2_NeedRxCount=0xffff;
 	CP1616_Client2_RxCount=0;
 }
-void CP1616_Client2_ProcRx(unsigned char rx)
+void CP1616_Client2_ProcRx(uint8_t rx)
 {
 	CP1616_Client2_NoRxTick=SystemTick;
 	if(CP1616_Client2_Flags.bRx==1)
@@ -193,10 +193,10 @@ void CP1616_Client2_ProcRx(unsigned char rx)
 		}
 	}	
 }
-void CP1616_Client2_SendData(unsigned char CommandIndex,unsigned char* pBuff,unsigned int Count)
+void CP1616_Client2_SendData(uint8_t CommandIndex,uint8_t* pBuff,uint16_t Count)
 {
-	unsigned char sum;
-	unsigned int i;
+	uint8_t sum;
+	uint16_t i;
 	sum=0;
 	SetTx_CP1616_Client2();
 	CP1616_Client2_AddTxHeader();
@@ -211,9 +211,9 @@ void CP1616_Client2_SendData(unsigned char CommandIndex,unsigned char* pBuff,uns
 	SetRx_CP1616_Client2();
 	CP1616_Client2_EndProcCommand();
 }
-void CP1616_Client2_SendOK(unsigned char CommandIndex)
+void CP1616_Client2_SendOK(uint8_t CommandIndex)
 {
-	unsigned char sum;
+	uint8_t sum;
 	sum=0;
 	SetTx_CP1616_Client2();
 	CP1616_Client2_AddTxHeader();
@@ -227,9 +227,9 @@ void CP1616_Client2_SendOK(unsigned char CommandIndex)
 	CP1616_Client2_EndProcCommand();
 }
 
-void CP1616_Client2_SendError( unsigned char CommandIndex )
+void CP1616_Client2_SendError( uint8_t CommandIndex )
 {
-	unsigned char sum;
+	uint8_t sum;
 	sum=0;
 	SetTx_CP1616_Client2();
 	CP1616_Client2_AddTxHeader();

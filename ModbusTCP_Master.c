@@ -1,12 +1,12 @@
 #include "HardwareProfile.h"
 
-unsigned char CurCommand;//当前操作的指令号
+uint8_t CurCommand;//当前操作的指令号
 void Init_ModbusTCP_Master(void)
 {
 	ModbusTCP_Master_MBAPIndex.u16=0;
 }
 
-void ProcRx_ModbusTCP_Master(unsigned char rx)
+void ProcRx_ModbusTCP_Master(uint8_t rx)
 {
 	if(ModbusTCP_Master_Flags.bRx)//之前没处理完
 		return;
@@ -124,9 +124,9 @@ void ProcRx_ModbusTCP_Master(unsigned char rx)
 									ModbusTCP_Master_TxByte(0);\
 									ModbusTCP_Master_TxByte(count+7);\
 									ModbusTCP_Master_TxByte(ModbusTCP_Master_SubAddr);
-void SendCommand16_ModbusTCP_Master(unsigned char *pBuff,unsigned char count)
+void SendCommand16_ModbusTCP_Master(uint8_t *pBuff,uint8_t count)
 {
-	unsigned char i;
+	uint8_t i;
 	CurCommand=0x10;
 	ModbusTCP_Master_TxHeader();
   	ModbusTCP_Master_TxByte(0x10);

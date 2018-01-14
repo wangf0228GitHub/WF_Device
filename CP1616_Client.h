@@ -14,7 +14,7 @@ typedef union
 	{
 		unsigned bRx:1;
 	};
-	unsigned char AllFlag;
+	uint8_t AllFlag;
 } _CP1616_Client_Flags;        // general flags
 
 #ifndef CP1616_Client_TxByteWithVerify_Ex
@@ -45,18 +45,18 @@ typedef union
 #endif
 
 _CP1616_Client_Flags CP1616_Client_Flags;
-unsigned char CP1616_Client_RxList[MAX_CP1616_Client_RX];
-unsigned int CP1616_Client_RxCount;
-unsigned int CP1616_Client_NeedRxCount;
-unsigned int CP1616_Client_NoRxTick;
+uint8_t CP1616_Client_RxList[MAX_CP1616_Client_RX];
+uint16_t CP1616_Client_RxCount;
+uint16_t CP1616_Client_NeedRxCount;
+uint16_t CP1616_Client_NoRxTick;
 uint CP1616_Client_Addr;
 
 void CP1616_Client_Init(void);
 void CP1616_Client_EndProcCommand(void);
-void CP1616_Client_ProcRx(unsigned char rx);
-void CP1616_Client_SendData(unsigned char CommandIndex,unsigned char* pBuff,unsigned int Count);
-void CP1616_Client_SendOK(unsigned char CommandIndex);
-void CP1616_Client_SendError(unsigned char CommandIndex);
+void CP1616_Client_ProcRx(uint8_t rx);
+void CP1616_Client_SendData(uint8_t CommandIndex,uint8_t* pBuff,uint16_t Count);
+void CP1616_Client_SendOK(uint8_t CommandIndex);
+void CP1616_Client_SendError(uint8_t CommandIndex);
 
 
 #ifdef CP1616_Client2
@@ -73,7 +73,7 @@ typedef union
 	{
 		unsigned bRx:1;
 	};
-	unsigned char AllFlag;
+	uint8_t AllFlag;
 } _CP1616_Client2_Flags;        // general flags
 
 #ifndef CP1616_Client2_TxByteWithVerify
@@ -104,18 +104,18 @@ typedef union
 #define MAX_CP1616_Client2_RX 50
 #endif
 _CP1616_Client2_Flags CP1616_Client2_Flags;
-unsigned char CP1616_Client2_RxList[MAX_CP1616_Client2_RX];
-unsigned int CP1616_Client2_RxCount;
-unsigned int CP1616_Client2_NeedRxCount;
-unsigned int CP1616_Client2_NoRxTick;
+uint8_t CP1616_Client2_RxList[MAX_CP1616_Client2_RX];
+uint16_t CP1616_Client2_RxCount;
+uint16_t CP1616_Client2_NeedRxCount;
+uint16_t CP1616_Client2_NoRxTick;
 uint CP1616_Client2_Addr;
 
 void CP1616_Client2_Init(void);
 void CP1616_Client2_EndProcCommand(void);
-void CP1616_Client2_ProcRx(unsigned char rx);
-void CP1616_Client2_SendData(unsigned char CommandIndex,unsigned char* pBuff,unsigned int Count);
-void CP1616_Client2_SendOK(unsigned char CommandIndex);
-void CP1616_Client2_SendError(unsigned char CommandIndex);
+void CP1616_Client2_ProcRx(uint8_t rx);
+void CP1616_Client2_SendData(uint8_t CommandIndex,uint8_t* pBuff,uint16_t Count);
+void CP1616_Client2_SendOK(uint8_t CommandIndex);
+void CP1616_Client2_SendError(uint8_t CommandIndex);
 #endif
 #endif
 

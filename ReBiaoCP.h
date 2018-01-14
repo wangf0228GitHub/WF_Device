@@ -9,7 +9,7 @@ typedef union
 		unsigned bRx:1;
 		unsigned bWaitDataFromClient:1;	
 	};
-	unsigned char AllFlag;
+	uint8_t AllFlag;
 } _ReBiaoCP_Flags;        // general flags
 
 
@@ -55,20 +55,20 @@ typedef union
 // #define ReBiaoCP_RetryTimes 3
 // #endif
 extern _ReBiaoCP_Flags ReBiaoCP_Flags;
-extern unsigned char ReBiaoCP_RxList[MAX_ReBiaoCP_RX];
-extern unsigned char ReBiaoCP_RxCount;
-extern unsigned char ReBiaoCP_NeedRxCount;
+extern uint8_t ReBiaoCP_RxList[MAX_ReBiaoCP_RX];
+extern uint8_t ReBiaoCP_RxCount;
+extern uint8_t ReBiaoCP_NeedRxCount;
 //extern uint ReBiaoCP_WaitClientAddr;
-//extern unsigned char ReBiaoCP_WaitCommand;
-extern unsigned int ReBiaoCP_WaitClientTick;
-//extern unsigned char ReBiaoCP_RxErrTimes;
-extern unsigned int ReBiaoCP_WaitClientTime;
-extern unsigned char ReBiaoCP_RetryTimes;
+//extern uint8_t ReBiaoCP_WaitCommand;
+extern uint16_t ReBiaoCP_WaitClientTick;
+//extern uint8_t ReBiaoCP_RxErrTimes;
+extern uint16_t ReBiaoCP_WaitClientTime;
+extern uint8_t ReBiaoCP_RetryTimes;
 
 void Init_ReBiaoCP(void);
-void ProcRx_ReBiaoCP(unsigned char rx);
-//unsigned char ReBiaoCPWaitClientData(unsigned int Addr,unsigned char Command,unsigned char* pBuff,unsigned int Count);
-//void ReBiaoCPSendData(unsigned int Addr,unsigned char Command,unsigned char* pBuff,unsigned int Count);
+void ProcRx_ReBiaoCP(uint8_t rx);
+//uint8_t ReBiaoCPWaitClientData(uint16_t Addr,uint8_t Command,uint8_t* pBuff,uint16_t Count);
+//void ReBiaoCPSendData(uint16_t Addr,uint8_t Command,uint8_t* pBuff,uint16_t Count);
 
-unsigned char ReBiaoCP_Read10(unsigned char Addr);
+uint8_t ReBiaoCP_Read10(uint8_t Addr);
 #endif

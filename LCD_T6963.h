@@ -38,17 +38,17 @@
 #define   T6963_ScreenPeek       0xe0          // ÆÁ¶Á 
 #define   T6963_ScreenCopy       0xe1          // ÆÁ¿½±´ 
 void LCD_T6963_Init(void);
-void LCD_T6963_ClearScreen(unsigned int ram);
-void LCD_T6963_WriteCmd0(unsigned char cmd);
-void LCD_T6963_WriteCmd1(unsigned char dat,unsigned char cmd);
-void LCD_T6963_WriteCmd2(unsigned char dat1,unsigned char dat2,unsigned char cmd);
-void LCD_T6963_AutoWriteStart(unsigned int Addr);
-void LCD_T6963_AutoWriteData(unsigned char dat);
+void LCD_T6963_ClearScreen(uint16_t ram);
+void LCD_T6963_WriteCmd0(uint8_t cmd);
+void LCD_T6963_WriteCmd1(uint8_t dat,uint8_t cmd);
+void LCD_T6963_WriteCmd2(uint8_t dat1,uint8_t dat2,uint8_t cmd);
+void LCD_T6963_AutoWriteStart(uint16_t Addr);
+void LCD_T6963_AutoWriteData(uint8_t dat);
 void LCD_T6963_AutoWriteEnd(void);
-void LCD_T6963_ShowHZ16x16(unsigned char x,unsigned char y,const unsigned char* zm);
-void LCD_T6963_ShowHZ8x16(unsigned char x,unsigned char y,const unsigned char* zm);
-void LCD_T6963_ShowPic(unsigned int Addr,unsigned char Width,unsigned char Height,const unsigned char* Pic);
-void LCD_T6963_ShowFull(unsigned int Addr,unsigned char Width,unsigned char Height,unsigned char fc);
-void LCD_T6963_ShowFullByXY(unsigned char x,unsigned char y,unsigned char Width,unsigned char Height,unsigned char fc);
-void LCD_T6963_ShowPicByXY(unsigned char x,unsigned char y,unsigned char Width,unsigned char Height,const unsigned char* Pic);
+void LCD_T6963_ShowHZ16x16(uint8_t x,uint8_t y,const uint8_t* zm);
+void LCD_T6963_ShowHZ8x16(uint8_t x,uint8_t y,const uint8_t* zm);
+void LCD_T6963_ShowPic(uint16_t Addr,uint8_t Width,uint8_t Height,const uint8_t* Pic);
+void LCD_T6963_ShowFull(uint16_t Addr,uint8_t Width,uint8_t Height,uint8_t fc);
+void LCD_T6963_ShowFullByXY(uint8_t x,uint8_t y,uint8_t Width,uint8_t Height,uint8_t fc);
+void LCD_T6963_ShowPicByXY(uint8_t x,uint8_t y,uint8_t Width,uint8_t Height,const uint8_t* Pic);
 #endif

@@ -23,9 +23,9 @@ void Max7221_Init(void)
 // 	Max7221_WriteData(0x03,0xFF);
 // 	Max7221_WriteData(0x04,0xFF);
 }
-void Max7221_WriteData(unsigned char addr,unsigned char data)      
+void Max7221_WriteData(uint8_t addr,uint8_t data)      
 {  
-	unsigned char i;
+	uint8_t i;
 	Max7221_CS_W=0;
 	for(i=0;i<8;i++)
 	{
@@ -69,9 +69,9 @@ void Max7221_Init_2(void)
 	// 	Max7221_WriteData(0x03,0xFF);
 	// 	Max7221_WriteData(0x04,0xFF);
 }
-void Max7221_WriteData_2(unsigned char addr,unsigned char data)      
+void Max7221_WriteData_2(uint8_t addr,uint8_t data)      
 {  
-	unsigned char i;
+	uint8_t i;
 	Max7221_CS_W_2=0;
 	for(i=0;i<8;i++)
 	{
@@ -116,9 +116,9 @@ void Max7221_Init_3(void)
 	// 	Max7221_WriteData(0x03,0xFF);
 	// 	Max7221_WriteData(0x04,0xFF);
 }
-void Max7221_WriteData_3(unsigned char addr,unsigned char data)      
+void Max7221_WriteData_3(uint8_t addr,uint8_t data)      
 {  
-	unsigned char i;
+	uint8_t i;
 	Max7221_CS_W_3=0;
 	for(i=0;i<8;i++)
 	{

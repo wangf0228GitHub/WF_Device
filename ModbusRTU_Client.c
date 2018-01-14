@@ -4,7 +4,7 @@ void Init_ModbusRTU_Client(void)
 	SetRx_ModbusRTU_Client();
 }
 
-void ProcRx_ModbusRTU_Client(unsigned char rx)
+void ProcRx_ModbusRTU_Client(uint8_t rx)
 {
 	if(ModbusRTU_Client_Flags.bRx)//之前没处理完
 		return;
@@ -15,11 +15,11 @@ void ProcRx_ModbusRTU_Client(unsigned char rx)
 		ModbusRTU_Client_RxCount=0;			
 	}	
 }
-void SendCommand03_ModbusRTU_Client(unsigned char *pBuff,unsigned char count)
+void SendCommand03_ModbusRTU_Client(uint8_t *pBuff,uint8_t count)
 {
-	unsigned char i;
+	uint8_t i;
 	uint crc;	
-	unsigned char uIndex ; /* CRC循环中的索引 */
+	uint8_t uIndex ; /* CRC循环中的索引 */
 	crc.u16=0xffff;
 	SetTx_ModbusRTU_Client();
   	ModbusRTU_Client_VerifyTxByte(ModbusRTU_Client_MyAddr);
@@ -33,10 +33,10 @@ void SendCommand03_ModbusRTU_Client(unsigned char *pBuff,unsigned char count)
   	ModbusRTU_Client_TxByte(crc.u8L);
 	SetRx_ModbusRTU_Client();
 }
-void SendCommand16_ModbusRTU_Client(unsigned int FirstReg,unsigned char count)
+void SendCommand16_ModbusRTU_Client(uint16_t FirstReg,uint8_t count)
 {
 	uint crc;	
-	unsigned char uIndex ; /* CRC循环中的索引 */
+	uint8_t uIndex ; /* CRC循环中的索引 */
 	crc.u16=0xffff;
 	SetTx_ModbusRTU_Client();
 	ModbusRTU_Client_VerifyTxByte(ModbusRTU_Client_MyAddr);

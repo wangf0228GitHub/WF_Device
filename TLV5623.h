@@ -15,10 +15,10 @@ typedef union
 		unsigned PWR:1;
 		unsigned SPD:1;
 	};
-	unsigned char AllFlag;
+	uint8_t AllFlag;
 } _TLV5623State;        // general flags
 _TLV5623State TLV5623State;
 void TLV5623_Init(void);
-void TLV5623_WriteData(unsigned char d);
+void TLV5623_WriteData(uint8_t d);
 #endif // __TLV5623_h__
 

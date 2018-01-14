@@ -14,5 +14,5 @@
 // #define X9C103_CLK_IO		TRISD6
 
 void X9C103_Init(void);
-void X9C103_R_Change_Step(unsigned char Mode,unsigned char N);
+void X9C103_R_Change_Step(uint8_t Mode,uint8_t N);
 #endif

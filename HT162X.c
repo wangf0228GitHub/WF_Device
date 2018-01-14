@@ -1,8 +1,8 @@
 #include "HardwareProfile.h"
 
-void HT162X_Setting(unsigned char x)
+void HT162X_Setting(uint8_t x)
 {
-	unsigned char i;
+	uint8_t i;
 	HT162X_WR_W=0;
 	HT162X_CS_W=0;
 	__delay_us(10);
@@ -38,9 +38,9 @@ void HT162X_Setting(unsigned char x)
 	HT162X_CS_W=1;
 	HT162X_WR_W=1;
 }
-void HT162X_WriteData(unsigned char reg,unsigned char d)
+void HT162X_WriteData(uint8_t reg,uint8_t d)
 {
-	unsigned char i;
+	uint8_t i;
 	HT162X_WR_W=0;
 	HT162X_CS_W=0;
 	__delay_us(10);
@@ -89,9 +89,9 @@ void HT162X_WriteData(unsigned char reg,unsigned char d)
 	HT162X_CS_W=1;
 	HT162X_WR_W=1;
 }
-void HT162X_WriteDatas(unsigned char reg,const unsigned char* pBuf,unsigned char count)
+void HT162X_WriteDatas(uint8_t reg,const uint8_t* pBuf,uint8_t count)
 {
-	unsigned char i,j,x;
+	uint8_t i,j,x;
 	HT162X_WR_W=0;
 	HT162X_CS_W=0;
 	__delay_us(10);

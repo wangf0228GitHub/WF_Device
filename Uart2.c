@@ -2,10 +2,10 @@
 #include "afx.h"
 #include "Uart2.h"
 #ifdef Uart2_ParityVerifyType
-unsigned char Uart2_ParityVerifyType;
-unsigned char Uart2_GetVerifyBit(unsigned char data)
+uint8_t Uart2_ParityVerifyType;
+uint8_t Uart2_GetVerifyBit(uint8_t data)
 {
-	unsigned char i,d,c,b,ret;
+	uint8_t i,d,c,b,ret;
 	if(Uart2_ParityVerifyType==Uart2_ParityVerify_High)
 		ret=1;
 	else if(Uart2_ParityVerifyType==Uart2_ParityVerify_Low)
@@ -39,7 +39,7 @@ unsigned char Uart2_GetVerifyBit(unsigned char data)
 	return ret;
 }
 #endif
-void Uart2_PutChar(unsigned char c )
+void Uart2_PutChar(uint8_t c )
 {
 	while(Uart2_TRMT==0);
 #ifdef Uart2_ParityVerifyType
@@ -62,9 +62,9 @@ void Uart2_PutString(const char* pString )
 }
 
 
-void Uart2_PutHex(unsigned char c )
+void Uart2_PutHex(uint8_t c )
 {
-	unsigned char  b;
+	uint8_t  b;
 	b=HIGH_NIBBLE(c);
 	if (b>9) 
 		b += 'A'-10;
@@ -79,8 +79,8 @@ void Uart2_PutHex(unsigned char c )
 	Uart2_PutChar(b);
 }
 #ifdef Uart2TxQueue
-unsigned char Uart2TxQueueBuf[Uart2TxQueue_BufLen];
-unsigned char *pInUart2TxQueueBuf, *pOutUart2TxQueueBuf;
+uint8_t Uart2TxQueueBuf[Uart2TxQueue_BufLen];
+uint8_t *pInUart2TxQueueBuf, *pOutUart2TxQueueBuf;
 void Uart2TxQueue_TxStart()
 {	
 	if (Uart2_TXIF && !Uart2_TXIE)        
@@ -99,9 +99,9 @@ void Uart2TxQueue_AddStr(const char* pt)
 	}
 }
 
-void Uart2TxQueue_AddByte(unsigned char tx)
+void Uart2TxQueue_AddByte(uint8_t tx)
 {
-	unsigned char *d;
+	uint8_t *d;
 	d = pInUart2TxQueueBuf;
 	d++;
 	if (d == (Uart2TxQueueBuf+Uart2TxQueue_BufLen))         //回绕
@@ -111,13 +111,13 @@ void Uart2TxQueue_AddByte(unsigned char tx)
 	pInUart2TxQueueBuf = d;    //inTxBuf后移
 	Uart2TxQueue_TxStart();
 }
-void Uart2TxQueue_AddBytes(const void *tx, unsigned char size, unsigned int n)
+void Uart2TxQueue_AddBytes(const void *tx, uint8_t size, uint16_t n)
 {
-	unsigned int count = size * n;
-	unsigned char *s;
+	uint16_t count = size * n;
+	uint8_t *s;
 	if(count==0)
 		return;
-	s = (unsigned char*)tx;
+	s = (uint8_t*)tx;
 	while (count--)                         //逐个放入缓冲区
 	{
 		Uart2TxQueue_AddByte(*s++);

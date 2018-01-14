@@ -1,15 +1,15 @@
-#include "HardwareProfile.h"
+#include "picUart.h"
 #include "afx.h"
-#include "Uart.h"
+
 #ifdef Uart_UseTxQueue
 _UartTxQueueFlags UartTxQueueFlags;
 #endif
 #ifdef Uart_Uart1
 	#ifdef Uart1_UsedParityVerify
-		unsigned char Uart1_ParityVerifyType;
-		unsigned char Uart1_GetVerifyBit(unsigned char data)
+		uint8_t Uart1_ParityVerifyType;
+		uint8_t Uart1_GetVerifyBit(uint8_t data)
 		{
-			unsigned char i,d,c,b,ret;
+			uint8_t i,d,c,b,ret;
 			if(Uart1_ParityVerifyType==Uart1_ParityVerify_High)
 				ret=1;
 			else if(Uart1_ParityVerifyType==Uart1_ParityVerify_Low)
@@ -43,7 +43,7 @@ _UartTxQueueFlags UartTxQueueFlags;
 			return ret;
 		}
 	#endif
-	void Uart1_PutChar(unsigned char c )
+	void Uart1_PutChar(uint8_t c )
 	{
 		while(Uart1_TRMT==0);
 		#ifdef Uart1_UsedParityVerify
@@ -51,9 +51,9 @@ _UartTxQueueFlags UartTxQueueFlags;
 		#endif
 		Uart1_TXREG=c;
 	}
-	void Uart1_PutChars(const unsigned char* pBuf,unsigned char len)
+	void Uart1_PutChars(const uint8_t* pBuf,uint8_t len)
 	{
-		unsigned char i;
+		uint8_t i;
 		for(i=0;i<len;i++)
 		{
 			Uart1_PutChar(pBuf[i]);
@@ -73,9 +73,9 @@ _UartTxQueueFlags UartTxQueueFlags;
 	}
 
 
-	void Uart1_PutHex(unsigned char c )
+	void Uart1_PutHex(uint8_t c )
 	{
-		unsigned char  b;
+		uint8_t  b;
 		b=HIGH_NIBBLE(c);
 		if (b>9) 
 			b += 'A'-10;
@@ -90,8 +90,8 @@ _UartTxQueueFlags UartTxQueueFlags;
 		Uart1_PutChar(b);
 	}
 	#ifdef Uart1TxQueue
-		unsigned char Uart1TxQueueBuf[Uart1TxQueue_BufLen];
-		unsigned char *pInUart1TxQueueBuf, *pOutUart1TxQueueBuf;
+		uint8_t Uart1TxQueueBuf[Uart1TxQueue_BufLen];
+		uint8_t *pInUart1TxQueueBuf, *pOutUart1TxQueueBuf;
 		void Uart1TxQueue_TxStart()
 		{	
 			if (Uart1_TXIF && !Uart1_TXIE)        
@@ -113,9 +113,9 @@ _UartTxQueueFlags UartTxQueueFlags;
 			}
 		}
 
-		void Uart1TxQueue_AddByte(unsigned char tx)
+		void Uart1TxQueue_AddByte(uint8_t tx)
 		{
-			unsigned char *d;
+			uint8_t *d;
 			d = pInUart1TxQueueBuf;
 			d++;
 			if (d == (Uart1TxQueueBuf+Uart1TxQueue_BufLen))         //回绕
@@ -125,13 +125,13 @@ _UartTxQueueFlags UartTxQueueFlags;
 			pInUart1TxQueueBuf = d;    //inTxBuf后移
 			Uart1TxQueue_TxStart();
 		}
-		void Uart1TxQueue_AddBytes(const void *tx, unsigned char size, unsigned int n)
+		void Uart1TxQueue_AddBytes(const void *tx, uint8_t size, uint16_t n)
 		{
-			unsigned int count = size * n;
-			unsigned char *s;
+			uint16_t count = size * n;
+			uint8_t *s;
 			if(count==0)
 				return;
-			s = (unsigned char*)tx;
+			s = (uint8_t*)tx;
 			while (count--)                         //逐个放入缓冲区
 			{
 				Uart1TxQueue_AddByte(*s++);
@@ -166,10 +166,10 @@ _UartTxQueueFlags UartTxQueueFlags;
 
 #ifdef Uart_Uart2
 	#ifdef Uart2_UsedParityVerify
-		unsigned char Uart2_ParityVerifyType;
-		unsigned char Uart2_GetVerifyBit(unsigned char data)
+		uint8_t Uart2_ParityVerifyType;
+		uint8_t Uart2_GetVerifyBit(uint8_t data)
 		{
-			unsigned char i,d,c,b,ret;
+			uint8_t i,d,c,b,ret;
 			if(Uart2_ParityVerifyType==Uart2_ParityVerify_High)
 				ret=1;
 			else if(Uart2_ParityVerifyType==Uart2_ParityVerify_Low)
@@ -203,7 +203,7 @@ _UartTxQueueFlags UartTxQueueFlags;
 			return ret;
 		}
 	#endif
-	void Uart2_PutChar(unsigned char c )
+	void Uart2_PutChar(uint8_t c )
 	{
 		while(Uart2_TRMT==0);
 		#ifdef Uart2_UsedParityVerify
@@ -226,9 +226,9 @@ _UartTxQueueFlags UartTxQueueFlags;
 	}
 
 
-	void Uart2_PutHex(unsigned char c )
+	void Uart2_PutHex(uint8_t c )
 	{
-		unsigned char  b;
+		uint8_t  b;
 		b=HIGH_NIBBLE(c);
 		if (b>9) 
 			b += 'A'-10;
@@ -243,8 +243,8 @@ _UartTxQueueFlags UartTxQueueFlags;
 		Uart2_PutChar(b);
 	}
 	#ifdef Uart2TxQueue
-		unsigned char Uart2TxQueueBuf[Uart2TxQueue_BufLen];
-		unsigned char *pInUart2TxQueueBuf, *pOutUart2TxQueueBuf;
+		uint8_t Uart2TxQueueBuf[Uart2TxQueue_BufLen];
+		uint8_t *pInUart2TxQueueBuf, *pOutUart2TxQueueBuf;
 		void Uart2TxQueue_TxStart()
 		{	
 			if (Uart2_TXIF && !Uart2_TXIE)        
@@ -263,9 +263,9 @@ _UartTxQueueFlags UartTxQueueFlags;
 			}
 		}
 
-		void Uart2TxQueue_AddByte(unsigned char tx)
+		void Uart2TxQueue_AddByte(uint8_t tx)
 		{
-			unsigned char *d;
+			uint8_t *d;
 			d = pInUart2TxQueueBuf;
 			d++;
 			if (d == (Uart2TxQueueBuf+Uart2TxQueue_BufLen))         //回绕
@@ -275,13 +275,13 @@ _UartTxQueueFlags UartTxQueueFlags;
 			pInUart2TxQueueBuf = d;    //inTxBuf后移
 			Uart2TxQueue_TxStart();
 		}
-		void Uart2TxQueue_AddBytes(const void *tx, unsigned char size, unsigned int n)
+		void Uart2TxQueue_AddBytes(const void *tx, uint8_t size, uint16_t n)
 		{
-			unsigned int count = size * n;
-			unsigned char *s;
+			uint16_t count = size * n;
+			uint8_t *s;
 			if(count==0)
 				return;
-			s = (unsigned char*)tx;
+			s = (uint8_t*)tx;
 			while (count--)                         //逐个放入缓冲区
 			{
 				Uart2TxQueue_AddByte(*s++);
@@ -313,10 +313,10 @@ _UartTxQueueFlags UartTxQueueFlags;
 
 #ifdef Uart_Uart3
 	#ifdef Uart3_UsedParityVerify
-		unsigned char Uart3_ParityVerifyType;
-		unsigned char Uart3_GetVerifyBit(unsigned char data)
+		uint8_t Uart3_ParityVerifyType;
+		uint8_t Uart3_GetVerifyBit(uint8_t data)
 		{
-			unsigned char i,d,c,b,ret;
+			uint8_t i,d,c,b,ret;
 			if(Uart3_ParityVerifyType==Uart3_ParityVerify_High)
 				ret=1;
 			else if(Uart3_ParityVerifyType==Uart3_ParityVerify_Low)
@@ -350,7 +350,7 @@ _UartTxQueueFlags UartTxQueueFlags;
 			return ret;
 		}
 	#endif
-	void Uart3_PutChar(unsigned char c )
+	void Uart3_PutChar(uint8_t c )
 	{
 		while(Uart3_TRMT==0);
 		#ifdef Uart3_UsedParityVerify
@@ -373,9 +373,9 @@ _UartTxQueueFlags UartTxQueueFlags;
 	}
 
 
-	void Uart3_PutHex(unsigned char c )
+	void Uart3_PutHex(uint8_t c )
 	{
-		unsigned char  b;
+		uint8_t  b;
 		b=HIGH_NIBBLE(c);
 		if (b>9) 
 			b += 'A'-10;
@@ -390,8 +390,8 @@ _UartTxQueueFlags UartTxQueueFlags;
 		Uart3_PutChar(b);
 	}
 	#ifdef Uart3TxQueue
-		unsigned char Uart3TxQueueBuf[Uart3TxQueue_BufLen];
-		unsigned char *pInUart3TxQueueBuf, *pOutUart3TxQueueBuf;
+		uint8_t Uart3TxQueueBuf[Uart3TxQueue_BufLen];
+		uint8_t *pInUart3TxQueueBuf, *pOutUart3TxQueueBuf;
 		void Uart3TxQueue_TxStart()
 		{	
 			if (Uart3_TXIF && !Uart3_TXIE)        
@@ -410,9 +410,9 @@ _UartTxQueueFlags UartTxQueueFlags;
 			}
 		}
 
-		void Uart3TxQueue_AddByte(unsigned char tx)
+		void Uart3TxQueue_AddByte(uint8_t tx)
 		{
-			unsigned char *d;
+			uint8_t *d;
 			d = pInUart3TxQueueBuf;
 			d++;
 			if (d == (Uart3TxQueueBuf+Uart3TxQueue_BufLen))         //回绕
@@ -422,13 +422,13 @@ _UartTxQueueFlags UartTxQueueFlags;
 			pInUart3TxQueueBuf = d;    //inTxBuf后移
 			Uart3TxQueue_TxStart();
 		}
-		void Uart3TxQueue_AddBytes(const void *tx, unsigned char size, unsigned int n)
+		void Uart3TxQueue_AddBytes(const void *tx, uint8_t size, uint16_t n)
 		{
-			unsigned int count = size * n;
-			unsigned char *s;
+			uint16_t count = size * n;
+			uint8_t *s;
 			if(count==0)
 				return;
-			s = (unsigned char*)tx;
+			s = (uint8_t*)tx;
 			while (count--)                         //逐个放入缓冲区
 			{
 				Uart3TxQueue_AddByte(*s++);
@@ -460,10 +460,10 @@ _UartTxQueueFlags UartTxQueueFlags;
 
 #ifdef Uart_Uart4
 	#ifdef Uart4_UsedParityVerify
-		unsigned char Uart4_ParityVerifyType;
-		unsigned char Uart4_GetVerifyBit(unsigned char data)
+		uint8_t Uart4_ParityVerifyType;
+		uint8_t Uart4_GetVerifyBit(uint8_t data)
 		{
-			unsigned char i,d,c,b,ret;
+			uint8_t i,d,c,b,ret;
 			if(Uart4_ParityVerifyType==Uart4_ParityVerify_High)
 				ret=1;
 			else if(Uart4_ParityVerifyType==Uart4_ParityVerify_Low)
@@ -497,7 +497,7 @@ _UartTxQueueFlags UartTxQueueFlags;
 			return ret;
 		}
 	#endif
-	void Uart4_PutChar(unsigned char c )
+	void Uart4_PutChar(uint8_t c )
 	{
 		while(Uart4_TRMT==0);
 		#ifdef Uart4_UsedParityVerify
@@ -520,9 +520,9 @@ _UartTxQueueFlags UartTxQueueFlags;
 	}
 
 
-	void Uart4_PutHex(unsigned char c )
+	void Uart4_PutHex(uint8_t c )
 	{
-		unsigned char  b;
+		uint8_t  b;
 		b=HIGH_NIBBLE(c);
 		if (b>9) 
 			b += 'A'-10;
@@ -537,8 +537,8 @@ _UartTxQueueFlags UartTxQueueFlags;
 		Uart4_PutChar(b);
 	}
 	#ifdef Uart4TxQueue
-		unsigned char Uart4TxQueueBuf[Uart4TxQueue_BufLen];
-		unsigned char *pInUart4TxQueueBuf, *pOutUart4TxQueueBuf;
+		uint8_t Uart4TxQueueBuf[Uart4TxQueue_BufLen];
+		uint8_t *pInUart4TxQueueBuf, *pOutUart4TxQueueBuf;
 		void Uart4TxQueue_TxStart()
 		{	
 			if (Uart4_TXIF && !Uart4_TXIE)        
@@ -557,9 +557,9 @@ _UartTxQueueFlags UartTxQueueFlags;
 			}
 		}
 
-		void Uart4TxQueue_AddByte(unsigned char tx)
+		void Uart4TxQueue_AddByte(uint8_t tx)
 		{
-			unsigned char *d;
+			uint8_t *d;
 			d = pInUart4TxQueueBuf;
 			d++;
 			if (d == (Uart4TxQueueBuf+Uart4TxQueue_BufLen))         //回绕
@@ -569,13 +569,13 @@ _UartTxQueueFlags UartTxQueueFlags;
 			pInUart4TxQueueBuf = d;    //inTxBuf后移
 			Uart4TxQueue_TxStart();
 		}
-		void Uart4TxQueue_AddBytes(const void *tx, unsigned char size, unsigned int n)
+		void Uart4TxQueue_AddBytes(const void *tx, uint8_t size, uint16_t n)
 		{
-			unsigned int count = size * n;
-			unsigned char *s;
+			uint16_t count = size * n;
+			uint8_t *s;
 			if(count==0)
 				return;
-			s = (unsigned char*)tx;
+			s = (uint8_t*)tx;
 			while (count--)                         //逐个放入缓冲区
 			{
 				Uart4TxQueue_AddByte(*s++);

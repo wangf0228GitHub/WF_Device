@@ -8,9 +8,9 @@
 #define Si4432_TxBuffer 0x7f
 
 void Si4432_Init(void);
-unsigned char Si4432_ReadRegister(unsigned char reg);
-void Si4432_WriteRegister(unsigned char reg,unsigned char value);
-void Si4432_WriteRegisters(unsigned char reg,unsigned char Count,const unsigned char *p);
-void Si4432_ReadRegisters(unsigned char reg,unsigned char Count,unsigned char *p);
+uint8_t Si4432_ReadRegister(uint8_t reg);
+void Si4432_WriteRegister(uint8_t reg,uint8_t value);
+void Si4432_WriteRegisters(uint8_t reg,uint8_t Count,const uint8_t *p);
+void Si4432_ReadRegisters(uint8_t reg,uint8_t Count,uint8_t *p);
 
 #endif // __Si4432_h__

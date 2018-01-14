@@ -46,7 +46,7 @@ void X5045_RstWDT()
 //等待X5045结束内部写周期
 void X5045_WIPCheck()
 {
-	unsigned char dat;
+	uint8_t dat;
 	do
 	{
 		dat=X5045_RDSR();
@@ -54,9 +54,9 @@ void X5045_WIPCheck()
 	}
 	while(dat);
 }
-unsigned char X5045_RDSR()
+uint8_t X5045_RDSR()
 {
-	unsigned char x;
+	uint8_t x;
 	X5045_CS=0;
 	SimSPI_Proc(0b00000101);
 	x=SimSPI_Proc(0);
@@ -64,7 +64,7 @@ unsigned char X5045_RDSR()
 	return (x);
 }
 //5045状态寄存器写入程序
-void X5045_WRSR(unsigned char x)
+void X5045_WRSR(uint8_t x)
 {
 	X5045_WREN();
 	X5045_CS=0;
@@ -76,7 +76,7 @@ void X5045_WRSR(unsigned char x)
 }
 //向X5045写入单字节数据,输入：x,待写数据,address,写入数据的地址
 #ifndef X5045_MorePage
-void X5045_WriteByte(unsigned char address,unsigned char x)
+void X5045_WriteByte(uint8_t address,uint8_t x)
 {
     X5045_WREN();
     X5045_CS=0;
@@ -87,9 +87,9 @@ void X5045_WriteByte(unsigned char address,unsigned char x)
     X5045_WIPCheck();	
     X5045_WRDI();
 }
-void X5045_WriteBytes(unsigned char address,unsigned char* pW,unsigned char wCount)
+void X5045_WriteBytes(uint8_t address,uint8_t* pW,uint8_t wCount)
 {
-    unsigned char i,x;
+    uint8_t i,x;
     X5045_WREN();
     X5045_CS=0;
     SimSPI_Proc(0b00000010);
@@ -104,9 +104,9 @@ void X5045_WriteBytes(unsigned char address,unsigned char* pW,unsigned char wCou
     X5045_WRDI();
 }
 //从X5045读入单字节数据,输入：address,待读数据地址,返回：读出的数据
-unsigned char X5045_ReadByte(unsigned char address)
+uint8_t X5045_ReadByte(uint8_t address)
 {
-    unsigned char x;
+    uint8_t x;
     X5045_CS=0;
     SimSPI_Proc(0b00000011);
     SimSPI_Proc(address);
@@ -114,9 +114,9 @@ unsigned char X5045_ReadByte(unsigned char address)
     X5045_CS=1;
     return (x);
 }
-void X5045_ReadBytes(unsigned char address,unsigned char* pR,unsigned char rCount)
+void X5045_ReadBytes(uint8_t address,uint8_t* pR,uint8_t rCount)
 {
-    unsigned char i,x;
+    uint8_t i,x;
     X5045_CS=0;
     SimSPI_Proc(0b00000011);
     SimSPI_Proc(address);
@@ -128,7 +128,7 @@ void X5045_ReadBytes(unsigned char address,unsigned char* pR,unsigned char rCoun
     X5045_CS=1;
 }
 #else
-void X5045_WriteByte(unsigned char address,unsigned char x,unsigned char page)
+void X5045_WriteByte(uint8_t address,uint8_t x,uint8_t page)
 {
     X5045_WREN();
     X5045_CS=0;
@@ -142,9 +142,9 @@ void X5045_WriteByte(unsigned char address,unsigned char x,unsigned char page)
     X5045_WIPCheck();	
     X5045_WRDI();
 }
-void X5045_WriteBytes(unsigned char address,unsigned char* pW,unsigned char wCount,unsigned char page)
+void X5045_WriteBytes(uint8_t address,uint8_t* pW,uint8_t wCount,uint8_t page)
 {
-    unsigned char i,x;
+    uint8_t i,x;
     X5045_WREN();
     X5045_CS=0;
     if(page!=0)
@@ -162,9 +162,9 @@ void X5045_WriteBytes(unsigned char address,unsigned char* pW,unsigned char wCou
     X5045_WRDI();
 }
 //从X5045读入单字节数据,输入：address,待读数据地址,返回：读出的数据
-unsigned char X5045_ReadByte(unsigned char address,unsigned char page)
+uint8_t X5045_ReadByte(uint8_t address,uint8_t page)
 {
-    unsigned char x;
+    uint8_t x;
     X5045_CS=0;
     if(page!=0)
         SimSPI_Proc(0b00001011);
@@ -175,9 +175,9 @@ unsigned char X5045_ReadByte(unsigned char address,unsigned char page)
     X5045_CS=1;
     return (x);
 }
-void X5045_ReadBytes(unsigned char address,unsigned char* pR,unsigned char rCount,unsigned char page)
+void X5045_ReadBytes(uint8_t address,uint8_t* pR,uint8_t rCount,uint8_t page)
 {
-    unsigned char i,x;
+    uint8_t i,x;
     X5045_CS=0;
     if(page!=0)
         SimSPI_Proc(0b00001011);

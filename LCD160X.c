@@ -11,9 +11,9 @@
 // #define LCD160X_WR RD1    //读
 // #define LCD160X_E RD0
 #ifndef LCD160X_LineStart_Ex
-const unsigned char LCD160X_LineStart[4]={0x80,0x90,0x88,0x98};
-const unsigned char LCD160X_RowStart[4]={0x80,0x80,0x88,0x88};
-const unsigned char LCD160X_ColStart[4]={0x80,0x90,0x80,0x90};
+const uint8_t LCD160X_LineStart[4]={0x80,0x90,0x88,0x98};
+const uint8_t LCD160X_RowStart[4]={0x80,0x80,0x88,0x88};
+const uint8_t LCD160X_ColStart[4]={0x80,0x90,0x80,0x90};
 #endif
 #ifdef LCD160X_Serial
 
@@ -22,10 +22,10 @@ const unsigned char LCD160X_ColStart[4]={0x80,0x90,0x80,0x90};
 #define LCD160X_READ_STATUS     0xFC 
 #define LCD160X_READ_DATA       0xFE
 
-unsigned char LCD160X_ReadByte(void) 
+uint8_t LCD160X_ReadByte(void) 
 {    
-	unsigned char temp=0;      
-	unsigned char i,temp1=0;
+	uint8_t temp=0;      
+	uint8_t i,temp1=0;
 	LCD160X_SID_DIR=1; 
 	for(i=0; i<8; i++) 
 	{ 
@@ -54,9 +54,9 @@ unsigned char LCD160X_ReadByte(void)
 	LCD160X_SID_DIR=0; 
 	return(temp);     
 }
-void LCD160X_WriteByte(unsigned char b)
+void LCD160X_WriteByte(uint8_t b)
 {
-	unsigned char i; 
+	uint8_t i; 
 	for(i=0; i<8; i++) 
 	{   
 		if(b & 0x80) 
@@ -75,9 +75,9 @@ void LCD160X_WriteByte(unsigned char b)
 }
 #endif
 #ifndef LCD160X_FuncEx
-	unsigned char LCD160X_IsBusy(void)
+	uint8_t LCD160X_IsBusy(void)
 	{ 
-		unsigned char Ret;
+		uint8_t Ret;
 	#ifdef LCD160X_Parallel8
 		#ifdef LCD160X_PORT_DIR
 			LCD160X_PORT_DIR=0xff;
@@ -115,7 +115,7 @@ void LCD160X_WriteByte(unsigned char b)
 	#endif
 		return 0;
 	}
-	void LCD160X_Write(unsigned char dat_comm,unsigned char content)
+	void LCD160X_Write(uint8_t dat_comm,uint8_t content)
 	{
 	#ifdef LCD160X_Parallel8
 		#ifdef Proteus
@@ -214,10 +214,10 @@ void LCD160X_Init(void)
 }
 /*---------------显示汉字或字符----------------*/
 
-void LCD160X_DispString(unsigned char X,unsigned char Y,const char  *pString)
+void LCD160X_DispString(uint8_t X,uint8_t Y,const char  *pString)
 {
 #ifdef LCD160X_LineMax
-	unsigned char x=0;
+	uint8_t x=0;
 #endif
 	LCD160X_Write(LCD160X_COMMAND, LCD160X_LineStart[Y] + X);
 	while((*pString)!='\0')		 //字符串未结束就一直写
@@ -230,12 +230,12 @@ void LCD160X_DispString(unsigned char X,unsigned char Y,const char  *pString)
 #endif
 	}
 }
-void LCD160X_DispOneCharByXY(unsigned char X,unsigned char Y,unsigned char c)
+void LCD160X_DispOneCharByXY(uint8_t X,uint8_t Y,uint8_t c)
 {
 	LCD160X_Write(LCD160X_COMMAND, LCD160X_LineStart[Y] + X);
 	LCD160X_Write(LCD160X_DATA,c);
 }
-void LCD160X_DispOneChar(unsigned char Addr,unsigned char c)
+void LCD160X_DispOneChar(uint8_t Addr,uint8_t c)
 {
 	Addr |= 0x80; //算出指令码
 	LCD160X_Write(LCD160X_COMMAND, Addr);
@@ -247,23 +247,23 @@ void LCD160X_ClrRam(void)
 	LCD160X_Write(LCD160X_COMMAND,0x01);
 }
 #ifdef LCD160X_CGRAMADDR
-void Lcd1602_InitCGRAM(const char  *pC,unsigned char count)
+void Lcd1602_InitCGRAM(const char  *pC,uint8_t count)
 {
-	unsigned char i;
+	uint8_t i;
 	LCD160X_Write(LCD160X_COMMAND, LCD160X_CGRAMADDR);  //写入CGRAM首地址
 	for (i = 0; i < count; i++)		  //写入64个字节的CGRAM内容
 	{
 		LCD160X_Write(LCD160X_DATA,pC[i]);
 	}
 }
-void LCD160X_DispCGRAM(unsigned char X,unsigned char Y,unsigned char nIndex)
+void LCD160X_DispCGRAM(uint8_t X,uint8_t Y,uint8_t nIndex)
 {
 	LCD160X_Write(LCD160X_COMMAND, LCD160X_LineStart[Y] + X);
 	LCD160X_Write(LCD160X_DATA, nIndex);
 }	
 #endif
 
-void LCD160X_CurShowByXY(unsigned char X,unsigned char Y,unsigned char bFlicker )
+void LCD160X_CurShowByXY(uint8_t X,uint8_t Y,uint8_t bFlicker )
 {	
 	LCD160X_Write(LCD160X_COMMAND, LCD160X_LineStart[Y] + X);
 	if(bFlicker)
@@ -271,7 +271,7 @@ void LCD160X_CurShowByXY(unsigned char X,unsigned char Y,unsigned char bFlicker 
 	else
 		LCD160X_Write(LCD160X_COMMAND,0x0e);  
 }
-void LCD160X_CurShowByAddr( unsigned char Addr,unsigned char bFlicker )
+void LCD160X_CurShowByAddr( uint8_t Addr,uint8_t bFlicker )
 {	
 	Addr |= 0x80; //算出指令码
 	LCD160X_Write(LCD160X_COMMAND, Addr);
@@ -298,9 +298,9 @@ void LCD160X_CurHide( void )
 /************************************************************************/
 /* 绘图相关                                                             */
 /************************************************************************/
-void LCD160X_ShowHZ16x16(unsigned char x,unsigned char y,const unsigned char* zm) 
+void LCD160X_ShowHZ16x16(uint8_t x,uint8_t y,const uint8_t* zm) 
 { 
-	unsigned char i=0;
+	uint8_t i=0;
 	LCD160X_Write(LCD160X_COMMAND,0x34);//关闭绘图显示
 	for(i=0;i<16;i++)
 	{
@@ -311,9 +311,9 @@ void LCD160X_ShowHZ16x16(unsigned char x,unsigned char y,const unsigned char* zm
 	}
 	LCD160X_Write(LCD160X_COMMAND,0x36);//打开绘图显示
 }
-void LCD160X_ShowHZ8x16(unsigned char x,unsigned char y,const unsigned char* zm1,const unsigned char* zm2) 
+void LCD160X_ShowHZ8x16(uint8_t x,uint8_t y,const uint8_t* zm1,const uint8_t* zm2) 
 { 
-	unsigned char i=0;
+	uint8_t i=0;
 	LCD160X_Write(LCD160X_COMMAND,0x34);//关闭绘图显示
 	for(i=0;i<16;i++)
 	{
@@ -324,9 +324,9 @@ void LCD160X_ShowHZ8x16(unsigned char x,unsigned char y,const unsigned char* zm1
 	}
 	LCD160X_Write(LCD160X_COMMAND,0x36);//打开绘图显示
 }
-void LCD160X_ShowPicByXY(unsigned char x,unsigned char y,unsigned char Width,unsigned char Height,const unsigned char* Pic)
+void LCD160X_ShowPicByXY(uint8_t x,uint8_t y,uint8_t Width,uint8_t Height,const uint8_t* Pic)
 {
-	unsigned char i,j,k;
+	uint8_t i,j,k;
 	LCD160X_Write(LCD160X_COMMAND,0x34);//关闭绘图显示
 	Width=Width>>3;
 	k=0;
@@ -347,9 +347,9 @@ void LCD160X_ShowPicByXY(unsigned char x,unsigned char y,unsigned char Width,uns
 	}
 	LCD160X_Write(LCD160X_COMMAND,0x36);//打开绘图显示
 }
-void LCD160X_ShowFullByXY(unsigned char x,unsigned char y,unsigned char Width,unsigned char Height,unsigned char fc)
+void LCD160X_ShowFullByXY(uint8_t x,uint8_t y,uint8_t Width,uint8_t Height,uint8_t fc)
 {
-	unsigned char i,j,k;
+	uint8_t i,j,k;
 	LCD160X_Write(LCD160X_COMMAND,0x34);//关闭绘图显示
 	Width=Width>>3;
 	k=0;

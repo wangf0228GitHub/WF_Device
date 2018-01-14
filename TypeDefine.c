@@ -3,7 +3,7 @@
 /* Given the high and low-order 32-bit quantities HI and LO, return a u64
    value representing (HI << 32) + LO.  */
 #ifdef unsigned64
-u64 u64_Init (unsigned int hi, unsigned int lo)
+u64 u64_Init (uint16_t hi, uint16_t lo)
 {
 	u64 r;
 	r.hi = hi;
@@ -11,21 +11,21 @@ u64 u64_Init (unsigned int hi, unsigned int lo)
 	return r;
 }
 /* Return a u64 value representing LO.  */
-u64 u64_lo (unsigned int lo)
+u64 u64_lo (uint16_t lo)
 {
 	u64 r;
 	r.hi = 0;
 	r.lo = lo;
 	return r;
 }
-u64 u64_hi (unsigned int hi)
+u64 u64_hi (uint16_t hi)
 {
 	u64 r;
 	r.hi = hi;
 	r.lo = 0;
 	return r;
 }
-unsigned char u64_lt (u64 x, u64 y)
+uint8_t u64_lt (u64 x, u64 y)
 {
 	return x.hi < y.hi || (x.hi == y.hi && x.lo < y.lo);
 }
@@ -54,7 +54,7 @@ u64 u64_xor (u64 x, u64 y)
 	return r;
 }
 /* Return X + Y.  */
-u64 u64_plus (u64 x, unsigned int hi,unsigned int lo)
+u64 u64_plus (u64 x, uint16_t hi,uint16_t lo)
 {
 	u64 r;
 	r.lo = x.lo + lo;
@@ -62,7 +62,7 @@ u64 u64_plus (u64 x, unsigned int hi,unsigned int lo)
 	return r;
 }
 /* Return X - Y.  */
-u64 u64_decrease (u64 x, unsigned int hi,unsigned int lo)
+u64 u64_decrease (u64 x, uint16_t hi,uint16_t lo)
 {
 	u64 r;
 	if(x.lo<lo)
@@ -107,7 +107,7 @@ u64 u64_shr (u64 x, int n)
 	}
 	return r;
 }
-u64 u64_lmul(unsigned int multiplier, unsigned int multiplicand)
+u64 u64_lmul(uint16_t multiplier, uint16_t multiplicand)
 {
 	u64	product,m1;
 	product=u64_Init(0,0);
@@ -123,7 +123,7 @@ u64 u64_lmul(unsigned int multiplier, unsigned int multiplicand)
 	} while(multiplier!=0);
 	return product;
 }
-u64 u64_lmuu64(u64 multiplicand, unsigned int multiplier)
+u64 u64_lmuu64(u64 multiplicand, uint16_t multiplier)
 {
 	u64	product;
 	product=u64_Init(0,0);
@@ -138,7 +138,7 @@ u64 u64_lmuu64(u64 multiplicand, unsigned int multiplier)
 	} while(multiplier!= 0 );
 	return product;
 }
-u64 u64_u64muu64(u64 multiplier, unsigned int hi,unsigned int lo)
+u64 u64_u64muu64(u64 multiplier, uint16_t hi,uint16_t lo)
 {
 	u64	product,multiplicand;
 	product=u64_Init(0,0);

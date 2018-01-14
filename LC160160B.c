@@ -18,13 +18,13 @@
 
 
 
-void LC160160B_WriteD(unsigned char dat);
-void LC160160B_WriteC(unsigned char cmd);
+void LC160160B_WriteD(uint8_t dat);
+void LC160160B_WriteC(uint8_t cmd);
 void LC160160B_Init(void)
 {
 	
 #ifdef LC160160B_RST
-	unsigned char i;
+	uint8_t i;
 	LC160160B_RST_DIR=0;
 	LC160160B_RST=0;
 	__delay_20ms(25);
@@ -86,16 +86,16 @@ void LC160160B_Init(void)
 	LC160160B_WriteC(0xAD); //Set Display Enable
 }
 /******************************************************************************** 
-函数名:Void ShowHZ16x16(unsigned Addr,unsigned int hzcode) 
+函数名:Void ShowHZ16x16(unsigned Addr,uint16_t hzcode) 
 函数功能：显示一个汉字(16*16点阵)
            Addr: 显示位置
         hzcode: 汉字代码(自定义的) 
 注:超出范围的将直接写到RAM中,可以实现卷屏效果????????
 ********************************************************************************/ 
-void LC160160B_ShowHZ16x16(unsigned char x,unsigned char y,const unsigned char* zm) 
+void LC160160B_ShowHZ16x16(uint8_t x,uint8_t y,const uint8_t* zm) 
 { 
-     unsigned char CA; 
-     unsigned char i=0;
+     uint8_t CA; 
+     uint8_t i=0;
 	 CA=0x25+y;
      for(i=0;i<16;i++) 
      { 
@@ -109,16 +109,16 @@ void LC160160B_ShowHZ16x16(unsigned char x,unsigned char y,const unsigned char* 
      } 
 }
 /******************************************************************************** 
-函数名:Void ShowHZ16x16(unsigned Addr,unsigned int hzcode) 
+函数名:Void ShowHZ16x16(unsigned Addr,uint16_t hzcode) 
 函数功能：显示一个汉字(16*16点阵)
            Addr: 显示位置
         hzcode: 汉字代码(自定义的) 
 注:超出范围的将直接写到RAM中,可以实现卷屏效果????????
 ********************************************************************************/ 
-void LC160160B_ShowHZ8x16(unsigned char x,unsigned char y,const unsigned char* zm) 
+void LC160160B_ShowHZ8x16(uint8_t x,uint8_t y,const uint8_t* zm) 
 { 
-	unsigned char CA; 
-	unsigned char i=0;
+	uint8_t CA; 
+	uint8_t i=0;
 	CA=0x25+y;
 	for(i=0;i<16;i++) 
 	{ 
@@ -130,10 +130,10 @@ void LC160160B_ShowHZ8x16(unsigned char x,unsigned char y,const unsigned char* z
 		x++;            // 换到下一行
 	} 
 }
-void LC160160B_ShowPic(unsigned char x,unsigned char y,unsigned char Width,unsigned char Height,const unsigned char* Pic)
+void LC160160B_ShowPic(uint8_t x,uint8_t y,uint8_t Width,uint8_t Height,const uint8_t* Pic)
 {
-	unsigned char i,j,CA;
-	unsigned char s3;
+	uint8_t i,j,CA;
+	uint8_t s3;
 	s3=Width<<3;
 	s3=s3%3;
 	s3=3-s3;
@@ -156,13 +156,13 @@ void LC160160B_ShowPic(unsigned char x,unsigned char y,unsigned char Width,unsig
 	} 
 }
 /********************************************************************************
-函数名: Void ClearScreen(unsigned int ram)
+函数名: Void ClearScreen(uint16_t ram)
 函数功能: 清除整个屏幕
      ram : 需要清零的单元数
 ********************************************************************************/
 void LC160160B_ClearScreen(void)
 {
-     unsigned char i,x,j,CA;
+     uint8_t i,x,j,CA;
 	 CA=0x25;
 	 x=0;   
 	 for(i=0;i<160;i++)  
@@ -177,9 +177,9 @@ void LC160160B_ClearScreen(void)
 		 x++;
 	 }  	      
 }
-void LC160160B_Write8Dots2LCD(unsigned char uc_dat)
+void LC160160B_Write8Dots2LCD(uint8_t uc_dat)
 {
-	unsigned char uc_dat0;
+	uint8_t uc_dat0;
 
 	uc_dat0 =0;
 	if ((uc_dat &0x80)==0x80) uc_dat0=0xF0;
@@ -201,7 +201,7 @@ void LC160160B_Write8Dots2LCD(unsigned char uc_dat)
 	if ((uc_dat &0x01)==0x01) uc_dat0|=0x0F;
 	LC160160B_WriteD(uc_dat0);
 }
-void LC160160B_WriteD(unsigned char dat)
+void LC160160B_WriteD(uint8_t dat)
 {
 	
 	LC160160B_CD=1;    //数据
@@ -211,7 +211,7 @@ void LC160160B_WriteD(unsigned char dat)
 	LC160160B_WR=1;	
 	LC160160B_CS=1;
 }
-void LC160160B_WriteC(unsigned char cmd)
+void LC160160B_WriteC(uint8_t cmd)
 {	
 	LC160160B_CD=0;    //命令
 	LC160160B_CS=0;

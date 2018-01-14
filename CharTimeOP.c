@@ -1,10 +1,10 @@
 #include "HardwareProfile.h"
 #include "BCDTimeOP.h"
 #include "afx.h"
-const unsigned char MonthDaymax[] =
+const uint8_t MonthDaymax[] =
 //jan feb mar apr may jun jul aug sep oct nov dec
 {  31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-unsigned char GetMonthDay(unsigned char Y,unsigned char M)
+uint8_t GetMonthDay(uint8_t Y,uint8_t M)
 {
 	if(M>12 || M==0)
 		return 0;
@@ -20,7 +20,7 @@ unsigned char GetMonthDay(unsigned char Y,unsigned char M)
 }
 void DateTimeAdd1M(_SystemCharTime* dt)
 {
-	unsigned char x,md;
+	uint8_t x,md;
 	x=(*dt).Minute;
 	x++;
 	if(x<60)
@@ -60,10 +60,10 @@ void DateTimeAdd1M(_SystemCharTime* dt)
 		}
 	}		
 }
-void DateTimeAddMinutes(_SystemCharTime* dt,unsigned int MS)
+void DateTimeAddMinutes(_SystemCharTime* dt,uint16_t MS)
 {
-	unsigned char addM,addH,addD;
-	unsigned char x,md,y;
+	uint8_t addM,addH,addD;
+	uint8_t x,md,y;
 	addM=MS%60;
 	MS=MS/60;
 	addH=MS%24;
@@ -120,10 +120,10 @@ void DateTimeAddMinutes(_SystemCharTime* dt,unsigned int MS)
 	}
 	(*dt).Day=CHAR2BCD(x);	
 }
-unsigned int GetMinutesGap(_SystemCharTime dts,_SystemCharTime dte)
+uint16_t GetMinutesGap(_SystemCharTime dts,_SystemCharTime dte)
 {
-	unsigned int ret=0,dh;
-	unsigned char x1,x2;
+	uint16_t ret=0,dh;
+	uint8_t x1,x2;
 	dh=GetHourGap(dts,dte);
 	if(dh>1092)
 		return 0xffff;
@@ -148,10 +148,10 @@ unsigned int GetMinutesGap(_SystemCharTime dts,_SystemCharTime dte)
 	return ret;
 }
 //获得整小时的时间间隔
-unsigned int GetHourGap(_SystemCharTime dts,_SystemCharTime dte)
+uint16_t GetHourGap(_SystemCharTime dts,_SystemCharTime dte)
 {
-	unsigned int ret=0,ds;
-	unsigned char x1,x2;
+	uint16_t ret=0,ds;
+	uint8_t x1,x2;
 	ds=GetDayGap(dts,dte);
 	if(ds>2730)
 		return 0xffff;
@@ -176,10 +176,10 @@ unsigned int GetHourGap(_SystemCharTime dts,_SystemCharTime dte)
 	return ret;
 }
 //获得整天的时间间隔
-unsigned int GetDayGap(_SystemCharTime dts,_SystemCharTime dte)
+uint16_t GetDayGap(_SystemCharTime dts,_SystemCharTime dte)
 {
-	unsigned int ret=0;
-	unsigned char i,x,x1,x2,md;
+	uint16_t ret=0;
+	uint8_t i,x,x1,x2,md;
 	if(dts.Year!=dte.Year)//年不相等
 	{
 		if(dts.Year>dts.Year)

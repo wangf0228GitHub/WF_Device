@@ -10,16 +10,16 @@
 //#define TM1650_DIN_DIR RC1    
 //#define TM1650_WR_DIR  RC2    
 //#define TM1650_CS_DIR 	 RC3
-unsigned char TM1650_Result;
+uint8_t TM1650_Result;
 #ifdef SimI2C
 void TM1650_Init(void)
 {
 	SimI2C_Init();
 }
-unsigned char TM1650_Read(void)
+uint8_t TM1650_Read(void)
 {
-	unsigned char ErrTimes=TM1650_RetryCount;
-	unsigned char bRight=0;
+	uint8_t ErrTimes=TM1650_RetryCount;
+	uint8_t bRight=0;
 	while(ErrTimes--)
 	{
 		SimI2C_Start();		
@@ -34,10 +34,10 @@ unsigned char TM1650_Read(void)
 	SimI2C_Stop();
 	return bRight;
 }
-unsigned char TM1650_WriteData(unsigned char Com,unsigned char Data)
+uint8_t TM1650_WriteData(uint8_t Com,uint8_t Data)
 {
-	unsigned char ErrTimes=TM1650_RetryCount;
-	unsigned char bRight=0;	
+	uint8_t ErrTimes=TM1650_RetryCount;
+	uint8_t bRight=0;	
 	while(ErrTimes--)
 	{
 		SimI2C_Start();		
@@ -57,16 +57,16 @@ unsigned char TM1650_WriteData(unsigned char Com,unsigned char Data)
 #endif
 
 #ifdef TM1650_2
-unsigned char TM1650_Result_2;
+uint8_t TM1650_Result_2;
 #ifdef SimI2C_2
 void TM1650_Init_2(void)
 {
 	SimI2C_Init_2();
 }
-unsigned char TM1650_Read_2(void)
+uint8_t TM1650_Read_2(void)
 {
-	unsigned char ErrTimes=TM1650_RetryCount_2;	
-	unsigned char bRight=0;
+	uint8_t ErrTimes=TM1650_RetryCount_2;	
+	uint8_t bRight=0;
 	while(ErrTimes--)
 	{
 		SimI2C_Start_2();		
@@ -81,10 +81,10 @@ unsigned char TM1650_Read_2(void)
 	SimI2C_Stop_2();
 	return bRight;
 }
-unsigned char TM1650_WriteData_2(unsigned char Com,unsigned char Data)
+uint8_t TM1650_WriteData_2(uint8_t Com,uint8_t Data)
 {
-	unsigned char ErrTimes=TM1650_RetryCount_2;
-	unsigned char bRight=0;	
+	uint8_t ErrTimes=TM1650_RetryCount_2;
+	uint8_t bRight=0;	
 	while(ErrTimes--)
 	{
 		SimI2C_Start_2();		
@@ -104,16 +104,16 @@ unsigned char TM1650_WriteData_2(unsigned char Com,unsigned char Data)
 #endif
 #endif
 #ifdef TM1650_3
-unsigned char TM1650_Result_3;
+uint8_t TM1650_Result_3;
 #ifdef SimI2C_3
 void TM1650_Init_3(void)
 {
 	SimI2C_Init_3();
 }
-unsigned char TM1650_Read_3(void)
+uint8_t TM1650_Read_3(void)
 {
-	unsigned char ErrTimes=TM1650_RetryCount_3;	
-	unsigned char bRight=0;
+	uint8_t ErrTimes=TM1650_RetryCount_3;	
+	uint8_t bRight=0;
 	while(ErrTimes--)
 	{
 		SimI2C_Start_3();		
@@ -128,10 +128,10 @@ unsigned char TM1650_Read_3(void)
 	SimI2C_Stop_3();
 	return bRight;
 }
-unsigned char TM1650_WriteData_3(unsigned char Com,unsigned char Data)
+uint8_t TM1650_WriteData_3(uint8_t Com,uint8_t Data)
 {
-	unsigned char ErrTimes=TM1650_RetryCount_3;
-	unsigned char bRight=0;	
+	uint8_t ErrTimes=TM1650_RetryCount_3;
+	uint8_t bRight=0;	
 	while(ErrTimes--)
 	{
 		SimI2C_Start_3();		

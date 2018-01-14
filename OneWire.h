@@ -1,6 +1,8 @@
 #ifndef _ONEWIRE_h_
 #define _ONEWIRE_h_
 
+#include "main.h"
+
 #ifndef TIMESFORRETRY_OneWire
 	#define TIMESFORRETRY_OneWire 5
 #endif
@@ -47,20 +49,20 @@
 
 //#define OneWire_Init() ONEWIRE_SETHIGH()
 
-unsigned char OneWire_Reset(void);
-void OneWire_WriteBit(unsigned char bitval);
-unsigned char OneWire_ReadBit( void );
-void OneWire_WriteByte(unsigned char val);
-unsigned char OneWire_ReadByte(void);
+uint8_t OneWire_Reset(void);
+void OneWire_WriteBit(uint8_t bitval);
+uint8_t OneWire_ReadBit( void );
+void OneWire_WriteByte(uint8_t val);
+uint8_t OneWire_ReadByte(void);
 
 #ifdef OneWire_MAXSENSORS
 
-	unsigned char OneWire_RomSearch( unsigned char diff, unsigned char *id );
+	uint8_t OneWire_RomSearch( uint8_t diff, uint8_t *id );
 
-	unsigned char OneWire_Command( unsigned char command, unsigned char *id );
+	uint8_t OneWire_Command( uint8_t command, uint8_t *id );
 
 #else
-	unsigned char OneWire_Command( unsigned char command);
+	uint8_t OneWire_Command( uint8_t command);
 #endif
 
 #endif

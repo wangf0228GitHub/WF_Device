@@ -5,7 +5,7 @@
 #ifndef   __TypeDefine_h__
 #define   __TypeDefine_h__
 
-
+#include "main.h"
 
 // #ifndef __GENERIC_TYPE_DEFS_H_
 // typedef enum _BOOL { FALSE = 0, TRUE } BOOL;    /* Undefined size */
@@ -43,7 +43,7 @@ typedef union
 		unsigned b6:1;
 		unsigned b7:1;		
 	}bits;
-}uchar_wf;
+}u8_wf;
 typedef union
 {	
 	uint8_t u8s[2];
@@ -72,19 +72,19 @@ typedef union
 		uint8_t u8L;
 		uint8_t u8H;
 	};
-}ushort_wf;
+}u16_wf;
 typedef union 
 {	
 	uint8_t u8s[3];	
 	struct
 	{
-		ushort_wf	u16_0;
+		u16_wf	u16_0;
 		uint8_t	u8_1;
 	}byte21;
 	struct
 	{
 		uint8_t	u8_0;
-		ushort_wf	u16_1;
+		u16_wf	u16_1;
 	}byte12;
 	struct
 	{
@@ -113,7 +113,7 @@ typedef union
 		unsigned b22:1;
 		unsigned b23:1;
 	}bits;
-}uchar3_wf;
+}u24_wf;
 
 typedef union 
 {	
@@ -155,7 +155,7 @@ typedef union
 		unsigned b30:1;
 		unsigned b31:1;
 	}bits;
-}uint_wf;
+}u32_wf;
 
 /************************************************************************/
 /* ÓÐ·ûºÅÊý                                                             */
@@ -182,7 +182,7 @@ typedef union
 	}s8s;
 	struct
 	{
-		ushort_wf	u16_l;
+		u16_wf	u16_l;
 		sshort_wf	s16_h;	
 	}s16s;
 	struct

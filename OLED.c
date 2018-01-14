@@ -14,9 +14,9 @@
 // #define OLED_CS_DIR TRISE1
 // #define OLED_CD_DIR TRISE4
 // #define OLED_PORT_DIR TRISD
-unsigned char OLED_ReadState()
+uint8_t OLED_ReadState()
 {
-	unsigned char state;
+	uint8_t state;
 	OLED_CD_W=1;    //控制字
 #ifdef OLED_PORT_DIR
 	OLED_PORT_W=0xff;//输入
@@ -148,9 +148,9 @@ void OLED_Init(void)
 	}
 }
 //x:0~15,y:0,1
-void OLED_ShowHZ16x16(unsigned char x,unsigned char y,const unsigned char* zm) 
+void OLED_ShowHZ16x16(uint8_t x,uint8_t y,const uint8_t* zm) 
 {
-     unsigned char i=0;
+     uint8_t i=0;
 	 i=(x<<3)+4;
 	 OLED_WriteC(0x21);
 	 OLED_WriteC(i);
@@ -172,9 +172,9 @@ void OLED_ShowHZ16x16(unsigned char x,unsigned char y,const unsigned char* zm)
      } 
 }
 //x:0~15,y:0,1
-void OLED_ShowHZ8x16(unsigned char x,unsigned char y,const unsigned char* zm) 
+void OLED_ShowHZ8x16(uint8_t x,uint8_t y,const uint8_t* zm) 
 { 
-	unsigned char i=0;
+	uint8_t i=0;
 	i=(x<<3)+4;
 	OLED_WriteC(0x21);
 	OLED_WriteC(i);
@@ -195,9 +195,9 @@ void OLED_ShowHZ8x16(unsigned char x,unsigned char y,const unsigned char* zm)
 		OLED_WriteD(*zm++);
 	}
 }
-void OLED_ShowPicByXY(unsigned char x,unsigned char y,unsigned char Width,unsigned char Height,const unsigned char* Pic)
+void OLED_ShowPicByXY(uint8_t x,uint8_t y,uint8_t Width,uint8_t Height,const uint8_t* Pic)
 {
-	unsigned int n,ii;
+	uint16_t n,ii;
 	n=Width*Height;
 	n=n>>3;
 	x=x<<3;
@@ -218,9 +218,9 @@ void OLED_ShowPicByXY(unsigned char x,unsigned char y,unsigned char Width,unsign
 		OLED_WriteD(Pic[ii]);
 	}
 }
-void OLED_ShowFullByXY(unsigned char x,unsigned char y,unsigned char Width,unsigned char Height,unsigned char fc)
+void OLED_ShowFullByXY(uint8_t x,uint8_t y,uint8_t Width,uint8_t Height,uint8_t fc)
 {
-	unsigned int n,ii;
+	uint16_t n,ii;
 	n=Width*Height;
 	n=n>>3;
 	x=x<<3;
@@ -242,13 +242,13 @@ void OLED_ShowFullByXY(unsigned char x,unsigned char y,unsigned char Width,unsig
 	}
 }
 /********************************************************************************
-函数名: Void ClearScreen(unsigned int ram)
+函数名: Void ClearScreen(uint16_t ram)
 函数功能: 清除整个屏幕
      ram : 需要清零的单元数
 ********************************************************************************/
 void OLED_ClearScreen(void)
 {
-	unsigned int i=0;
+	uint16_t i=0;
 	OLED_WriteC(0x21);
 	OLED_WriteC(4);
 	OLED_WriteC(131);
@@ -260,7 +260,7 @@ void OLED_ClearScreen(void)
 		OLED_WriteD(0x00);
 	}
 }
-void OLED_WriteD(unsigned char dat)
+void OLED_WriteD(uint8_t dat)
 {
 	OLED_RD_W=1;
 	OLED_CS_W=0;
@@ -274,7 +274,7 @@ void OLED_WriteD(unsigned char dat)
 	OLED_WR_W=1;	
 	OLED_CS_W=1;
 }
-void OLED_WriteC(unsigned char cmd)
+void OLED_WriteC(uint8_t cmd)
 {	
 	OLED_RD_W=1;
 	OLED_CS_W=0;

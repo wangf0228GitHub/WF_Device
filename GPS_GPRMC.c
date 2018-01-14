@@ -3,11 +3,11 @@
 #include <string.h>
      
 _GPS_GPRMC GPS_GPRMC;
-unsigned char GPS_GPRMC_DataProc( char* data )
+uint8_t GPS_GPRMC_DataProc( char* data )
 {
-	unsigned char dotIndex[12];
-	unsigned char dotCount=0;
-	unsigned char i,j;
+	uint8_t dotIndex[12];
+	uint8_t dotCount=0;
+	uint8_t i,j;
 	if(data[0]!='$')
 		return 0;
 	if(data[1]!='G')

@@ -1,15 +1,15 @@
 #include "HardwareProfile.h"
 
 _CP1616_Master_Flags CP1616_Master_Flags;
-unsigned char CP1616_Master_RxList[MAX_CP1616_Master_RX];
-unsigned int CP1616_Master_RxCount;
-unsigned int CP1616_Master_NeedRxCount;
+uint8_t CP1616_Master_RxList[MAX_CP1616_Master_RX];
+uint16_t CP1616_Master_RxCount;
+uint16_t CP1616_Master_NeedRxCount;
 uint CP1616_Master_WaitClientAddr;
-unsigned char CP1616_Master_WaitCommand;
-unsigned int CP1616_Master_WaitClientTick;
-//unsigned char CP1616_Master_RxErrTimes;
-unsigned int CP1616_Master_WaitClientTime;
-unsigned char CP1616_Master_RetryTimes;
+uint8_t CP1616_Master_WaitCommand;
+uint16_t CP1616_Master_WaitClientTick;
+//uint8_t CP1616_Master_RxErrTimes;
+uint16_t CP1616_Master_WaitClientTime;
+uint8_t CP1616_Master_RetryTimes;
 
 void Init_CP1616_Master(void)
 {
@@ -22,7 +22,7 @@ void Init_CP1616_Master(void)
 //		Uart_PutChar(0xff);
 //	}
 }
-void ProcRx_CP1616_Master(unsigned char rx)
+void ProcRx_CP1616_Master(uint8_t rx)
 {
 	if(CP1616_Master_Flags.bRx)//之前没处理完
 		return;
@@ -91,10 +91,10 @@ void ProcRx_CP1616_Master(unsigned char rx)
 		}
 	}	
 }
-void CP1616_MasterSendData(unsigned int Addr,unsigned char Command,unsigned char* pBuff,unsigned int Count)
+void CP1616_MasterSendData(uint16_t Addr,uint8_t Command,uint8_t* pBuff,uint16_t Count)
 {
-	unsigned char sum;
-	unsigned int i;
+	uint8_t sum;
+	uint16_t i;
 	CP1616_Master_WaitClientAddr.u16=Addr;
 	CP1616_Master_WaitCommand=Command;
 	SetTx_CP1616_Master();
@@ -115,11 +115,11 @@ void CP1616_MasterSendData(unsigned int Addr,unsigned char Command,unsigned char
 	CP1616_Master_NeedRxCount=0xffff;
 	CP1616_Master_Flags.bWaitDataFromClient=1;
 }
-unsigned char CP1616_MasterWaitClientData(unsigned int Addr,unsigned char Command,unsigned char* pBuff,unsigned int Count)
+uint8_t CP1616_MasterWaitClientData(uint16_t Addr,uint8_t Command,uint8_t* pBuff,uint16_t Count)
 {	
-	unsigned char sum,retry;
-	unsigned char ret;
-	unsigned int i;
+	uint8_t sum,retry;
+	uint8_t ret;
+	uint16_t i;
 	ret=0;
 	CP1616_Master_WaitClientAddr.u16=Addr;
 	CP1616_Master_WaitCommand=Command;

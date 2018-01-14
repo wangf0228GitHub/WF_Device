@@ -1,14 +1,14 @@
 #include <stdafx.h>
-unsigned char Modbus_ASCII_Inner_RxBuffer[(Modbus_ASCII_RxBufLen<<1)+7];
-unsigned char Modbus_ASCII_Inner_TxBuffer[(Modbus_ASCII_TxBufLen<<1)+7];
-unsigned char Modbus_ASCII_Inner_RxCount;
-unsigned char Modbus_ASCII_Slave_Addr;
-unsigned char Modbus_ASCII_RxBuffer[Modbus_ASCII_RxBufLen];
-unsigned char Modbus_ASCII_TxBuffer[Modbus_ASCII_TxBufLen];
-unsigned char Modbus_ASCII_RxCount;
+uint8_t Modbus_ASCII_Inner_RxBuffer[(Modbus_ASCII_RxBufLen<<1)+7];
+uint8_t Modbus_ASCII_Inner_TxBuffer[(Modbus_ASCII_TxBufLen<<1)+7];
+uint8_t Modbus_ASCII_Inner_RxCount;
+uint8_t Modbus_ASCII_Slave_Addr;
+uint8_t Modbus_ASCII_RxBuffer[Modbus_ASCII_RxBufLen];
+uint8_t Modbus_ASCII_TxBuffer[Modbus_ASCII_TxBufLen];
+uint8_t Modbus_ASCII_RxCount;
 void Modbus_ASCII_Init(void)
 {
-	unsigned char i;
+	uint8_t i;
 	for(i=0;i<Modbus_ASCII_RxBufLen;i++)
 	{
 		Modbus_ASCII_RxBuffer[i]=0;
@@ -30,9 +30,9 @@ void Modbus_ASCII_Init(void)
 	Byte2ASCII(Modbus_ASCII_Slave_Addr,&Modbus_ASCII_Inner_TxBuffer[1],&Modbus_ASCII_Inner_TxBuffer[2]);
 #endif
 }
-void Modbus_ASCII_RxCommand(unsigned char rx)
+void Modbus_ASCII_RxCommand(uint8_t rx)
 {
-	unsigned char i;
+	uint8_t i;
 	if(gFlags.Modbus_ASCII_Rx)
 		return;
 	Modbus_ASCII_Inner_RxBuffer[Modbus_ASCII_Inner_RxCount++]=rx;
@@ -68,9 +68,9 @@ void Modbus_ASCII_RxCommand(unsigned char rx)
 	}
 }
 #ifdef Modbus_ASCII_Slave
-void Modbus_ASCII_TxCommand(unsigned char len)
+void Modbus_ASCII_TxCommand(uint8_t len)
 {
-	unsigned char i;
+	uint8_t i;
 	for(i=0;i<len;i++)
 		Byte2ASCII(Modbus_ASCII_TxBuffer[i],&Modbus_ASCII_Inner_TxBuffer[3+(i<<1)],&Modbus_ASCII_Inner_TxBuffer[3+(i<<1)+1]);
 	i=GetVerify_Sum(Modbus_ASCII_TxBuffer,len);

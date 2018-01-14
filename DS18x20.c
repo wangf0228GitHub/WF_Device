@@ -1,17 +1,17 @@
-#include "HardwareProfile.h"
+#include "DS18x20.h"
 #include "OneWire.h"
 #include "Verify.h"
 
 
-//unsigned char DS18X20_Scratchpad[9];
+//uint8_t DS18X20_Scratchpad[9];
 //#define DS18X20_Init() OneWire_Init()
 #ifdef OneWire_MAXSENSORS
-unsigned char DS18X20_SearchSensors(unsigned char* id)
+uint8_t DS18X20_SearchSensors(uint8_t* id)
 {
-	unsigned char i;
-	unsigned char diff;
-	unsigned char xx[8];
-	unsigned char Count = 0;
+	uint8_t i;
+	uint8_t diff;
+	uint8_t xx[8];
+	uint8_t Count = 0;
 	for(diff = ONEWIRE_SEARCH_FIRST;diff != ONEWIRE_LAST_DEVICE && Count < OneWire_MAXSENSORS ; )
 	{
 		DS18X20_FindSensor(&diff,xx);
@@ -26,7 +26,7 @@ unsigned char DS18X20_SearchSensors(unsigned char* id)
 	}
 	return Count;
 }
-void DS18X20_FindSensor(unsigned char* diff, unsigned char* id)
+void DS18X20_FindSensor(uint8_t* diff, uint8_t* id)
 {
 	while(1) 
 	{ 
@@ -37,7 +37,7 @@ void DS18X20_FindSensor(unsigned char* diff, unsigned char* id)
 }
 /* start measurement (CONVERT_T) for all sensors if input id==NULL 
    or for single sensor. then id is the rom-code */
-unsigned char DS18X20_StartMeas(unsigned char* id)
+uint8_t DS18X20_StartMeas(uint8_t* id)
 { 
 	if(OneWire_Reset()) //**
 		return DS18X20_ERROR;
@@ -48,9 +48,9 @@ unsigned char DS18X20_StartMeas(unsigned char* id)
    output: subzero==1 if temp.<0, cel: full celsius, mcel: frac 
    in millicelsius*0.1
    i.e.: subzero=1, cel=18, millicel=5000 = -18,5000癈 */
-unsigned char DS18X20_ReadMeas(unsigned char* id,unsigned char bVerify)
+uint8_t DS18X20_ReadMeas(uint8_t* id,uint8_t bVerify)
 { 
-	unsigned char i;
+	uint8_t i;
 	if(OneWire_Reset()) //**
 		return DS18X20_ERROR;
 	if(OneWire_Command(DS18X20_READ, id))
@@ -74,7 +74,7 @@ unsigned char DS18X20_ReadMeas(unsigned char* id,unsigned char bVerify)
 
 #ifdef DS18X20_EEPROMSUPPORT
 
-unsigned char DS18X20_WriteScratchpad(unsigned char* id,unsigned char th, unsigned char tl, unsigned char conf)
+uint8_t DS18X20_WriteScratchpad(uint8_t* id,uint8_t th, uint8_t tl, uint8_t conf)
 { 
 	if(OneWire_Reset()) //**
 		return DS18X20_ERROR;	
@@ -87,9 +87,9 @@ unsigned char DS18X20_WriteScratchpad(unsigned char* id,unsigned char th, unsign
 	return DS18X20_OK;	
 }
 
-unsigned char DS18X20_ReadScratchpad(unsigned char* id,unsigned char bVerify)
+uint8_t DS18X20_ReadScratchpad(uint8_t* id,uint8_t bVerify)
 { 
-	unsigned char i;
+	uint8_t i;
 	if(bVerify!=0x00)
 		return DS18X20_ReadMeas(id,bVerify);
 	else
@@ -101,7 +101,7 @@ unsigned char DS18X20_ReadScratchpad(unsigned char* id,unsigned char bVerify)
 	}
 }
 
-unsigned char DS18X20_CopyScratchpad(unsigned char* id)
+uint8_t DS18X20_CopyScratchpad(uint8_t* id)
 { 
 	if(OneWire_Reset()) //**3
 		return DS18X20_ERROR;	
@@ -111,7 +111,7 @@ unsigned char DS18X20_CopyScratchpad(unsigned char* id)
 	return DS18X20_OK;	
 }
 
-unsigned char DS18X20_RecallE2(unsigned char* id)
+uint8_t DS18X20_RecallE2(uint8_t* id)
 { 
 	if(OneWire_Reset()) //**
 		return DS18X20_ERROR;	
@@ -129,7 +129,7 @@ unsigned char DS18X20_RecallE2(unsigned char* id)
 #else//只有一个18b20
 /* start measurement (CONVERT_T) for all sensors if input id==NULL 
    or for single sensor. then id is the rom-code */
-unsigned char DS18X20_StartMeas()
+uint8_t DS18X20_StartMeas()
 { 
 	if(OneWire_Reset()) //**
 		return DS18X20_ERROR;
@@ -140,9 +140,9 @@ unsigned char DS18X20_StartMeas()
    output: subzero==1 if temp.<0, cel: full celsius, mcel: frac 
    in millicelsius*0.1
    i.e.: subzero=1, cel=18, millicel=5000 = -18,5000癈 */
-unsigned char DS18X20_ReadMeas(unsigned char bVerify)
+uint8_t DS18X20_ReadMeas(uint8_t bVerify)
 { 
-	unsigned char i;
+	uint8_t i;
 	if(OneWire_Reset()) //**
 		return DS18X20_ERROR;
 	if(OneWire_Command(DS18X20_READ))
@@ -167,7 +167,7 @@ unsigned char DS18X20_ReadMeas(unsigned char bVerify)
 #ifdef DS18X20_EEPROMSUPPORT
 
 #ifdef DS18B20
-	unsigned char DS18X20_WriteScratchpad(unsigned char th, unsigned char tl, unsigned char conf)
+	uint8_t DS18X20_WriteScratchpad(uint8_t th, uint8_t tl, uint8_t conf)
 	{ 
 		if(OneWire_Reset()) //**
 			return DS18X20_ERROR;	
@@ -179,7 +179,7 @@ unsigned char DS18X20_ReadMeas(unsigned char bVerify)
 		return DS18X20_OK;	
 	}
 #else
-	unsigned char DS18X20_WriteScratchpad(unsigned char th, unsigned char tl)
+	uint8_t DS18X20_WriteScratchpad(uint8_t th, uint8_t tl)
 	{ 
 		if(OneWire_Reset()) //**
 			return DS18X20_ERROR;	
@@ -192,9 +192,9 @@ unsigned char DS18X20_ReadMeas(unsigned char bVerify)
 #endif 
 
 
-unsigned char DS18X20_ReadScratchpad(unsigned char bVerify)
+uint8_t DS18X20_ReadScratchpad(uint8_t bVerify)
 { 
-	unsigned char i;
+	uint8_t i;
 	if(bVerify)
 		return DS18X20_ReadMeas(bVerify);
 	else
@@ -206,7 +206,7 @@ unsigned char DS18X20_ReadScratchpad(unsigned char bVerify)
 	}
 }
 
-unsigned char DS18X20_CopyScratchpad()
+uint8_t DS18X20_CopyScratchpad()
 { 
 	if(OneWire_Reset()) //**3
 		return DS18X20_ERROR;	
@@ -216,7 +216,7 @@ unsigned char DS18X20_CopyScratchpad()
 	return DS18X20_OK;	
 }
 
-unsigned char DS18X20_RecallE2()
+uint8_t DS18X20_RecallE2()
 { 
 	if(OneWire_Reset()) //**
 		return DS18X20_ERROR;	

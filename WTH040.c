@@ -1,8 +1,8 @@
 #include "HardwareProfile.h"
 #ifdef WTH040_ONELINE
-void WTH040_OneLine_Play(unsigned char a)
+void WTH040_OneLine_Play(uint8_t a)
 {
-	unsigned char i;
+	uint8_t i;
 	WTH040_RST_W=0;
 	__delay_us(200);
 	WTH040_RST_W=1;

@@ -3,30 +3,30 @@
 
 typedef union
 {	
-	unsigned char Times[8];
+	uint8_t Times[8];
 	struct
 	{
-		unsigned char Year;
-		unsigned char Month;
-		unsigned char Day;
-		unsigned char Hour;
-		unsigned char Minute;
-		unsigned char Second;
-		unsigned char Week;
+		uint8_t Year;
+		uint8_t Month;
+		uint8_t Day;
+		uint8_t Hour;
+		uint8_t Minute;
+		uint8_t Second;
+		uint8_t Week;
 	};	
 }_SystemCharTime;
-unsigned char GetMonthDay(unsigned char Y,unsigned char M);
+uint8_t GetMonthDay(uint8_t Y,uint8_t M);
 
 void DateTimeAdd1M(_SystemCharTime* dt);
 
-void DateTimeAddMinutes(_SystemCharTime* dt,unsigned int MS);
+void DateTimeAddMinutes(_SystemCharTime* dt,uint16_t MS);
 
-unsigned int GetMinutesGap(_SystemCharTime dts,_SystemCharTime dte);
+uint16_t GetMinutesGap(_SystemCharTime dts,_SystemCharTime dte);
 
 //获得整小时的时间间隔
-unsigned int GetHourGap(_SystemCharTime dts,_SystemCharTime dte);
+uint16_t GetHourGap(_SystemCharTime dts,_SystemCharTime dte);
 
 //获得整天的时间间隔
-unsigned int GetDayGap(_SystemCharTime dts,_SystemCharTime dte);
+uint16_t GetDayGap(_SystemCharTime dts,_SystemCharTime dte);
 
 #endif // TimeOP_h__

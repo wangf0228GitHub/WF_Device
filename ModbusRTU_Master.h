@@ -8,7 +8,7 @@ typedef union
 		unsigned bRx:1;
 		unsigned bWaitClient:1;
 	};
-	unsigned char AllFlag;
+	uint8_t AllFlag;
 } _ModbusRTU_Master_Flags;        // general flags
 
 extern _ModbusRTU_Master_Flags ModbusRTU_Master_Flags;
@@ -44,21 +44,21 @@ extern _ModbusRTU_Master_Flags ModbusRTU_Master_Flags;
 
 #define ModbusRTU_Master_preRxProcInit() ModbusRTU_Master_Flags.bRx=0;ModbusRTU_Master_Flags.bWaitClient=1;ModbusRTU_Master_RxCount=0;ModbusRTU_Master_WaitClientTick=SystemTick;ModbusRTU_Master_NeedRxCount=0xff
 
-extern unsigned char ModbusRTU_Master_RxList[MAX_ModbusRTU_Master_RX];
-extern unsigned char ModbusRTU_Master_RxCount;
-extern unsigned char ModbusRTU_Master_NeedRxCount;
-extern unsigned char ModbusRTU_Master_TargetAddr;
+extern uint8_t ModbusRTU_Master_RxList[MAX_ModbusRTU_Master_RX];
+extern uint8_t ModbusRTU_Master_RxCount;
+extern uint8_t ModbusRTU_Master_NeedRxCount;
+extern uint8_t ModbusRTU_Master_TargetAddr;
 //extern uint ModbusRTU_Master_FirstRegAddr;
-extern unsigned char ModbusRTU_Master_RetryTimes;
-extern unsigned int ModbusRTU_Master_WaitClientTick;
-extern unsigned int ModbusRTU_Master_WaitClientTime;
+extern uint8_t ModbusRTU_Master_RetryTimes;
+extern uint16_t ModbusRTU_Master_WaitClientTick;
+extern uint16_t ModbusRTU_Master_WaitClientTime;
 
 void Init_ModbusRTU_Master(void);
-void ProcRx_ModbusRTU_Master(unsigned char rx);
-void ModbusRTU_Master_SendCommand16(unsigned int RegAddr,unsigned char *pBuff,unsigned char count);
-unsigned char ModbusRTU_Master_ProcCommand16(unsigned int RegAddr,unsigned char* pBuff,unsigned int Count);
-void ModbusRTU_Master_SendCommand03(unsigned int RegAddr,unsigned char count);
-unsigned char ModbusRTU_Master_ProcCommand03(unsigned int RegAddr,unsigned char count);
-void ModbusRTU_Master_SendCommand04(unsigned int RegAddr,unsigned char count);
-unsigned char ModbusRTU_Master_ProcCommand04(unsigned int RegAddr,unsigned char count);
+void ProcRx_ModbusRTU_Master(uint8_t rx);
+void ModbusRTU_Master_SendCommand16(uint16_t RegAddr,uint8_t *pBuff,uint8_t count);
+uint8_t ModbusRTU_Master_ProcCommand16(uint16_t RegAddr,uint8_t* pBuff,uint16_t Count);
+void ModbusRTU_Master_SendCommand03(uint16_t RegAddr,uint8_t count);
+uint8_t ModbusRTU_Master_ProcCommand03(uint16_t RegAddr,uint8_t count);
+void ModbusRTU_Master_SendCommand04(uint16_t RegAddr,uint8_t count);
+uint8_t ModbusRTU_Master_ProcCommand04(uint16_t RegAddr,uint8_t count);
 #endif

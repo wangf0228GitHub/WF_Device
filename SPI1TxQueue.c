@@ -2,8 +2,8 @@
 #include "SPI1TxQueue.h"
 //#define Uart1_BRGVAL ((FCY/Uart1_BAUDRATE)/4)-1
 
-unsigned char SPI1TxQueue[SPI1TxQueueLen];
-unsigned char *pSPI1In, *pSPI1Out;
+uint8_t SPI1TxQueue[SPI1TxQueueLen];
+uint8_t *pSPI1In, *pSPI1Out;
 
 void SPI1TxStart()
 {	
@@ -24,9 +24,9 @@ void SPI1AddStr(const char* pt)
 		SPI1AddByte(*p++);
 	}
 }
-void SPI1AddByte(unsigned char tx)
+void SPI1AddByte(uint8_t tx)
 {
-	unsigned char *d;
+	uint8_t *d;
 	d = pSPI1In;
 	d++;
 	if (d == (SPI1TxQueue+SPI1TxQueueLen))         //回绕
@@ -39,10 +39,10 @@ void SPI1AddByte(unsigned char tx)
 void SPI1AddBytes(const void *tx, size_t size, size_t n)
 {
 	size_t count = size * n;
-	unsigned char *s;
+	uint8_t *s;
 	if(count==0)
 		return;
-	s = (unsigned char*)tx;
+	s = (uint8_t*)tx;
 	while (count--)                         //逐个放入缓冲区
 	{
 		SPI1AddByte(*s++);

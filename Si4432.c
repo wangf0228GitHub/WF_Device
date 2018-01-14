@@ -20,9 +20,9 @@ void Si4432_Init(void)
 	Si4432_SCL_W=1;	//拉低时钟信号
 }
 
-void Si4432_WriteRegister(unsigned char reg,unsigned char value)
+void Si4432_WriteRegister(uint8_t reg,uint8_t value)
 {
-	unsigned char i;
+	uint8_t i;
 	Si4432_NSEL_W=0;
 	Si4432_SCL_W=0;	//拉高时钟信号
 	reg=reg|0x80;//写
@@ -52,9 +52,9 @@ void Si4432_WriteRegister(unsigned char reg,unsigned char value)
 	}
 	Si4432_NSEL_W=1;
 }
-unsigned char Si4432_ReadRegister(unsigned char reg)
+uint8_t Si4432_ReadRegister(uint8_t reg)
 {
-	unsigned char i,value;
+	uint8_t i,value;
 	Si4432_NSEL_W=0;
 	Si4432_SCL_W=0;	//拉高时钟信号
 	value=reg&0x7f;//写
@@ -117,9 +117,9 @@ unsigned char Si4432_ReadRegister(unsigned char reg)
 	
 	return value;
 }
-void Si4432_WriteRegisters(unsigned char reg,unsigned char Count,const unsigned char *p)
+void Si4432_WriteRegisters(uint8_t reg,uint8_t Count,const uint8_t *p)
 {
-	unsigned char i,j,v;
+	uint8_t i,j,v;
 	Si4432_NSEL_W=0;
 	Si4432_SCL_W=0;	//拉高时钟信号
 	reg=reg|0x80;//写
@@ -152,9 +152,9 @@ void Si4432_WriteRegisters(unsigned char reg,unsigned char Count,const unsigned 
 		}
 	}
 }
-void Si4432_ReadRegisters(unsigned char reg,unsigned char Count,unsigned char *p)
+void Si4432_ReadRegisters(uint8_t reg,uint8_t Count,uint8_t *p)
 {
-	unsigned char i,j,value;
+	uint8_t i,j,value;
 	Si4432_NSEL_W=0;
 	Si4432_SCL_W=0;	//拉高时钟信号
 	reg=reg&0x7f;//写

@@ -15,9 +15,9 @@ void TLV56XX_Init(void)
 	TLV56XX_CS_W=1;
 #endif
 }
-void TLV56XX_WriteData(unsigned int d)
+void TLV56XX_WriteData(uint16_t d)
 {
-	unsigned char i;
+	uint8_t i;
 #ifdef TLV56XX_CS_W
 	TLV56XX_CS_W=0;
 	__delay_us(1);
@@ -59,9 +59,9 @@ void TLV56XX_2_Init(void)
 	TLV56XX_2_CS_W=1;
 #endif
 }
-void TLV56XX_2_WriteData(unsigned int d)
+void TLV56XX_2_WriteData(uint16_t d)
 {
-	unsigned char i;
+	uint8_t i;
 #ifdef TLV56XX_2_CS_W
 	TLV56XX_2_CS_W=0;
 	__delay_us(1);

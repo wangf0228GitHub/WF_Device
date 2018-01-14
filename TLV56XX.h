@@ -23,11 +23,11 @@
 // #define TLV56XX_2_DIO_DIR	TRISA4  
 // #define TLV56XX_2_CS_DIR	TRISA2
 void TLV56XX_Init(void);
-void TLV56XX_WriteData(unsigned int d);
+void TLV56XX_WriteData(uint16_t d);
 
 #ifdef TLV56XX_2
 void TLV56XX_2_Init(void);
-void TLV56XX_2_WriteData(unsigned int d);
+void TLV56XX_2_WriteData(uint16_t d);
 #endif
 #endif // __TLV56XX_h__
 

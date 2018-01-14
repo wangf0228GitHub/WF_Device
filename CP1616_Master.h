@@ -9,7 +9,7 @@ typedef union
 		unsigned bRx:1;
 		unsigned bWaitDataFromClient:1;	
 	};
-	unsigned char AllFlag;
+	uint8_t AllFlag;
 } _CP1616_Master_Flags;        // general flags
 
 
@@ -55,18 +55,18 @@ typedef union
 // #define CP1616_Master_RetryTimes 3
 // #endif
 extern _CP1616_Master_Flags CP1616_Master_Flags;
-extern unsigned char CP1616_Master_RxList[MAX_CP1616_Master_RX];
-extern unsigned int CP1616_Master_RxCount;
-extern unsigned int CP1616_Master_NeedRxCount;
+extern uint8_t CP1616_Master_RxList[MAX_CP1616_Master_RX];
+extern uint16_t CP1616_Master_RxCount;
+extern uint16_t CP1616_Master_NeedRxCount;
 extern uint CP1616_Master_WaitClientAddr;
-extern unsigned char CP1616_Master_WaitCommand;
-extern unsigned int CP1616_Master_WaitClientTick;
-//extern unsigned char CP1616_Master_RxErrTimes;
-extern unsigned int CP1616_Master_WaitClientTime;
-extern unsigned char CP1616_Master_RetryTimes;
+extern uint8_t CP1616_Master_WaitCommand;
+extern uint16_t CP1616_Master_WaitClientTick;
+//extern uint8_t CP1616_Master_RxErrTimes;
+extern uint16_t CP1616_Master_WaitClientTime;
+extern uint8_t CP1616_Master_RetryTimes;
 
 void Init_CP1616_Master(void);
-void ProcRx_CP1616_Master(unsigned char rx);
-unsigned char CP1616_MasterWaitClientData(unsigned int Addr,unsigned char Command,unsigned char* pBuff,unsigned int Count);
-void CP1616_MasterSendData(unsigned int Addr,unsigned char Command,unsigned char* pBuff,unsigned int Count);
+void ProcRx_CP1616_Master(uint8_t rx);
+uint8_t CP1616_MasterWaitClientData(uint16_t Addr,uint8_t Command,uint8_t* pBuff,uint16_t Count);
+void CP1616_MasterSendData(uint16_t Addr,uint8_t Command,uint8_t* pBuff,uint16_t Count);
 #endif

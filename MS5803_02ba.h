@@ -16,8 +16,8 @@
 #define	MS5803_02ba_Convert_D2_1024 0x54
 #define	MS5803_02ba_Convert_D2_2048 0x56
 #define	MS5803_02ba_Convert_D2_4096 0x58
-extern unsigned long MS5803_02ba_T;
+extern uint32_t MS5803_02ba_T;
 void MS5803_02ba_GetCx(void);
-unsigned long MS5803_02ba_Calculate(void);
+uint32_t MS5803_02ba_Calculate(void);
 void MS5803_02ba_Reset(void);
 #endif // __MS5803_02ba_h__

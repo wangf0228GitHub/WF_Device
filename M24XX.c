@@ -16,14 +16,14 @@ void M24XX_Init(void)
 #endif
 }
 #ifdef M24XX_1024
-unsigned char M24XX_Read( unsigned char *pBuff,unsigned int Count,unsigned long Address )
+uint8_t M24XX_Read( uint8_t *pBuff,uint16_t Count,uint32_t Address )
 #else
-unsigned char M24XX_Read( unsigned char *pBuff,unsigned int Count,unsigned int Address )
+uint8_t M24XX_Read( uint8_t *pBuff,uint16_t Count,uint16_t Address )
 #endif
 {
-	unsigned char ErrTimes=M24XX_RetryCount;	
-	unsigned char AddrL,AddrH;
-	unsigned char bRight=0;
+	uint8_t ErrTimes=M24XX_RetryCount;	
+	uint8_t AddrL,AddrH;
+	uint8_t bRight=0;
 	while(ErrTimes--)
 	{
 		SimI2C_Start();
@@ -71,21 +71,21 @@ unsigned char M24XX_Read( unsigned char *pBuff,unsigned int Count,unsigned int A
 	return bRight;
 }
 #ifdef M24XX_1024
-unsigned char M24XX_Write( unsigned char *pBuff,unsigned int Count,unsigned long Address )
+uint8_t M24XX_Write( uint8_t *pBuff,uint16_t Count,uint32_t Address )
 #else
-unsigned char M24XX_Write( unsigned char *pBuff,unsigned char Count,unsigned int Address )
+uint8_t M24XX_Write( uint8_t *pBuff,uint8_t Count,uint16_t Address )
 #endif
 {
-	unsigned char AddrH;
-	unsigned char AddrL;
+	uint8_t AddrH;
+	uint8_t AddrL;
 #ifdef M24XX_1024
-	unsigned int N;
+	uint16_t N;
 #else
-	unsigned char N;
+	uint8_t N;
 #endif
-	unsigned char* pB;
-	unsigned char ErrTimes=M24XX_RetryCount;
-	unsigned char bRight=0;	
+	uint8_t* pB;
+	uint8_t ErrTimes=M24XX_RetryCount;
+	uint8_t bRight=0;	
 	while(ErrTimes--)
 	{
 		SimI2C_Start();		

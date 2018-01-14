@@ -1,16 +1,11 @@
-#include "main.h"
-#include "SimI2C_Conf.h"
 #include "SimI2C.h"
+#include "SimI2C_Conf.h"
 void SimI2C_Init( void )
 {
-	GPIO_InitTypeDef GPIO_InitStruct;
-	GPIO_InitStruct.Pin = SimI2C_SDA_Pin;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_PULLUP;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-	HAL_GPIO_Init(SimI2C_SDA_GPIO_Port, &GPIO_InitStruct);	
 	SIMI2C_SCL_High();
 	SIMI2C_SDA_High();
+	SIMI2C_SCL_OUT();
+	SIMI2C_SDA_OUT();	
 }
 
 //数据线下降沿作为起始位
@@ -34,26 +29,17 @@ void SimI2C_Stop(void)
 	SIMI2C_SDA_High();
 }
 //时钟线上升沿读取ACK
-unsigned char SimI2C_RecAck(void)
+uint8_t SimI2C_RecAck(void)
 {   
-	unsigned char t;
-	GPIO_InitTypeDef GPIO_InitStruct;
-	GPIO_InitStruct.Pin = SimI2C_SDA_Pin;
-	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-	GPIO_InitStruct.Pull = GPIO_PULLUP;
-	HAL_GPIO_Init(SimI2C_SDA_GPIO_Port, &GPIO_InitStruct);
-
+	uint8_t t;
+	SIMI2C_SDA_IN();
 	SIMI2C_SCL_Low();
 	SimI2C_Delay();
 	SIMI2C_SCL_High();
 	SimI2C_Delay();
 	t=SIMI2C_SDA_Read();
 	SIMI2C_SCL_Low();
-	GPIO_InitStruct.Pin = SimI2C_SDA_Pin;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_PULLUP;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-	HAL_GPIO_Init(SimI2C_SDA_GPIO_Port, &GPIO_InitStruct);   
+	SIMI2C_SDA_OUT();  
 	return t;
 }
 //数据线低电平，发送Ack
@@ -75,10 +61,10 @@ void SimI2C_NoAck(void)
 	SimI2C_Delay();
 	SIMI2C_SCL_Low();
 }
-void SimI2C_SendByte(unsigned char data)//写数据
+void SimI2C_SendByte(uint8_t data)//写数据
 {   
-	unsigned char i;
-	unsigned char t;
+	uint8_t i;
+	uint8_t t;
 	for(i=0;i<8;i++)
 	{
 		SIMI2C_SCL_Low();
@@ -94,14 +80,10 @@ void SimI2C_SendByte(unsigned char data)//写数据
 	}	
 	SIMI2C_SCL_Low();
 }
-unsigned char SimI2C_ReadByte(void)                    //读数据
+uint8_t SimI2C_ReadByte(void)                    //读数据
 {
-	unsigned char data,i;
-	GPIO_InitTypeDef GPIO_InitStruct;
-	GPIO_InitStruct.Pin = SimI2C_SDA_Pin;
-	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-	GPIO_InitStruct.Pull = GPIO_PULLUP;
-	HAL_GPIO_Init(SimI2C_SDA_GPIO_Port, &GPIO_InitStruct);
+	uint8_t data,i;
+	SIMI2C_SDA_IN();
 	SimI2C_Delay();
 	SIMI2C_SCL_Low();
 	data=0;
@@ -117,11 +99,7 @@ unsigned char SimI2C_ReadByte(void)                    //读数据
 		SIMI2C_SCL_Low();
 		SimI2C_Delay();
 	}
-	GPIO_InitStruct.Pin = SimI2C_SDA_Pin;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_PULLUP;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-	HAL_GPIO_Init(SimI2C_SDA_GPIO_Port, &GPIO_InitStruct);
+	SIMI2C_SDA_OUT();
 	SimI2C_Delay();
 	return data;
 }
@@ -163,9 +141,9 @@ void SimI2C_Stop_2(void)
 	SimI2C_DATA_W_2=1;
 }
 //时钟线上升沿读取ACK
-unsigned char SimI2C_RecAck_2(void)
+uint8_t SimI2C_RecAck_2(void)
 {   
-	unsigned char t;
+	uint8_t t;
 	SimI2C_DATA_IO_2=1;
 	SimI2C_CLK_W_2=0;
 	SimI2C_Delay_2();
@@ -195,10 +173,10 @@ void SimI2C_NoAck_2(void)
 	SimI2C_Delay_2();
 	SimI2C_CLK_W_2=0;
 }
-void SimI2C_SendByte_2(unsigned char data)//写数据
+void SimI2C_SendByte_2(uint8_t data)//写数据
 {   
-	unsigned char i;
-	unsigned char t;
+	uint8_t i;
+	uint8_t t;
 	for(i=0;i<8;i++)
 	{
 		SimI2C_CLK_W_2=0;
@@ -214,9 +192,9 @@ void SimI2C_SendByte_2(unsigned char data)//写数据
 	}	
 	SimI2C_CLK_W_2=0;
 }
-unsigned char SimI2C_ReadByte_2(void)                    //读数据
+uint8_t SimI2C_ReadByte_2(void)                    //读数据
 {
-	unsigned char data,i;
+	uint8_t data,i;
 	SimI2C_DATA_IO_2=1;
 	SimI2C_Delay_2();
 	SimI2C_CLK_W_2=0;
@@ -276,9 +254,9 @@ void SimI2C_Stop_3(void)
 	SimI2C_DATA_W_3=1;
 }
 //时钟线上升沿读取ACK
-unsigned char SimI2C_RecAck_3(void)
+uint8_t SimI2C_RecAck_3(void)
 {   
-	unsigned char t;
+	uint8_t t;
 	SimI2C_DATA_IO_3=1;
 	SimI2C_CLK_W_3=0;
 	SimI2C_Delay_3();
@@ -308,10 +286,10 @@ void SimI2C_NoAck_3(void)
 	SimI2C_Delay_3();
 	SimI2C_CLK_W_3=0;
 }
-void SimI2C_SendByte_3(unsigned char data)//写数据
+void SimI2C_SendByte_3(uint8_t data)//写数据
 {   
-	unsigned char i;
-	unsigned char t;
+	uint8_t i;
+	uint8_t t;
 	for(i=0;i<8;i++)
 	{
 		SimI2C_CLK_W_3=0;
@@ -327,9 +305,9 @@ void SimI2C_SendByte_3(unsigned char data)//写数据
 	}	
 	SimI2C_CLK_W_3=0;
 }
-unsigned char SimI2C_ReadByte_3(void)                    //读数据
+uint8_t SimI2C_ReadByte_3(void)                    //读数据
 {
-	unsigned char data,i;
+	uint8_t data,i;
 	SimI2C_DATA_IO_3=1;
 	SimI2C_Delay_3();
 	SimI2C_CLK_W_3=0;

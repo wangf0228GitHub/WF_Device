@@ -22,10 +22,10 @@ void FM_TEA5767_Init(void)
 	FM_TEA5767_WriteData[4]=0x40;
 	FM_TEA5767_Write();
 }
-unsigned char FM_TEA5767_Read(void)
+uint8_t FM_TEA5767_Read(void)
 {
-	unsigned char ErrTimes=FM_TEA5767_RetryCount;
-	unsigned char bRight=0;
+	uint8_t ErrTimes=FM_TEA5767_RetryCount;
+	uint8_t bRight=0;
 	while(ErrTimes--)
 	{
 		SimI2C_Start();
@@ -48,10 +48,10 @@ unsigned char FM_TEA5767_Read(void)
 	SimI2C_Stop();
 	return bRight;
 }
-unsigned char FM_TEA5767_Write(void)
+uint8_t FM_TEA5767_Write(void)
 {
-	unsigned char ErrTimes=FM_TEA5767_RetryCount;
-	unsigned char bRight=0;	
+	uint8_t ErrTimes=FM_TEA5767_RetryCount;
+	uint8_t bRight=0;	
 	while(ErrTimes--)
 	{
 		SimI2C_Start();
@@ -79,8 +79,8 @@ unsigned char FM_TEA5767_Write(void)
 
 void FM_TEA5767_NextChannel(void)
 {
-	unsigned char temp_l,temp_h;
-	unsigned int Pll;
+	uint8_t temp_l,temp_h;
+	uint16_t Pll;
 
 	FM_TEA5767_Read();
 	Pll=MAKE_INT(FM_TEA5767_ReadData[0],FM_TEA5767_ReadData[1]);

@@ -7,7 +7,7 @@ typedef union
 	{
 		unsigned bReKey:1;
 	};
-	unsigned char AllFlag;
+	uint8_t AllFlag;
 } _KeyCheckFlags;        // general flags
 
 _KeyCheckFlags KeyCheckFlags;
@@ -21,21 +21,21 @@ _KeyCheckFlags KeyCheckFlags;
 #ifndef KeyCheck_ReKeyTick
 #define KeyCheck_ReKeyTick 5
 #endif
-unsigned char KeyTimes;
-unsigned int KeyTick;
+uint8_t KeyTimes;
+uint16_t KeyTick;
 
 #ifdef MatrixKeys
-extern unsigned char RowKeyValue;
-extern unsigned char ColKeyValue;
+extern uint8_t RowKeyValue;
+extern uint8_t ColKeyValue;
 #define NoKey 0
 #define IsKey 1
 //#define ReKey 2
 #endif
 #ifdef BigKeys
-extern unsigned int OldKey;
-unsigned int KeyCheck(void);
+extern uint16_t OldKey;
+uint16_t KeyCheck(void);
 #else
-extern unsigned char OldKey;
-unsigned char KeyCheck(void);
+extern uint8_t OldKey;
+uint8_t KeyCheck(void);
 #endif
 #endif // __Key_h__

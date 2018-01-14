@@ -12,7 +12,7 @@ void HT9200_Init(void)
 #ifndef HT9200_Parallel
 void HT9200_PhoneCall(const char* pPhoneNumber)
 {
-	unsigned char i,x;	
+	uint8_t i,x;	
 	while(*pPhoneNumber!='\0')
 	{
 		HT9200_CE_W=0;
@@ -74,7 +74,7 @@ void HT9200_PhoneCall(const char* pPhoneNumber)
 }
 void HT9200_CallNum(char Number)
 {
-	unsigned char i,x;	
+	uint8_t i,x;	
 	HT9200_CE_W=0;
 	__delay_ms(15);
 	switch(Number)

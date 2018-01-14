@@ -8,7 +8,7 @@ typedef union
 	{
 		unsigned bRx:1;
 	};
-	unsigned char AllFlag;
+	uint8_t AllFlag;
 } _ModbusRTU_Client_Flags;        // general flags
 
 _ModbusRTU_Client_Flags ModbusRTU_Client_Flags;
@@ -39,13 +39,13 @@ _ModbusRTU_Client_Flags ModbusRTU_Client_Flags;
 #define SetTx_ModbusRTU_Client() RS485DE_W=1;__delay_ms(1)
 #endif
 
-unsigned char ModbusRTU_Client_RxList[MAX_ModbusRTU_Client_RX];
-unsigned char ModbusRTU_Client_RxCount;
-unsigned char ModbusRTU_Client_MyAddr;
+uint8_t ModbusRTU_Client_RxList[MAX_ModbusRTU_Client_RX];
+uint8_t ModbusRTU_Client_RxCount;
+uint8_t ModbusRTU_Client_MyAddr;
 uint ModbusRTU_Client_FirstRegAddr;
 
 void Init_ModbusRTU_Client(void);
-void ProcRx_ModbusRTU_Client(unsigned char rx);
-void SendCommand03_ModbusRTU_Client(unsigned char *pBuff,unsigned char count);
-void SendCommand16_ModbusRTU_Client(unsigned int FirstReg,unsigned char count);
+void ProcRx_ModbusRTU_Client(uint8_t rx);
+void SendCommand03_ModbusRTU_Client(uint8_t *pBuff,uint8_t count);
+void SendCommand16_ModbusRTU_Client(uint16_t FirstReg,uint8_t count);
 #endif

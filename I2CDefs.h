@@ -27,6 +27,6 @@ typedef union
 		unsigned RS:1;
 		unsigned Wait:1;
 	}Bits;
-	unsigned char AllFlag;
+	uint8_t AllFlag;
 }I2CFlags;        // general flags
 #endif // __I2CDefs_h__

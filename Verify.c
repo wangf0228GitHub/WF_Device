@@ -106,9 +106,9 @@ const uint8_t auchCRCLo[] = {
 	0x44, 0x84, 0x85, 0x45, 0x87, 0x47, 0x46, 0x86, 0x82, 0x42,
 	0x43, 0x83, 0x41, 0x81, 0x80, 0x40
 };
-ushort_wf GetVerify_CRC16(uint8_t *puchMsg,uint32_t usDataLen)
+u16_wf GetVerify_CRC16(uint8_t *puchMsg,uint32_t usDataLen)
 {
-	ushort_wf ret;
+	u16_wf ret;
 	ret.u16=Verify_CRC16_Init;
 	uint8_t uIndex ; /* CRC循环中的索引 */
 	while (usDataLen--) /* 传输消息缓冲区 */

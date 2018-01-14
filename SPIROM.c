@@ -33,9 +33,9 @@ void SPIROM_Init(void)
 	SPIROM_SPIInit();
 }
 #ifdef SPIROM_Addr24
-void SPIROM_WriteByte(unsigned long address,unsigned char data)
+void SPIROM_WriteByte(uint32_t address,uint8_t data)
 #else
-void SPIROM_WriteByte(unsigned int address,unsigned char data)
+void SPIROM_WriteByte(uint16_t address,uint8_t data)
 #endif
 {
 #ifdef SPIROM_Addr24
@@ -71,12 +71,12 @@ void SPIROM_WriteByte(unsigned int address,unsigned char data)
 }
 
 #ifdef SPIROM_Addr24
-unsigned char SPIROM_ReadByte(unsigned long address)
+uint8_t SPIROM_ReadByte(uint32_t address)
 #else
-unsigned char SPIROM_ReadByte(unsigned int address)
+uint8_t SPIROM_ReadByte(uint16_t address)
 #endif
 {
-    unsigned char ret;
+    uint8_t ret;
 #ifdef SPIROM_Addr24
 	ulong Addr;
 	Addr.u32=address;
@@ -111,13 +111,13 @@ void SPIROM_ReadStatus(void)
     SPIROM_CS_W=1;
 }
 #ifdef SPIROM_Addr24
-void SPIROM_WriteArray(unsigned long address, unsigned char* pData,unsigned int nCount)
+void SPIROM_WriteArray(uint32_t address, uint8_t* pData,uint16_t nCount)
 #else
-void SPIROM_WriteArray(unsigned int address, unsigned char* pData,unsigned int nCount)
+void SPIROM_WriteArray(uint16_t address, uint8_t* pData,uint16_t nCount)
 #endif
 {
 #ifdef SPIROM_Addr24
-	//unsigned long counter;
+	//uint32_t counter;
 	ulong Addr;
 	Addr.u32=address;
 #else
@@ -188,9 +188,9 @@ void SPIROM_WriteArray(unsigned int address, unsigned char* pData,unsigned int n
 	SPIROM_WriteDisable();
 }
 #ifdef SPIROM_Addr24
-void SPIROM_Fill(unsigned long address, unsigned char Data,unsigned long nCount)
+void SPIROM_Fill(uint32_t address, uint8_t Data,uint32_t nCount)
 #else
-void SPIROM_Fill(unsigned int address, unsigned char Data,unsigned int nCount)
+void SPIROM_Fill(uint16_t address, uint8_t Data,uint16_t nCount)
 #endif
 {    
 #ifdef SPIROM_Addr24
@@ -265,9 +265,9 @@ void SPIROM_Fill(unsigned int address, unsigned char Data,unsigned int nCount)
 	SPIROM_WriteDisable();
 }
 #ifdef SPIROM_Addr24
-void SPIROM_ReadArray(unsigned long address, unsigned char* pData,unsigned int nCount)
+void SPIROM_ReadArray(uint32_t address, uint8_t* pData,uint16_t nCount)
 #else
-void SPIROM_ReadArray(unsigned int address, unsigned char* pData,unsigned int nCount)
+void SPIROM_ReadArray(uint16_t address, uint8_t* pData,uint16_t nCount)
 #endif
 {
 #ifdef SPIROM_Addr24

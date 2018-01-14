@@ -16,9 +16,9 @@ void X9C103_Init(void)
 	//X9C103_R_Change_Step(X9C103_R_DOWN,99);
 }
 
-void X9C103_R_Change_Step(unsigned char Mode,unsigned char N)
+void X9C103_R_Change_Step(uint8_t Mode,uint8_t N)
 {
-   	unsigned char i=0; 
+   	uint8_t i=0; 
    	if(Mode==1)	
    	{
    		X9C103_UD_W = 1;	//Ôö¼Óµç×è

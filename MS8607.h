@@ -8,7 +8,7 @@ typedef union
 		unsigned bInit:1;
 		unsigned bHold:1;
 	};
-	unsigned int AllFlag;
+	uint16_t AllFlag;
 } _MS8607_Flags;        // general flags
 
 
@@ -33,7 +33,7 @@ enum ms8607_pressure_resolution {
 	ms8607_pressure_resolution_osr_4096,
 	ms8607_pressure_resolution_osr_8192
 };
-extern unsigned int MS8607_eeprom[8];
+extern uint16_t MS8607_eeprom[8];
 extern _MS8607_Flags MS8607_Flags;
 extern ulong MS8607_adcT;
 extern ulong MS8607_adcP;
@@ -41,9 +41,9 @@ extern uint MS8607_adcRH;
 extern float32 MS8607_Temperature;
 extern float32 MS8607_Pressure;
 extern float32 MS8607_RH;
-unsigned char MS8607_Init(void);
-unsigned char MS8607_ReadPT(unsigned char resolution_osr);
-unsigned char MS8607_I2CProc(unsigned char Addr,unsigned char Command,unsigned char NeedReadLen);
+uint8_t MS8607_Init(void);
+uint8_t MS8607_ReadPT(uint8_t resolution_osr);
+uint8_t MS8607_I2CProc(uint8_t Addr,uint8_t Command,uint8_t NeedReadLen);
 void MS8607_CalculatePT(void);
-unsigned char MS8607_ReadRH(void);
+uint8_t MS8607_ReadRH(void);
 #endif // __MS8607_h__

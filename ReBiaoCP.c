@@ -1,15 +1,15 @@
 #include "HardwareProfile.h"
 
 _ReBiaoCP_Flags ReBiaoCP_Flags;
-unsigned char ReBiaoCP_RxList[MAX_ReBiaoCP_RX];
-unsigned char ReBiaoCP_RxCount;
-unsigned char ReBiaoCP_NeedRxCount;
+uint8_t ReBiaoCP_RxList[MAX_ReBiaoCP_RX];
+uint8_t ReBiaoCP_RxCount;
+uint8_t ReBiaoCP_NeedRxCount;
 uint ReBiaoCP_WaitClientAddr;
-unsigned char ReBiaoCP_WaitCommand;
-unsigned int ReBiaoCP_WaitClientTick;
-//unsigned char ReBiaoCP_RxErrTimes;
-unsigned int ReBiaoCP_WaitClientTime;
-unsigned char ReBiaoCP_RetryTimes;
+uint8_t ReBiaoCP_WaitCommand;
+uint16_t ReBiaoCP_WaitClientTick;
+//uint8_t ReBiaoCP_RxErrTimes;
+uint16_t ReBiaoCP_WaitClientTime;
+uint8_t ReBiaoCP_RetryTimes;
 
 void Init_ReBiaoCP(void)
 {
@@ -22,7 +22,7 @@ void Init_ReBiaoCP(void)
 //		Uart_PutChar(0xff);
 //	}
 }
-void ProcRx_ReBiaoCP(unsigned char rx)
+void ProcRx_ReBiaoCP(uint8_t rx)
 {
 	if(ReBiaoCP_Flags.bRx)//之前没处理完
 		return;
@@ -81,10 +81,10 @@ void ProcRx_ReBiaoCP(unsigned char rx)
 		}
 	}	
 }
-// void ReBiaoCPSendData(unsigned int Addr,unsigned char Command,unsigned char* pBuff,unsigned int Count)
+// void ReBiaoCPSendData(uint16_t Addr,uint8_t Command,uint8_t* pBuff,uint16_t Count)
 // {
-// 	unsigned char sum;
-// 	unsigned int i;
+// 	uint8_t sum;
+// 	uint16_t i;
 // 	ReBiaoCP_WaitClientAddr.u16=Addr;
 // 	ReBiaoCP_WaitCommand=Command;
 // 	SetTx_ReBiaoCP();
@@ -105,11 +105,11 @@ void ProcRx_ReBiaoCP(unsigned char rx)
 // 	ReBiaoCP_NeedRxCount=0xff;
 // 	ReBiaoCP_Flags.bWaitDataFromClient=1;
 // }
-// unsigned char ReBiaoCPWaitClientData(unsigned int Addr,unsigned char Command,unsigned char* pBuff,unsigned int Count)
+// uint8_t ReBiaoCPWaitClientData(uint16_t Addr,uint8_t Command,uint8_t* pBuff,uint16_t Count)
 // {	
-// 	unsigned char sum,retry;
-// 	unsigned char ret;
-// 	unsigned int i;
+// 	uint8_t sum,retry;
+// 	uint8_t ret;
+// 	uint16_t i;
 // 	ret=0;
 // 	ReBiaoCP_WaitClientAddr.u16=Addr;
 // 	ReBiaoCP_WaitCommand=Command;
@@ -153,11 +153,11 @@ void ProcRx_ReBiaoCP(unsigned char rx)
 // 	return ret;
 // }
 
-unsigned char ReBiaoCP_Read10(unsigned char Addr)
+uint8_t ReBiaoCP_Read10(uint8_t Addr)
 {	
-	unsigned char CS,retry;
-	unsigned char ret;
-	unsigned int i;
+	uint8_t CS,retry;
+	uint8_t ret;
+	uint16_t i;
 	ret=0;
 	ReBiaoCP_WaitClientAddr.u16=Addr;
 	retry=ReBiaoCP_RetryTimes;
@@ -167,7 +167,7 @@ unsigned char ReBiaoCP_Read10(unsigned char Addr)
 		ReBiaoCP_TxByte(0x10);
 		ReBiaoCP_TxByte(0x5b);
 		ReBiaoCP_TxByte(Addr);
-		CS=(unsigned char)(0x5b+Addr);
+		CS=(uint8_t)(0x5b+Addr);
 		ReBiaoCP_TxByte(CS);
 		ReBiaoCP_TxByte(0x16);
 		//SetRx_ReBiaoCP();

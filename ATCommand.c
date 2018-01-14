@@ -1,18 +1,17 @@
-#include "HardwareProfile.h"
 #include "ATCommand.h"
 #include <string.h>
 #include <ctype.h>
 _ATCommand_Flags ATCommand_Flags;
-unsigned char ATCommand_RxList[ATCommand_MaxRX];
-unsigned int ATCommand_WaitACKTick;
-unsigned char ATCommand_RetryTimes;
-unsigned char ATCommand_RxCount;
-unsigned int ATCommand_WaitACKTimes;
+uint8_t ATCommand_RxList[ATCommand_MaxRX];
+uint16_t ATCommand_WaitACKTick;
+uint8_t ATCommand_RetryTimes;
+uint8_t ATCommand_RxCount;
+uint16_t ATCommand_WaitACKTimes;
 //char ATCommand_EndString[2];
 char ATCommand_ErrString[15];
 char ATCommand_OkString[15];
 char ATCommand_Clear;//用于设定清除缓存的某个特定字符
-//unsigned char ATCommand_Result;
+//uint8_t ATCommand_Result;
 void ATCommand_Init(void)
 {
 	ATCommand_WaitACKTimes=50;
@@ -23,7 +22,7 @@ void ATCommand_Init(void)
 	//strcpy(ATCommand_EndString,"\r");
 }
 
-void ATCommand_ProcRx(unsigned char rx)
+void ATCommand_ProcRx(uint8_t rx)
 {
 	if(ATCommand_Flags.bRx)//之前没处理完
 		return;	
@@ -67,12 +66,12 @@ void ATCommand_ProcRx(unsigned char rx)
 		}
 	}
 }
-unsigned char ATCommand_SendCmd(const char *cmd)
+uint8_t ATCommand_SendCmd(const char *cmd)
 {
-	unsigned char res=0; 
-	unsigned char retry;
+	uint8_t res=0; 
+	uint8_t retry;
 	char *strx=0;
-	//unsigned int i;	
+	//uint16_t i;	
 	retry=ATCommand_RetryTimes;
 	res=ATACK_Null;
 	while(retry!=0)
@@ -121,9 +120,9 @@ unsigned char ATCommand_SendCmd(const char *cmd)
 	ATCommand_WaitACKTimes=50;
 	return res;
 }
-unsigned char ATCommand_WaitData(void)
+uint8_t ATCommand_WaitData(void)
 {
-	unsigned char res=0; 
+	uint8_t res=0; 
 	char *strx=0;
 	res=ATACK_Null;
 	ATCommand_Flags.bRx=0;

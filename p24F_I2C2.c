@@ -5,13 +5,13 @@
 I2CFlags I2C2Flag;
 
 I2C_STATE I2C2State;
-unsigned char I2C2Buf[I2C2BufLen];
-unsigned int I2C2BufIndex;
-unsigned int I2C2PageIndex;
-unsigned char SlaveAddr;
-unsigned int I2C2TxCount;
-unsigned int I2C2RxCount;
-unsigned int I2C2Error;
+uint8_t I2C2Buf[I2C2BufLen];
+uint16_t I2C2BufIndex;
+uint16_t I2C2PageIndex;
+uint8_t SlaveAddr;
+uint16_t I2C2TxCount;
+uint16_t I2C2RxCount;
+uint16_t I2C2Error;
 UINT16_VAL WriteAddr;
 void I2C2Init()
 {
@@ -26,7 +26,7 @@ void I2C2Init()
 	I2C2BufIndex=0;
 }
 
-int I2C2AddByte(unsigned char b)
+int I2C2AddByte(uint8_t b)
 {
 	if(I2C2TxCount==I2C2BufLen)
 	{
@@ -41,11 +41,11 @@ int I2C2AddByte(unsigned char b)
 int I2C2AddBytes(const void *tx, size_t size, size_t n)
 {
 	size_t count = size * n;
-	unsigned int ret=1;	
-	unsigned char *s;
+	uint16_t ret=1;	
+	uint8_t *s;
 	if(count==0)
 		return -1;
-	s = (unsigned char*)tx;
+	s = (uint8_t*)tx;
 	while (count--)                         //逐个放入缓冲区
 	{
 		ret=I2C2AddByte(*s++);
@@ -57,7 +57,7 @@ int I2C2AddBytes(const void *tx, size_t size, size_t n)
 int I2C2AddStr(const char* pt)
 {
 	const char *p;
-	unsigned int ret;	
+	uint16_t ret;	
 	p = pt;
 	while (*p != '\0')                         //逐个放入缓冲区
 	{
@@ -67,7 +67,7 @@ int I2C2AddStr(const char* pt)
 	}
 	return ret;
 }
-int I2C2Write(unsigned char slaveAddr,unsigned int writeAddr)
+int I2C2Write(uint8_t slaveAddr,uint16_t writeAddr)
 {
 	if(I2C2State!=I2C_IDLE)
 		return -2;
@@ -85,7 +85,7 @@ int I2C2Write(unsigned char slaveAddr,unsigned int writeAddr)
 #endif
 	return 1;
 }
-int I2C2Read(unsigned char slaveAddr,unsigned int writeAddr,size_t count)
+int I2C2Read(uint8_t slaveAddr,uint16_t writeAddr,size_t count)
 {
 	if(I2C2State!=I2C_IDLE)
 		return -2;

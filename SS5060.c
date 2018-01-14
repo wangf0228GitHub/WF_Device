@@ -15,7 +15,7 @@ void SS5060_Init(void)
 {
 	SimI2C_Init();
 }
-unsigned char SS5060_GetResult(unsigned char x)
+uint8_t SS5060_GetResult(uint8_t x)
 {
 	if(SS5060_Setting(x)==0)
 		return 0;
@@ -24,10 +24,10 @@ unsigned char SS5060_GetResult(unsigned char x)
 		return 0;
 	return 1;
 }
-unsigned char SS5060_ReadReg(void)
+uint8_t SS5060_ReadReg(void)
 {
-	unsigned char ErrTimes=SS5060_RetryCount;
-	unsigned char bRight=0;
+	uint8_t ErrTimes=SS5060_RetryCount;
+	uint8_t bRight=0;
 	while(ErrTimes--)
 	{		
 		SimI2C_Start();
@@ -44,10 +44,10 @@ unsigned char SS5060_ReadReg(void)
 	SimI2C_Stop();
 	return bRight;
 }
-unsigned char SS5060_Setting(unsigned char x)
+uint8_t SS5060_Setting(uint8_t x)
 {
-	unsigned char ErrTimes=SS5060_RetryCount;
-	unsigned char bRight=0;
+	uint8_t ErrTimes=SS5060_RetryCount;
+	uint8_t bRight=0;
 	while(ErrTimes--)
 	{
 		SimI2C_Start();

@@ -19,8 +19,8 @@ typedef union
 		char CPJFX;
 		char Model;
 	};
-	unsigned char GPS_GPRMC_Data[61];
+	uint8_t GPS_GPRMC_Data[61];
 }_GPS_GPRMC;
 extern _GPS_GPRMC GPS_GPRMC;
-unsigned char GPS_GPRMC_DataProc(char* data);
+uint8_t GPS_GPRMC_DataProc(char* data);
 #endif // GPS_GPRMC_h__

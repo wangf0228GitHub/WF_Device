@@ -1,6 +1,7 @@
 #ifndef __CH45x_h__
 #define __CH45x_h__
 
+#include "main.h"
 //CH45xW4
 // #define CH45x_DCLK_W TRISB1  //串行数据时钟上升延激活
 // #define CH45x_DIN_W RB1      //串行数据输出，接CH45x的数据输入
@@ -29,10 +30,10 @@
 #define CH45x_TWINKLE    0x0600     //设置闪烁控制
 
 #ifdef CH45x_noINT
-#define CH45x_CloseINT() NOP()
-#define CH45x_OpenINT() NOP()
+#define CH45x_CloseINT()
+#define CH45x_OpenINT() 
 #endif
 void CH45x_Init(void);
-unsigned char CH45x_Read(void);
-void CH45x_Write(unsigned int command);
+uint8_t CH45x_Read(void);
+void CH45x_Write(uint16_t command);
 #endif // __CH45x_h__

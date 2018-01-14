@@ -1,6 +1,7 @@
 #ifndef __ADS1112_h__
 #define __ADS1112_h__
 
+#include "main.h"
 #include "TypeDefine.h"
 
 #ifndef ADS1112_RetryCount
@@ -24,12 +25,12 @@ typedef union
 		unsigned INP:2;//是否进入菜单
 		unsigned ST_DRDY:1;//菜单状态，0等温，1变温
 	};
-	unsigned char AllFlag;
+	uint8_t AllFlag;
 } _ADS1112_Status;
-extern ushort_wf ADS1112_Result;
+extern u16_wf ADS1112_Result;
 extern _ADS1112_Status ADS1112_Status;
-unsigned char ADS1112_Read(void);
-unsigned char ADS1112_Write(void);
+uint8_t ADS1112_Read(void);
+uint8_t ADS1112_Write(void);
 
 #endif
 

@@ -3,31 +3,31 @@
 
 typedef union
 {	
-	unsigned char Times[8];
+	uint8_t Times[8];
 	struct
 	{
-		unsigned char Year;
-		unsigned char Month;
-		unsigned char Day;
-		unsigned char Hour;
-		unsigned char Minute;
-		unsigned char Second;
-		unsigned char Week;
+		uint8_t Year;
+		uint8_t Month;
+		uint8_t Day;
+		uint8_t Hour;
+		uint8_t Minute;
+		uint8_t Second;
+		uint8_t Week;
 	};	
 }_SystemBCDTime;
-unsigned char GetMonthDay_BCD(unsigned char Y,unsigned char M);
-unsigned char GetMonthDay(unsigned char Y,unsigned char M);
+uint8_t GetMonthDay_BCD(uint8_t Y,uint8_t M);
+uint8_t GetMonthDay(uint8_t Y,uint8_t M);
 
 void BCDDateTimeAdd1M(_SystemBCDTime* dt);
 
-void BCDDateTimeAddMinutes(_SystemBCDTime* dt,unsigned int MS);
+void BCDDateTimeAddMinutes(_SystemBCDTime* dt,uint16_t MS);
 
-unsigned int GetMinutesGap_BCD(_SystemBCDTime dts,_SystemBCDTime dte);
+uint16_t GetMinutesGap_BCD(_SystemBCDTime dts,_SystemBCDTime dte);
 
 //获得整小时的时间间隔
-unsigned int GetHourGap_BCD(_SystemBCDTime dts,_SystemBCDTime dte);
+uint16_t GetHourGap_BCD(_SystemBCDTime dts,_SystemBCDTime dte);
 
 //获得整天的时间间隔
-unsigned int GetDayGap_BCD(_SystemBCDTime dts,_SystemBCDTime dte);
+uint16_t GetDayGap_BCD(_SystemBCDTime dts,_SystemBCDTime dte);
 
 #endif // TimeOP_h__

@@ -4,16 +4,16 @@
 #define MS5536c_Start() MS5536c_DIN=1;MS5536c_CLK();MS5536c_CLK();MS5536c_CLK()
 #define MS5536c_Stop() MS5536c_DIN=0;MS5536c_CLK();MS5536c_CLK();MS5536c_CLK()
 #define MS5536c_WB(lx) MS5536c_DIN=lx;MS5536c_CLK()
-unsigned int MS5536c_c1;
-unsigned int MS5536c_c2;
-unsigned int MS5536c_c3;
-unsigned int MS5536c_c4;
-unsigned int MS5536c_c5;
-unsigned int MS5536c_c6;
-unsigned int MS5536c_T;
+uint16_t MS5536c_c1;
+uint16_t MS5536c_c2;
+uint16_t MS5536c_c3;
+uint16_t MS5536c_c4;
+uint16_t MS5536c_c5;
+uint16_t MS5536c_c6;
+uint16_t MS5536c_T;
 void MS5536c_Reset(void)
 {
-	unsigned char i;
+	uint8_t i;
 	for(i=0;i<8;i++)
 	{
 		MS5536c_WB(1); 
@@ -28,10 +28,10 @@ void MS5536c_Reset(void)
 	MS5536c_CLK();
 	while(!MS5536c_DOUT);
 }
-unsigned int MS5536c_GetT(void)
+uint16_t MS5536c_GetT(void)
 {
-	unsigned int t;
-	unsigned char i;
+	uint16_t t;
+	uint8_t i;
 	t=0;
 	//MS5536c_SCLK=1;__delay_us(1);MS5536c_SCLK=0;__delay_us(1);
 	MS5536c_Start();
@@ -61,10 +61,10 @@ unsigned int MS5536c_GetT(void)
 	}
 	return t;
 }
-unsigned int MS5536c_GetP(void)
+uint16_t MS5536c_GetP(void)
 {
-	unsigned int p;
-	unsigned char i;
+	uint16_t p;
+	uint8_t i;
 	p=0;
 	MS5536c_Start();
 	/************************************************************************/
@@ -95,8 +95,8 @@ unsigned int MS5536c_GetP(void)
 }
 void MS5536c_GetCx(void)
 {
-	unsigned int w1,w2,w3,w4,x;
-	unsigned char i;
+	uint16_t w1,w2,w3,w4,x;
+	uint8_t i;
 	w1=0;
 	w2=0;
 	w3=0;
@@ -223,19 +223,19 @@ void MS5536c_GetCx(void)
 	if(MS5536c_c6==0)
 		MS5536c_c5=0;
 }
-unsigned int MS5536c_Calculate(void)
+uint16_t MS5536c_Calculate(void)
 {
-	unsigned int UT1;
-	unsigned int t,p;
-	unsigned long lx;	
-	unsigned int dT,OFF,SENS,X,P;
+	uint16_t UT1;
+	uint16_t t,p;
+	uint32_t lx;	
+	uint16_t dT,OFF,SENS,X,P;
 	UT1=(MS5536c_c5<<2)+15136;
 	p=MS5536c_GetP();
 	t=MS5536c_GetT();	
 	if(t>UT1)
 	{
 		dT=t-UT1;
-		lx=(unsigned long)dT*(MS5536c_c6+262);
+		lx=(uint32_t)dT*(MS5536c_c6+262);
 		lx=lx>>9;
 		lx=lx+2000;
 		MS5536c_T=lx;

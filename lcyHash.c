@@ -1,16 +1,16 @@
 #include "HardwareProfile.h"
 #include "TypeDefine.h"
 
-unsigned char lcyHashIn[0x08];
-unsigned char lcyHashOut[0x08];
-unsigned char F_calsel;
+uint8_t lcyHashIn[0x08];
+uint8_t lcyHashOut[0x08];
+uint8_t F_calsel;
 
-unsigned char Ht[0x10];
+uint8_t Ht[0x10];
 
-void sub_add_4B(unsigned char* p)
+void sub_add_4B(uint8_t* p)
 {
-	unsigned char i,C;
-	unsigned int Sum;
+	uint8_t i,C;
+	uint16_t Sum;
 	C=0;
 	for(i=0;i<0x04;i++)
 	{
@@ -27,9 +27,9 @@ void sub_add_4B(unsigned char* p)
 	}
 }
 /*---------------------------------------------------------------------*/
-void sub_Shift_L(unsigned char N)//N is cnt
+void sub_Shift_L(uint8_t N)//N is cnt
 {
-	unsigned char C,Ct,i,j;
+	uint8_t C,Ct,i,j;
 	for(i=0;i<N;i++)
 	{
 		C=Ht[0x08]&0x80;
@@ -50,9 +50,9 @@ void sub_Shift_L(unsigned char N)//N is cnt
 	}
 }
 /*---------------------------------------------------------------------*/
-void sub_Shift_R(unsigned char N)//N is cnt
+void sub_Shift_R(uint8_t N)//N is cnt
 {
-	unsigned char C,Ct,i,j;
+	uint8_t C,Ct,i,j;
 	for(i=0;i<N;i++)
 	{
 		C=Ht[0x0B]&0x01;
@@ -76,9 +76,9 @@ void sub_Shift_R(unsigned char N)//N is cnt
 void sub_Mixed_A()//
 {
 	//                              +0   +1   +2   +3   +4   +5   +6   +7   +8   +9   +A   +B   +C   +D   +E   +F
-	const unsigned char Ta[0x10]={0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B,0x0F,0x0C,0x0D,0x0E,0x00,0x01,0x02,0x03};
-	unsigned char tmp[0x10];
-	unsigned char i,j;
+	const uint8_t Ta[0x10]={0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B,0x0F,0x0C,0x0D,0x0E,0x00,0x01,0x02,0x03};
+	uint8_t tmp[0x10];
+	uint8_t i,j;
 
 	for(i=0;i<0x10;i++)
 	{
@@ -95,9 +95,9 @@ void sub_Mixed_A()//
 void sub_Mixed_B()//
 {
 	//                              +0   +1   +2   +3   +4   +5   +6   +7   +8   +9   +A   +B   +C   +D   +E   +F
-	const unsigned char Tb[0x10]={0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B,0x0E,0x0F,0x0C,0x0D,0x00,0x01,0x02,0x03};
-	unsigned char tmp[0x10];
-	unsigned char i,j;
+	const uint8_t Tb[0x10]={0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B,0x0E,0x0F,0x0C,0x0D,0x00,0x01,0x02,0x03};
+	uint8_t tmp[0x10];
+	uint8_t i,j;
 
 	for(i=0;i<0x10;i++)
 	{
@@ -113,9 +113,9 @@ void sub_Mixed_B()//
 /*---------------------------------------------------------------------*/
 void sub_cal0()//0AFE
 {
-	unsigned char i;
-	unsigned char Biao_a[0x04]={0x50,0xA2,0x8B,0xE6};
-	unsigned char TP[0x04];
+	uint8_t i;
+	uint8_t Biao_a[0x04]={0x50,0xA2,0x8B,0xE6};
+	uint8_t TP[0x04];
 	for(i=0;i<0x04;i++)
 	{
 		TP[i]=((Ht[0x00+i]^Ht[0x04+i])&Ht[0x0C+i])^Ht[0x04+i];
@@ -127,10 +127,10 @@ void sub_cal0()//0AFE
 	}
 }
 /*---------------------------------------------------------------------*/
-void sub_cal1(unsigned char s)//0CDF
+void sub_cal1(uint8_t s)//0CDF
 {
-	unsigned char i;
-	unsigned char T[0x04];
+	uint8_t i;
+	uint8_t T[0x04];
 	s=s&0x04;
 	for(i=0;i<0x04;i++)
 	{
@@ -141,10 +141,10 @@ void sub_cal1(unsigned char s)//0CDF
 /*---------------------------------------------------------------------*/
 void sub_cal2()//0B4B
 {
-	unsigned char i;
-	unsigned char Biao_b[0x04]={0x5A,0x82,0x79,0x99};
-	unsigned char TP[0x04];
-	unsigned char m,n;
+	uint8_t i;
+	uint8_t Biao_b[0x04]={0x5A,0x82,0x79,0x99};
+	uint8_t TP[0x04];
+	uint8_t m,n;
 
 	for(i=0;i<0x04;i++)
 	{
@@ -162,10 +162,10 @@ void sub_cal2()//0B4B
 /*---------------------------------------------------------------------*/
 void sub_cal3()//0BD9
 {
-	unsigned char i;
-	unsigned char Biao_c[0x04]={0x6E,0xD9,0xEB,0xA1};
-	unsigned char Biao_d[0x04]={0x5C,0x4D,0xD1,0x24};
-	unsigned char TP[0x04];
+	uint8_t i;
+	uint8_t Biao_c[0x04]={0x6E,0xD9,0xEB,0xA1};
+	uint8_t Biao_d[0x04]={0x5C,0x4D,0xD1,0x24};
+	uint8_t TP[0x04];
 
 	for(i=0;i<0x04;i++)
 	{
@@ -183,35 +183,35 @@ void sub_cal3()//0BD9
 	}
 }
 /*---------------------------------------------------------------------*/
-void sub_cal_L_A(unsigned char x)//
+void sub_cal_L_A(uint8_t x)//
 {
 	sub_Shift_L(x);
 	sub_Mixed_A();
 }
 /*---------------------------------------------------------------------*/
-void sub_cal_L_B(unsigned char x)//
+void sub_cal_L_B(uint8_t x)//
 {
 	sub_Shift_L(x);
 	sub_Mixed_B();
 }
 /*---------------------------------------------------------------------*/
-void sub_cal_R_A(unsigned char x)//
+void sub_cal_R_A(uint8_t x)//
 {
 	sub_Shift_R(x);
 	sub_Mixed_A();
 }
 /*---------------------------------------------------------------------*/
-void sub_cal_R_B(unsigned char x)//
+void sub_cal_R_B(uint8_t x)//
 {
 	sub_Shift_R(x);
 	sub_Mixed_B();
 }
 void loadTab()
 {
-	const unsigned char TAB0[0x10]={
+	const uint8_t TAB0[0x10]={
 		0x45,0x03,0x11,0x4F,0x85,0x4C,0x7A,0x31,
 		0xF6,0x7C,0xCB,0xB8,0x15,0xA4,0xD0,0x42};
-	const unsigned char TAB1[0x10]={
+	const uint8_t TAB1[0x10]={
 		0x51,0x9B,0x49,0x14,0xB1,0x2E,0x8F,0xB5,
 		0x95,0xDE,0x62,0x7A,0xD8,0x0D,0x44,0x1C};
 
@@ -230,7 +230,7 @@ void loadTab()
 }
 void sub_half()
 {
-	unsigned char n,m;
+	uint8_t n,m;
 	loadTab();
 	sub_cal0();//0AFE
 	n=0x00;
@@ -376,11 +376,11 @@ void sub_half()
 	m=3;
 	sub_cal_R_A(m);
 }
-void sub_add(unsigned char *p,unsigned char*s)
+void sub_add(uint8_t *p,uint8_t*s)
 {
-	unsigned char i,C;
-	unsigned int Sum;
-	const unsigned char B[0x08]={0x89,0xAB,0xCD,0xEF,0xFE,0xDC,0xBA,0x98};
+	uint8_t i,C;
+	uint16_t Sum;
+	const uint8_t B[0x08]={0x89,0xAB,0xCD,0xEF,0xFE,0xDC,0xBA,0x98};
 	//--
 	C=0;
 	for(i=0;i<0x04;i++)
@@ -445,9 +445,9 @@ void sub_add(unsigned char *p,unsigned char*s)
 }
 void lcyHashOnce(void)
 {
-	unsigned char i;
-	unsigned char Sa[0x08];
-	unsigned char Sb[0x08];
+	uint8_t i;
+	uint8_t Sa[0x08];
+	uint8_t Sb[0x08];
 	//--
 	F_calsel=0;
 	sub_half();
@@ -463,9 +463,9 @@ void lcyHashOnce(void)
 	}
 	sub_add(Sa,Sb);
 }
-void lcyHashCalc(unsigned char n)
+void lcyHashCalc(uint8_t n)
 {
-	unsigned char i,j;
+	uint8_t i,j;
 	for(i=0;i<n;i++)
 	{
 		lcyHashOnce();

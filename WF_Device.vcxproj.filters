@@ -166,9 +166,6 @@
     <Filter Include="接口\SPI">
       <UniqueIdentifier>{d239eeb4-1b58-4f50-8c01-25df58b9df89}</UniqueIdentifier>
     </Filter>
-    <Filter Include="接口\SS5060光照度计">
-      <UniqueIdentifier>{f6abc823-9cae-47bd-919c-1fea6e433ca1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="D/A\TLV56XX">
       <UniqueIdentifier>{0078d41f-eb03-4ec5-a983-3c0cd8858ec2}</UniqueIdentifier>
     </Filter>
@@ -181,6 +178,9 @@
     <Filter Include="传感器\MS8607">
       <UniqueIdentifier>{cc566b23-b10d-4bfe-a409-f21ca33d33d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SS5060光照度计">
+      <UniqueIdentifier>{f6abc823-9cae-47bd-919c-1fea6e433ca1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DS12C887_Intel.c">
@@ -188,9 +188,6 @@
     </ClCompile>
     <ClCompile Include="afx.c">
       <Filter>全局函数</Filter>
-    </ClCompile>
-    <ClCompile Include="Uart.c">
-      <Filter>串口\Uart1</Filter>
     </ClCompile>
     <ClCompile Include="UartTx1.c">
       <Filter>串口\Uart1</Filter>
@@ -333,7 +330,7 @@
       <Filter>通信协议\AT指令</Filter>
     </ClCompile>
     <ClCompile Include="SS5060.c">
-      <Filter>接口\SS5060光照度计</Filter>
+      <Filter>SS5060光照度计</Filter>
     </ClCompile>
     <ClCompile Include="Si4463.c">
       <Filter>SI4432</Filter>
@@ -365,6 +362,12 @@
     <ClCompile Include="MS8607.c">
       <Filter>传感器\MS8607</Filter>
     </ClCompile>
+    <ClCompile Include="CP68_Client.c">
+      <Filter>通信协议\热表</Filter>
+    </ClCompile>
+    <ClCompile Include="picUart.c">
+      <Filter>串口</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DS12C887_Intel.h">
@@ -372,9 +375,6 @@
     </ClInclude>
     <ClInclude Include="afx.h">
       <Filter>全局函数</Filter>
-    </ClInclude>
-    <ClInclude Include="Uart.h">
-      <Filter>串口\Uart1</Filter>
     </ClInclude>
     <ClInclude Include="UartTx1.h">
       <Filter>串口\Uart1</Filter>
@@ -519,7 +519,7 @@
       <Filter>通信协议\AT指令</Filter>
     </ClInclude>
     <ClInclude Include="SS5060.h">
-      <Filter>接口\SS5060光照度计</Filter>
+      <Filter>SS5060光照度计</Filter>
     </ClInclude>
     <ClInclude Include="Si4463.h">
       <Filter>SI4432</Filter>
@@ -550,6 +550,12 @@
     </ClInclude>
     <ClInclude Include="MS8607.h">
       <Filter>传感器\MS8607</Filter>
+    </ClInclude>
+    <ClInclude Include="CP68_Client.h">
+      <Filter>通信协议\热表</Filter>
+    </ClInclude>
+    <ClInclude Include="picUart.h">
+      <Filter>串口</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

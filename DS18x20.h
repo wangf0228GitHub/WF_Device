@@ -1,6 +1,7 @@
 #ifndef DS18X20_H_
 #define DS18X20_H_
 
+#include "main.h"
 //#define MAXSENSORS 10
 // enable DS18x20 EERPROM support
 //#define DS18X20_EEPROMSUPPORT
@@ -65,7 +66,7 @@
 #define DS18X20_TH_REG      2
 #define DS18X20_TL_REG      3
 
-const unsigned char DS18X20_ToDecicel[16]={
+const uint8_t DS18X20_ToDecicel[16]={
 	0,
 	1,
 	1,
@@ -83,43 +84,43 @@ const unsigned char DS18X20_ToDecicel[16]={
 	9,
 	9
 };
-unsigned char DS18X20_Scratchpad[9];
+uint8_t DS18X20_Scratchpad[9];
 
 #ifdef OneWire_MAXSENSORS
-	void DS18X20_FindSensor(unsigned char* diff, unsigned char* id);
+	void DS18X20_FindSensor(uint8_t* diff, uint8_t* id);
 
-	unsigned char DS18X20_StartMeas(unsigned char* id);
-	unsigned char DS18X20_SearchSensors(unsigned char* id);
-	unsigned char DS18X20_ReadMeas(unsigned char* id,unsigned char bVerify);
+	uint8_t DS18X20_StartMeas(uint8_t* id);
+	uint8_t DS18X20_SearchSensors(uint8_t* id);
+	uint8_t DS18X20_ReadMeas(uint8_t* id,uint8_t bVerify);
 
 	#ifdef DS18X20_EEPROMSUPPORT
 		// write th, tl and config-register to scratchpad (config ignored on S20)
-		unsigned char DS18X20_WriteScratchpad(unsigned char* id, unsigned char th, unsigned char tl, unsigned char conf);
+		uint8_t DS18X20_WriteScratchpad(uint8_t* id, uint8_t th, uint8_t tl, uint8_t conf);
 		// read scratchpad into array SP
-		unsigned char DS18X20_ReadScratchpad(unsigned char* id,unsigned char bVerify);
+		uint8_t DS18X20_ReadScratchpad(uint8_t* id,uint8_t bVerify);
 		// copy values th,tl (config) from scratchpad to DS18x20 eeprom
-		unsigned char DS18X20_CopyScratchpad(unsigned char* id);
+		uint8_t DS18X20_CopyScratchpad(uint8_t* id);
 		// copy values from DS18x20 eeprom to scratchpad
-		unsigned char DS18X20_RecallE2(unsigned char* id);
+		uint8_t DS18X20_RecallE2(uint8_t* id);
 	#endif
 #else
 
-	unsigned char DS18X20_StartMeas();
-	unsigned char DS18X20_ReadMeas(unsigned char bVerify);
+	uint8_t DS18X20_StartMeas();
+	uint8_t DS18X20_ReadMeas(uint8_t bVerify);
 
 	#ifdef DS18X20_EEPROMSUPPORT
 		// write th, tl and config-register to scratchpad (config ignored on S20)
 		#ifdef DS18B20
-			unsigned char DS18X20_WriteScratchpad(unsigned char th, unsigned char tl, unsigned char conf);
+			uint8_t DS18X20_WriteScratchpad(uint8_t th, uint8_t tl, uint8_t conf);
 		#else
-			unsigned char DS18X20_WriteScratchpad(unsigned char th, unsigned char tl);
+			uint8_t DS18X20_WriteScratchpad(uint8_t th, uint8_t tl);
 		#endif
 		// read scratchpad into array SP
-		unsigned char DS18X20_ReadScratchpad(unsigned char bVerify);
+		uint8_t DS18X20_ReadScratchpad(uint8_t bVerify);
 		// copy values th,tl (config) from scratchpad to DS18x20 eeprom
-		unsigned char DS18X20_CopyScratchpad();
+		uint8_t DS18X20_CopyScratchpad();
 		// copy values from DS18x20 eeprom to scratchpad
-		unsigned char DS18X20_RecallE2();
+		uint8_t DS18X20_RecallE2();
 	#endif
 #endif
 

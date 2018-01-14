@@ -1,4 +1,3 @@
-#include "HardwareProfile.h"
 #include "TCN75.h"
 #ifdef SimI2C
 #include "SimI2C.h"
@@ -16,10 +15,10 @@ void TCN75_Init(void)
 {
 	SimI2C_Init();
 }
-unsigned char TCN75_ReadReg(unsigned char RegPoint)
+uint8_t TCN75_ReadReg(uint8_t RegPoint)
 {
-	unsigned char ErrTimes=TCN75_RetryCount;
-	unsigned char bRight=0;
+	uint8_t ErrTimes=TCN75_RetryCount;
+	uint8_t bRight=0;
 	while(ErrTimes--)
 	{
 		SimI2C_Start();
@@ -43,10 +42,10 @@ unsigned char TCN75_ReadReg(unsigned char RegPoint)
 	SimI2C_Stop();
 	return bRight;
 }
-unsigned char TCN75_SetConfig(void)
+uint8_t TCN75_SetConfig(void)
 {
-	unsigned char ErrTimes=TCN75_RetryCount;
-	unsigned char bRight=0;
+	uint8_t ErrTimes=TCN75_RetryCount;
+	uint8_t bRight=0;
 	while(ErrTimes--)
 	{
 		SimI2C_Start();
@@ -65,10 +64,10 @@ unsigned char TCN75_SetConfig(void)
 	SimI2C_Stop();
 	return bRight;
 }
-unsigned char TCN75_ReadConfig(void)
+uint8_t TCN75_ReadConfig(void)
 {
-	unsigned char ErrTimes=TCN75_RetryCount;
-	unsigned char bRight=0;
+	uint8_t ErrTimes=TCN75_RetryCount;
+	uint8_t bRight=0;
 	while(ErrTimes--)
 	{
 		SimI2C_Start();

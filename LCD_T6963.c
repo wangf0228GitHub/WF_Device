@@ -13,12 +13,12 @@
 // #define LCD_T6963_PORT_DIR TRISD
 // #define LCD_T6963_LineChar 20  // 设置宽度
 
-unsigned char LCD_T6963_ReadState();
-void LCD_T6963_WriteD(unsigned char dat);
-void LCD_T6963_WriteC(unsigned char cmd);
+uint8_t LCD_T6963_ReadState();
+void LCD_T6963_WriteD(uint8_t dat);
+void LCD_T6963_WriteC(uint8_t cmd);
 void LCD_T6963_Init(void)
 {
-	unsigned int x;
+	uint16_t x;
 #ifdef LCD_T6963_RST_DIR
 	LCD_T6963_RST_DIR=0;
 	LCD_T6963_RST_W=1;
@@ -54,19 +54,19 @@ void LCD_T6963_Init(void)
 	LCD_T6963_ClearScreen(x); 
 }
 /******************************************************************************** 
-函数名:Void ShowHZ16x16(unsigned Addr,unsigned int hzcode) 
+函数名:Void ShowHZ16x16(unsigned Addr,uint16_t hzcode) 
 函数功能：显示一个汉字(16*16点阵)
            Addr: 显示位置
         hzcode: 汉字代码(自定义的) 
 注:超出范围的将直接写到RAM中,可以实现卷屏效果????????
 ********************************************************************************/ 
-void LCD_T6963_ShowHZ16x16(unsigned char x,unsigned char y,const unsigned char* zm) 
+void LCD_T6963_ShowHZ16x16(uint8_t x,uint8_t y,const uint8_t* zm) 
 { 
-     unsigned int StartAddr; 
-     unsigned char i=0;
-     //unsigned char* zm=ZM;
+     uint16_t StartAddr; 
+     uint8_t i=0;
+     //uint8_t* zm=ZM;
      StartAddr=x;
-     StartAddr+=((unsigned int)y*LCD_T6963_LineChar)<<3;        //定位起始行
+     StartAddr+=((uint16_t)y*LCD_T6963_LineChar)<<3;        //定位起始行
      for(i=0;i<16;i++) 
      { 
 		LCD_T6963_WriteCmd2(LOW_BYTE(StartAddr),HIGH_BYTE(StartAddr),T6963_AddrSet);
@@ -76,19 +76,19 @@ void LCD_T6963_ShowHZ16x16(unsigned char x,unsigned char y,const unsigned char* 
      } 
 }
 /******************************************************************************** 
-函数名:Void ShowHZ16x16(unsigned Addr,unsigned int hzcode) 
+函数名:Void ShowHZ16x16(unsigned Addr,uint16_t hzcode) 
 函数功能：显示一个汉字(16*16点阵)
            Addr: 显示位置
         hzcode: 汉字代码(自定义的) 
 注:超出范围的将直接写到RAM中,可以实现卷屏效果????????
 ********************************************************************************/ 
-void LCD_T6963_ShowHZ8x16(unsigned char x,unsigned char y,const unsigned char* zm) 
+void LCD_T6963_ShowHZ8x16(uint8_t x,uint8_t y,const uint8_t* zm) 
 { 
-     unsigned int StartAddr; 
-     unsigned char i=0;
-     //unsigned char* zm=ZM;
+     uint16_t StartAddr; 
+     uint8_t i=0;
+     //uint8_t* zm=ZM;
      StartAddr=x;
-     StartAddr+=((unsigned int)y*LCD_T6963_LineChar)<<3;        //定位起始行
+     StartAddr+=((uint16_t)y*LCD_T6963_LineChar)<<3;        //定位起始行
      for(i=0;i<16;i++) 
      { 
 		LCD_T6963_WriteCmd2(LOW_BYTE(StartAddr),HIGH_BYTE(StartAddr),T6963_AddrSet);
@@ -96,11 +96,11 @@ void LCD_T6963_ShowHZ8x16(unsigned char x,unsigned char y,const unsigned char* z
 		StartAddr=StartAddr + LCD_T6963_LineChar;            // 换到下一行
      } 
 }
-void LCD_T6963_ShowPic(unsigned int Addr,unsigned char Width,unsigned char Height,const unsigned char* Pic)
+void LCD_T6963_ShowPic(uint16_t Addr,uint8_t Width,uint8_t Height,const uint8_t* Pic)
 {
-	unsigned int StartAddr; 
-	unsigned char i,j;
-	//unsigned char* zm=ZM;
+	uint16_t StartAddr; 
+	uint8_t i,j;
+	//uint8_t* zm=ZM;
 	StartAddr=Addr;        //定位起始行
 	Width=Width>>3;
 	for(i=0;i<Height;i++) 
@@ -113,11 +113,11 @@ void LCD_T6963_ShowPic(unsigned int Addr,unsigned char Width,unsigned char Heigh
 		StartAddr=StartAddr + LCD_T6963_LineChar;            // 换到下一行
 	} 
 }
-void LCD_T6963_ShowFull(unsigned int Addr,unsigned char Width,unsigned char Height,unsigned char fc)
+void LCD_T6963_ShowFull(uint16_t Addr,uint8_t Width,uint8_t Height,uint8_t fc)
 {
-	unsigned int StartAddr; 
-	unsigned char i,j;
-	//unsigned char* zm=ZM;
+	uint16_t StartAddr; 
+	uint8_t i,j;
+	//uint8_t* zm=ZM;
 	StartAddr=Addr;        //定位起始行
 	Width=Width>>3;
 	for(i=0;i<Height;i++) 
@@ -130,13 +130,13 @@ void LCD_T6963_ShowFull(unsigned int Addr,unsigned char Width,unsigned char Heig
 		StartAddr=StartAddr + LCD_T6963_LineChar;            // 换到下一行
 	} 
 }
-void LCD_T6963_ShowPicByXY(unsigned char x,unsigned char y,unsigned char Width,unsigned char Height,const unsigned char* Pic)
+void LCD_T6963_ShowPicByXY(uint8_t x,uint8_t y,uint8_t Width,uint8_t Height,const uint8_t* Pic)
 {
-	unsigned int StartAddr; 
-	unsigned char i,j;
-	//unsigned char* zm=ZM;
+	uint16_t StartAddr; 
+	uint8_t i,j;
+	//uint8_t* zm=ZM;
 	StartAddr=x;
-	StartAddr+=((unsigned int)y*LCD_T6963_LineChar)<<3;        //定位起始行
+	StartAddr+=((uint16_t)y*LCD_T6963_LineChar)<<3;        //定位起始行
 	Width=Width>>3;
 	for(i=0;i<Height;i++) 
 	{ 
@@ -148,13 +148,13 @@ void LCD_T6963_ShowPicByXY(unsigned char x,unsigned char y,unsigned char Width,u
 		StartAddr=StartAddr + LCD_T6963_LineChar;            // 换到下一行
 	} 
 }
-void LCD_T6963_ShowFullByXY(unsigned char x,unsigned char y,unsigned char Width,unsigned char Height,unsigned char fc)
+void LCD_T6963_ShowFullByXY(uint8_t x,uint8_t y,uint8_t Width,uint8_t Height,uint8_t fc)
 {
-	unsigned int StartAddr; 
-	unsigned char i,j;
-	//unsigned char* zm=ZM;
+	uint16_t StartAddr; 
+	uint8_t i,j;
+	//uint8_t* zm=ZM;
 	StartAddr=x;
-	StartAddr+=((unsigned int)y*LCD_T6963_LineChar)<<3;        //定位起始行
+	StartAddr+=((uint16_t)y*LCD_T6963_LineChar)<<3;        //定位起始行
 	Width=Width>>3;
 	for(i=0;i<Height;i++) 
 	{ 
@@ -167,34 +167,34 @@ void LCD_T6963_ShowFullByXY(unsigned char x,unsigned char y,unsigned char Width,
 	} 
 }
 /********************************************************************************
-函数名: Void ClearScreen(unsigned int ram)
+函数名: Void ClearScreen(uint16_t ram)
 函数功能: 清除整个屏幕
      ram : 需要清零的单元数
 ********************************************************************************/
-void LCD_T6963_ClearScreen(unsigned int ram)
+void LCD_T6963_ClearScreen(uint16_t ram)
 {
-     unsigned int i;
+     uint16_t i;
      LCD_T6963_AutoWriteStart(0x0000);          // 清显示 RAM 区 0000h--2000h (8k)     
      for(i=0x00;i<ram;i++) 
 		 LCD_T6963_AutoWriteData(0x00);        // data=0;
      LCD_T6963_AutoWriteEnd();                // 自动写结束
 }
-void LCD_T6963_ClearScreenEx(unsigned int start,unsigned int ram)
+void LCD_T6963_ClearScreenEx(uint16_t start,uint16_t ram)
 {
-	unsigned int i;
+	uint16_t i;
 	LCD_T6963_AutoWriteStart(start);          // 清显示 RAM 区 0000h--2000h (8k)     
 	for(i=0x00;i<ram;i++) 
 		LCD_T6963_AutoWriteData(0x00);        // data=0;
 	LCD_T6963_AutoWriteEnd();                // 自动写结束
 }
 /********************************************************************************
-函数名:    Void LCD_T6963_WriteCmd1(unsigned char cmd)
-           Void LCD_T6963_WriteCmd2(unsigned char dat1,unsigned char cmd)
-           Void LCD_T6963_WriteCmd3(unsigned char dat1,unsigned char dat2,unsigned char cmd)
-     Void LCD_T6963_WriteData(unsigned char dat)
+函数名:    Void LCD_T6963_WriteCmd1(uint8_t cmd)
+           Void LCD_T6963_WriteCmd2(uint8_t dat1,uint8_t cmd)
+           Void LCD_T6963_WriteCmd3(uint8_t dat1,uint8_t dat2,uint8_t cmd)
+     Void LCD_T6963_WriteData(uint8_t dat)
 函数功能: 写指令和写数据子程序
 ********************************************************************************/
-void LCD_T6963_WriteD(unsigned char dat)
+void LCD_T6963_WriteD(uint8_t dat)
 {
 	while( (LCD_T6963_ReadState()&0x03)!=0x03 );
 	LCD_T6963_CD_W=0;    //数据
@@ -207,7 +207,7 @@ void LCD_T6963_WriteD(unsigned char dat)
 	__delay_us(1);
 	LCD_T6963_WR_W=1;	
 }
-void LCD_T6963_WriteC(unsigned char cmd)
+void LCD_T6963_WriteC(uint8_t cmd)
 {
 	while( (LCD_T6963_ReadState()&0x03)!=0x03 );
 	LCD_T6963_CD_W=1;    //数据
@@ -221,7 +221,7 @@ void LCD_T6963_WriteC(unsigned char cmd)
 	LCD_T6963_WR_W=1;
 
 }
-void LCD_T6963_WriteCmd0(unsigned char cmd)
+void LCD_T6963_WriteCmd0(uint8_t cmd)
 {
 
 #ifdef  LCD_T6963_CE_DIR
@@ -235,7 +235,7 @@ void LCD_T6963_WriteCmd0(unsigned char cmd)
 #endif
 
 }
-void LCD_T6963_WriteCmd1(unsigned char dat,unsigned char cmd)
+void LCD_T6963_WriteCmd1(uint8_t dat,uint8_t cmd)
 {
 
 #ifdef  LCD_T6963_CE_DIR
@@ -250,7 +250,7 @@ void LCD_T6963_WriteCmd1(unsigned char dat,unsigned char cmd)
 #endif
 
 }
-void LCD_T6963_WriteCmd2(unsigned char dat1,unsigned char dat2,unsigned char cmd)
+void LCD_T6963_WriteCmd2(uint8_t dat1,uint8_t dat2,uint8_t cmd)
 {
 
 #ifdef  LCD_T6963_CE_DIR
@@ -266,7 +266,7 @@ void LCD_T6963_WriteCmd2(unsigned char dat1,unsigned char dat2,unsigned char cmd
 #endif
 
 }
-void LCD_T6963_AutoWriteStart(unsigned int Addr)
+void LCD_T6963_AutoWriteStart(uint16_t Addr)
 {
 
 #ifdef  LCD_T6963_CE_DIR
@@ -278,7 +278,7 @@ void LCD_T6963_AutoWriteStart(unsigned int Addr)
 	LCD_T6963_WriteC(T6963_AddrSet);	
 	LCD_T6963_WriteC(T6963_DataAutoWrite);  // 设置自动写状态
 }
-void LCD_T6963_AutoWriteData(unsigned char dat)
+void LCD_T6963_AutoWriteData(uint8_t dat)
 {
 	while( !(LCD_T6963_ReadState()&0x08) );
 	LCD_T6963_CD_W=0;    //数据
@@ -305,9 +305,9 @@ void LCD_T6963_AutoWriteEnd(void)
 函数功能: IOPORT输出数据并检查LCD忙数据。
 返回数据：checkbusy
 /********************************************************************************/
-unsigned char LCD_T6963_ReadState()
+uint8_t LCD_T6963_ReadState()
 {
-	unsigned char state;
+	uint8_t state;
 	LCD_T6963_CD_W=1;    //控制字
 #ifdef LCD_T6963_PORT_DIR
 	LCD_T6963_PORT_DIR=0xff;//输入

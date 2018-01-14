@@ -17,10 +17,14 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{90B86704-708E-4979-BE79-BAC2870D5B98}</ProjectGuid>
     <RootNamespace>WF_Device</RootNamespace>
-    <SccProjectName>SAK</SccProjectName>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccProvider>
+    </SccProvider>
     <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -144,6 +148,7 @@
     <ClCompile Include="CharTimeOP.c" />
     <ClCompile Include="CP1616_Client.c" />
     <ClCompile Include="CP1616_Master.c" />
+    <ClCompile Include="CP68_Client.c" />
     <ClCompile Include="DS12C887_Intel.c" />
     <ClCompile Include="afx.c" />
     <ClCompile Include="DS18x20.c" />
@@ -164,6 +169,7 @@
     <ClCompile Include="NMEA0183.c" />
     <ClCompile Include="OLED.c" />
     <ClCompile Include="OneWire.c" />
+    <ClCompile Include="picUart.c" />
     <ClCompile Include="PID.c" />
     <ClCompile Include="ReBiaoCP.c" />
     <ClCompile Include="SHT25.c" />
@@ -178,7 +184,6 @@
     <ClCompile Include="TM1638.c" />
     <ClCompile Include="TM1650.c" />
     <ClCompile Include="TypeDefine.c" />
-    <ClCompile Include="Uart.c" />
     <ClCompile Include="UartTx1.c" />
     <ClCompile Include="Uart2.c" />
     <ClCompile Include="UartTx2.c" />
@@ -208,6 +213,7 @@
     <ClInclude Include="CharTimeOP.h" />
     <ClInclude Include="CP1616_Client.h" />
     <ClInclude Include="CP1616_Master.h" />
+    <ClInclude Include="CP68_Client.h" />
     <ClInclude Include="DS12C887_Intel.h" />
     <ClInclude Include="afx.h" />
     <ClInclude Include="DS18x20.h" />
@@ -228,6 +234,7 @@
     <ClInclude Include="NMEA0183.h" />
     <ClInclude Include="OLED.h" />
     <ClInclude Include="OneWire.h" />
+    <ClInclude Include="picUart.h" />
     <ClInclude Include="PID.h" />
     <ClInclude Include="ReBiaoCP.h" />
     <ClInclude Include="SHT25.h" />
@@ -241,7 +248,6 @@
     <ClInclude Include="TLV56XX.h" />
     <ClInclude Include="TM1638.h" />
     <ClInclude Include="TM1650.h" />
-    <ClInclude Include="Uart.h" />
     <ClInclude Include="UartTx1.h" />
     <ClInclude Include="Uart2.h" />
     <ClInclude Include="UartTx2.h" />

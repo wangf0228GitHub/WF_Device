@@ -3,7 +3,7 @@
 
 
 void SPI1AddStr(const char* pt);
-void SPI1AddByte(unsigned char tx);
+void SPI1AddByte(uint8_t tx);
 void SPI1AddBytes(const void *tx, size_t size, size_t n);
 void SPI1TxQueueInterrupt(void);
 void InitSPI1TxQueue(void);

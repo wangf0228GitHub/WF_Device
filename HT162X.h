@@ -41,11 +41,11 @@
 #define HT162X_TNORMAL 0b11100011 // ÆÕÍ¨Ä£Ê½
 
 
-void HT162X_Setting(unsigned char x);
+void HT162X_Setting(uint8_t x);
 
-void HT162X_WriteData(unsigned char reg,unsigned char data);
+void HT162X_WriteData(uint8_t reg,uint8_t data);
 
-void HT162X_WriteDatas(unsigned char reg,const unsigned char* pBuf,unsigned char count);
+void HT162X_WriteDatas(uint8_t reg,const uint8_t* pBuf,uint8_t count);
 
 void HT162X_Init(void);
 #endif

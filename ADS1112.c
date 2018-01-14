@@ -1,19 +1,18 @@
-#include "main.h"
 #include "ADS1112.h"
 #ifdef SimI2C
 #include "SimI2C.h"
 #endif
-ushort_wf ADS1112_Result;
+u16_wf ADS1112_Result;
 _ADS1112_Status ADS1112_Status;
 #ifdef SimI2C
 void ADS1112_Init(void)
 {
 	SimI2C_Init();
 }
-unsigned char ADS1112_Read(void)
+uint8_t ADS1112_Read(void)
 {
-	unsigned char ErrTimes=ADS1112_RetryCount;	
-	unsigned char bRight=0;
+	uint8_t ErrTimes=ADS1112_RetryCount;	
+	uint8_t bRight=0;
 	while(ErrTimes--)
 	{
 		SimI2C_Start();		
@@ -33,10 +32,10 @@ unsigned char ADS1112_Read(void)
 	SimI2C_Stop();
 	return bRight;
 }
-unsigned char ADS1112_Write()
+uint8_t ADS1112_Write()
 {
-	unsigned char ErrTimes=ADS1112_RetryCount;
-	unsigned char bRight=0;	
+	uint8_t ErrTimes=ADS1112_RetryCount;
+	uint8_t bRight=0;	
 	while(ErrTimes--)
 	{
 		SimI2C_Start();		

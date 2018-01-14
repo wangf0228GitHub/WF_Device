@@ -2,15 +2,15 @@
 #include "SimI2C.h"
 #include "TypeDefine.h"
 #include "SHT25.h"
-unsigned int SHT25_T;//放大100倍后的温度
-unsigned int SHT25_RH;//放大100倍后的湿度
-unsigned char SHT25_bErrT;
-unsigned char SHT25_bErrRH;
+uint16_t SHT25_T;//放大100倍后的温度
+uint16_t SHT25_RH;//放大100倍后的湿度
+uint8_t SHT25_bErrT;
+uint8_t SHT25_bErrRH;
 #ifdef SHT25_HOLDREAD
-unsigned int SHT25_HoldRead(unsigned char cmd)
+uint16_t SHT25_HoldRead(uint8_t cmd)
 {
 	uint SHT25_Data;
-	unsigned char sum;
+	uint8_t sum;
 #ifdef SHT25_SimI2C
 	SimI2C_Start();
 	SimI2C_SendByte(SHT25_ADDR_W);//写
@@ -35,10 +35,10 @@ unsigned int SHT25_HoldRead(unsigned char cmd)
 	return SHT25_Data.u16;
 }
 #else
-unsigned int SHT25_NoHoldRead(unsigned char cmd)
+uint16_t SHT25_NoHoldRead(uint8_t cmd)
 {
 	uint SHT25_Data;
-	//unsigned char sum;
+	//uint8_t sum;
 #ifdef SHT25_SimI2C
 	SimI2C_Start();
 	SimI2C_SendByte(SHT25_ADDR_W);//写
@@ -63,15 +63,15 @@ unsigned int SHT25_NoHoldRead(unsigned char cmd)
 	SimI2C_NoAck();
 	SimI2C_Stop();
 #endif	
-	//if((unsigned char)(SHT25_Data.u8s[1],SHT25_Data.u8s[0])==sum)
+	//if((uint8_t)(SHT25_Data.u8s[1],SHT25_Data.u8s[0])==sum)
 		return SHT25_Data.u16;
 	//else
 	//	return FALSE;
 }
 #endif
-unsigned char SHT25_GetUserReg(void)
+uint8_t SHT25_GetUserReg(void)
 {
-	unsigned char x;
+	uint8_t x;
 #ifdef SHT25_SimI2C
 	SimI2C_Start();
 	SimI2C_SendByte(SHT25_ADDR_W);//写
@@ -95,8 +95,8 @@ unsigned char SHT25_GetUserReg(void)
 
 void SHT25_GetT(void)
 {
-	unsigned int St;
-	unsigned long t;
+	uint16_t St;
+	uint32_t t;
 	SHT25_bErrT=0;
 #ifdef SHT25_HOLDREAD
 	St=SHT25_HoldRead(SHT25_HoldT);
@@ -110,15 +110,15 @@ void SHT25_GetT(void)
 		return;
 	}	
 	St=St&0xfffc;
-	t=(unsigned long)St*17572;
+	t=(uint32_t)St*17572;
 	t=t>>16;
 	t=t-4685;
-	SHT25_T=(unsigned int)t;
+	SHT25_T=(uint16_t)t;
 }
 void SHT25_GetRH(void)
 {
-	unsigned int Srh;
-	unsigned long rh;
+	uint16_t Srh;
+	uint32_t rh;
 	SHT25_bErrRH=0;
 #ifdef SHT25_HOLDREAD
 	Srh=SHT25_HoldRead(SHT25_HoldRH);
@@ -132,12 +132,12 @@ void SHT25_GetRH(void)
 		return;
 	}
 	Srh=Srh&0xfffc;
-	rh=(unsigned long)Srh*12500;
+	rh=(uint32_t)Srh*12500;
 	rh=rh>>16;
 	rh=rh-600;
-	SHT25_RH=(unsigned int)rh;
+	SHT25_RH=(uint16_t)rh;
 }
-unsigned char SHT25_Reset(void)
+uint8_t SHT25_Reset(void)
 {
 #ifdef SHT25_SimI2C
 	SimI2C_Start();

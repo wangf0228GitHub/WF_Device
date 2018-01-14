@@ -7,7 +7,7 @@ typedef union
 	{
 		unsigned bRx:1;
 	};
-	unsigned char AllFlag;
+	uint8_t AllFlag;
 } _NMEA0183_Flags;        // general flags
 
 extern _NMEA0183_Flags NMEA0183_Flags;
@@ -18,8 +18,8 @@ extern _NMEA0183_Flags NMEA0183_Flags;
 #endif
 
 extern char NMEA0183_RxBuf[NMEA0183_RxBufSize];
-extern unsigned char NMEA0183_RxCount;
+extern uint8_t NMEA0183_RxCount;
 void NMEA0183_Init(void);
-void NMEA0183_RxProc(unsigned char rx);
-unsigned char NMEA0183_Verify(void);
+void NMEA0183_RxProc(uint8_t rx);
+uint8_t NMEA0183_Verify(void);
 #endif // NMEA0183_h__

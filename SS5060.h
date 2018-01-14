@@ -12,7 +12,7 @@
 uint SS5060_RegReadResualt;
 
 void SS5060_Init(void);
-unsigned char SS5060_ReadReg(void);
-unsigned char SS5060_Setting(unsigned char x);
-unsigned char SS5060_GetResult(unsigned char x);
+uint8_t SS5060_ReadReg(void);
+uint8_t SS5060_Setting(uint8_t x);
+uint8_t SS5060_GetResult(uint8_t x);
 #endif

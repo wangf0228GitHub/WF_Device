@@ -1,10 +1,9 @@
-#include "HardwareProfile.h"
 #include "OneWire.h"
 
 
-unsigned char OneWire_Reset(void)
+uint8_t OneWire_Reset(void)
 {
-	unsigned char r,Retry;
+	uint8_t r,Retry;
 	r=1;
 	Retry=TIMESFORRETRY_OneWire;
 	while(Retry--)
@@ -25,10 +24,10 @@ unsigned char OneWire_Reset(void)
 	return r;	
 }
 #ifdef OneWire_MAXSENSORS
-unsigned char OneWire_RomSearch( unsigned char diff, unsigned char *id )
+uint8_t OneWire_RomSearch( uint8_t diff, uint8_t *id )
 { 
-	unsigned char i, j, next_diff;
-	unsigned char b,b1;
+	uint8_t i, j, next_diff;
+	uint8_t b,b1;
 
 	if(OneWire_Reset())
 		return ONEWIRE_PRESENCE_ERR;
@@ -101,9 +100,9 @@ unsigned char OneWire_RomSearch( unsigned char diff, unsigned char *id )
 }
 
 
-unsigned char OneWire_Command( unsigned char command, unsigned char *id )
+uint8_t OneWire_Command( uint8_t command, uint8_t *id )
 {
-	unsigned char i;
+	uint8_t i;
 	if(OneWire_Reset())
 		return 0x01;	
 	if(id) 
@@ -122,7 +121,7 @@ unsigned char OneWire_Command( unsigned char command, unsigned char *id )
 	return 0x00;	
 }
 #else
-unsigned char OneWire_Command( unsigned char command)
+uint8_t OneWire_Command( uint8_t command)
 {
 	if(OneWire_Reset())
 		return 0x01;	
@@ -131,7 +130,7 @@ unsigned char OneWire_Command( unsigned char command)
 	return 0x00;	
 }
 #endif
-// void OneWire_WriteBit( unsigned char bitval )
+// void OneWire_WriteBit( uint8_t bitval )
 // {
 // 	di();
 // 	ONEWIRE_SETLOW();
@@ -145,9 +144,9 @@ unsigned char OneWire_Command( unsigned char command)
 // 	ei();
 // }
 // 
-unsigned char OneWire_ReadBit( void )
+uint8_t OneWire_ReadBit( void )
 {
-	unsigned char r;
+	uint8_t r;
 	di();
 	ONEWIRE_SETLOW;
 	__delay_us(2);
@@ -163,10 +162,10 @@ unsigned char OneWire_ReadBit( void )
  		return 1;
 }
 
-void OneWire_WriteByte( unsigned char val )
+void OneWire_WriteByte( uint8_t val )
 {
-	unsigned char i;
-	unsigned char temp;
+	uint8_t i;
+	uint8_t temp;
 	for (i=0;i<8;i++)
 	{
 		temp=val>>i;
@@ -186,11 +185,11 @@ void OneWire_WriteByte( unsigned char val )
 	//__delay_us(1);
 }
 
-unsigned char OneWire_ReadByte( void )
+uint8_t OneWire_ReadByte( void )
 {
-	unsigned char i;
-	unsigned char b;
-	unsigned char value=0;
+	uint8_t i;
+	uint8_t b;
+	uint8_t value=0;
 	for(i=0;i<8;i++)
 	{
 		di();

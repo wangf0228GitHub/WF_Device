@@ -377,19 +377,19 @@ typedef enum
 */
 void Si4463_Init(void);
 /*Read the PART_INFO of the device, 8 bytes needed*/
-void Si4463_PART_INFO( unsigned char *buffer );
+void Si4463_PART_INFO( uint8_t *buffer );
 
 /*Read the FUNC_INFO of the device, 7 bytes needed*/
-void Si4463_FUNC_INFO( unsigned char *buffer );
+void Si4463_FUNC_INFO( uint8_t *buffer );
 
 /*Send a command to the device*/
-void Si4463_CMD( unsigned char *cmd, unsigned char cmdsize );
+void Si4463_CMD( uint8_t *cmd, uint8_t cmdsize );
 
 /*Read the INT status of the device, 9 bytes needed*/
-void Si4463_INT_STATUS( unsigned char *buffer );
+void Si4463_INT_STATUS( uint8_t *buffer );
 
 /*Read the PROPERTY of the device*/
-void Si4463_GET_PROPERTY_X( Si4463_PROPERTY GROUP_NUM, unsigned char NUM_PROPS, unsigned char *buffer  );
+void Si4463_GET_PROPERTY_X( Si4463_PROPERTY GROUP_NUM, uint8_t NUM_PROPS, uint8_t *buffer  );
 
 /*configuration the device*/
 void Si4463_CONFIG_INIT( void );
@@ -398,45 +398,45 @@ void Si4463_CONFIG_INIT( void );
 void Si4463_RESET( void );
 
 /*write data to TX fifo*/
-void Si4463_W_TX_FIFO( unsigned char *txbuffer, unsigned char size );
+void Si4463_W_TX_FIFO( uint8_t *txbuffer, uint8_t size );
 
 /*start TX command*/
-void Si4463_START_TX( unsigned char channel, unsigned char condition, unsigned int tx_len );
+void Si4463_START_TX( uint8_t channel, uint8_t condition, uint16_t tx_len );
 
 /*read RX fifo*/
-unsigned char Si4463_READ_PACKET( unsigned char *buffer );
+uint8_t Si4463_READ_PACKET( uint8_t *buffer );
 
 /*start RX state*/
-void Si4463_START_RX( unsigned char channel, unsigned char condition, unsigned int rx_len,
-	unsigned char n_state1, unsigned char n_state2, unsigned char n_state3 );
+void Si4463_START_RX( uint8_t channel, uint8_t condition, uint16_t rx_len,
+	uint8_t n_state1, uint8_t n_state2, uint8_t n_state3 );
 
 /*read packet information*/
-void Si4463_PKT_INFO( unsigned char *buffer, unsigned char FIELD, unsigned int length, unsigned int diff_len );
+void Si4463_PKT_INFO( uint8_t *buffer, uint8_t FIELD, uint16_t length, uint16_t diff_len );
 
 /*read fifo information*/
-void Si4463_FIFO_INFO( unsigned char *buffer );
+void Si4463_FIFO_INFO( uint8_t *buffer );
 
 /*Power up the device*/
-void Si4463_POWER_UP(unsigned long f_xtal );
+void Si4463_POWER_UP(uint32_t f_xtal );
 
 /*send a packet*/
-void Si4463_SEND_PACKET( unsigned char *txbuffer, unsigned char size, unsigned char channel, unsigned char condition );
+void Si4463_SEND_PACKET( uint8_t *txbuffer, uint8_t size, uint8_t channel, uint8_t condition );
 
 /*Set the PROPERTY of the device*/
-void Si4463_SET_PROPERTY_X( Si4463_PROPERTY GROUP_NUM, unsigned char NUM_PROPS, unsigned char *PAR_BUFF );
+void Si4463_SET_PROPERTY_X( Si4463_PROPERTY GROUP_NUM, uint8_t NUM_PROPS, uint8_t *PAR_BUFF );
 
 /*config the CRC, PROPERTY 0x1200*/
-void Si4463_CRC_CONFIG( unsigned char PKT_CRC_CONFIG );
+void Si4463_CRC_CONFIG( uint8_t PKT_CRC_CONFIG );
 
 /*Get the PROPERTY of the device, only 1 byte*/
-unsigned char Si4463_GET_PROPERTY_1( Si4463_PROPERTY GROUP_NUM );
+uint8_t Si4463_GET_PROPERTY_1( Si4463_PROPERTY GROUP_NUM );
 
 /*Set the PROPERTY of the device, only 1 byte*/
-void Si4463_SET_PROPERTY_1( Si4463_PROPERTY GROUP_NUM, unsigned char proirity );
+void Si4463_SET_PROPERTY_1( Si4463_PROPERTY GROUP_NUM, uint8_t proirity );
 
 /*config the GPIOs, IRQ, SDO*/
-void Si4463_GPIO_CONFIG( unsigned char G0, unsigned char G1, unsigned char G2, unsigned char G3,
-	unsigned char IRQ, unsigned char SDO, unsigned char GEN_CONFIG );
+void Si4463_GPIO_CONFIG( uint8_t G0, uint8_t G1, uint8_t G2, uint8_t G3,
+	uint8_t IRQ, uint8_t SDO, uint8_t GEN_CONFIG );
 
 /*reset the RX FIFO of the device*/
 void Si4463_RX_FIFO_RESET( void );

@@ -23,25 +23,25 @@
 
 typedef union
 {	
-	unsigned char Times[10];
+	uint8_t Times[10];
 	struct
 	{
-		unsigned char Second;
-		unsigned char SecondAlarm;
-		unsigned char Minute;
-		unsigned char MinuteAlarm;
-		unsigned char Hour;
-		unsigned char HourAlarm;
-		unsigned char Week;
-		unsigned char Day;
-		unsigned char Month;
-		unsigned char Year;
+		uint8_t Second;
+		uint8_t SecondAlarm;
+		uint8_t Minute;
+		uint8_t MinuteAlarm;
+		uint8_t Hour;
+		uint8_t HourAlarm;
+		uint8_t Week;
+		uint8_t Day;
+		uint8_t Month;
+		uint8_t Year;
 	};	
 }DS12C887_TIME;
 extern DS12C887_TIME DS12C887_Time;
 void DS12C887_Init(void); 
-unsigned char DS12C887_ReadByte(unsigned char reg);
-void DS12C887_WriteByte(unsigned char reg,unsigned char c);
+uint8_t DS12C887_ReadByte(uint8_t reg);
+void DS12C887_WriteByte(uint8_t reg,uint8_t c);
 void DS12C887_GetTime(void);
 void DS12C887_SetTime(void);
 void DS12C887_GetAlarm(void);

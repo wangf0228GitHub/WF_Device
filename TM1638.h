@@ -10,9 +10,9 @@
 // #define TM1638_DIO_IO   RB1  
 extern ulong TM1638_KeyValue;
 void TM1638_Init(void);
-void TM1638_WriteCommand(unsigned char c);
-void TM1638_WriteData(unsigned char addr,unsigned char d);
-void TM1638_WriteDatas(unsigned char addr,unsigned char* d,unsigned char count);
+void TM1638_WriteCommand(uint8_t c);
+void TM1638_WriteData(uint8_t addr,uint8_t d);
+void TM1638_WriteDatas(uint8_t addr,uint8_t* d,uint8_t count);
 void TM1638_ReadKey(void);
 #endif // __TM1638_h__
 

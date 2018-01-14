@@ -29,7 +29,7 @@
 #define LCD160X_A_CURFLA	0x0F		// 打开光标闪烁
 
 // #ifndef LCD160X_LineStart
-// const unsigned char LCD160X_LineStart[4]={0x80,0x90,0x88,0x98};
+// const uint8_t LCD160X_LineStart[4]={0x80,0x90,0x88,0x98};
 // #endif
 
 #define LCD160X_OFF() LCD160X_Write(LCD160X_COMMAND,0x08)  //关显示
@@ -37,33 +37,33 @@
 /*------------------初始化-----------------*/
 void LCD160X_Init(void);
 /*---------------显示汉字或字符----------------*/
-void LCD160X_DispString(unsigned char X,unsigned char Y,const char *pString);
-void LCD160X_DispOneChar(unsigned char Addr,unsigned char c);
-void LCD160X_DispOneCharByXY(unsigned char X,unsigned char Y,unsigned char c);
+void LCD160X_DispString(uint8_t X,uint8_t Y,const char *pString);
+void LCD160X_DispOneChar(uint8_t Addr,uint8_t c);
+void LCD160X_DispOneCharByXY(uint8_t X,uint8_t Y,uint8_t c);
 /************************************************************************/
 /* 光标动作                                                             */
 /************************************************************************/
 void LCD160X_CurLeft(void);
 void LCD160X_CurRight(void);
-void LCD160X_CurShowByAddr(unsigned char Addr,unsigned char bFlicker);
-void LCD160X_CurShowByXY(unsigned char X,unsigned char Y,unsigned char bFlicker );
+void LCD160X_CurShowByAddr(uint8_t Addr,uint8_t bFlicker);
+void LCD160X_CurShowByXY(uint8_t X,uint8_t Y,uint8_t bFlicker );
 void LCD160X_CurHide(void);
 /*--------------清DDRAM------------------*/
 void LCD160X_ClrRam(void);
 
 #ifdef LCD160X_CGRAMADDR
-void LCD160X_DispCGRAM(unsigned char X,unsigned char Y,unsigned char nIndex);
+void LCD160X_DispCGRAM(uint8_t X,uint8_t Y,uint8_t nIndex);
 void Lcd1602_InitCGRAM(const char  *pC);
 #endif
 
-void LCD160X_Write(unsigned char dat_comm,unsigned char content);
+void LCD160X_Write(uint8_t dat_comm,uint8_t content);
 
 /************************************************************************/
 /* 绘图相关                                                             */
 /************************************************************************/
-void LCD160X_ShowHZ16x16(unsigned char x,unsigned char y,const unsigned char* zm);
-void LCD160X_ShowHZ8x16(unsigned char x,unsigned char y,const unsigned char* zm1,const unsigned char* zm2);
-void LCD160X_ShowPicByXY(unsigned char x,unsigned char y,unsigned char Width,unsigned char Height,const unsigned char* Pic);
-void LCD160X_ShowFullByXY(unsigned char x,unsigned char y,unsigned char Width,unsigned char Height,unsigned char fc);
+void LCD160X_ShowHZ16x16(uint8_t x,uint8_t y,const uint8_t* zm);
+void LCD160X_ShowHZ8x16(uint8_t x,uint8_t y,const uint8_t* zm1,const uint8_t* zm2);
+void LCD160X_ShowPicByXY(uint8_t x,uint8_t y,uint8_t Width,uint8_t Height,const uint8_t* Pic);
+void LCD160X_ShowFullByXY(uint8_t x,uint8_t y,uint8_t Width,uint8_t Height,uint8_t fc);
 #endif
 

@@ -1,17 +1,17 @@
 #include "HardwareProfile.h"
 
-unsigned int MS5803_02ba_c1;
-unsigned int MS5803_02ba_c2;
-unsigned int MS5803_02ba_c3;
-unsigned int MS5803_02ba_c4;
-unsigned int MS5803_02ba_c5;
-unsigned int MS5803_02ba_c6;
-unsigned long MS5803_02ba_T;
+uint16_t MS5803_02ba_c1;
+uint16_t MS5803_02ba_c2;
+uint16_t MS5803_02ba_c3;
+uint16_t MS5803_02ba_c4;
+uint16_t MS5803_02ba_c5;
+uint16_t MS5803_02ba_c6;
+uint32_t MS5803_02ba_T;
 #ifdef MS5803_02ba_SimI2C
-unsigned long MS5803_02ba_GetParam(unsigned char param)
+uint32_t MS5803_02ba_GetParam(uint8_t param)
 {
 	ulong t;
-	unsigned char i,x;
+	uint8_t i,x;
 	t.u32=0;
 	SimI2C_Start();
 	SimI2C_SendByte(MS5803_02ba_ADDR_W);//д
@@ -46,7 +46,7 @@ unsigned long MS5803_02ba_GetParam(unsigned char param)
 	SimI2C_Stop();
 	return t.u32;
 }
-unsigned char MS5803_02ba_Reset(void)
+uint8_t MS5803_02ba_Reset(void)
 {
 	SimI2C_Start();
 	SimI2C_SendByte(MS5803_02ba_ADDR_W);//д
@@ -58,9 +58,9 @@ unsigned char MS5803_02ba_Reset(void)
 	SimI2C_Stop();
 	return true;
 }
-unsigned char MS5803_02ba_GetCx(void)
+uint8_t MS5803_02ba_GetCx(void)
 {	
-	unsigned char i,j,param;
+	uint8_t i,j,param;
 	uint c[7];
 	for(i=0;i<7;i++)
 		c[i].u16=0;	
@@ -95,10 +95,10 @@ unsigned char MS5803_02ba_GetCx(void)
 }
 #else
 #define MS5803_02ba_CLK() MS5803_02ba_SCLK=0;__delay_us(1);MS5803_02ba_SCLK=1;__delay_us(1)
-unsigned long MS5803_02ba_GetParam(unsigned char param)
+uint32_t MS5803_02ba_GetParam(uint8_t param)
 {
-	unsigned long t;
-	unsigned char i,x;
+	uint32_t t;
+	uint8_t i,x;
 	t=0;
 	x=param;
 	MS5803_02ba_CSB=0;
@@ -141,7 +141,7 @@ unsigned long MS5803_02ba_GetParam(unsigned char param)
 }
 void MS5803_02ba_Reset(void)
 {
-	unsigned char i,param;
+	uint8_t i,param;
 	param=MS5803_02ba_RESET;
 	MS5803_02ba_CSB=0;
 	__delay_us(1);
@@ -161,8 +161,8 @@ void MS5803_02ba_Reset(void)
 }
 void MS5803_02ba_GetCx(void)
 {	
-	unsigned char i,j,param;
-	unsigned int c[7];
+	uint8_t i,j,param;
+	uint16_t c[7];
 	for(i=0;i<7;i++)
 		c[i]=0;	
 	for(i=6;i>0;i--)
@@ -200,18 +200,18 @@ void MS5803_02ba_GetCx(void)
 	MS5803_02ba_c6=c[6];
 }
 #endif
-unsigned long MS5803_02ba_Calculate(void)
+uint32_t MS5803_02ba_Calculate(void)
 {
-	unsigned long t,pp;
-	unsigned long Tref,dT,OFF2,SENS2;
+	uint32_t t,pp;
+	uint32_t Tref,dT,OFF2,SENS2;
 	u64 OFF,SENS,P,x64;	
 	OFF2=0;
 	SENS2=0;
 	pp=MS5803_02ba_GetParam(MS5803_02ba_Convert_D1_4096);
 	t=MS5803_02ba_GetParam(MS5803_02ba_Convert_D2_4096);
 
-	Tref=((unsigned long)MS5803_02ba_c5)<<8;
-	x64=u64_shl(u64_lo((unsigned long)MS5803_02ba_c2),17);
+	Tref=((uint32_t)MS5803_02ba_c5)<<8;
+	x64=u64_shl(u64_lo((uint32_t)MS5803_02ba_c2),17);
 	if(t>Tref)//dT>0
 	{
 		dT=t-Tref;
@@ -223,7 +223,7 @@ unsigned long MS5803_02ba_Calculate(void)
 		OFF=u64_plus(OFF,x64.hi,x64.lo);
 		SENS=u64_lmul(MS5803_02ba_c3,dT);
 		SENS=u64_shr(SENS,7);		
-		SENS=u64_plus(SENS,0,((unsigned long)MS5803_02ba_c1)<<16);
+		SENS=u64_plus(SENS,0,((uint32_t)MS5803_02ba_c1)<<16);
 		P=u64_plus(OFF,SENS.hi,SENS.lo);
 	}
 	else//dT<0
@@ -251,7 +251,7 @@ unsigned long MS5803_02ba_Calculate(void)
 		OFF=u64_decrease(OFF,x64.hi,x64.lo);
 		SENS=u64_lmul(MS5803_02ba_c3,dT);
 		SENS=u64_shr(SENS,7);
-		SENS=u64_decrease(SENS,0,(unsigned long)MS5803_02ba_c1<<16);
+		SENS=u64_decrease(SENS,0,(uint32_t)MS5803_02ba_c1<<16);
 		OFF=u64_decrease(OFF,0,OFF2);
 		SENS=u64_decrease(SENS,0,SENS2);
 	}

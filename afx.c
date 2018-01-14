@@ -1,10 +1,9 @@
-#include "HardwareProfile.h"
 #include "afx.h"
 #include "TypeDefine.h"
 #ifdef MCC30
-unsigned char wCPU_IPL;
+uint8_t wCPU_IPL;
 #endif
-void __delay_20ms(unsigned int x)
+void __delay_20ms(uint16_t x)
 {
 	while(x--)
 	{
@@ -12,9 +11,9 @@ void __delay_20ms(unsigned int x)
 	}
 }
 
-unsigned char BCD2Char(unsigned char bcd)
+uint8_t BCD2Char(uint8_t bcd)
 {
-	unsigned char h,l,n;
+	uint8_t h,l,n;
 	h=HIGH_NIBBLE(bcd);
 	l=LOW_NIBBLE(bcd);
 	n=h*10;
@@ -22,12 +21,12 @@ unsigned char BCD2Char(unsigned char bcd)
 	return n;
 }
 //没有之前的无用0
-void Int2BCD_Array_NoH0(unsigned int Value,unsigned char* Buffer)
+void Int2BCD_Array_NoH0(uint16_t Value,uint8_t* Buffer)
 {
-	unsigned char i;
-	unsigned int Digit;
-	unsigned int Divisor;
-	unsigned char Printed = 0;
+	uint8_t i;
+	uint16_t Digit;
+	uint16_t Divisor;
+	uint8_t Printed = 0;
 
 	if(Value)
 	{
@@ -49,10 +48,10 @@ void Int2BCD_Array_NoH0(unsigned int Value,unsigned char* Buffer)
 	}
 	*Buffer = '\0';
 }
-unsigned long Long2BCD(unsigned long l)
+uint32_t Long2BCD(uint32_t l)
 {
-	ulong ret;
-	unsigned char x;
+	u32_wf ret;
+	uint8_t x;
 	ret.u32=0;
 	if(l>99999999)
 		return 0;
@@ -81,10 +80,10 @@ unsigned long Long2BCD(unsigned long l)
 	ret.u8s[0]=LOW_NIBBLE(x);
 	return ret.u32;
 }
-void Byte2ASCII(unsigned char b, unsigned char *h, unsigned char *l)
+void Byte2ASCII(uint8_t b, uint8_t *h, uint8_t *l)
 {
-	//h=(unsigned char)h;
-	//l=(unsigned char)l;
+	//h=(uint8_t)h;
+	//l=(uint8_t)l;
 	*h = HIGH_NIBBLE(b);
 	*l = LOW_NIBBLE(b);
 	if (*h > 9)
@@ -96,7 +95,7 @@ void Byte2ASCII(unsigned char b, unsigned char *h, unsigned char *l)
 	else
 		*l = *l + '0';
 }
-unsigned char ASCII2Byte_Capital(unsigned char h,unsigned char l)
+uint8_t ASCII2Byte_Capital(uint8_t h,uint8_t l)
 {
 	if(h>'9')
 		h=h-55;//-'A'+10;
@@ -108,7 +107,7 @@ unsigned char ASCII2Byte_Capital(unsigned char h,unsigned char l)
 		l=l-'0';
 	return MAKE_BYTE(h,l);
 }
-unsigned char ASCII2Byte_Lowercase(unsigned char h,unsigned char l)
+uint8_t ASCII2Byte_Lowercase(uint8_t h,uint8_t l)
 {
 	if(h>'9')
 		h=h-87;//-'a'+10;
@@ -121,9 +120,9 @@ unsigned char ASCII2Byte_Lowercase(unsigned char h,unsigned char l)
 	return MAKE_BYTE(h,l);
 }
 #ifdef WFRomOperation
-unsigned char GetRomData(void)
+uint8_t GetRomData(void)
 {
-	unsigned char i;	
+	uint8_t i;	
 	for(i=0;i<RomCount;i++)
 		RomParams.All[i]=eeprom_read(i);
 	i=GetVerify_Sum(&RomParams.All[1],RomCount-1);
@@ -137,7 +136,7 @@ unsigned char GetRomData(void)
 }
 void SaveRomData(void)
 {
-	unsigned char i;
+	uint8_t i;
 	RomParams.sum=GetVerify_Sum(&RomParams.All[1],RomCount-1);
 	RomParams.sum+=eeprom_offset;
 	for(i=0;i<RomCount;i++)
@@ -145,9 +144,9 @@ void SaveRomData(void)
 }
 #endif
 #ifdef WFRomOperation_OneByte
-unsigned char GetRomData(void)
+uint8_t GetRomData(void)
 {
-	unsigned char x,x1;	
+	uint8_t x,x1;	
 	x=eeprom_read(WFRomOneByteAddr);
 	x1=eeprom_read(WFRomOneByteAddr+1);
 	x1=~x1;

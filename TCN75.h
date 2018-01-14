@@ -1,6 +1,7 @@
 #ifndef __TCN75_h__
 #define __TCN75_h__
 
+#include "main.h"
 #ifndef TCN75_RetryCount
 #define TCN75_RetryCount 2
 #endif
@@ -18,7 +19,7 @@
 #define TCN75_MinPLL 0x299d
 #endif
 enum {TCN75_TEMP=0x00,TCN75_T_HYST=0x02,TCN75_T_SET=0x03};
-uint TCN75_RegReadResualt;
+u16_wf TCN75_RegReadResualt;
 typedef union   
 {
 	struct
@@ -30,12 +31,12 @@ typedef union
 		unsigned Resolution:2;
 		unsigned OneShot:1;
 	};
-	unsigned char AllFlag;
+	uint8_t AllFlag;
 } _TCN75_Config;        // general flags
 
 _TCN75_Config TCN75_Config;
 void TCN75_Init(void);
-unsigned char TCN75_ReadReg(unsigned char RegPoint);
-unsigned char TCN75_SetConfig(void);
-unsigned char TCN75_ReadConfig(void);
+uint8_t TCN75_ReadReg(uint8_t RegPoint);
+uint8_t TCN75_SetConfig(void);
+uint8_t TCN75_ReadConfig(void);
 #endif

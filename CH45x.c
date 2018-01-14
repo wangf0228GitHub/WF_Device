@@ -1,4 +1,4 @@
-#include "HardwareProfile.h"
+#include "CH45x.h"
 
 void CH45x_Init(void)
 {
@@ -27,9 +27,9 @@ void CH45x_Init(void)
 	CH45x_Write(CH45x_BCD);
 }
 //向CH45x写命令/数据函数
-void CH45x_Write(unsigned int command)
+void CH45x_Write(uint16_t command)
 {
-	unsigned char i;
+	uint8_t i;
 	CH45x_CloseINT();
 	CH45x_LOAD_W=0;                //命令开始       
 	for(i=0;i<12;i++)			 //送入12位数据，低位在前
@@ -48,10 +48,10 @@ void CH45x_Write(unsigned int command)
 }
 
 //从CH45x读取一个字节函数
-unsigned char CH45x_Read(void)
+uint8_t CH45x_Read(void)
 {
-	unsigned char i;
-	unsigned char command,keycode;     //定义命令字，和数据存储器
+	uint8_t i;
+	uint8_t command,keycode;     //定义命令字，和数据存储器
 	CH45x_CloseINT();
 	command=0x07;              		   //输入读451命令字 
 	CH45x_LOAD_W=0;

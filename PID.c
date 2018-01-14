@@ -8,7 +8,7 @@ void PID_Init(void)
 	PIDParam.PreErrorSum=0;
 	PIDParam.PreError=0;
 }
-unsigned char PIDCalc(void) 
+uint8_t PIDCalc(void) 
 {
 #ifdef PID_Debug
 	char PIDDebug[20];
@@ -70,7 +70,7 @@ void PID2_Init(void)
 	PID2Param.PreErrorSum=0;
 	PID2Param.PreError=0;
 }
-unsigned char PID2Calc(void) 
+uint8_t PID2Calc(void) 
 {
 #ifdef PID2_Debug
 	char PID2Debug[20];

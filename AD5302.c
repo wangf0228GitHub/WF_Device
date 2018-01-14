@@ -1,4 +1,4 @@
-#include "HardwareProfile.h"
+#include "AD5302.h"
 
 // #define AD5302_SCLK_DIR	TRISA1
 // #define AD5302_DIN_DIR	TRISA2
@@ -23,9 +23,9 @@ void AD5302_Init(void)
 	AD5302_DIN=1;
 }
 
-void AD5302_Setting(unsigned int set)
+void AD5302_Setting(uint16_t set)
 {
-	unsigned char i;	
+	uint8_t i;	
 	AD5302_SYNC=0;
 	for(i=0;i<16;i++)
 	{		

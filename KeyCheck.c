@@ -3,17 +3,17 @@
 #ifndef MatrixKeys
 
 #ifdef BigKeys
-unsigned int OldKey;
-unsigned int KeyCheck(void)
+uint16_t OldKey;
+uint16_t KeyCheck(void)
 #else
-unsigned char OldKey;
-unsigned char KeyCheck(void)
+uint8_t OldKey;
+uint8_t KeyCheck(void)
 #endif
 {
 #ifdef BigKeys
-	unsigned int x,key;
+	uint16_t x,key;
 #else
-	unsigned char x,key;
+	uint8_t x,key;
 #endif	
 	KeyCheck_ReadKey(key);	
 	if(key==KeyCheck_NoKey)
@@ -58,11 +58,11 @@ unsigned char KeyCheck(void)
 	}
 }
 #else
-unsigned char RowKeyValue;
-unsigned char ColKeyValue;
-unsigned char KeyCheck(void)
+uint8_t RowKeyValue;
+uint8_t ColKeyValue;
+uint8_t KeyCheck(void)
 {
-	unsigned char x,row,col;	
+	uint8_t x,row,col;	
 	KeyCheck_SetRow();
 	__delay_ms(1);
 	KeyCheck_ReadRow(row);	

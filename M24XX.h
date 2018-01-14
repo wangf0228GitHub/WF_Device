@@ -14,11 +14,11 @@
 void M24XX_Init(void);
 
 #ifdef M24XX_1024
-	unsigned char M24XX_Read(unsigned char *pBuff,unsigned int Count,unsigned long Address);
-	unsigned char M24XX_Write(unsigned char *pBuff,unsigned int Count,unsigned long Address);
+	uint8_t M24XX_Read(uint8_t *pBuff,uint16_t Count,uint32_t Address);
+	uint8_t M24XX_Write(uint8_t *pBuff,uint16_t Count,uint32_t Address);
 #else
-	unsigned char M24XX_Read(unsigned char *pBuff,unsigned int Count,unsigned int Address);
-	unsigned char M24XX_Write(unsigned char *pBuff,unsigned char Count,unsigned int Address);
+	uint8_t M24XX_Read(uint8_t *pBuff,uint16_t Count,uint16_t Address);
+	uint8_t M24XX_Write(uint8_t *pBuff,uint8_t Count,uint16_t Address);
 #endif
 
 #endif

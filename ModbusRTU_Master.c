@@ -1,15 +1,15 @@
 #include "HardwareProfile.h"
 #include "ModbusRTU_Master.h"
-unsigned char ModbusRTU_Master_RxList[MAX_ModbusRTU_Master_RX];
-unsigned char ModbusRTU_Master_RxCount;
-unsigned char ModbusRTU_Master_NeedRxCount;
-unsigned char ModbusRTU_Master_TargetAddr;
+uint8_t ModbusRTU_Master_RxList[MAX_ModbusRTU_Master_RX];
+uint8_t ModbusRTU_Master_RxCount;
+uint8_t ModbusRTU_Master_NeedRxCount;
+uint8_t ModbusRTU_Master_TargetAddr;
 //uint ModbusRTU_Master_FirstRegAddr;
-unsigned char ModbusRTU_Master_RetryTimes;
-unsigned int ModbusRTU_Master_WaitClientTick;
-unsigned int ModbusRTU_Master_WaitClientTime;
+uint8_t ModbusRTU_Master_RetryTimes;
+uint16_t ModbusRTU_Master_WaitClientTick;
+uint16_t ModbusRTU_Master_WaitClientTime;
 
-unsigned char CurCommand;//当前操作的指令号
+uint8_t CurCommand;//当前操作的指令号
 
 _ModbusRTU_Master_Flags ModbusRTU_Master_Flags;
 void Init_ModbusRTU_Master(void)
@@ -19,7 +19,7 @@ void Init_ModbusRTU_Master(void)
 	ModbusRTU_Master_WaitClientTime=3;
 }
 
-void ProcRx_ModbusRTU_Master(unsigned char rx)
+void ProcRx_ModbusRTU_Master(uint8_t rx)
 {
 	if(ModbusRTU_Master_Flags.bRx)//之前没处理完
 		return;
@@ -83,11 +83,11 @@ void ProcRx_ModbusRTU_Master(unsigned char rx)
 		}
 	}	
 }
-void ModbusRTU_Master_SendCommand16(unsigned int RegAddr,unsigned char *pBuff,unsigned char count)
+void ModbusRTU_Master_SendCommand16(uint16_t RegAddr,uint8_t *pBuff,uint8_t count)
 {
-	unsigned char i;
+	uint8_t i;
 	uint crc;	
-	unsigned char uIndex ; /* CRC循环中的索引 */
+	uint8_t uIndex ; /* CRC循环中的索引 */
 	crc.u16=0xffff;
 	CurCommand=0x10;
 	SetTx_ModbusRTU_Master();
@@ -107,13 +107,13 @@ void ModbusRTU_Master_SendCommand16(unsigned int RegAddr,unsigned char *pBuff,un
   	ModbusRTU_Master_TxByte(crc.u8L);
 	SetRx_ModbusRTU_Master();
 }
-unsigned char ModbusRTU_Master_ProcCommand16(unsigned int RegAddr,unsigned char* pBuff,unsigned int Count)
+uint8_t ModbusRTU_Master_ProcCommand16(uint16_t RegAddr,uint8_t* pBuff,uint16_t Count)
 {	
-	unsigned char i;
+	uint8_t i;
 	uint crc;	
-	unsigned char uIndex ; /* CRC循环中的索引 */
-	unsigned char retry;
-	unsigned char ret;	
+	uint8_t uIndex ; /* CRC循环中的索引 */
+	uint8_t retry;
+	uint8_t ret;	
 	CurCommand=0x10;
 	retry=ModbusRTU_Master_RetryTimes;
 	ret=0;
@@ -161,10 +161,10 @@ unsigned char ModbusRTU_Master_ProcCommand16(unsigned int RegAddr,unsigned char*
 	SetTx_ModbusRTU_Master();
 	return ret;
 }
-void ModbusRTU_Master_SendCommand03(unsigned int RegAddr,unsigned char count)
+void ModbusRTU_Master_SendCommand03(uint16_t RegAddr,uint8_t count)
 {
 	uint crc;	
-	unsigned char uIndex ; /* CRC循环中的索引 */
+	uint8_t uIndex ; /* CRC循环中的索引 */
 	crc.u16=0xffff;
 	CurCommand=0x03;
 	SetTx_ModbusRTU_Master();
@@ -178,12 +178,12 @@ void ModbusRTU_Master_SendCommand03(unsigned int RegAddr,unsigned char count)
 	ModbusRTU_Master_TxByte(crc.u8L);
 	SetRx_ModbusRTU_Master();
 }
-unsigned char ModbusRTU_Master_ProcCommand03(unsigned int RegAddr,unsigned char count)
+uint8_t ModbusRTU_Master_ProcCommand03(uint16_t RegAddr,uint8_t count)
 {
 	uint crc;	
-	unsigned char uIndex ; /* CRC循环中的索引 */
-	unsigned char retry;
-	unsigned char ret;	
+	uint8_t uIndex ; /* CRC循环中的索引 */
+	uint8_t retry;
+	uint8_t ret;	
 	CurCommand=0x03;
 	retry=ModbusRTU_Master_RetryTimes;
 	ret=0;
@@ -225,10 +225,10 @@ unsigned char ModbusRTU_Master_ProcCommand03(unsigned int RegAddr,unsigned char 
 	SetTx_ModbusRTU_Master();
 	return ret;
 }
-void ModbusRTU_Master_SendCommand04(unsigned int RegAddr,unsigned char count)
+void ModbusRTU_Master_SendCommand04(uint16_t RegAddr,uint8_t count)
 {
 	uint crc;	
-	unsigned char uIndex ; /* CRC循环中的索引 */
+	uint8_t uIndex ; /* CRC循环中的索引 */
 	crc.u16=0xffff;
 	CurCommand=0x04;
 	SetTx_ModbusRTU_Master();
@@ -242,12 +242,12 @@ void ModbusRTU_Master_SendCommand04(unsigned int RegAddr,unsigned char count)
 	ModbusRTU_Master_TxByte(crc.u8L);
 	SetRx_ModbusRTU_Master();
 }
-unsigned char ModbusRTU_Master_ProcCommand04(unsigned int RegAddr,unsigned char count)
+uint8_t ModbusRTU_Master_ProcCommand04(uint16_t RegAddr,uint8_t count)
 {
 	uint crc;	
-	unsigned char uIndex ; /* CRC循环中的索引 */
-	unsigned char retry;
-	unsigned char ret;	
+	uint8_t uIndex ; /* CRC循环中的索引 */
+	uint8_t retry;
+	uint8_t ret;	
 	CurCommand=0x04;
 	retry=ModbusRTU_Master_RetryTimes;
 	ret=0;

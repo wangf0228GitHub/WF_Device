@@ -3,9 +3,9 @@
 #include "DS1302.h"
 
 DS1302_TIME DS1302_Time;//秒;分;时;日;月;星期;年;
-void DS1302_WriteCommand(unsigned char cmd,unsigned char data);
-void DS1302_WriteByte(unsigned char tx);
-unsigned char DS1302_ReadByte(void);
+void DS1302_WriteCommand(uint8_t cmd,uint8_t data);
+void DS1302_WriteByte(uint8_t tx);
+uint8_t DS1302_ReadByte(void);
 //DS1302初始化函数
 void DS1302_Init()
 {
@@ -18,7 +18,7 @@ void DS1302_Init()
 	__delay_us(1);	
 }
 //写保护切换
-void DS1302_WP(unsigned char bWP)
+void DS1302_WP(uint8_t bWP)
 {
 	if(bWP==0)//可写
 	{
@@ -30,9 +30,9 @@ void DS1302_WP(unsigned char bWP)
 	}
 }
 //时钟开关切换
-void DS1302_Switch(unsigned char bStart)
+void DS1302_Switch(uint8_t bStart)
 {
-	unsigned char s;
+	uint8_t s;
 	DS1302_CE_W=1;//使能DS1302
 	DS1302_WriteByte(0x81);
 	s=DS1302_ReadByte();
@@ -53,7 +53,7 @@ void DS1302_Switch(unsigned char bStart)
 //设置时间函数
 void DS1302_SetTime()
 {
-	unsigned char i;	//定义循环变量
+	uint8_t i;	//定义循环变量
 	DS1302_Time.Hour &= 0x7f;//强行为24小时模式
 	DS1302_WP(0);//关闭写保护
 	DS1302_CE_W=1;	//使能DS1302
@@ -66,7 +66,7 @@ void DS1302_SetTime()
 	DS1302_CE_W=0;	//复位
 	DS1302_WP(1);//写保护
 }
-void DS1302_SetHour24(unsigned char b24)
+void DS1302_SetHour24(uint8_t b24)
 {
 	DS1302_GetTime();
 	if(b24==0x01)
@@ -87,7 +87,7 @@ void DS1302_SetHour24(unsigned char b24)
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&//
 void DS1302_GetTime()
 {
-	unsigned char i;//设置循环变量
+	uint8_t i;//设置循环变量
 	DS1302_CE_W=1;//使能DS1302
 	DS1302_WriteByte(0xbf);//发送多字节读取命令
 	for(i=0;i<7;i++)//连续读取7个字节数据
@@ -98,7 +98,7 @@ void DS1302_GetTime()
 }
 void DS1302_ReadTime(DS1302_TIME* t)
 {
-	unsigned char i;//设置循环变量
+	uint8_t i;//设置循环变量
 	DS1302_CE_W=1;//使能DS1302
 	DS1302_WriteByte(0xbf);//发送多字节读取命令
 	for(i=0;i<7;i++)//连续读取7个字节数据
@@ -109,7 +109,7 @@ void DS1302_ReadTime(DS1302_TIME* t)
 }
 //--------------------------------------------
 //写一个字节数据函数
-void DS1302_WriteCommand(unsigned char cmd,unsigned char data)
+void DS1302_WriteCommand(uint8_t cmd,uint8_t data)
 {
 	DS1302_CE_W=1;	//使能DS1302
 	__delay_us(1);
@@ -120,9 +120,9 @@ void DS1302_WriteCommand(unsigned char cmd,unsigned char data)
 }
 //--------------------------------------------
 //写一个字节数据函数
-void DS1302_WriteByte(unsigned char tx)
+void DS1302_WriteByte(uint8_t tx)
 {
-	unsigned char i;	//设置循环变量
+	uint8_t i;	//设置循环变量
 	for(i=0;i<8;i++)	//连续写8bit
 	{
 		__delay_us(1);
@@ -140,9 +140,9 @@ void DS1302_WriteByte(unsigned char tx)
 }
 //---------------------------------------------
 //读一个字节函数
-unsigned char DS1302_ReadByte(void)
+uint8_t DS1302_ReadByte(void)
 {
-	unsigned char i,rx=0;//设置循环变量
+	uint8_t i,rx=0;//设置循环变量
 	DS1302_DATA_IO=1;//设置数据口方向为输入
 	for(i=0;i<8;i++)//连续读取8bit
 	{
@@ -158,17 +158,17 @@ unsigned char DS1302_ReadByte(void)
 	DS1302_CLK_W=0;//拉低时钟信号
 	return(rx);//返回读取到的数据
 }
-unsigned char DS1302_GetMonth( void )
+uint8_t DS1302_GetMonth( void )
 {
-	unsigned char M;	
+	uint8_t M;	
 	M=DS1302_Time.Month&0x0f;
 	if(DS1302_Time.Month>0x0f)
 		M=M+10;
 	return M;
 }
-unsigned char DS1302_GetDay( void )
+uint8_t DS1302_GetDay( void )
 {
-	unsigned char D;
+	uint8_t D;
 	D=DS1302_Time.Day>>4;
 	switch(D)
 	{
@@ -188,9 +188,9 @@ unsigned char DS1302_GetDay( void )
 	return D;
 }
 
-unsigned char DS1302_GetHour24( void )
+uint8_t DS1302_GetHour24( void )
 {
-	unsigned char D;
+	uint8_t D;
 	D=DS1302_Time.Hour>>4;
 	switch(D)
 	{
@@ -206,9 +206,9 @@ unsigned char DS1302_GetHour24( void )
 	D=D+(DS1302_Time.Hour&0x0f);
 	return D;
 }
-unsigned char DS1302_GetMinute( void )
+uint8_t DS1302_GetMinute( void )
 {
-	unsigned char D;
+	uint8_t D;
 	D=DS1302_Time.Minute>>4;
 	switch(D)
 	{
@@ -234,9 +234,9 @@ unsigned char DS1302_GetMinute( void )
 	return D;
 }
 
-unsigned char DS1302_GetSecond( void )
+uint8_t DS1302_GetSecond( void )
 {
-	unsigned char D;
+	uint8_t D;
 	D=DS1302_Time.Second>>4;
 	D=D&0x07;
 	switch(D)
@@ -262,9 +262,9 @@ unsigned char DS1302_GetSecond( void )
 	D=D+(DS1302_Time.Second&0x0f);
 	return D;
 }
-unsigned char DS1302_GetNum(unsigned char x)
+uint8_t DS1302_GetNum(uint8_t x)
 {
-	unsigned char D;
+	uint8_t D;
 	D=x>>4;
 	switch(D)
 	{

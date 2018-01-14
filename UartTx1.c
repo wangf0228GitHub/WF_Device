@@ -1,8 +1,8 @@
 #include "HardwareProfile.h"
 //#define Uart1_BRGVAL ((FCY/Uart1_BAUDRATE)/4)-1
 
-unsigned char UartTxQueueBuf[UartTxQueue_BufLen];
-unsigned char *pInUartTxQueueBuf, *pOutUartTxQueueBuf;
+uint8_t UartTxQueueBuf[UartTxQueue_BufLen];
+uint8_t *pInUartTxQueueBuf, *pOutUartTxQueueBuf;
 void UartTxQueue_TxStart()
 {	
 	if (Uart_TXIF && !Uart_TXIE)        
@@ -20,9 +20,9 @@ void UartTxQueue_AddStr(const char* pt)
 		UartTxQueue_AddByte(*p++);
 	}
 }
-void UartTxQueue_AddByte(unsigned char tx)
+void UartTxQueue_AddByte(uint8_t tx)
 {
-	unsigned char *d;
+	uint8_t *d;
 	d = pInUartTxQueueBuf;
 	d++;
 	if (d == (UartTxQueueBuf+UartTxQueue_BufLen))         //回绕
@@ -32,13 +32,13 @@ void UartTxQueue_AddByte(unsigned char tx)
 	pInUartTxQueueBuf = d;    //inTxBuf后移
 	UartTxQueue_TxStart();
 }
-void UartTxQueue_AddBytes(const void *tx, unsigned char size, unsigned int n)
+void UartTxQueue_AddBytes(const void *tx, uint8_t size, uint16_t n)
 {
-	unsigned int count = size * n;
-	unsigned char *s;
+	uint16_t count = size * n;
+	uint8_t *s;
 	if(count==0)
 		return;
-	s = (unsigned char*)tx;
+	s = (uint8_t*)tx;
 	while (count--)                         //逐个放入缓冲区
 	{
 		UartTxQueue_AddByte(*s++);

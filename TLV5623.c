@@ -15,9 +15,9 @@ void TLV5623_Init(void)
 	TLV5623_CS_W=1;
 #endif
 }
-void TLV5623_WriteData(unsigned char d)
+void TLV5623_WriteData(uint8_t d)
 {
-	unsigned char i;
+	uint8_t i;
 #ifdef TLV5623_CS_W
 	TLV5623_CS_W=0;
 	__delay_us(1);

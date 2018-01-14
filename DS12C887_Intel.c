@@ -88,7 +88,7 @@ void DS12C887_SetAlarmEx(DS12C887_TIME exTime)
 	DS12C887_WriteByte(DS12C887_MINUTE_ALARM,exTime.MinuteAlarm);
 	DS12C887_WriteByte(DS12C887_HOUR_ALARM,exTime.HourAlarm);	
 }
-void DS12C887_WriteByte(unsigned char reg,unsigned char c)
+void DS12C887_WriteByte(uint8_t reg,uint8_t c)
 {
 	DS12C887_CS_W=0;
 	__delay_us(1);
@@ -112,9 +112,9 @@ void DS12C887_WriteByte(unsigned char reg,unsigned char c)
 	DS12C887_ALE_W=1;
 	DS12C887_CS_W=1;
 }
-unsigned char DS12C887_ReadByte(unsigned char reg)
+uint8_t DS12C887_ReadByte(uint8_t reg)
 {	
-	unsigned char x;
+	uint8_t x;
 	DS12C887_CS_W=0;
 	__delay_us(1);
 #ifdef DS12C887_PORT_DIR
@@ -150,7 +150,7 @@ unsigned char DS12C887_ReadByte(unsigned char reg)
 }
 void DS12C887_Wait( void )
 {
-	unsigned char x;
+	uint8_t x;
 	while(1)
 	{
 		x=DS12C887_ReadByte(DS12C887_REGA);

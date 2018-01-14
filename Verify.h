@@ -23,7 +23,7 @@ uint8_t GetVerify_CRC8(uint8_t* pBuff, uint32_t Count);
 	crc.u8L = auchCRCLo[uIndex] ;
 extern const uint8_t auchCRCHi[];
 extern const uint8_t auchCRCLo[];
-ushort_wf GetVerify_CRC16(uint8_t *puchMsg,uint32_t usDataLen);
+u16_wf GetVerify_CRC16(uint8_t *puchMsg,uint32_t usDataLen);
 
 #ifndef Verify_CRC16_Init
 #define Verify_CRC16_Init 0xffff

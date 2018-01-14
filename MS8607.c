@@ -11,7 +11,7 @@
 #define TEMP_COEFF_OF_TEMPERATURE_INDEX 6
 #define COEFFICIENT_NUMBERS 7
 
-// unsigned char MS8607_reset(void) 
+// uint8_t MS8607_reset(void) 
 // {
 // 	status = hsensor_reset();
 // 	if (status != ms8607_status_ok)
@@ -34,8 +34,8 @@
 #endif
 #define MS8607_PT_Addr 0xec //0x76
 #define MS8607_RH_Addr 0x80 //0x40
-unsigned char MS8607_Buf[10];
-unsigned int MS8607_eeprom[8];
+uint8_t MS8607_Buf[10];
+uint16_t MS8607_eeprom[8];
 _MS8607_Flags MS8607_Flags;
 ulong MS8607_adcT;
 ulong MS8607_adcP;
@@ -43,9 +43,9 @@ uint MS8607_adcRH;
 float32 MS8607_Temperature;
 float32 MS8607_Pressure;
 float32 MS8607_RH;
-unsigned char MS8607_Geteeprom(void);
-unsigned char MS8607_I2CRead(unsigned char Addr,unsigned char NeedReadLen);
-unsigned char MS8607_Init(void)
+uint8_t MS8607_Geteeprom(void);
+uint8_t MS8607_I2CRead(uint8_t Addr,uint8_t NeedReadLen);
+uint8_t MS8607_Init(void)
 {
 	MS8607_Flags.bInit=0;
 	MS8607_Flags.bHold=1;
@@ -108,9 +108,9 @@ void MS8607_CalculatePT(void)
 	MS8607_Temperature.f32 = ((float)TEMP - T2) / 100;
 	MS8607_Pressure.f32 = (float)P / 100;
 }
-unsigned char MS8607_ReadPT(unsigned char resolution_osr)
+uint8_t MS8607_ReadPT(uint8_t resolution_osr)
 {
-	unsigned char cmd=resolution_osr<<1;
+	uint8_t cmd=resolution_osr<<1;
 	cmd |= 0x50;//
 	if(MS8607_I2CProc(MS8607_PT_Addr,cmd,0)==0)
 		return 0;
@@ -139,7 +139,7 @@ unsigned char MS8607_ReadPT(unsigned char resolution_osr)
 	MS8607_CalculatePT();
 	return 1;
 }
-unsigned char MS8607_ReadRH(void)
+uint8_t MS8607_ReadRH(void)
 {
 	uint8_t crc;
 	uint32_t polynom = 0x988000; // x^8 + x^5 + x^4 + 1
@@ -189,10 +189,10 @@ unsigned char MS8607_ReadRH(void)
 	else
 		return 0;
 }
-unsigned char MS8607_CRCCheck(unsigned int* pBuf,unsigned char crc)
+uint8_t MS8607_CRCCheck(uint16_t* pBuf,uint8_t crc)
 {
-	unsigned char cnt, n_bit,h,l;
-	unsigned int n_rem;
+	uint8_t cnt, n_bit,h,l;
+	uint16_t n_rem;
 	n_rem = 0x00;	
 	for (cnt = 0; cnt < 8; cnt++) 
 	{
@@ -226,10 +226,10 @@ unsigned char MS8607_CRCCheck(unsigned int* pBuf,unsigned char crc)
 	else
 		return 0;
 }
-unsigned char MS8607_Geteeprom(void)
+uint8_t MS8607_Geteeprom(void)
 {
-	unsigned char i,crc;
-	unsigned int crc_read;
+	uint8_t i,crc;
+	uint16_t crc_read;
 	for(i=0;i<7;i++)
 	{
 		if(MS8607_I2CProc(MS8607_PT_Addr,0xa0+i * 2,2)==0)
@@ -248,9 +248,9 @@ unsigned char MS8607_Geteeprom(void)
 	MS8607_eeprom[0] = crc_read;
 	return 1;
 }
-unsigned char MS8607_I2CRead(unsigned char Addr,unsigned char NeedReadLen)
+uint8_t MS8607_I2CRead(uint8_t Addr,uint8_t NeedReadLen)
 {
-	unsigned char i;	
+	uint8_t i;	
 	I2C_Start();
 	I2C_SendByte(Addr|0x01);//¶Á
 	if(I2C_RecAck())
@@ -266,9 +266,9 @@ unsigned char MS8607_I2CRead(unsigned char Addr,unsigned char NeedReadLen)
 	I2C_Stop();
 	return 1;
 }
-unsigned char MS8607_I2CProc(unsigned char Addr,unsigned char Command,unsigned char NeedReadLen)
+uint8_t MS8607_I2CProc(uint8_t Addr,uint8_t Command,uint8_t NeedReadLen)
 {
-	unsigned char i;
+	uint8_t i;
 	I2C_Start();
 	I2C_SendByte(Addr);//Ð´
 	if(I2C_RecAck())

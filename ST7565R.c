@@ -1,7 +1,7 @@
 #include "HardwareProfile.h"
-void ST7565R_WriteCommand(unsigned char com)
+void ST7565R_WriteCommand(uint8_t com)
 { 
-	unsigned char i ;  
+	uint8_t i ;  
 	ST7565R_CS_W=0;  
 	ST7565R_CD_W=0;	
 	for(i=0;i<8;i++)
@@ -18,9 +18,9 @@ void ST7565R_WriteCommand(unsigned char com)
 	ST7565R_CD_W=1;
 }
 
-void ST7565R_WriteData(unsigned char dat)
+void ST7565R_WriteData(uint8_t dat)
 {  
-	unsigned char i;
+	uint8_t i;
 	ST7565R_CS_W=0;  
 	ST7565R_CD_W=1;
 
@@ -61,15 +61,15 @@ void ST7565R_Init(void)
 
 }
 /******************************************************************************** 
-函数名:Void ShowHZ16x16(unsigned Addr,unsigned int hzcode) 
+函数名:Void ShowHZ16x16(unsigned Addr,uint16_t hzcode) 
 函数功能：显示一个汉字(16*16点阵)
            Addr: 显示位置
         hzcode: 汉字代码(自定义的) 
 注:超出范围的将直接写到RAM中,可以实现卷屏效果????????
 ********************************************************************************/ 
-void ST7565R_ShowHZ16x16(unsigned char x,unsigned char y,const unsigned char* zm) 
+void ST7565R_ShowHZ16x16(uint8_t x,uint8_t y,const uint8_t* zm) 
 { 
-	unsigned char col,i;
+	uint8_t col,i;
  	col=x<<3;
  	ST7565R_ColOffset(col);
  	ST7565R_WriteCommand(0xb0+ST7565R_ComTable[y]);
@@ -83,21 +83,21 @@ void ST7565R_ShowHZ16x16(unsigned char x,unsigned char y,const unsigned char* zm
  	for(i=0;i<16;i++)
  		ST7565R_WriteData(*zm++);
 }
-void ST7565R_SetVop(unsigned char vop)
+void ST7565R_SetVop(uint8_t vop)
 {
 	ST7565R_WriteCommand(0x81);  // select resistor ratio Rb/Ra
  	ST7565R_WriteCommand(vop);  // select volume 
 }
  /******************************************************************************** 
- 函数名:Void ShowHZ16x16(unsigned Addr,unsigned int hzcode) 
+ 函数名:Void ShowHZ16x16(unsigned Addr,uint16_t hzcode) 
  函数功能：显示一个汉字(16*16点阵)
             Addr: 显示位置
          hzcode: 汉字代码(自定义的) 
  注:超出范围的将直接写到RAM中,可以实现卷屏效果????????
  ********************************************************************************/ 
- void ST7565R_ShowHZ8x16(unsigned char x,unsigned char y,const unsigned char* zm) 
+ void ST7565R_ShowHZ8x16(uint8_t x,uint8_t y,const uint8_t* zm) 
  { 
-	 unsigned char col,i;
+	 uint8_t col,i;
 	 col=x<<3;
 	 ST7565R_ColOffset(col);
 	 ST7565R_WriteCommand(0xb0+ST7565R_ComTable[y]);
@@ -111,9 +111,9 @@ void ST7565R_SetVop(unsigned char vop)
 	 for(i=0;i<8;i++)
 		 ST7565R_WriteData(*zm++);
  } 
- void ST7565R_ShowPicByXY(unsigned char x,unsigned char y,unsigned char Width,unsigned char Height,const unsigned char* Pic)
+ void ST7565R_ShowPicByXY(uint8_t x,uint8_t y,uint8_t Width,uint8_t Height,const uint8_t* Pic)
  {
-	 unsigned char col,i,j;
+	 uint8_t col,i,j;
 	 col=x<<3;
 	 ST7565R_ColOffset(col);
 	 Height=Height>>3;
@@ -126,9 +126,9 @@ void ST7565R_SetVop(unsigned char vop)
 			 ST7565R_WriteData(*Pic++);	
 	 }
  }
- void ST7565R_ShowFullByXY(unsigned char x,unsigned char y,unsigned char Width,unsigned char Height,unsigned char fc)
+ void ST7565R_ShowFullByXY(uint8_t x,uint8_t y,uint8_t Width,uint8_t Height,uint8_t fc)
  {
-	 unsigned char col,i,j;
+	 uint8_t col,i,j;
 	 col=x<<3;
 	 ST7565R_ColOffset(col);
 	 Height=Height>>3;
@@ -142,13 +142,13 @@ void ST7565R_SetVop(unsigned char vop)
 	 }
  }
  /********************************************************************************
- 函数名: Void ClearScreen(unsigned int ram)
+ 函数名: Void ClearScreen(uint16_t ram)
  函数功能: 清除整个屏幕
       ram : 需要清零的单元数
  ********************************************************************************/
  void ST7565R_ClearScreen(void)
  {
-	 unsigned char col,i;
+	 uint8_t col,i;
 	 for(i=0xb0;i<0xb8;i++)
 	 {
 		 ST7565R_WriteCommand(i);
@@ -158,9 +158,9 @@ void ST7565R_SetVop(unsigned char vop)
 			 ST7565R_WriteData(0);	
 	 }	 
  }
-// void ST7565R_ClearScreenEx(unsigned int start,unsigned int ram)
+// void ST7565R_ClearScreenEx(uint16_t start,uint16_t ram)
 // {
-// 	unsigned int i;
+// 	uint16_t i;
 // 	LCD_T6963_AutoWriteStart(start);          // 清显示 RAM 区 0000h--2000h (8k)     
 // 	for(i=0x00;i<ram;i++) 
 // 		LCD_T6963_AutoWriteData(0x00);        // data=0;
@@ -172,9 +172,9 @@ void ST7565R_SetVop(unsigned char vop)
 // 函数功能: IOPORT输出数据并检查LCD忙数据。
 // 返回数据：checkbusy
 // /********************************************************************************/
-// unsigned char ST7565R_ReadState()
+// uint8_t ST7565R_ReadState()
 // {
-// 	unsigned char state;
+// 	uint8_t state;
 // 	LCD_T6963_CD_W=1;    //控制字
 // #ifdef LCD_T6963_PORT_DIR
 // 	LCD_T6963_PORT_W=0xff;//输入

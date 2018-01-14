@@ -38,35 +38,35 @@ extern void initiate_write(void);
 #ifdef __J_PART
 // This buffer must align on a 1024 address boundary
 // This cannot exist in the final block of 1024 as this contains config stuff
-volatile const unsigned char _flash_buffer_j[_FLASH_ERASE_SIZE] @ FlashWriteBakAddr;
+volatile const uint8_t _flash_buffer_j[_FLASH_ERASE_SIZE] @ FlashWriteBakAddr;
 
 /* Simple helper function as this sequence is repeated through flash_write for J-parts */
-void transfer(unsigned int ix){
+void transfer(uint16_t ix){
 	asm("tblwt*");			// transfer a byte to flash holding regs
 	ix &= (_FLASH_WRITE_SIZE-1);
 	if(ix==0)
 		initiate_write();	// commit what we have to temp buffer
 }
 	
-void wf_flash_write(const unsigned char * source, unsigned int length, far unsigned char * dest){
-	unsigned int ix, offset;
-	volatile const unsigned char * ptr;
+void wf_flash_write(const uint8_t * source, uint16_t length, far uint8_t * dest){
+	uint16_t ix, offset;
+	volatile const uint8_t * ptr;
 #ifdef _OMNI_CODE_
-	unsigned char	saved_tblptrh;
-	unsigned char	saved_tblptru;
+	uint8_t	saved_tblptrh;
+	uint8_t	saved_tblptru;
 
 	saved_tblptrh = TBLPTRH;
 	saved_tblptru = TBLPTRU;
 #endif
 	
 	offset = ((int)(dest)) & (_FLASH_ERASE_SIZE-1);
-	dest = (unsigned char *)((unsigned long)dest & ~(_FLASH_ERASE_SIZE-1)); // point to start of destination erase buffer
+	dest = (uint8_t *)((uint32_t)dest & ~(_FLASH_ERASE_SIZE-1)); // point to start of destination erase buffer
 
 	while(length){
 		// align at start of erase block
 		ptr = dest;
 
-		TBLPTR = (unsigned char *)_flash_buffer_j;	// first erase the holding buffer
+		TBLPTR = (uint8_t *)_flash_buffer_j;	// first erase the holding buffer
 		FREE=1;
 		initiate_write();
 	
@@ -74,7 +74,7 @@ void wf_flash_write(const unsigned char * source, unsigned int length, far unsig
 			if(offset || (length==0)){	// not reading from source, read backup from dest
 				if(offset)
 					offset--;
-				TBLPTR=(unsigned char *)ptr;
+				TBLPTR=(uint8_t *)ptr;
 				asm("tblrd*");
 			}else{
 				TABLAT=*source++;	// reading from source
@@ -83,11 +83,11 @@ void wf_flash_write(const unsigned char * source, unsigned int length, far unsig
 			ptr++;
 
 			// TABLAT has byte of data, transfer to flash buffer
-			TBLPTR = (unsigned char *)&_flash_buffer_j[ix];
+			TBLPTR = (uint8_t *)&_flash_buffer_j[ix];
 			transfer(++ix);	// commit what we have to temp buffer
 		}
 
-		TBLPTR = (unsigned char *)dest;	// first erase the destination sector
+		TBLPTR = (uint8_t *)dest;	// first erase the destination sector
 		FREE=1;
 		initiate_write();
 		ptr = _flash_buffer_j;	// already linked to start of erase block
@@ -95,7 +95,7 @@ void wf_flash_write(const unsigned char * source, unsigned int length, far unsig
 		// transfer temporary buffer in flash to final destination.
 		for(ix=0; ix != _FLASH_ERASE_SIZE; ){
 			TABLAT = _flash_buffer_j[ix];	// read this byte from buffer
-			TBLPTR = (unsigned char *)dest++;	// point to destination
+			TBLPTR = (uint8_t *)dest++;	// point to destination
 			transfer(++ix);	// move from flash buffer to final destination
 		}
 	}
@@ -116,26 +116,26 @@ void wf_flash_write(const unsigned char * source, unsigned int length, far unsig
  #endif
 
 
-void wf_flash_write(const unsigned char * source_addr,unsigned int length,far unsigned char * dest_addr)
+void wf_flash_write(const uint8_t * source_addr,uint16_t length,far uint8_t * dest_addr)
 {
 	/* variable declaration */
 #ifdef _BUFFERED_WRITE
-	unsigned char BUFFER[_FLASH_ERASE_SIZE];
+	uint8_t BUFFER[_FLASH_ERASE_SIZE];
 #endif
-	unsigned char index;
-	unsigned char offset;
+	uint8_t index;
+	uint8_t offset;
 #if _ERRATA_TYPES & ERRATA_TBLWTINT
-	unsigned char saved1,saved3;
+	uint8_t saved1,saved3;
 #endif
 #ifdef _OMNI_CODE_
-	unsigned char	saved_tblptrh;
-	unsigned char	saved_tblptru;
+	uint8_t	saved_tblptrh;
+	uint8_t	saved_tblptru;
 
 	saved_tblptrh = TBLPTRH;
 	saved_tblptru = TBLPTRU;
 #endif
 
-	offset=(unsigned char)dest_addr & (_FLASH_ERASE_SIZE-1);	// find the index into the flash sector
+	offset=(uint8_t)dest_addr & (_FLASH_ERASE_SIZE-1);	// find the index into the flash sector
 	dest_addr-=offset;	// find the start address of the flash sector
 
 	TBLPTR=dest_addr;	// initially point to destination sector
@@ -164,7 +164,7 @@ void wf_flash_write(const unsigned char * source_addr,unsigned int length,far un
 
 // Erase destination sector before writing
 #ifdef _BUFFERED_WRITE
-		TBLPTRL=((unsigned char)dest_addr)&0xFF;  // start of erase section before erasure & short writes
+		TBLPTRL=((uint8_t)dest_addr)&0xFF;  // start of erase section before erasure & short writes
 #endif
 		EECON1=0x94;
 		initiate_write();

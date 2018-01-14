@@ -4,7 +4,7 @@
 void AS1080_Init(void)
 {
 	SimI2C_Init();
-	unsigned char i;
+	uint8_t i;
 	AS1080_SendByte(0x0F, 0x80);     	// Write Enable. The WR_EN register in bit 7 needs to be set to “1” before writing to any of the RW registers.
 	__delay_ms(2);
 	AS1080_SendByte(0x0C, 0x1F);        //set Register 0Ch = 1Fh (default is 09h) and 0Dh = 7Fh (default is 29h).  工作在快速检测状态
@@ -21,7 +21,7 @@ void AS1080_Init(void)
 	__delay_ms(20);
 }
 
-void AS1080_SendByte(unsigned char addr,unsigned char dat)
+void AS1080_SendByte(uint8_t addr,uint8_t dat)
 {
 	while(1)
 	{
@@ -40,9 +40,9 @@ void AS1080_SendByte(unsigned char addr,unsigned char dat)
 	}
 }
 
-unsigned char AS1080_ReadByte(unsigned char addr)
+uint8_t AS1080_ReadByte(uint8_t addr)
 {
-	unsigned char dat;
+	uint8_t dat;
 	while(1)
 	{
 		SimI2C_Start();

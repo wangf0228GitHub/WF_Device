@@ -34,7 +34,7 @@ INTPUT   : cmd, the buffer stores the command array
 OUTPUT   : NONE
 =================================================================================
 */
-void Si4463_CMD(unsigned char *cmd, unsigned char cmdsize )
+void Si4463_CMD(uint8_t *cmd, uint8_t cmdsize )
 {
     Si4463_WAIT_CTS( );
     Si4463_NSEL_W=0;
@@ -52,9 +52,9 @@ INTPUT   : f_xtal, the frequency of the external high-speed crystal
 OUTPUT   : NONE
 =================================================================================
 */
-void Si4463_POWER_UP(unsigned long f_xtal )
+void Si4463_POWER_UP(uint32_t f_xtal )
 {
-    unsigned char cmd[7];
+    uint8_t cmd[7];
     cmd[0] = POWER_UP;
     cmd[1] = 0x01;
     cmd[2] = 0x00;
@@ -73,7 +73,7 @@ INTPUT   : buffer,  a buffer, stores the data responsed
 OUTPUT   : NONE
 =================================================================================
 */
-void Si4463_READ_RESPONSE( unsigned char *buffer, unsigned char size )
+void Si4463_READ_RESPONSE( uint8_t *buffer, uint8_t size )
 {
     Si4463_WAIT_CTS( );
     Si4463_NSEL_W=0;
@@ -95,7 +95,7 @@ OUTPUT   : NONE
 */
 void Si4463_WAIT_CTS( void )
 {
-    unsigned char cts;
+    uint8_t cts;
     do
     {
         Si4463_NSEL_W=0;
@@ -112,9 +112,9 @@ INTPUT   : NONE
 OUTPUT   : NONE
 =================================================================================
 */
-unsigned char Si4463_NOP( void )
+uint8_t Si4463_NOP( void )
 {
-    unsigned char cts;
+    uint8_t cts;
     Si4463_NSEL_W=0;
     cts = Si4463_SPIProc( NOP );
     Si4463_NSEL_W=1;
@@ -129,9 +129,9 @@ INTPUT   : buffer, the buffer stores the part information
 OUTPUT   : NONE
 =================================================================================
 */
-void Si4463_PART_INFO( unsigned char *buffer )
+void Si4463_PART_INFO( uint8_t *buffer )
 {
-    unsigned char cmd = PART_INFO;
+    uint8_t cmd = PART_INFO;
 
     Si4463_CMD( &cmd, 1 );
     Si4463_READ_RESPONSE( buffer, 8 );
@@ -145,9 +145,9 @@ INTPUT   : buffer, the buffer stores the FUNC information
 OUTPUT   : NONE
 =================================================================================
 */
-void Si4463_FUNC_INFO( unsigned char *buffer )
+void Si4463_FUNC_INFO( uint8_t *buffer )
 {
-    unsigned char cmd = FUNC_INFO;
+    uint8_t cmd = FUNC_INFO;
 
     Si4463_CMD( &cmd, 1 );
     Si4463_READ_RESPONSE( buffer, 7 );
@@ -160,9 +160,9 @@ INTPUT   : buffer, the buffer stores the int status
 OUTPUT   : NONE
 =================================================================================
 */
-void Si4463_INT_STATUS( unsigned char *buffer )
+void Si4463_INT_STATUS( uint8_t *buffer )
 {
-    unsigned char cmd[4];
+    uint8_t cmd[4];
     cmd[0] = GET_INT_STATUS;
     cmd[1] = 0;
     cmd[2] = 0;
@@ -182,9 +182,9 @@ INTPUT   : buffer, the buffer stores the PROPERTY value
 OUTPUT   : NONE
 =================================================================================
 */
-void Si4463_GET_PROPERTY_X( Si4463_PROPERTY GROUP_NUM, unsigned char NUM_PROPS, unsigned char *buffer  )
+void Si4463_GET_PROPERTY_X( Si4463_PROPERTY GROUP_NUM, uint8_t NUM_PROPS, uint8_t *buffer  )
 {
-    unsigned char cmd[4];
+    uint8_t cmd[4];
 
     cmd[0] = GET_PROPERTY;
     cmd[1] = GROUP_NUM>>8;
@@ -204,9 +204,9 @@ INTPUT   : GROUP_NUM, the group and the number of the parameter
 OUTPUT   : NONE
 =================================================================================
 */
-void Si4463_SET_PROPERTY_X( Si4463_PROPERTY GROUP_NUM, unsigned char NUM_PROPS, unsigned char *PAR_BUFF )
+void Si4463_SET_PROPERTY_X( Si4463_PROPERTY GROUP_NUM, uint8_t NUM_PROPS, uint8_t *PAR_BUFF )
 {
-    unsigned char cmd[20], i = 0;
+    uint8_t cmd[20], i = 0;
     if( NUM_PROPS >= 16 )   { return; }
     cmd[i++] = SET_PROPERTY;
     cmd[i++] = GROUP_NUM>>8;
@@ -227,9 +227,9 @@ INTPUT   : GROUP_NUM, the group and number index
 OUTPUT   : NONE
 =================================================================================
 */
-void Si4463_SET_PROPERTY_1( Si4463_PROPERTY GROUP_NUM, unsigned char proirity )
+void Si4463_SET_PROPERTY_1( Si4463_PROPERTY GROUP_NUM, uint8_t proirity )
 {
-    unsigned char cmd[5];
+    uint8_t cmd[5];
 
     cmd[0] = SET_PROPERTY;
     cmd[1] = GROUP_NUM>>8;
@@ -246,9 +246,9 @@ INTPUT   : GROUP_NUM, the group and number index
 OUTPUT   : the PROPERTY value read from device
 =================================================================================
 */
-unsigned char Si4463_GET_PROPERTY_1( Si4463_PROPERTY GROUP_NUM )
+uint8_t Si4463_GET_PROPERTY_1( Si4463_PROPERTY GROUP_NUM )
 {
-    unsigned char cmd[4];
+    uint8_t cmd[4];
 
     cmd[0] = GET_PROPERTY;
     cmd[1] = GROUP_NUM>>8;
@@ -283,7 +283,7 @@ INTPUT   : txbuffer, a buffer stores TX array
 OUTPUT   : NONE
 =================================================================================
 */
-void Si4463_W_TX_FIFO( unsigned char *txbuffer, unsigned char size )
+void Si4463_W_TX_FIFO( uint8_t *txbuffer, uint8_t size )
 {
     Si4463_NSEL_W=0;
     Si4463_SPIProc( WRITE_TX_FIFO );
@@ -301,10 +301,10 @@ INTPUT   : txbuffer, a buffer stores TX array
 OUTPUT   : NONE
 =================================================================================
 */
-void Si4463_SEND_PACKET( unsigned char *txbuffer, unsigned char size, unsigned char channel, unsigned char condition )
+void Si4463_SEND_PACKET( uint8_t *txbuffer, uint8_t size, uint8_t channel, uint8_t condition )
 {
-    unsigned char cmd[5];
-    unsigned char tx_len = size;
+    uint8_t cmd[5];
+    uint8_t tx_len = size;
 
     Si4463_TX_FIFO_RESET( );
 
@@ -333,9 +333,9 @@ INTPUT   : channel, tx channel
 OUTPUT   : NONE
 =================================================================================
 */
-void Si4463_START_TX( unsigned char channel, unsigned char condition, unsigned int tx_len )
+void Si4463_START_TX( uint8_t channel, uint8_t condition, uint16_t tx_len )
 {
-    unsigned char cmd[5];
+    uint8_t cmd[5];
 
     cmd[0] = START_TX;
     cmd[1] = channel;
@@ -352,9 +352,9 @@ INTPUT   : buffer, a buffer to store data read
 OUTPUT   : received bytes
 =================================================================================
 */
-unsigned char Si4463_READ_PACKET( unsigned char *buffer )
+uint8_t Si4463_READ_PACKET( uint8_t *buffer )
 {
-    unsigned char length, i;
+    uint8_t length, i;
     Si4463_WAIT_CTS( );
     Si4463_NSEL_W=0;
 
@@ -386,10 +386,10 @@ INTPUT   : channel, receive channel
 OUTPUT   : NONE
 =================================================================================
 */
-void Si4463_START_RX( unsigned char channel, unsigned char condition, unsigned int rx_len,
-                      unsigned char n_state1, unsigned char n_state2, unsigned char n_state3 )
+void Si4463_START_RX( uint8_t channel, uint8_t condition, uint16_t rx_len,
+                      uint8_t n_state1, uint8_t n_state2, uint8_t n_state3 )
 {
-    unsigned char cmd[8];
+    uint8_t cmd[8];
     Si4463_RX_FIFO_RESET( );
     Si4463_TX_FIFO_RESET( );
     cmd[0] = START_RX;
@@ -412,7 +412,7 @@ OUTPUT   : NONE
 */
 void Si4463_RX_FIFO_RESET( void )
 {
-    unsigned char cmd[2];
+    uint8_t cmd[2];
 
     cmd[0] = FIFO_INFO;
     cmd[1] = 0x02;
@@ -428,7 +428,7 @@ OUTPUT   : NONE
 */
 void Si4463_TX_FIFO_RESET( void )
 {
-    unsigned char cmd[2];
+    uint8_t cmd[2];
 
     cmd[0] = FIFO_INFO;
     cmd[1] = 0x01;
@@ -445,9 +445,9 @@ INTPUT   : buffer, stores the read information
 OUTPUT   : NONE
 =================================================================================
 */
-void Si4463_PKT_INFO( unsigned char *buffer, unsigned char FIELD, unsigned int length, unsigned int diff_len )
+void Si4463_PKT_INFO( uint8_t *buffer, uint8_t FIELD, uint16_t length, uint16_t diff_len )
 {
-    unsigned char cmd[6];
+    uint8_t cmd[6];
     cmd[0] = PACKET_INFO;
     cmd[1] = FIELD;
     cmd[2] = length >> 8;
@@ -466,9 +466,9 @@ INTPUT   : buffer, stores the read information
 OUTPUT   : NONE
 =================================================================================
 */
-void Si4463_FIFO_INFO( unsigned char *buffer )
+void Si4463_FIFO_INFO( uint8_t *buffer )
 {
-    unsigned char cmd[2];
+    uint8_t cmd[2];
     cmd[0] = FIFO_INFO;
     cmd[1] = 0x03;
 
@@ -483,10 +483,10 @@ INTPUT   :
 OUTPUT   : NONE
 =================================================================================
 */
-void Si4463_GPIO_CONFIG( unsigned char G0, unsigned char G1, unsigned char G2, unsigned char G3,
-                         unsigned char IRQ, unsigned char SDO, unsigned char GEN_CONFIG )
+void Si4463_GPIO_CONFIG( uint8_t G0, uint8_t G1, uint8_t G2, uint8_t G3,
+                         uint8_t IRQ, uint8_t SDO, uint8_t GEN_CONFIG )
 {
-    unsigned char cmd[10];
+    uint8_t cmd[10];
     cmd[0] = GPIO_PIN_CFG;
     cmd[1] = G0;
     cmd[2] = G1;

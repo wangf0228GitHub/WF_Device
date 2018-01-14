@@ -11,9 +11,9 @@ void TM1638_Init(void)
 	TM1638_CLK=0;
 	TM1638_DIO=0;
 }
-void TM1638_WriteByte(unsigned char d)
+void TM1638_WriteByte(uint8_t d)
 {
-	unsigned char i;
+	uint8_t i;
 	for(i=0;i<8;i++)
 	{
 		TM1638_CLK=0;
@@ -26,14 +26,14 @@ void TM1638_WriteByte(unsigned char d)
 		TM1638_CLK=1;
 	}
 }
-void TM1638_WriteCommand(unsigned char c)
+void TM1638_WriteCommand(uint8_t c)
 {
 	TM1638_STB=0;
 	__delay_us(1);
 	TM1638_WriteByte(c);
 	TM1638_STB=1;
 }
-void TM1638_WriteData(unsigned char addr,unsigned char d)
+void TM1638_WriteData(uint8_t addr,uint8_t d)
 {
 	TM1638_WriteCommand(0x44);//固定地址写显示寄存器
 	TM1638_STB=0;
@@ -42,9 +42,9 @@ void TM1638_WriteData(unsigned char addr,unsigned char d)
 	TM1638_WriteByte(d);
 	TM1638_STB=1;
 }
-void TM1638_WriteDatas(unsigned char addr,unsigned char* d,unsigned char count)
+void TM1638_WriteDatas(uint8_t addr,uint8_t* d,uint8_t count)
 {
-	unsigned char i;
+	uint8_t i;
 	TM1638_WriteCommand(0x40);//增加地址写显示寄存器
 	TM1638_STB=0;
 	__delay_us(1);
@@ -53,10 +53,10 @@ void TM1638_WriteDatas(unsigned char addr,unsigned char* d,unsigned char count)
 		TM1638_WriteByte(d[i]);
 	TM1638_STB=1;
 }
-unsigned char TM1638_ReadByte(void)					//读数据函数
+uint8_t TM1638_ReadByte(void)					//读数据函数
 {
-	unsigned char i;
-	unsigned char temp=0;
+	uint8_t i;
+	uint8_t temp=0;
 	TM1638_DIO=1;	//设置为输入
 	for(i=0;i<8;i++)
 	{

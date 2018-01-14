@@ -12,7 +12,7 @@
 // #define LCM_DATALENGTH 4
 // #define LCM_INIT 0b00101001
 
-void LCM_WriteBit(unsigned char wb)   
+void LCM_WriteBit(uint8_t wb)   
 {  
 	if(wb==0)
 		LCM_DATA=0;
@@ -29,9 +29,9 @@ void LCM_WriteBit(unsigned char wb)
    	LCM_WR = 1;   
 }   
 //送控制字   
-void LCM_WriteCmd(unsigned char cmdcode)      
+void LCM_WriteCmd(uint8_t cmdcode)      
 {  
-	unsigned char i;   
+	uint8_t i;   
 	LCM_CS=1;   
 	LCM_CS=0;  
 	LCM_WriteBit(1);   
@@ -63,9 +63,9 @@ void LCM_Init(void)
    	LCM_WriteCmd(LCM_INIT);                 //模式设置29    
 }   
 //送6位地址+LCM_DATALENGTH位数据
-void LCM_WriteData(unsigned char address,unsigned char data)      
+void LCM_WriteData(uint8_t address,uint8_t data)      
 {  
-	unsigned char i;   
+	uint8_t i;   
    	LCM_CS = 1;   
    	LCM_CS = 0;   
    	LCM_WriteBit(1);  
@@ -93,9 +93,9 @@ void LCM_WriteData(unsigned char address,unsigned char data)
    	LCM_CS=1;   
 }   
 //连续写
-void LCM_WriteDatas(unsigned char address,unsigned char len,unsigned char* pData)      
+void LCM_WriteDatas(uint8_t address,uint8_t len,uint8_t* pData)      
 {  
-	unsigned char i,j,data;   
+	uint8_t i,j,data;   
 	LCM_CS = 1;   
 	LCM_CS = 0;   
 	LCM_WriteBit(1);  

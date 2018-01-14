@@ -1,6 +1,7 @@
 #ifndef __ATCommand_h__
 #define __ATCommand_h__
 
+#include "main.h"
 typedef union   
 {
 	struct
@@ -9,7 +10,7 @@ typedef union
 		unsigned bRx:1;
 		unsigned bWaitData:1;
 	};
-	unsigned char AllFlag;
+	uint8_t AllFlag;
 } _ATCommand_Flags;        // general flags
 
 extern _ATCommand_Flags ATCommand_Flags;
@@ -38,18 +39,18 @@ extern _ATCommand_Flags ATCommand_Flags;
 enum {ATACK_Null=0,ATACK_OK,ATACK_Err};
 
 extern _ATCommand_Flags ATCommand_Flags;
-extern unsigned char ATCommand_RxList[ATCommand_MaxRX];
-extern unsigned int ATCommand_WaitACKTick;
-extern unsigned char ATCommand_RetryTimes;
-extern unsigned char ATCommand_RxCount;
-extern unsigned int ATCommand_WaitACKTimes;
+extern uint8_t ATCommand_RxList[ATCommand_MaxRX];
+extern uint16_t ATCommand_WaitACKTick;
+extern uint8_t ATCommand_RetryTimes;
+extern uint8_t ATCommand_RxCount;
+extern uint16_t ATCommand_WaitACKTimes;
 extern char ATCommand_ErrString[15];
 extern char ATCommand_OkString[15];
 extern char ATCommand_Clear;
 //extern char ATCommand_EndString[15];
 void ATCommand_Init(void);
-void ATCommand_ProcRx(unsigned char rx);
-unsigned char ATCommand_SendCmd(const char *cmd);
-unsigned char ATCommand_WaitData(void);
+void ATCommand_ProcRx(uint8_t rx);
+uint8_t ATCommand_SendCmd(const char *cmd);
+uint8_t ATCommand_WaitData(void);
 void ATCommand_InitWaitData(void);
 #endif
