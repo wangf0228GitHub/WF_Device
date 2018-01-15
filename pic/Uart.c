@@ -1,4 +1,4 @@
-#include "picUart.h"
+#include "Uart.h"
 #include "afx.h"
 
 #ifdef Uart_UseTxQueue

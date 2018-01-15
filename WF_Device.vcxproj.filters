@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="全局函数">
-      <UniqueIdentifier>{132c8a7d-8aa3-47b2-bcea-8653c5adfd77}</UniqueIdentifier>
-    </Filter>
     <Filter Include="校验">
       <UniqueIdentifier>{39de897a-038c-4212-b5a0-c3ef6c4d6a61}</UniqueIdentifier>
     </Filter>
@@ -33,15 +30,6 @@
     </Filter>
     <Filter Include="库文件">
       <UniqueIdentifier>{4e46ef8b-3d69-4b6e-bcff-ae33397c1279}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="串口">
-      <UniqueIdentifier>{9f82e46b-9150-4d8d-958b-c319cba89310}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="串口\Uart1">
-      <UniqueIdentifier>{d78e9965-9c34-431f-9106-d400ad788102}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="串口\Uart2">
-      <UniqueIdentifier>{196d2b7a-b711-4337-a49f-cecc8075cdb1}</UniqueIdentifier>
     </Filter>
     <Filter Include="CHxxx">
       <UniqueIdentifier>{cf0027a5-dbc3-447c-b9c9-a37094c336aa}</UniqueIdentifier>
@@ -181,22 +169,16 @@
     <Filter Include="SS5060光照度计">
       <UniqueIdentifier>{f6abc823-9cae-47bd-919c-1fea6e433ca1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="pic">
+      <UniqueIdentifier>{130abc29-a24c-42ef-8744-c65734f5aaf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stm32">
+      <UniqueIdentifier>{d83c69ab-e8be-4ed9-bc3b-68ae8f4faf2e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DS12C887_Intel.c">
       <Filter>时钟\DS12C887_Intel</Filter>
-    </ClCompile>
-    <ClCompile Include="afx.c">
-      <Filter>全局函数</Filter>
-    </ClCompile>
-    <ClCompile Include="UartTx1.c">
-      <Filter>串口\Uart1</Filter>
-    </ClCompile>
-    <ClCompile Include="Uart2.c">
-      <Filter>串口\Uart2</Filter>
-    </ClCompile>
-    <ClCompile Include="UartTx2.c">
-      <Filter>串口\Uart2</Filter>
     </ClCompile>
     <ClCompile Include="Verify.c">
       <Filter>校验</Filter>
@@ -310,7 +292,6 @@
     <ClCompile Include="ST7565R.c">
       <Filter>显示\ST7565R</Filter>
     </ClCompile>
-    <ClCompile Include="wf_flashwrite.c" />
     <ClCompile Include="FM_TEA5767.c">
       <Filter>收音机FM_TEA5767</Filter>
     </ClCompile>
@@ -365,25 +346,28 @@
     <ClCompile Include="CP68_Client.c">
       <Filter>通信协议\热表</Filter>
     </ClCompile>
-    <ClCompile Include="picUart.c">
-      <Filter>串口</Filter>
+    <ClCompile Include="pic\afx.c">
+      <Filter>pic</Filter>
+    </ClCompile>
+    <ClCompile Include="pic\p24F_I2C2.c">
+      <Filter>pic</Filter>
+    </ClCompile>
+    <ClCompile Include="pic\wf_flashwrite.c">
+      <Filter>pic</Filter>
+    </ClCompile>
+    <ClCompile Include="stm32\wfEEPROM.c">
+      <Filter>stm32</Filter>
+    </ClCompile>
+    <ClCompile Include="stm32\wfSys.c">
+      <Filter>stm32</Filter>
+    </ClCompile>
+    <ClCompile Include="pic\Uart.c">
+      <Filter>pic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DS12C887_Intel.h">
       <Filter>时钟\DS12C887_Intel</Filter>
-    </ClInclude>
-    <ClInclude Include="afx.h">
-      <Filter>全局函数</Filter>
-    </ClInclude>
-    <ClInclude Include="UartTx1.h">
-      <Filter>串口\Uart1</Filter>
-    </ClInclude>
-    <ClInclude Include="Uart2.h">
-      <Filter>串口\Uart2</Filter>
-    </ClInclude>
-    <ClInclude Include="UartTx2.h">
-      <Filter>串口\Uart2</Filter>
     </ClInclude>
     <ClInclude Include="Verify.h">
       <Filter>校验</Filter>
@@ -554,8 +538,20 @@
     <ClInclude Include="CP68_Client.h">
       <Filter>通信协议\热表</Filter>
     </ClInclude>
-    <ClInclude Include="picUart.h">
-      <Filter>串口</Filter>
+    <ClInclude Include="pic\afx.h">
+      <Filter>pic</Filter>
+    </ClInclude>
+    <ClInclude Include="pic\p24F_I2C2.h">
+      <Filter>pic</Filter>
+    </ClInclude>
+    <ClInclude Include="stm32\wfEEPROM.h">
+      <Filter>stm32</Filter>
+    </ClInclude>
+    <ClInclude Include="stm32\wfSys.h">
+      <Filter>stm32</Filter>
+    </ClInclude>
+    <ClInclude Include="pic\Uart.h">
+      <Filter>pic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
