@@ -142,6 +142,8 @@
   <ItemGroup>
     <ClCompile Include="AD5302.c" />
     <ClCompile Include="ADS1112.c" />
+    <ClCompile Include="ADS1120.c" />
+    <ClCompile Include="ADS8689.c" />
     <ClCompile Include="AS1080.c" />
     <ClCompile Include="ATCommand.c" />
     <ClCompile Include="CH45x.c" />
@@ -207,6 +209,8 @@
   <ItemGroup>
     <ClInclude Include="AD5302.h" />
     <ClInclude Include="ADS1112.h" />
+    <ClInclude Include="ADS1120.h" />
+    <ClInclude Include="ADS8689.h" />
     <ClInclude Include="AS1080.h" />
     <ClInclude Include="ATCommand.h" />
     <ClInclude Include="CH45x.h" />

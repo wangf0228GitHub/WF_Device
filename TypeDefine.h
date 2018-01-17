@@ -118,7 +118,11 @@ typedef union
 typedef union 
 {	
 	uint8_t u8s[4];
-	uint16_t u16s[2];
+	struct
+	{
+		u16_wf u16L;
+		u16_wf u16H;
+	};
 	uint32_t u32;
 	struct
 	{

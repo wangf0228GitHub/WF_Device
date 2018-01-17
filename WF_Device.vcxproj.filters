@@ -175,6 +175,12 @@
     <Filter Include="stm32">
       <UniqueIdentifier>{d83c69ab-e8be-4ed9-bc3b-68ae8f4faf2e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="A/D\ADS1120">
+      <UniqueIdentifier>{e050cc89-5dc3-4406-b764-761bd29b299d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="A/D\ADS8689">
+      <UniqueIdentifier>{313e786a-3f6c-458d-8961-9d0e9d9f0794}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DS12C887_Intel.c">
@@ -364,6 +370,12 @@
     <ClCompile Include="pic\Uart.c">
       <Filter>pic</Filter>
     </ClCompile>
+    <ClCompile Include="ADS1120.c">
+      <Filter>A/D\ADS1120</Filter>
+    </ClCompile>
+    <ClCompile Include="ADS8689.c">
+      <Filter>A/D\ADS8689</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DS12C887_Intel.h">
@@ -552,6 +564,12 @@
     </ClInclude>
     <ClInclude Include="pic\Uart.h">
       <Filter>pic</Filter>
+    </ClInclude>
+    <ClInclude Include="ADS1120.h">
+      <Filter>A/D\ADS1120</Filter>
+    </ClInclude>
+    <ClInclude Include="ADS8689.h">
+      <Filter>A/D\ADS8689</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
