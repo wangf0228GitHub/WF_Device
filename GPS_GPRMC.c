@@ -1,4 +1,4 @@
-#include "HardwareProfile.h"
+#include "main.h"
 #include "GPS_GPRMC.h"
 #include <string.h>
      

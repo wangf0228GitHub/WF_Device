@@ -1,5 +1,7 @@
-#include "HardwareProfile.h"
-#include "TypeDefine.h"
+//#include "HardwareProfile.h"
+//#include "TypeDefine.h"
+
+#include "lcyHash.h"
 
 uint8_t lcyHashIn[0x08];
 uint8_t lcyHashOut[0x08];

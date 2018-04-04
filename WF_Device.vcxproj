@@ -159,6 +159,7 @@
     <ClCompile Include="KeyCheck.c" />
     <ClCompile Include="LC160160B.c" />
     <ClCompile Include="lcyHash.c" />
+    <ClCompile Include="lcyIRDecode.c" />
     <ClCompile Include="M24XX.c" />
     <ClCompile Include="Max7221.c" />
     <ClCompile Include="ModbusRTU_Client.c" />
@@ -226,6 +227,7 @@
     <ClInclude Include="KeyCheck.h" />
     <ClInclude Include="LC160160B.h" />
     <ClInclude Include="lcyHash.h" />
+    <ClInclude Include="lcyIRDecode.h" />
     <ClInclude Include="M24XX.h" />
     <ClInclude Include="Max7221.h" />
     <ClInclude Include="ModbusRTU_Client.h" />
@@ -268,6 +270,7 @@
     <ClInclude Include="GPS_GPRMC.h" />
     <ClInclude Include="DS1302.h" />
     <ClInclude Include="BCDTimeOP.h" />
+    <ClInclude Include="wfDefine.h" />
     <ClInclude Include="WTH040.h" />
     <ClInclude Include="X5045.h" />
     <ClInclude Include="TypeDefine.h" />

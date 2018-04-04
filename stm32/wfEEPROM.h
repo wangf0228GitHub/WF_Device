@@ -1,7 +1,7 @@
 #ifndef __wfEEPROM_h__
 #define __wfEEPROM_h__
 
-#include "main.h"
+#include <stdint.h>
 
 #ifndef wfEEPROM_INFO
 #define wfEEPROM_BASE_ADDR    0x08080000    

@@ -1,4 +1,4 @@
-#include "HardwareProfile.h"
+#include "main.h"
 #include "SimI2C.h"
 #include "TypeDefine.h"
 #include "SHT25.h"

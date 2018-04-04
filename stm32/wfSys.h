@@ -1,20 +1,8 @@
 #ifndef _wfSys_H
 #define _wfSys_H
 
-#include "main.h"
+#include <stdint.h>
 
-#define MAKE_BYTE(h,l)	((h<<4)+(l&0x0f))
-#define MAKE_SHORT(h,l)	(((uint16_t)h<<8)+l)
-#define MAKE_INT(h,l)	(((uint32_t)h<<16)+l)
-
-#define LOW_NIBBLE(x)	(x&0x0F)
-#define HIGH_NIBBLE(x)	(x>>4)
-#define LOW_BYTE(x)     ((uint8_t)((x)&0xFF))
-#define HIGH_BYTE(x)    ((uint8_t)(((x)>>8)&0xFF))
-#define LOW_SHORT(x)     ((uint16_t)((x)&0xFFFF))
-#define HIGH_SHORT(x)    ((uint16_t)(((x)>>16)&0xFFFF))
-
-#define WF_CHECK_FLAG(__Instance__, __FLAG__)   ((((__Instance__) & (__FLAG__)) != 0) ? 1 : 0)
 #define GetDeltaTick(a) (HAL_GetTick() - a)
 
 void wfDelay_init(uint8_t SYSCLK);
