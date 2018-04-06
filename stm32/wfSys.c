@@ -1,6 +1,7 @@
 
 
 #include "wfSys.h"
+#include "main.h"
 #include <stdarg.h>
 
 static uint32_t fac_us=0;							//usÑÓÊ±±¶³ËÊı

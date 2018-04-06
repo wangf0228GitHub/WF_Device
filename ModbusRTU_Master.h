@@ -1,6 +1,9 @@
 #ifndef __ModbusRTU_Master_h__
 #define __ModbusRTU_Master_h__
 
+#include "main.h"
+#include "stdint.h"
+#include "ModbusRTU_Master_Conf.h"
 typedef union   
 {
 	struct
@@ -14,10 +17,7 @@ typedef union
 extern _ModbusRTU_Master_Flags ModbusRTU_Master_Flags;
 
 
-#ifndef ModbusRTU_Master_TxByte_Ex
-#define ModbusRTU_Master_VerifyTxByte(x) Uart1_VerifyCRC16AddTxByte(x)
-#define ModbusRTU_Master_TxByte(x) Uart1_PutChar(x)
-#endif
+
 
 #ifndef ModbusRTU_Master_WaitClientInterval_Ex
 #define ModbusRTU_Master_WaitClientInterval() __delay_20ms(5);
@@ -42,16 +42,40 @@ extern _ModbusRTU_Master_Flags ModbusRTU_Master_Flags;
 #define SetTx_ModbusRTU_Master() ModbusRTU_RS485DE_W=1;__delay_ms(1)
 #endif
 
-#define ModbusRTU_Master_preRxProcInit() ModbusRTU_Master_Flags.bRx=0;ModbusRTU_Master_Flags.bWaitClient=1;ModbusRTU_Master_RxCount=0;ModbusRTU_Master_WaitClientTick=SystemTick;ModbusRTU_Master_NeedRxCount=0xff
+#define ModbusRTU_Master_preRxProcInit() ModbusRTU_Master_Flags.bRx=0;ModbusRTU_Master_Flags.bWaitClient=1;ModbusRTU_Master_RxCount=0;ModbusRTU_Master_WaitClientTick=wfGetTick();ModbusRTU_Master_NeedRxCount=0xff
 
 extern uint8_t ModbusRTU_Master_RxList[MAX_ModbusRTU_Master_RX];
+#ifdef MCU_STM32
+extern uint32_t ModbusRTU_Master_RxCount;
+extern uint32_t ModbusRTU_Master_NeedRxCount;
+extern uint32_t ModbusRTU_Master_TargetAddr;
+extern uint32_t ModbusRTU_Master_RetryTimes;
+extern uint32_t ModbusRTU_Master_WaitClientTick;
+extern uint32_t ModbusRTU_Master_WaitClientTime;
+#else
 extern uint8_t ModbusRTU_Master_RxCount;
 extern uint8_t ModbusRTU_Master_NeedRxCount;
 extern uint8_t ModbusRTU_Master_TargetAddr;
-//extern uint ModbusRTU_Master_FirstRegAddr;
 extern uint8_t ModbusRTU_Master_RetryTimes;
 extern uint16_t ModbusRTU_Master_WaitClientTick;
 extern uint16_t ModbusRTU_Master_WaitClientTime;
+#endif
+
+
+
+#ifdef ModbusRTU_Master_UseTxList
+#ifndef MAX_ModbusRTU_Master_TX
+	#define MAX_ModbusRTU_Master_TX 50
+#endif
+extern uint8_t ModbusRTU_Master_TxList[MAX_ModbusRTU_Master_RX];
+extern uint32_t ModbusRTU_Master_TxCount;
+#else
+	#ifndef ModbusRTU_Master_TxByte_Ex
+		#define ModbusRTU_Master_VerifyTxByte(x) Uart1_VerifyCRC16AddTxByte(x)
+		#define ModbusRTU_Master_TxByte(x) Uart1_PutChar(x)
+	#endif
+#endif
+
 
 void Init_ModbusRTU_Master(void);
 void ProcRx_ModbusRTU_Master(uint8_t rx);

@@ -2,6 +2,7 @@
 #define __afx_H_
 
 #include "main.h"
+#include <stdint.h>
 
 #ifndef __PICC18__
 

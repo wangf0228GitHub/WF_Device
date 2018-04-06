@@ -2,6 +2,7 @@
 #define __SimI2C_h__
 
 #include "main.h"
+#include "SimI2C_Conf.h"
 //#define SimI2C_CLK_IO TRISB6
 //#define SimI2C_DATA_IO TRISB4
 //#define SimI2C_CLK RB6

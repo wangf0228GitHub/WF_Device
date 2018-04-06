@@ -1,6 +1,9 @@
 #ifndef __MS8607_h__
 #define __MS8607_h__
 
+#include "TypeDefine.h"
+#include <stdint.h>
+
 typedef union   
 {
 	struct
@@ -35,12 +38,12 @@ enum ms8607_pressure_resolution {
 };
 extern uint16_t MS8607_eeprom[8];
 extern _MS8607_Flags MS8607_Flags;
-extern ulong MS8607_adcT;
-extern ulong MS8607_adcP;
-extern uint MS8607_adcRH;
-extern float32 MS8607_Temperature;
-extern float32 MS8607_Pressure;
-extern float32 MS8607_RH;
+extern uint32_t MS8607_adcT;
+extern uint32_t MS8607_adcP;
+extern u16_wf MS8607_adcRH;
+extern float_wf MS8607_Temperature;
+extern float_wf MS8607_Pressure;
+extern float_wf MS8607_RH;
 uint8_t MS8607_Init(void);
 uint8_t MS8607_ReadPT(uint8_t resolution_osr);
 uint8_t MS8607_I2CProc(uint8_t Addr,uint8_t Command,uint8_t NeedReadLen);

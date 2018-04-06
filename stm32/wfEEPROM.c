@@ -1,5 +1,6 @@
 
 #include "wfEEPROM.h"
+#include "main.h"
 
 void wfEEPROM_ReadBytes(uint16_t Addr,uint8_t *Buffer,uint16_t Length) 
 {  

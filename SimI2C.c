@@ -1,10 +1,9 @@
 #include "SimI2C.h"
-#include "SimI2C_Conf.h"
+
 void SimI2C_Init( void )
 {
 	SIMI2C_SCL_High();
 	SIMI2C_SDA_High();
-	SIMI2C_SCL_OUT();
 	SIMI2C_SDA_OUT();	
 }
 
