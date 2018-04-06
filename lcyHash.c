@@ -1,4 +1,4 @@
-#include "HardwareProfile.h"
+#include "main.h"
 #include "TypeDefine.h"
 
 uint8_t lcyHashIn[0x08];
