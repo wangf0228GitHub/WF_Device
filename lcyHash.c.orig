@@ -1,3 +1,6 @@
+#include "main.h"
+//#include "TypeDefine.h"
+
 #include "lcyHash.h"
 
 uint8_t lcyHashIn[0x08];
