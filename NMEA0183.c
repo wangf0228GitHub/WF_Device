@@ -1,6 +1,5 @@
-#include "HardwareProfile.h"
 #include "NMEA0183.h"
-#include "afx.h"
+#include "wfDefine.h"
 _NMEA0183_Flags NMEA0183_Flags;
 uint8_t NMEA0183_RxCount;
 char NMEA0183_RxBuf[NMEA0183_RxBufSize];

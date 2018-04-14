@@ -11,7 +11,7 @@ typedef union
 		unsigned bInit:1;
 		unsigned bHold:1;
 	};
-	uint16_t AllFlag;
+	uint8_t AllFlag;
 } _MS8607_Flags;        // general flags
 
 

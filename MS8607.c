@@ -37,6 +37,7 @@
 #endif
 #define MS8607_PT_Addr 0xec //0x76
 #define MS8607_RH_Addr 0x80 //0x40
+
 uint8_t MS8607_Buf[10];
 uint16_t MS8607_eeprom[8];
 _MS8607_Flags MS8607_Flags;

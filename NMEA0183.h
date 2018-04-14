@@ -1,6 +1,9 @@
 #ifndef NMEA0183_h__
 #define NMEA0183_h__
 
+#include "main.h"
+#include <stdint.h>
+
 typedef union   
 {
 	struct

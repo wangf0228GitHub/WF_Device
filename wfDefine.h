@@ -26,5 +26,10 @@
 
 #define GetBit(b,index) ((((b) & (1<<index)) != 0) ? 1 : 0)
 
+uint8_t BCD2Char(uint8_t bcd);
+void Byte2ASCII(uint8_t b, uint8_t *h, uint8_t *l);
+uint8_t ASCII2Byte_Capital(uint8_t h,uint8_t l);
+uint8_t ASCII2Byte_Lowercase(uint8_t h,uint8_t l);
+
 #endif
 
