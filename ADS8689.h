@@ -6,6 +6,6 @@
 
 void ADS8689_Setting(uint8_t reg,uint16_t data);
 u16_wf ADS8689_ReadReg(uint8_t reg);
-u32_wf ADS8689_ReadResult(void);
+//u32_wf ADS8689_ReadResult(void);
 #endif
 

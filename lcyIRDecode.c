@@ -51,10 +51,10 @@ uint8_t ReadFshData(uint8_t c)
 	uint16_t j = addr % 2;
 	if (j == 0)
 	{
-		return HIGH_BYTE(TCodeKey[i]);
+		return LOW_BYTE(TCodeKey[i]);
 	}
 	else
-		return LOW_BYTE(TCodeKey[i]);
+		return HIGH_BYTE(TCodeKey[i]);
 }
 void GetFshKey(void)
 {

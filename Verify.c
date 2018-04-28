@@ -4,7 +4,8 @@
 #ifdef Verify_Sum
 uint8_t GetVerify_Sum(uint8_t* pBuff,uint32_t Count)
 {
-	uint8_t sum,i;
+	uint8_t sum;
+	uint32_t i;
 	sum=0;
 	for(i=0;i<Count;i++)
 	{
