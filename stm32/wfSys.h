@@ -4,10 +4,17 @@
 #include <stdint.h>
 
 #define GetDeltaTick(a) (HAL_GetTick() - a)
+#define GetCurTick() HAL_GetTick()
 
 void wfDelay_init(uint8_t SYSCLK);
-void wfDelay_ms(uint16_t nms);
+
 void wfDelay_us(uint32_t nus);
+
+#ifdef Delay_ms_wfus
+void wfDelay_ms(uint16_t nms);
+#else
+#define wfDelay_ms(x) HAL_Delay(x)
+#endif
 
 #ifdef USE_USART_PUTSTRING
 #ifndef  Usart_PutString_Len

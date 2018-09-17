@@ -37,11 +37,14 @@ void wfDelay_us(uint32_t nus)
 }
 //延时nms
 //nms:要延时的ms数
+#ifdef Delay_ms_wfus
 void wfDelay_ms(uint16_t nms)
 {
 	uint32_t i;
 	for(i=0;i<nms;i++) wfDelay_us(1000);
 }
+#endif
+
 #ifdef USE_USART_PUTSTRING
 void Usart_PutString(UART_HandleTypeDef *huart,char* pString, ...)
 {

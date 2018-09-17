@@ -1,5 +1,5 @@
-#include "Uart.h"
-#include "afx.h"
+#include "wfUart.h"
+#include "wfDefine.h"
 
 #ifdef Uart_UseTxQueue
 _UartTxQueueFlags UartTxQueueFlags;
@@ -45,11 +45,12 @@ _UartTxQueueFlags UartTxQueueFlags;
 	#endif
 	void Uart1_PutChar(uint8_t c )
 	{
-		while(Uart1_TRMT==0);
+		while(Uart1_IsBusy());
 		#ifdef Uart1_UsedParityVerify
 			Uart1_Tx9D=Uart1_GetVerifyBit(c);
 		#endif
-		Uart1_TXREG=c;
+		Uart1_TxChar(c);
+
 	}
 	void Uart1_PutChars(const uint8_t* pBuf,uint8_t len)
 	{

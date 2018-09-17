@@ -1,6 +1,4 @@
-#include "HardwareProfile.h"
 #include "Si4463.h"
-
 //#define Si4463_NSEL_DIR	TRISA1
 //#define Si4463_SCL_DIR	TRISA1
 //#define Si4463_SDI_DIR	TRISA2
@@ -16,8 +14,7 @@ void Si4463_WAIT_CTS( void );
 
 void Si4463_Init(void)
 {	
-	Si4463_NSEL_W=1;
-	Si4463_NSEL_DIR=0;
+	Si4463_NSEL_High();
 	Si4463_SPIInit();
 // 	Si4463_SCL_DIR=0;
 // 	Si4463_SDO_DIR=1;
@@ -37,12 +34,12 @@ OUTPUT   : NONE
 void Si4463_CMD(uint8_t *cmd, uint8_t cmdsize )
 {
     Si4463_WAIT_CTS( );
-    Si4463_NSEL_W=0;
+    Si4463_NSEL_Low();
     while( cmdsize -- )
     {
         Si4463_SPIProc( *cmd++ );
     }
-    Si4463_NSEL_W=1;
+    Si4463_NSEL_High();
 }
 /*
 =================================================================================
@@ -76,13 +73,13 @@ OUTPUT   : NONE
 void Si4463_READ_RESPONSE( uint8_t *buffer, uint8_t size )
 {
     Si4463_WAIT_CTS( );
-    Si4463_NSEL_W=0;
+    Si4463_NSEL_Low();
 	Si4463_SPIProc( READ_CMD_BUFF );
 	while( size -- )
     {
         *buffer++ = Si4463_SPIProc( 0xFF );
     }
-    Si4463_NSEL_W=1;
+    Si4463_NSEL_High();
 
 }
 /*
@@ -98,10 +95,10 @@ void Si4463_WAIT_CTS( void )
     uint8_t cts;
     do
     {
-        Si4463_NSEL_W=0;
+        Si4463_NSEL_Low();
         Si4463_SPIProc( READ_CMD_BUFF );
         cts = Si4463_SPIProc( 0xFF );
-        Si4463_NSEL_W=1;
+        Si4463_NSEL_High();
     }while( cts != 0xFF );
 }
 /*
@@ -115,9 +112,9 @@ OUTPUT   : NONE
 uint8_t Si4463_NOP( void )
 {
     uint8_t cts;
-    Si4463_NSEL_W=0;
+    Si4463_NSEL_Low();
     cts = Si4463_SPIProc( NOP );
-    Si4463_NSEL_W=1;
+    Si4463_NSEL_High();
 	return cts;
 }
 
@@ -268,11 +265,11 @@ OUTPUT   : NONE
 */
 void Si4463_RESET( void )
 {
-    Si4463_SDN_W=1;
-    __delay_ms(20);
-    Si4463_SDN_W=0;
-    Si4463_NSEL_W=1;
-	__delay_20ms(10);
+    Si4463_SDN_High();
+    wfDelay_ms(20);
+    Si4463_SDN_Low();
+    Si4463_NSEL_High();
+	wfDelay_ms(2000);
 }
 /*
 =================================================================================
@@ -285,10 +282,10 @@ OUTPUT   : NONE
 */
 void Si4463_W_TX_FIFO( uint8_t *txbuffer, uint8_t size )
 {
-    Si4463_NSEL_W=0;
+    Si4463_NSEL_Low();
     Si4463_SPIProc( WRITE_TX_FIFO );
     while( size -- )    { Si4463_SPIProc( *txbuffer++ ); }
-    Si4463_NSEL_W=1;
+    Si4463_NSEL_High();
 }
 /*
 =================================================================================
@@ -308,14 +305,14 @@ void Si4463_SEND_PACKET( uint8_t *txbuffer, uint8_t size, uint8_t channel, uint8
 
     Si4463_TX_FIFO_RESET( );
 
-    Si4463_NSEL_W=0;
+    Si4463_NSEL_Low();
     Si4463_SPIProc( WRITE_TX_FIFO );
 #if PACKET_LENGTH == 0
     tx_len ++;
     Si4463_SPIProc( size );
 #endif
     while( size -- )    { Si4463_SPIProc( *txbuffer++ ); }
-    Si4463_NSEL_W=1;
+    Si4463_NSEL_High();
     cmd[0] = START_TX;
     cmd[1] = channel;
     cmd[2] = condition;
@@ -356,7 +353,7 @@ uint8_t Si4463_READ_PACKET( uint8_t *buffer )
 {
     uint8_t length, i;
     Si4463_WAIT_CTS( );
-    Si4463_NSEL_W=0;
+    Si4463_NSEL_Low();
 
     Si4463_SPIProc( READ_RX_FIFO );
 #if PACKET_LENGTH == 0
@@ -370,7 +367,7 @@ uint8_t Si4463_READ_PACKET( uint8_t *buffer )
     {
         *buffer++ = Si4463_SPIProc( 0xFF );
     }
-    Si4463_NSEL_W=1;
+    Si4463_NSEL_High();
     return i;
 }
 /*

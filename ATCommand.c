@@ -3,10 +3,10 @@
 #include <ctype.h>
 _ATCommand_Flags ATCommand_Flags;
 uint8_t ATCommand_RxList[ATCommand_MaxRX];
-uint16_t ATCommand_WaitACKTick;
+uint32_t ATCommand_WaitACKTick;
 uint8_t ATCommand_RetryTimes;
 uint8_t ATCommand_RxCount;
-uint16_t ATCommand_WaitACKTimes;
+uint32_t ATCommand_WaitACKTimes;
 //char ATCommand_EndString[2];
 char ATCommand_ErrString[15];
 char ATCommand_OkString[15];
@@ -14,7 +14,7 @@ char ATCommand_Clear;//用于设定清除缓存的某个特定字符
 //uint8_t ATCommand_Result;
 void ATCommand_Init(void)
 {
-	ATCommand_WaitACKTimes=50;
+	ATCommand_WaitACKTimes=5000;
 	ATCommand_RetryTimes=3;
 	strcpy(ATCommand_OkString,"OK");
 	strcpy(ATCommand_ErrString,"ERROR");
@@ -80,7 +80,7 @@ uint8_t ATCommand_SendCmd(const char *cmd)
 		ATCommand_PutString(ATCommand_EndChar);		
 		ATCommand_Flags.bRx=0;
 		ATCommand_Flags.bChar=0;
-		ATCommand_WaitACKTick=SystemTick;
+		ATCommand_WaitACKTick=GetCurTick();
 		ATCommand_RxCount=0;
 		ATCommand_Flags.bWaitData=1;
 		ATCommand_RxList[ATCommand_RxCount]='\0';//添加结束符
@@ -117,7 +117,7 @@ uint8_t ATCommand_SendCmd(const char *cmd)
 	ATCommand_Clear='\0';
 	//strcpy(ATCommand_EndString,"\r");
 	ATCommand_RetryTimes=3;
-	ATCommand_WaitACKTimes=50;
+	ATCommand_WaitACKTimes=5000;
 	return res;
 }
 uint8_t ATCommand_WaitData(void)
@@ -127,7 +127,7 @@ uint8_t ATCommand_WaitData(void)
 	res=ATACK_Null;
 	ATCommand_Flags.bRx=0;
 	ATCommand_Flags.bChar=0;
-	ATCommand_WaitACKTick=SystemTick;
+	ATCommand_WaitACKTick=GetCurTick();
 	ATCommand_RxCount=0;
 	ATCommand_Flags.bWaitData=1;
 	ATCommand_RxList[ATCommand_RxCount]='\0';//添加结束符
@@ -150,7 +150,7 @@ uint8_t ATCommand_WaitData(void)
 				break;
 			}
 		}					
-		if((SystemTick-ATCommand_WaitACKTick)>ATCommand_WaitACKTimes)//200ms等待超时
+		if(GetDeltaTick(ATCommand_WaitACKTick)>ATCommand_WaitACKTimes)//200ms等待超时
 			break;
 	}
 	ATCommand_Flags.bWaitData=0;
@@ -158,14 +158,14 @@ uint8_t ATCommand_WaitData(void)
 	strcpy(ATCommand_ErrString,"ERROR");
 	ATCommand_Clear='\0';
 	//strcpy(ATCommand_EndString,"\r");
-	ATCommand_WaitACKTimes=50;
+	ATCommand_WaitACKTimes=5000;
 	return res;
 }
 void ATCommand_InitWaitData(void)
 {
 	ATCommand_Flags.bRx=0;
 	ATCommand_Flags.bChar=0;
-	ATCommand_WaitACKTick=SystemTick;
+	ATCommand_WaitACKTick=GetCurTick();
 	ATCommand_RxCount=0;
 	ATCommand_Flags.bWaitData=1;
 	ATCommand_RxList[ATCommand_RxCount]='\0';//添加结束符	

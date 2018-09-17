@@ -23,6 +23,9 @@
 // {
 // 	return *((uint8_t*)(wfEEPROM_BASE_ADDR+Addr));
 // }
+#ifndef STM32_Flash4EEPROM_EX
+#define FLASH_WAITETIME  50000          //FLASH等待超时时间
+#endif
 void wfEEPROM_ReadBytes(uint32_t Addr,uint8_t *Buffer,uint32_t Length);
 void wfEEPROM_ReadHalfWords(uint32_t Addr,uint16_t *Buffer,uint32_t Length);
 void wfEEPROM_ReadWords(uint32_t Addr,uint32_t *Buffer,uint32_t Length);

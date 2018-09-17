@@ -39,15 +39,15 @@ void  ADS8689_Setting(uint8_t reg,uint16_t data)
 		if(ADS8689_RVS_Read()==0)//rvsÀ­µÍºó¼ÌÐø
 			break;
 	}
-	if((reg&0x80)==0)
-	{
-		ADS8689_SPIProc(0xd0);//11010 00 0
-	}
-	else
-	{
-		ADS8689_SPIProc(0xd1);
-	}
-	reg=reg<<1;
+// 	if((reg&0x80)==0)
+// 	{
+ 		ADS8689_SPIProc(0xd0);//11010 00 0
+// 	}
+// 	else
+// 	{
+// 		ADS8689_SPIProc(0xd1);
+// 	}
+	//reg=reg<<1;
 	ADS8689_SPIProc(reg);
 	ADS8689_SPIProc(HIGH_BYTE(data));
 	ADS8689_SPIProc(LOW_BYTE(data));

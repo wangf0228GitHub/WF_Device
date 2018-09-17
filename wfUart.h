@@ -2,6 +2,7 @@
 #define __UART_H__
 
 #include "main.h"
+#include "wfUart_Conf.h"
 
 #ifdef Uart_UseTxQueue
 typedef union   
@@ -19,12 +20,10 @@ extern _UartTxQueueFlags UartTxQueueFlags;
 #endif
 #ifdef Uart_Uart1
 
-	#ifndef Uart1_TRMT
-		#define Uart1_TRMT TRMT
-	#endif
-
-	#ifndef Uart1_TXREG
-		#define Uart1_TXREG TXREG
+	#ifndef Uart1_Work_Ex
+		#define Uart1_IsBusy() (TRMT==0)
+		#define Uart1_TxChar(data) (TXREG=data)
+		#define Uart1_IsSendComplete() (TXIF==1)
 	#endif
 
 

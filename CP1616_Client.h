@@ -4,6 +4,15 @@
 #include "stdint.h"
 #include "CP1616_Client_Conf.h"
 
+#ifndef CP1616_Client_SetRx_Ex
+#define CP1616_Client_SetRx()
+#endif
+
+#ifndef CP1616_Client_SetTx_Ex
+#define CP1616_Client_SetTx()
+#endif
+
+
 typedef union   
 {
 	struct
@@ -16,26 +25,36 @@ typedef union
 #define pCP1616_ClientData 2+CP1616_AddrLen+1+CP1616_DataBufLen
 #define pCP1616_CommandIndex 2+CP1616_AddrLen
 
-_CP1616_Client_Flags CP1616_Client_Flags;
-uint8_t CP1616_Client_RxList[MAX_CP1616_Client_RX];
 
+
+#ifndef CP1616_Client_RxList_LenMax
+#define CP1616_Client_RxList_LenMax 100
+#endif
 
 #if CP1616_DataBufLen==1
-uint8_t CP1616_Client_RxCount;
-uint8_t CP1616_Client_NeedRxCount;
+extern uint8_t CP1616_Client_RxCount;
+extern uint8_t CP1616_Client_NeedRxCount;
 #else
-uint16_t CP1616_Client_RxCount;
-uint16_t CP1616_Client_NeedRxCount;
+extern uint16_t CP1616_Client_RxCount;
+extern uint16_t CP1616_Client_NeedRxCount;
 #endif
 
 
 #if CP1616_AddrLen==1
-uint8_t CP1616_Client_Addr;
+extern uint8_t CP1616_Client_Addr;
 #elif CP1616_AddrLen==2
-uint16_t CP1616_Client_Addr;
+extern uint16_t CP1616_Client_Addr;
 #endif
 
+#ifndef CP1616_Client_Tx_OneByOne
+#ifndef CP1616_Client_TxList_LenMax
+#define CP1616_Client_TxList_LenMax 100
+#endif
+extern uint8_t CP1616_Client_TxList[CP1616_Client_TxList_LenMax];
+#endif
 
+extern uint8_t CP1616_Client_RxList[CP1616_Client_RxList_LenMax];
+extern _CP1616_Client_Flags CP1616_Client_Flags;
 
 void CP1616_Client_Init(void);
 void CP1616_Client_EndProcCommand(void);

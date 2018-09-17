@@ -100,6 +100,36 @@ void wfEEPROM_ReadWords(uint32_t Addr,uint32_t *Buffer,uint32_t Length)
 // 	}  
 // 	HAL_FLASHEx_DATAEEPROM_Unlock();  
 // }
+void wfEEPROM_WriteWords(uint32_t WriteAddr,uint32_t *pBuffer,uint32_t NumToWrite)	
+{ 
+	uint32_t i;
+	FLASH_EraseInitTypeDef FlashEraseInit;
+	HAL_StatusTypeDef FlashStatus=HAL_OK;
+	uint32_t SectorError=0;
+	HAL_FLASH_Unlock();             //解锁	
+	FlashEraseInit.TypeErase=FLASH_TYPEERASE_PAGES;       //擦除类型，页擦除 
+	FlashEraseInit.PageAddress=WriteAddr;   //要擦除的页，即写入地址
+	FlashEraseInit.NbPages=1;               //只擦除一页
+	if(HAL_FLASHEx_Erase(&FlashEraseInit,&SectorError)!=HAL_OK) 
+	{
+		HAL_FLASH_Lock();           //上锁
+		return;//发生错误了	
+	}	
+	FlashStatus=FLASH_WaitForLastOperation(FLASH_WAITETIME);            //等待上次操作完成
+	if(FlashStatus==HAL_OK)
+	{
+		for(i=0;i<NumToWrite;i++)
+		{
+			if(HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD,WriteAddr,*pBuffer)!=HAL_OK)//写入数据
+			{ 
+				break;	//写入异常
+			}
+			WriteAddr+=4;
+			pBuffer++;
+		}
+	}
+	HAL_FLASH_Lock();           //上锁
+}
 #else
 void wfEEPROM_WriteBytes(uint32_t WriteAddr,uint8_t *pBuffer,uint32_t NumToWrite)  
 {  

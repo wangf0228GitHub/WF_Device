@@ -2,6 +2,7 @@
 #define __ATCommand_h__
 
 #include "main.h"
+#include "ATCommand_Conf.h"
 typedef union   
 {
 	struct
@@ -29,7 +30,7 @@ extern _ATCommand_Flags ATCommand_Flags;
 #endif
 
 #ifndef ATCommand_WaitClientInterval_Ex
-#define ATCommand_WaitClientInterval() __delay_20ms(5);
+#define ATCommand_WaitClientInterval() wfDelay_ms(100);
 #endif
 
 #ifndef ATCommand_ResetWait_Ex
@@ -40,10 +41,10 @@ enum {ATACK_Null=0,ATACK_OK,ATACK_Err};
 
 extern _ATCommand_Flags ATCommand_Flags;
 extern uint8_t ATCommand_RxList[ATCommand_MaxRX];
-extern uint16_t ATCommand_WaitACKTick;
+extern uint32_t ATCommand_WaitACKTick;
 extern uint8_t ATCommand_RetryTimes;
 extern uint8_t ATCommand_RxCount;
-extern uint16_t ATCommand_WaitACKTimes;
+extern uint32_t ATCommand_WaitACKTimes;
 extern char ATCommand_ErrString[15];
 extern char ATCommand_OkString[15];
 extern char ATCommand_Clear;

@@ -1,6 +1,7 @@
 #ifndef __Si4432_h__
 #define __Si4432_h__
 
+#include "Si4463_Conf.h"
 
 typedef enum
 {
