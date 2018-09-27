@@ -1,5 +1,5 @@
-#include "HardwareProfile.h"
 #include "SPIROM.h"
+#include "TypeDefine.h"
 _SPIROM_Status SPIROM_Status;
 // #define SPIROM_CS_DIR _TRISB10
 // #define SPIROM_W_DIR  _TRISB11
@@ -14,23 +14,19 @@ _SPIROM_Status SPIROM_Status;
 // #define SPIROM_CLK_W  SimSPI_SCL_W
 void SPIROM_WriteEnable(void)
 {
-	SPIROM_CS_W=0;
+	SPIROM_CS_Low();
 	SPIROM_SPIProc(SPIROM_CMD_WREN);
-	SPIROM_CS_W=1;
+	SPIROM_CS_High();
 }
 void SPIROM_WriteDisable(void)
 {
-	SPIROM_CS_W=0;
+	SPIROM_CS_Low();
 	SPIROM_SPIProc(SPIROM_CMD_WRDI);
-	SPIROM_CS_W=1;
+	SPIROM_CS_High();
 }
 void SPIROM_Init(void)
 {
-	SPIROM_CS_W=1;
-	SPIROM_CS_DIR=0;
-	SPIROM_W_W=1;
-	SPIROM_W_DIR=0;	
-	SPIROM_SPIInit();
+	SPIROM_CS_High();
 }
 #ifdef SPIROM_Addr24
 void SPIROM_WriteByte(uint32_t address,uint8_t data)
@@ -39,14 +35,14 @@ void SPIROM_WriteByte(uint16_t address,uint8_t data)
 #endif
 {
 #ifdef SPIROM_Addr24
-	ulong Addr;
+	u32_wf Addr;
 	Addr.u32=address;	
 #else
-	uint Addr;
+	u16_wf Addr;
 	Addr.u16=address;
 #endif	
 	SPIROM_WriteEnable();
-    SPIROM_CS_W=0;
+    SPIROM_CS_Low();
 
     SPIROM_SPIProc(SPIROM_CMD_WRITE);
 #ifdef SPIROM_Addr24
@@ -58,7 +54,7 @@ void SPIROM_WriteByte(uint16_t address,uint8_t data)
 
     SPIROM_SPIProc(data); 
 	
-    SPIROM_CS_W=1;
+    SPIROM_CS_High();
 #ifdef SPIROM_NeedWIP
 	while(1)
 	{
@@ -78,13 +74,13 @@ uint8_t SPIROM_ReadByte(uint16_t address)
 {
     uint8_t ret;
 #ifdef SPIROM_Addr24
-	ulong Addr;
+	u32_wf Addr;
 	Addr.u32=address;
 #else
-	uint Addr;
+	u16_wf Addr;
 	Addr.u16=address;
 #endif
-    SPIROM_CS_W=0;
+    SPIROM_CS_Low();
     SPIROM_SPIProc(SPIROM_CMD_READ);
 
 #ifdef SPIROM_Addr24
@@ -96,7 +92,7 @@ uint8_t SPIROM_ReadByte(uint16_t address)
 
 	ret=SPIROM_SPIProc(0);
 
-    SPIROM_CS_W=1;
+    SPIROM_CS_High();
 
     return (ret);
 }
@@ -105,10 +101,10 @@ uint8_t SPIROM_ReadByte(uint16_t address)
 
 void SPIROM_ReadStatus(void)
 {
-    SPIROM_CS_W=0;
+    SPIROM_CS_Low();
     SPIROM_SPIProc(SPIROM_CMD_RDSR);
     SPIROM_Status.All=SPIROM_SPIProc(0x55);
-    SPIROM_CS_W=1;
+    SPIROM_CS_High();
 }
 #ifdef SPIROM_Addr24
 void SPIROM_WriteArray(uint32_t address, uint8_t* pData,uint16_t nCount)
@@ -118,15 +114,15 @@ void SPIROM_WriteArray(uint16_t address, uint8_t* pData,uint16_t nCount)
 {
 #ifdef SPIROM_Addr24
 	//uint32_t counter;
-	ulong Addr;
+	u32_wf Addr;
 	Addr.u32=address;
 #else
-	uint Addr;
+	u16_wf Addr;
 	Addr.u16=address;
 #endif
     // WRITE
     SPIROM_WriteEnable();
-    SPIROM_CS_W=0;
+    SPIROM_CS_Low();
 
     SPIROM_SPIProc(SPIROM_CMD_WRITE);
 
@@ -150,7 +146,7 @@ void SPIROM_WriteArray(uint16_t address, uint8_t* pData,uint16_t nCount)
 		if((Addr.u16 & SPIROM_PageRollover) == 0)
 #endif
 		{
-			SPIROM_CS_W=1;
+			SPIROM_CS_High();
 
 			// Wait for completion of the write operation
 #ifdef SPIROM_NeedWIP
@@ -163,7 +159,7 @@ void SPIROM_WriteArray(uint16_t address, uint8_t* pData,uint16_t nCount)
 #endif
 			// Start writing of the next page
 			SPIROM_WriteEnable();
-			SPIROM_CS_W=0;
+			SPIROM_CS_Low();
 
 			SPIROM_SPIProc(SPIROM_CMD_WRITE);
 
@@ -176,7 +172,7 @@ void SPIROM_WriteArray(uint16_t address, uint8_t* pData,uint16_t nCount)
 		}
 #endif        
     }
-    SPIROM_CS_W=1;   
+    SPIROM_CS_High();   
 #ifdef SPIROM_NeedWIP
 	while(1)
 	{
@@ -194,15 +190,15 @@ void SPIROM_Fill(uint16_t address, uint8_t Data,uint16_t nCount)
 #endif
 {    
 #ifdef SPIROM_Addr24
-	ulong Addr;
+	u32_wf Addr;
 	Addr.u32=address;
 #else
-	uint Addr;
+	u16_wf Addr;
 	Addr.u16=address;
 #endif 
 	// WRITE
 	SPIROM_WriteEnable();
-	SPIROM_CS_W=0;
+	SPIROM_CS_Low();
 
 	SPIROM_SPIProc(SPIROM_CMD_WRITE);
 
@@ -226,7 +222,7 @@ void SPIROM_Fill(uint16_t address, uint8_t Data,uint16_t nCount)
 		if((Addr.u16 & SPIROM_PageRollover) == 0)
 #endif	
 		{
-			SPIROM_CS_W=1;;
+			SPIROM_CS_High();;
 
 			// Wait for completion of the write operation
 #ifdef SPIROM_NeedWIP
@@ -239,7 +235,7 @@ void SPIROM_Fill(uint16_t address, uint8_t Data,uint16_t nCount)
 #endif
 			// Start writing of the next page
 			SPIROM_WriteEnable();
-			SPIROM_CS_W=0;
+			SPIROM_CS_Low();
 
 			SPIROM_SPIProc(SPIROM_CMD_WRITE);
 
@@ -252,7 +248,7 @@ void SPIROM_Fill(uint16_t address, uint8_t Data,uint16_t nCount)
 		}
 #endif        
 	}
-	SPIROM_CS_W=1;   
+	SPIROM_CS_High();   
 #ifdef SPIROM_NeedWIP
 	// Wait for write end
 	while(1)
@@ -271,13 +267,13 @@ void SPIROM_ReadArray(uint16_t address, uint8_t* pData,uint16_t nCount)
 #endif
 {
 #ifdef SPIROM_Addr24
-	ulong Addr;
+	u32_wf Addr;
 	Addr.u32=address;
 #else
-	uint Addr;
+	u16_wf Addr;
 	Addr.u16=address;
 #endif
-    SPIROM_CS_W=0;
+    SPIROM_CS_Low();
 
     SPIROM_SPIProc(SPIROM_CMD_READ);
 
@@ -302,10 +298,10 @@ void SPIROM_ReadArray(uint16_t address, uint8_t* pData,uint16_t nCount)
 		if((Addr.u16 & SPIROM_PageRollover) == 0)
 #endif		
 		{
-			SPIROM_CS_W=1;;
+			SPIROM_CS_High();;
 
 			// Wait for completion of the write operation
-			SPIROM_CS_W=0;
+			SPIROM_CS_Low();
 
 			SPIROM_SPIProc(SPIROM_CMD_READ);
 
@@ -318,7 +314,7 @@ void SPIROM_ReadArray(uint16_t address, uint8_t* pData,uint16_t nCount)
 		}
 #endif
     }
-    SPIROM_CS_W=1;;
+    SPIROM_CS_High();;
 }
 
 

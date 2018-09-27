@@ -1,5 +1,7 @@
 #ifndef __SPIROM_h__
 #define __SPIROM_h__
+
+#include "SPIROM_Conf.h"
 //cs、wp自行初始化
 //需外部定义SPIROM_SPIInit()，用于初始化spi相关的3个引脚
 //需外部定义uint8_t SPIROM_SendData(uint8_t c)
