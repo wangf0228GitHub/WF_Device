@@ -62,7 +62,7 @@ void CP1616_Client_ProcRx(uint8_t rx);
 void CP1616_Client_SendData(uint8_t CommandIndex,uint8_t* pBuff,uint16_t Count);
 void CP1616_Client_SendOK(uint8_t CommandIndex);
 void CP1616_Client_SendError(uint8_t CommandIndex,uint8_t errNum);
-
+uint8_t CP1616_Client_SendHeader(uint8_t CommandIndex,uint16_t Count);
 #endif
 
 

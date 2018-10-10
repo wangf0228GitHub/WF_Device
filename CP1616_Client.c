@@ -315,3 +315,55 @@ void CP1616_Client_SendError(uint8_t CommandIndex,uint8_t errNum)
 	CP1616_Client_EndProcCommand();
 }
 
+uint8_t CP1616_Client_SendHeader( uint8_t CommandIndex,uint16_t Count )
+{
+	uint8_t sum;
+	uint16_t i;
+#ifndef CP1616_Client_Tx_OneByOne
+	uint16_t txIndex=0;
+#endif
+	sum=0;
+	CP1616_Client_SetTx();
+#ifdef CP1616_Client_Tx_OneByOne
+	CP1616_Client_TxByteWithVerify(0x16);
+	CP1616_Client_TxByteWithVerify(0x16);
+#if CP1616_AddrLen==1
+	CP1616_Client_TxByteWithVerify(CP1616_Client_Addr);
+#elif CP1616_AddrLen==2
+	CP1616_Client_TxByteWithVerify(HIGH_BYTE(CP1616_Client_Addr));
+	CP1616_Client_TxByteWithVerify(LOW_BYTE(CP1616_Client_Addr));
+#endif
+	CP1616_Client_TxByteWithVerify(CommandIndex);
+
+#if CP1616_DataBufLen==1
+	CP1616_Client_TxByteWithVerify(Count);
+#else
+	CP1616_Client_TxByteWithVerify(HIGH_BYTE(Count));
+	CP1616_Client_TxByteWithVerify(LOW_BYTE(Count));
+#endif
+	
+#else//Êý×é·¢ËÍ
+	CP1616_Client_TxList[txIndex++]=0x16;
+	CP1616_Client_TxList[txIndex++]=0x16;
+#if CP1616_AddrLen==1
+	CP1616_Client_TxList[txIndex++]=CP1616_Client_Addr;
+#elif CP1616_AddrLen==2
+	CP1616_Client_TxList[txIndex++]=HIGH_BYTE(CP1616_Client_Addr);
+	CP1616_Client_TxList[txIndex++]=LOW_BYTE(CP1616_Client_Addr);
+#endif
+	CP1616_Client_TxList[txIndex++]=CommandIndex;
+
+#if CP1616_DataBufLen==1
+	CP1616_Client_TxList[txIndex++]=Count;
+#else
+	CP1616_Client_TxList[txIndex++]=HIGH_BYTE(Count);
+	CP1616_Client_TxList[txIndex++]=LOW_BYTE(Count);
+#endif
+	sum=CP1616_Client_VerifyProc(CP1616_Client_TxList,pCP1616_ClientData);
+	CP1616_Client_TxProc(CP1616_Client_TxList,txIndex);
+#endif	
+	return sum;
+// 	CP1616_Client_SetRx();
+// 	CP1616_Client_EndProcCommand();
+}
+

@@ -2,7 +2,25 @@
 #include "OneWire.h"
 #include "Verify.h"
 
-
+const uint8_t DS18X20_ToDecicel[16]={
+	0,
+	1,
+	1,
+	2,
+	3,
+	3,
+	4,
+	4,
+	5,
+	6,
+	6,
+	7,
+	8,
+	8,
+	9,
+	9
+};
+uint8_t DS18X20_Scratchpad[9];
 //uint8_t DS18X20_Scratchpad[9];
 //#define DS18X20_Init() OneWire_Init()
 #ifdef OneWire_MAXSENSORS

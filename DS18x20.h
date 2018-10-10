@@ -66,25 +66,8 @@
 #define DS18X20_TH_REG      2
 #define DS18X20_TL_REG      3
 
-const uint8_t DS18X20_ToDecicel[16]={
-	0,
-	1,
-	1,
-	2,
-	3,
-	3,
-	4,
-	4,
-	5,
-	6,
-	6,
-	7,
-	8,
-	8,
-	9,
-	9
-};
-uint8_t DS18X20_Scratchpad[9];
+extern const uint8_t DS18X20_ToDecicel[16];
+extern uint8_t DS18X20_Scratchpad[9];
 
 #ifdef OneWire_MAXSENSORS
 	void DS18X20_FindSensor(uint8_t* diff, uint8_t* id);
