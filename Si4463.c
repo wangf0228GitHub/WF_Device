@@ -95,6 +95,7 @@ void Si4463_WAIT_CTS( void )
     uint8_t cts;
     do
     {
+		cts=0;
         Si4463_NSEL_Low();
         Si4463_SPIProc( READ_CMD_BUFF );
         cts = Si4463_SPIProc( 0xFF );
@@ -351,7 +352,7 @@ OUTPUT   : received bytes
 */
 uint8_t Si4463_READ_PACKET( uint8_t *buffer )
 {
-    uint8_t length, i;
+    uint8_t length, i,x;
     Si4463_WAIT_CTS( );
     Si4463_NSEL_Low();
 
@@ -365,7 +366,8 @@ uint8_t Si4463_READ_PACKET( uint8_t *buffer )
 
     while( length -- )
     {
-        *buffer++ = Si4463_SPIProc( 0xFF );
+        x = Si4463_SPIProc( 0xFF );
+		*buffer++=x;
     }
     Si4463_NSEL_High();
     return i;
