@@ -110,7 +110,7 @@ void MS8607_CalculatePT(void)
 	P = (((MS8607_adcP * SENS) >> 21) - OFF) >> 15;
 
 	MS8607_Temperature.f = ((float)TEMP - T2) / 100;
-	MS8607_Pressure.f= (float)P / 1000;
+	MS8607_Pressure.f= (float)P / 100;
 }
 uint8_t MS8607_ReadPT(uint8_t resolution_osr)
 {

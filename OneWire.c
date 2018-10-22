@@ -1,22 +1,23 @@
 #include "OneWire.h"
 
 
+
 uint8_t OneWire_Reset(void)
 {
-	uint8_t r,Retry;
+	unsigned char r,Retry;
 	r=1;
 	Retry=TIMESFORRETRY_OneWire;
 	while(Retry--)
 	{
-		ONEWIRE_SETLOW; 
-		__delay_us(480);
-		ONEWIRE_SETHIGH;//等电阻拉高总线并保持15－60us
-		di();
-		__delay_us(75);
-		r=ONEWIRE_GETIN;//接受应答信号
-		ei();		
-		__delay_us(480);//延时60－240us
-		if(ONEWIRE_GETIN==0)
+		ONEWIRE_SETLOW(); 
+		OneWire_Delay_us(480);
+		ONEWIRE_SETHIGH();//等电阻拉高总线并保持15－60us
+		//di();
+		OneWire_Delay_us(75);
+		r=ONEWIRE_GETIN();//接受应答信号
+		//ei();		
+		OneWire_Delay_us(480);//延时60－240us
+		if(ONEWIRE_GETIN()==0)
 			r=1;
 		if(r==0)
 			break;
@@ -40,23 +41,23 @@ uint8_t OneWire_RomSearch( uint8_t diff, uint8_t *id )
 		do 
 		{
 			di();
-			ONEWIRE_SETLOW;
-			__delay_us(2);
+			ONEWIRE_SETLOW();
+			OneWire_Delay_us(2);
 			//	ONEWIRE_SETLOW();
-			ONEWIRE_SETHIGH;
-			__delay_us(15-3-OneWire_ReadDelayOffSet);
-			b=ONEWIRE_GETIN;
+			ONEWIRE_SETHIGH();
+			OneWire_Delay_us(15-3-OneWire_ReadDelayOffSet);
+			b=ONEWIRE_GETIN();
 			ei();
-			__delay_us(60);
+			OneWire_Delay_us(60);
 			di();
-			ONEWIRE_SETLOW;
-			__delay_us(2);
+			ONEWIRE_SETLOW();
+			OneWire_Delay_us(2);
 			//	ONEWIRE_SETLOW();
-			ONEWIRE_SETHIGH;
-			__delay_us(15-3-OneWire_ReadDelayOffSet);
-			b1=ONEWIRE_GETIN;
+			ONEWIRE_SETHIGH();
+			OneWire_Delay_us(15-3-OneWire_ReadDelayOffSet);
+			b1=ONEWIRE_GETIN();
 			ei();
-			__delay_us(60);
+			OneWire_Delay_us(60);
 			//b = OneWire_ReadBit();			// read bit
 			//if(OneWire_ReadBit()) 
 			if(b1!=0x00)
@@ -78,14 +79,14 @@ uint8_t OneWire_RomSearch( uint8_t diff, uint8_t *id )
 				}
 			}
 			di();
-			ONEWIRE_SETLOW;
-			__delay_us(2);
+			ONEWIRE_SETLOW();
+			OneWire_Delay_us(2);
 			if (b!=0x00)  
 			{
-				ONEWIRE_SETHIGH;
+				ONEWIRE_SETHIGH();
 			}
-			__delay_us(75);
-			ONEWIRE_SETHIGH;
+			OneWire_Delay_us(75);
+			ONEWIRE_SETHIGH();
 			ei();
 			//OneWire_WriteBit(b);// write bit
 			*id >>= 1;
@@ -134,12 +135,12 @@ uint8_t OneWire_Command( uint8_t command)
 // {
 // 	di();
 // 	ONEWIRE_SETLOW();
-// 	__delay_us(2);
+// 	OneWire_Delay_us(2);
 // 	if (bitval==1)  
 // 	{
 // 		ONEWIRE_SETHIGH();
 // 	}
-// 	__delay_us(65);
+// 	OneWire_Delay_us(65);
 // 	ONEWIRE_SETHIGH();
 // 	ei();
 // }
@@ -147,15 +148,13 @@ uint8_t OneWire_Command( uint8_t command)
 uint8_t OneWire_ReadBit( void )
 {
 	uint8_t r;
-	di();
-	ONEWIRE_SETLOW;
-	__delay_us(2);
+	ONEWIRE_SETLOW();
+	OneWire_Delay_us(2);
 	//	ONEWIRE_SETLOW();
-	ONEWIRE_SETHIGH;
-	__delay_us(15-3-OneWire_ReadDelayOffSet);
-	r=ONEWIRE_GETIN;
-	ei();
-	__delay_us(60);
+	ONEWIRE_SETHIGH();
+	OneWire_Delay_us(15-3-OneWire_ReadDelayOffSet);
+	r=ONEWIRE_GETIN();
+	OneWire_Delay_us(60);
 	if(r==0x00)
  		return 0;	
 	else
@@ -170,19 +169,19 @@ void OneWire_WriteByte( uint8_t val )
 	{
 		temp=val>>i;
 		temp&=0x01;
-		di();
-		ONEWIRE_SETLOW;
-		__delay_us(2);
+		//di();
+		ONEWIRE_SETLOW();
+		OneWire_Delay_us(2);
 		if (temp==1)  
 		{
-			ONEWIRE_SETHIGH;
+			ONEWIRE_SETHIGH();
 		}
-		__delay_us(75);
-		ONEWIRE_SETHIGH;
-		ei();
+		OneWire_Delay_us(75);
+		ONEWIRE_SETHIGH();
+		//ei();
 		//OneWire_WriteBit(temp);   //调写位函数
 	}
-	//__delay_us(1);
+	//OneWire_Delay_us(1);
 }
 
 uint8_t OneWire_ReadByte( void )
@@ -192,20 +191,20 @@ uint8_t OneWire_ReadByte( void )
 	uint8_t value=0;
 	for(i=0;i<8;i++)
 	{
-		di();
-		ONEWIRE_SETLOW;
-		__delay_us(2);
+		//di();
+		ONEWIRE_SETLOW();
+		OneWire_Delay_us(2);
 		//	ONEWIRE_SETLOW();
-		ONEWIRE_SETHIGH;
-		__delay_us(15-3-OneWire_ReadDelayOffSet);
-		b=ONEWIRE_GETIN;
-		ei();
-		__delay_us(60);
+		ONEWIRE_SETHIGH();
+		OneWire_Delay_us(15-3-OneWire_ReadDelayOffSet);
+		b=ONEWIRE_GETIN();
+		//ei();
+		OneWire_Delay_us(60);
 		//b=OneWire_ReadBit();     //调读位函数
 		if(b)               //如果是 1 置1
 		{
 			value|=(0x01<<i);  //先读低位，再读高位
-			//__delay_us(1);
+			//OneWire_Delay_us(1);
 		}
 	}                         //否则置 0
 	return(value);  

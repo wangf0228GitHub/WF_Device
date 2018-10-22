@@ -73,7 +73,7 @@ void CP1616_Client_ProcRx(uint8_t rx)
 			CP1616_Client_NeedRxCount=0xffff;
 #endif
 		}
-		else if(CP1616_Client_RxCount>MAX_CP1616_Client_RX)
+		else if(CP1616_Client_RxCount>CP1616_Client_RxList_LenMax)
 		{
 			CP1616_Client_RxCount=0;
 #if CP1616_DataBufLen==1
@@ -88,9 +88,10 @@ void CP1616_Client_ProcRx(uint8_t rx)
 #if CP1616_DataBufLen==1
 		CP1616_Client_NeedRxCount=CP1616_Client_RxList[pCP1616_ClientData-1]+pCP1616_ClientData+2;
 #else
-		CP1616_Client_NeedRxCount=MAKE_INT(CP1616_Client_RxList[pCP1616_ClientData-2],CP1616_Client_RxList[pCP1616_ClientData-1])+pCP1616_ClientData+2;
+		CP1616_Client_NeedRxCount=MAKE_SHORT(CP1616_Client_RxList[pCP1616_ClientData-2],CP1616_Client_RxList[pCP1616_ClientData-1])+pCP1616_ClientData+2;
 #endif
-		
+		if(CP1616_Client_NeedRxCount>CP1616_Client_RxList_LenMax)
+			CP1616_Client_RxCount=0;
 	}
 #if CP1616_AddrLen==1
 	else if(CP1616_Client_RxCount==3)//≈–∂œµÿ÷∑

@@ -2,6 +2,8 @@
 #define _ONEWIRE_h_
 
 #include "main.h"
+#include "OneWire_Conf.h"
+
 
 #ifndef TIMESFORRETRY_OneWire
 	#define TIMESFORRETRY_OneWire 5
@@ -13,21 +15,11 @@
 //#define ONEWIRE_PIN RA2
 //#define ONEWIRE_PIN_DIR TRISA2
 
-#ifndef ONEWIRE_SETLOW
-	#define ONEWIRE_SETLOW ONEWIRE_PIN_DIR = 0;ONEWIRE_PIN_W=0
+#ifndef ONEWIRE_IOWork_Ex
+	#define ONEWIRE_SETLOW() ONEWIRE_PIN_DIR = 0;ONEWIRE_PIN_W=0
+	#define ONEWIRE_GETIN() ONEWIRE_PIN_R
+	#define ONEWIRE_SETHIGH() ONEWIRE_PIN_DIR=1
 #endif
-
-
-#ifndef ONEWIRE_GETIN
-	#define ONEWIRE_GETIN ONEWIRE_PIN_R
-#endif
-
-#ifndef ONEWIRE_SETHIGH
-	#define ONEWIRE_SETHIGH ONEWIRE_PIN_DIR=1
-#endif
-
-
-
 
 
 /*******************************************/

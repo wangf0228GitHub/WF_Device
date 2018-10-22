@@ -118,7 +118,7 @@ void SimSPI_Init(void)
 			}	
 			c=c<<1;	//判断待发送的数据位是0或1	
 			SimSPI_Delay();
-			SIMSPI_SCL_High();//上升沿发送					
+			SIMSPI_SCL_High();//上升沿发送
 		}
 		SIMSPI_SCL_Low();	//空闲为低电平
 	#elif defined(SimSPI_SPI1) 
