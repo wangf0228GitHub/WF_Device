@@ -126,7 +126,7 @@ uint8_t MS8607_ReadPT(uint8_t resolution_osr)
 
 	MS8607_adcT=MAKE_INT(MAKE_SHORT(0,MS8607_Buf[0]),MAKE_SHORT(MS8607_Buf[1],MS8607_Buf[2]));
 
-
+	cmd=resolution_osr<<1;
 	cmd |= 0x40;//
 	if(MS8607_I2CProc(MS8607_PT_Addr,cmd,0)==0)
 		return 0;
