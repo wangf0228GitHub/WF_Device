@@ -19,7 +19,7 @@ typedef union
 	{
 		unsigned bRx:1;
 	}Bits;
-	uint8_t AllFlag;
+	uint32_t AllFlag;
 } _CP1616_Client_Flags;        // general flags
 
 #define pCP1616_ClientData 2+CP1616_AddrLen+1+CP1616_DataBufLen
@@ -63,6 +63,68 @@ void CP1616_Client_SendData(uint8_t CommandIndex,uint8_t* pBuff,uint16_t Count);
 void CP1616_Client_SendOK(uint8_t CommandIndex);
 void CP1616_Client_SendError(uint8_t CommandIndex,uint8_t errNum);
 uint8_t CP1616_Client_SendHeader(uint8_t CommandIndex,uint16_t Count);
+
+#ifdef CP1717_Client
+#ifndef CP1717_Client_SetRx_Ex
+#define CP1717_Client_SetRx()
+#endif
+
+#ifndef CP1717_Client_SetTx_Ex
+#define CP1717_Client_SetTx()
+#endif
+
+
+typedef union   
+{
+	struct
+	{
+		unsigned bRx:1;
+	}Bits;
+	uint32_t AllFlag;
+} _CP1717_Client_Flags;        // general flags
+
+#define pCP1717_ClientData 2+CP1717_AddrLen+1+CP1717_DataBufLen
+#define pCP1717_CommandIndex 2+CP1717_AddrLen
+
+
+
+#ifndef CP1717_Client_RxList_LenMax
+#define CP1717_Client_RxList_LenMax 100
+#endif
+
+#if CP1717_DataBufLen==1
+extern uint8_t CP1717_Client_RxCount;
+extern uint8_t CP1717_Client_NeedRxCount;
+#else
+extern uint16_t CP1717_Client_RxCount;
+extern uint16_t CP1717_Client_NeedRxCount;
+#endif
+
+
+#if CP1717_AddrLen==1
+extern uint8_t CP1717_Client_Addr;
+#elif CP1717_AddrLen==2
+extern uint16_t CP1717_Client_Addr;
+#endif
+
+#ifndef CP1717_Client_Tx_OneByOne
+#ifndef CP1717_Client_TxList_LenMax
+#define CP1717_Client_TxList_LenMax 100
+#endif
+extern uint8_t CP1717_Client_TxList[CP1717_Client_TxList_LenMax];
+#endif
+
+extern uint8_t CP1717_Client_RxList[CP1717_Client_RxList_LenMax];
+extern _CP1717_Client_Flags CP1717_Client_Flags;
+
+void CP1717_Client_Init(void);
+void CP1717_Client_EndProcCommand(void);
+void CP1717_Client_ProcRx(uint8_t rx);
+void CP1717_Client_SendData(uint8_t CommandIndex,uint8_t* pBuff,uint16_t Count);
+void CP1717_Client_SendOK(uint8_t CommandIndex);
+void CP1717_Client_SendError(uint8_t CommandIndex,uint8_t errNum);
+uint8_t CP1717_Client_SendHeader(uint8_t CommandIndex,uint16_t Count);
+#endif
 #endif
 
 
