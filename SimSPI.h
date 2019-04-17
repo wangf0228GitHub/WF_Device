@@ -29,5 +29,18 @@ uint8_t SimSPI_Proc(uint8_t c);
 	uint8_t SimSPI2_Proc(uint8_t c);
 #endif
 
+#ifdef SimSPI3
+	#ifndef SimSPI3_Delay_Ex
+	#define SimSPI3_Delay()
+	#endif
+
+	#if defined(SimSPI3_SPI0) || defined(SimSPI3_SPI1) || defined(SimSPI3_SPI2) || defined(SimSPI3_SPI3) 
+	#else
+	#define SimSPI3_SPI0
+	#endif
+
+	void SimSPI3_Init(void);
+	uint8_t SimSPI3_Proc(uint8_t c);
+#endif
 
 #endif // __SimSPI_h__

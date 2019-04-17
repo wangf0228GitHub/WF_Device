@@ -5,7 +5,7 @@
 #include "SPIROM_Conf.h"
 //cs、wp自行初始化
 //需外部定义SPIROM_SPIInit()，用于初始化spi相关的3个引脚
-//需外部定义uint8_t SPIROM_SendData(uint8_t c)
+//需外部定义uint8_t SPIROM_SPIProc(uint8_t c)
 /************************************************************************/
 /* 适用芯片                                                             */
 /* 1. FM25H20  状态字中WIP未用，需定义SPIROM_Addr24						*/
