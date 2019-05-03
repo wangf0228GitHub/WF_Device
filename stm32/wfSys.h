@@ -6,10 +6,17 @@
 #define GetDeltaTick(a) (HAL_GetTick() - a)
 #define GetCurTick() HAL_GetTick()
 
+#ifdef KEIL
+#define nop() __nop()
+#else
+#define nop() asm("nop")
+#endif
+
 void wfDelay_init(uint8_t SYSCLK);
-
+void wfDelay_nNOP(uint32_t nCount);
 void wfDelay_us(uint32_t nus);
-
+#define NOP5()  nop();nop();nop();nop();nop()
+#define NOP10() nop();nop();nop();nop();nop();nop();nop();nop();nop();nop()  
 #ifdef Delay_ms_wfus
 void wfDelay_ms(uint16_t nms);
 #else

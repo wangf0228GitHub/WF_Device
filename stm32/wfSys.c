@@ -12,7 +12,14 @@ void wfDelay_init(uint8_t SYSCLK)
 {
 	fac_us=SYSCLK;
 }
-
+void wfDelay_nNOP(uint32_t nCount)
+{
+	while(nCount!=0)
+	{
+		nCount--;
+		nop();
+	}
+}
 //延时nus
 //nus为要延时的us数.	
 //nus:0~190887435(最大值即2^32/fac_us@fac_us=22.5)	 

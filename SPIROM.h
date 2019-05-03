@@ -3,6 +3,7 @@
 
 #include "main.h"
 #include "SPIROM_Conf.h"
+
 //cs、wp自行初始化
 //需外部定义SPIROM_SPIInit()，用于初始化spi相关的3个引脚
 //需外部定义uint8_t SPIROM_SPIProc(uint8_t c)
@@ -38,7 +39,7 @@ typedef union
 		unsigned BP1 : 1;
 		unsigned RESERVED : 3;
 		unsigned WPEN : 1;
-	};
+	}Bits;
 	uint8_t All;
 } _SPIROM_Status;        // general flags
 extern _SPIROM_Status SPIROM_Status;

@@ -6,7 +6,35 @@
 
 uint8_t lcyIRDecodeIn[0x08];
 uint8_t lcyIRDecodeOut[0x08];
-
+void lcyIRDecodeInit(uint8_t* pBuf)
+{
+	uint8_t i;
+	for (i=0;i<8;i++)
+	{
+		lcyIRDecodeIn[i]=pBuf[i];
+	}
+}
+void lcyIRDecodeRead(uint8_t* pBuf)
+{
+	uint8_t i;
+	for (i=0;i<8;i++)
+	{
+		pBuf[i]=lcyIRDecodeOut[i];
+	}
+}
+void GetlcyIRDecode(uint8_t* pIn,uint8_t* pOut)
+{
+	uint8_t i;
+	for (i=0;i<8;i++)
+	{
+		lcyIRDecodeIn[i]=pIn[i];
+	}
+	lcyIRDecode();
+	for (i=0;i<8;i++)
+	{
+		pOut[i]=lcyIRDecodeOut[i];
+	}
+}
 uint16_t TCodeKey[316]=
 {
 	0x3139,0x2129,0x1119,0x0109,0x333B,0x232B,0x131B,0x030B,0x353D,0x252D,0x151D,0x050D,0x373F,0x272F,0x171F,

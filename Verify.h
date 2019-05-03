@@ -2,7 +2,7 @@
 #define __VERIFY_H__
 
 #include "main.h"
-#include "TypeDefine.h"
+
 
 #define VERIFYSUM(x,y) ((uint8_t)(x+y))
 #define VERIFYXOR(x,y) ((uint8_t)(x^y))
@@ -18,6 +18,7 @@ uint8_t GetVerify_CRC8(uint8_t* pBuff, uint32_t Count);
 
 
 #ifdef Verify_CRC16
+#include "TypeDefine.h"
 #define VERIFYCRC16(x) uIndex = crc.u8H ^ x ;	\
 	crc.u8H = crc.u8L ^ auchCRCHi[uIndex] ;	\
 	crc.u8L = auchCRCLo[uIndex] ;

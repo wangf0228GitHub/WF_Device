@@ -442,6 +442,36 @@ void sub_add(uint8_t *p,uint8_t*s)
 	}
 	//--
 }
+void lcyHashInit(uint8_t* pBuf)
+{
+	uint8_t i;
+	for(i=0;i<8;i++)
+		lcyHashIn[i]=pBuf[i];
+}
+void lcyHashRead(uint8_t* pBuf)
+{
+	uint8_t i;
+	for(i=0;i<8;i++)
+		pBuf[i]=lcyHashOut[i];
+}
+void GetlcyHashOnce(uint8_t* pIn,uint8_t* pOut)
+{
+	uint8_t i;
+	for(i=0;i<8;i++)
+		lcyHashIn[i]=pIn[i];
+	lcyHashOnce();
+	for(i=0;i<8;i++)
+		pOut[i]=lcyHashOut[i];
+}
+void GetlcyHashN(uint8_t* pIn,uint8_t* pOut,uint8_t n)
+{
+	uint8_t i;
+	for(i=0;i<8;i++)
+		lcyHashIn[i]=pIn[i];
+	lcyHashCalc(n);
+	for(i=0;i<8;i++)
+		pOut[i]=lcyHashOut[i];
+}
 void lcyHashOnce(void)
 {
 	uint8_t i;

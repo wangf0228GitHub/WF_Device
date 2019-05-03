@@ -1,5 +1,5 @@
 #include "SPIROM.h"
-#include "TypeDefine.h"
+#include "wfDefine.h"
 _SPIROM_Status SPIROM_Status;
 // #define SPIROM_CS_DIR _TRISB10
 // #define SPIROM_W_DIR  _TRISB11
@@ -33,19 +33,12 @@ void SPIROM_WriteByte(uint32_t address,uint8_t data)
 #else
 void SPIROM_WriteByte(uint16_t address,uint8_t data)
 #endif
-{
-#ifdef SPIROM_Addr24
-	u32_wf Addr;
-	Addr.u32=address;	
-#else
-	u16_wf Addr;
-	Addr.u16=address;
-#endif	
+{	
 #ifdef SPIROM_NeedWIP
 	while(1)
 	{
 		SPIROM_ReadStatus();
-		if(SPIROM_Status.WIP==0)
+		if(SPIROM_Status.Bits.WIP==0)
 			break;
 	}
 #endif	
@@ -54,11 +47,11 @@ void SPIROM_WriteByte(uint16_t address,uint8_t data)
 
     SPIROM_SPIProc(SPIROM_CMD_WRITE);
 #ifdef SPIROM_Addr24
-	SPIROM_SPIProc(Addr.u8s[2]);
+	SPIROM_SPIProc(LOW_BYTE(HIGH_SHORT(address)));
 #endif
-    SPIROM_SPIProc(Addr.u8s[1]);
+    SPIROM_SPIProc(HIGH_BYTE(address));
 
-	SPIROM_SPIProc(Addr.u8s[0]);
+	SPIROM_SPIProc(LOW_BYTE(address));
 
     SPIROM_SPIProc(data); 
 	
@@ -74,22 +67,24 @@ uint8_t SPIROM_ReadByte(uint16_t address)
 #endif
 {
     uint8_t ret;
-#ifdef SPIROM_Addr24
-	u32_wf Addr;
-	Addr.u32=address;
-#else
-	u16_wf Addr;
-	Addr.u16=address;
+#ifdef SPIROM_NeedWIP
+	while(1)
+	{
+		SPIROM_ReadStatus();
+		if(SPIROM_Status.Bits.WIP==0)
+			break;
+	}
 #endif
+
     SPIROM_CS_Low();
     SPIROM_SPIProc(SPIROM_CMD_READ);
 
 #ifdef SPIROM_Addr24
-	SPIROM_SPIProc(Addr.u8s[2]);
+	SPIROM_SPIProc(LOW_BYTE(HIGH_SHORT(address)));
 #endif
-	SPIROM_SPIProc(Addr.u8s[1]);
+	SPIROM_SPIProc(HIGH_BYTE(address));
 
-	SPIROM_SPIProc(Addr.u8s[0]);
+	SPIROM_SPIProc(LOW_BYTE(address));
 
 	ret=SPIROM_SPIProc(0);
 
@@ -113,19 +108,11 @@ void SPIROM_WriteArray(uint32_t address, uint8_t* pData,uint16_t nCount)
 void SPIROM_WriteArray(uint16_t address, uint8_t* pData,uint16_t nCount)
 #endif
 {
-#ifdef SPIROM_Addr24
-	//uint32_t counter;
-	u32_wf Addr;
-	Addr.u32=address;
-#else
-	u16_wf Addr;
-	Addr.u16=address;
-#endif
 #ifdef SPIROM_NeedWIP
 	while(1)
 	{
 		SPIROM_ReadStatus();
-		if(SPIROM_Status.WIP==0)
+		if(SPIROM_Status.Bits.WIP==0)
 			break;
 	}
 #endif	
@@ -136,24 +123,19 @@ void SPIROM_WriteArray(uint16_t address, uint8_t* pData,uint16_t nCount)
     SPIROM_SPIProc(SPIROM_CMD_WRITE);
 
 #ifdef SPIROM_Addr24
-	SPIROM_SPIProc(Addr.u8s[2]);
+	SPIROM_SPIProc(LOW_BYTE(HIGH_SHORT(address)));
 #endif
-	SPIROM_SPIProc(Addr.u8s[1]);
+	SPIROM_SPIProc(HIGH_BYTE(address));
 
-	SPIROM_SPIProc(Addr.u8s[0]);
+	SPIROM_SPIProc(LOW_BYTE(address));
 
     while(nCount!=0)
     {
 		nCount--;
 		SPIROM_SPIProc(*pData++);
 #ifdef SPIROM_PageRollover
-#ifdef SPIROM_Addr24
-		Addr.u32++;
-		if((Addr.u32 & SPIROM_PageRollover) == 0)
-#else
-		Addr.u16++;
-		if((Addr.u16 & SPIROM_PageRollover) == 0)
-#endif
+		address++;
+		if((address & SPIROM_PageRollover) == 0&&(nCount!=0))
 		{
 			SPIROM_CS_High();
 
@@ -162,7 +144,7 @@ void SPIROM_WriteArray(uint16_t address, uint8_t* pData,uint16_t nCount)
 			while(1)
 			{
 				SPIROM_ReadStatus();
-				if(SPIROM_Status.WIP==0)
+				if(SPIROM_Status.Bits.WIP==0)
 					break;
 			}
 #endif
@@ -173,11 +155,11 @@ void SPIROM_WriteArray(uint16_t address, uint8_t* pData,uint16_t nCount)
 			SPIROM_SPIProc(SPIROM_CMD_WRITE);
 
 #ifdef SPIROM_Addr24
-			SPIROM_SPIProc(Addr.u8s[2]);
+			SPIROM_SPIProc(LOW_BYTE(HIGH_SHORT(address)));
 #endif
-			SPIROM_SPIProc(Addr.u8s[1]);
+			SPIROM_SPIProc(HIGH_BYTE(address));
 
-			SPIROM_SPIProc(Addr.u8s[0]);
+			SPIROM_SPIProc(LOW_BYTE(address));
 		}
 #endif        
     }
@@ -190,19 +172,12 @@ void SPIROM_Fill(uint32_t address, uint8_t Data,uint32_t nCount)
 #else
 void SPIROM_Fill(uint16_t address, uint8_t Data,uint16_t nCount)
 #endif
-{    
-#ifdef SPIROM_Addr24
-	u32_wf Addr;
-	Addr.u32=address;
-#else
-	u16_wf Addr;
-	Addr.u16=address;
-#endif 
+{     
 #ifdef SPIROM_NeedWIP
 	while(1)
 	{
 		SPIROM_ReadStatus();
-		if(SPIROM_Status.WIP==0)
+		if(SPIROM_Status.Bits.WIP==0)
 			break;
 	}
 #endif	
@@ -213,24 +188,19 @@ void SPIROM_Fill(uint16_t address, uint8_t Data,uint16_t nCount)
 	SPIROM_SPIProc(SPIROM_CMD_WRITE);
 
 #ifdef SPIROM_Addr24
-	SPIROM_SPIProc(Addr.u8s[2]);
+	SPIROM_SPIProc(LOW_BYTE(HIGH_SHORT(address)));
 #endif
-	SPIROM_SPIProc(Addr.u8s[1]);
+	SPIROM_SPIProc(HIGH_BYTE(address));
 
-	SPIROM_SPIProc(Addr.u8s[0]);
+	SPIROM_SPIProc(LOW_BYTE(address));
 
 	while(nCount!=0)
 	{
 		nCount--;
 		SPIROM_SPIProc(Data);
 #ifdef SPIROM_PageRollover
-#ifdef SPIROM_Addr24
-		Addr.u32++;
-		if((Addr.u32 & SPIROM_PageRollover) == 0)
-#else
-		Addr.u16++;
-		if((Addr.u16 & SPIROM_PageRollover) == 0)
-#endif	
+		address++;
+		if((address & SPIROM_PageRollover) == 0&&(nCount!=0))	
 		{
 			SPIROM_CS_High();;
 
@@ -239,7 +209,7 @@ void SPIROM_Fill(uint16_t address, uint8_t Data,uint16_t nCount)
 			while(1)
 			{
 				SPIROM_ReadStatus();
-				if(SPIROM_Status.WIP==0)
+				if(SPIROM_Status.Bits.WIP==0)
 					break;
 			}
 #endif
@@ -250,11 +220,11 @@ void SPIROM_Fill(uint16_t address, uint8_t Data,uint16_t nCount)
 			SPIROM_SPIProc(SPIROM_CMD_WRITE);
 
 #ifdef SPIROM_Addr24
-			SPIROM_SPIProc(Addr.u8s[2]);
+			SPIROM_SPIProc(LOW_BYTE(HIGH_SHORT(address)));
 #endif
-			SPIROM_SPIProc(Addr.u8s[1]);
+			SPIROM_SPIProc(HIGH_BYTE(address));
 
-			SPIROM_SPIProc(Addr.u8s[0]);
+			SPIROM_SPIProc(LOW_BYTE(address));
 		}
 #endif        
 	}
@@ -268,23 +238,25 @@ void SPIROM_ReadArray(uint32_t address, uint8_t* pData,uint16_t nCount)
 void SPIROM_ReadArray(uint16_t address, uint8_t* pData,uint16_t nCount)
 #endif
 {
-#ifdef SPIROM_Addr24
-	u32_wf Addr;
-	Addr.u32=address;
-#else
-	u16_wf Addr;
-	Addr.u16=address;
+#ifdef SPIROM_NeedWIP
+	while(1)
+	{
+		SPIROM_ReadStatus();
+		if(SPIROM_Status.Bits.WIP==0)
+			break;
+	}
 #endif
+
     SPIROM_CS_Low();
 
     SPIROM_SPIProc(SPIROM_CMD_READ);
 
 #ifdef SPIROM_Addr24
-	SPIROM_SPIProc(Addr.u8s[2]);
+	SPIROM_SPIProc(LOW_BYTE(HIGH_SHORT(address)));
 #endif
-	SPIROM_SPIProc(Addr.u8s[1]);
+	SPIROM_SPIProc(HIGH_BYTE(address));
 
-	SPIROM_SPIProc(Addr.u8s[0]);
+	SPIROM_SPIProc(LOW_BYTE(address));
 	//nCount=nCount*size;
     while(nCount!=0)
     {
@@ -292,13 +264,8 @@ void SPIROM_ReadArray(uint16_t address, uint8_t* pData,uint16_t nCount)
 		*pData=SPIROM_SPIProc(0);
         pData++;
 #ifdef SPIROM_PageRollover
-#ifdef SPIROM_Addr24
-		Addr.u32++;
-		if((Addr.u32 & SPIROM_PageRollover) == 0)
-#else
-		Addr.u16++;
-		if((Addr.u16 & SPIROM_PageRollover) == 0)
-#endif		
+		address++;
+		if((address & SPIROM_PageRollover) == 0 &&(nCount!=0))	
 		{
 			SPIROM_CS_High();;
 
@@ -308,11 +275,11 @@ void SPIROM_ReadArray(uint16_t address, uint8_t* pData,uint16_t nCount)
 			SPIROM_SPIProc(SPIROM_CMD_READ);
 
 #ifdef SPIROM_Addr24
-			SPIROM_SPIProc(Addr.u8s[2]);
+			SPIROM_SPIProc(LOW_BYTE(HIGH_SHORT(address)));
 #endif
-			SPIROM_SPIProc(Addr.u8s[1]);
+			SPIROM_SPIProc(HIGH_BYTE(address));
 
-			SPIROM_SPIProc(Addr.u8s[0]);
+			SPIROM_SPIProc(LOW_BYTE(address));
 		}
 #endif
     }
