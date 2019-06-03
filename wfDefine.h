@@ -7,10 +7,15 @@
 #define MAKE_SHORT(h,l)	(((uint16_t)h<<8)+l)
 #define MAKE_INT(h,l)	(((uint32_t)h<<16)+l)
 
-#define LOW_NIBBLE(x)	(x&0x0F)
-#define HIGH_NIBBLE(x)	(x>>4)
+#ifndef __PICC18__
 #define LOW_BYTE(x)     ((uint8_t)((x)&0xFF))
 #define HIGH_BYTE(x)    ((uint8_t)(((x)>>8)&0xFF))
+#define LOW_WORD(x)     ((unsigned short)((x)&0xFFFF))
+#define HIGH_WORD(x)    ((unsigned short)(((x)>>16)&0xFFFF))
+#endif
+
+#define LOW_NIBBLE(x)	(x&0x0F)
+#define HIGH_NIBBLE(x)	(x>>4)
 #define LOW_SHORT(x)     ((uint16_t)((x)&0xFFFF))
 #define HIGH_SHORT(x)    ((uint16_t)(((x)>>16)&0xFFFF))
 

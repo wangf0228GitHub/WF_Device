@@ -1,7 +1,7 @@
 #ifndef __VERIFY_H__
 #define __VERIFY_H__
 
-#include "main.h"
+#include "HardwareProfile.h"
 
 
 #define VERIFYSUM(x,y) ((uint8_t)(x+y))

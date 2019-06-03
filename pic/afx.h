@@ -1,15 +1,11 @@
 #ifndef __afx_H_
 #define __afx_H_
 
-#include "main.h"
+#include "HardwareProfile.h"
 #include <stdint.h>
 
 #ifndef __PICC18__
 
-#define LOW_BYTE(x)     ((uint8_t)((x)&0xFF))
-#define HIGH_BYTE(x)    ((uint8_t)(((x)>>8)&0xFF))
-#define LOW_WORD(x)     ((unsigned short)((x)&0xFFFF))
-#define HIGH_WORD(x)    ((unsigned short)(((x)>>16)&0xFFFF))
 #define WRITETIMER1(x) ((void)(TMR1H=((x)>>8),TMR1L=((x)&0xFF)))
 #define READTIMER1() (MAKE_INT(TMR1H,TMR1L))
 #define WRITETIMER0(x) ((void)(TMR0H=((x)>>8),TMR0L=((x)&0xFF)))
@@ -39,12 +35,7 @@ extern uint8_t wCPU_IPL;
 #define iQX(X,Y) ((Y < 0.0) ? (int)((int)(1<<X)*(Y) - 0.5) : (int)((int)(1<<X)*(Y) + 0.5))
 #define lQX(X,Y) ((Y < 0.0) ? (long)((long)(1<<X)*(Y) - 0.5) : (long)((long)(1<<X)*(Y) + 0.5))
 
-#define LOW_NIBBLE(x)	(x&0x0F)
-#define HIGH_NIBBLE(x)	(x>>4)
 
-#define MAKE_BYTE(h,l)	((h<<4)+(l&0x0f))
-#define MAKE_INT(h,l)	(((uint16_t)h<<8)+l)
-#define MAKE_WORD(h,l)	(((uint32_t)h<<16)+l)
 
 #define GetDeltaTick(a) (SystemTick-a)
 #ifdef TMR

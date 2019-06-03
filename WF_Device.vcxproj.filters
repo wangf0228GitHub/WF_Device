@@ -367,9 +367,6 @@
     <ClCompile Include="stm32\wfSys.c">
       <Filter>stm32</Filter>
     </ClCompile>
-    <ClCompile Include="pic\Uart.c">
-      <Filter>pic</Filter>
-    </ClCompile>
     <ClCompile Include="ADS1120.c">
       <Filter>A/D\ADS1120</Filter>
     </ClCompile>
@@ -379,6 +376,7 @@
     <ClCompile Include="lcyIRDecode.c">
       <Filter>算法</Filter>
     </ClCompile>
+    <ClCompile Include="wfUart.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DS12C887_Intel.h">
@@ -565,9 +563,6 @@
     <ClInclude Include="stm32\wfSys.h">
       <Filter>stm32</Filter>
     </ClInclude>
-    <ClInclude Include="pic\Uart.h">
-      <Filter>pic</Filter>
-    </ClInclude>
     <ClInclude Include="ADS1120.h">
       <Filter>A/D\ADS1120</Filter>
     </ClInclude>
@@ -578,6 +573,7 @@
       <Filter>算法</Filter>
     </ClInclude>
     <ClInclude Include="wfDefine.h" />
+    <ClInclude Include="wfUart.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="芯片\24cxx.pdf">

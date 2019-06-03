@@ -1,5 +1,6 @@
 #include "afx.h"
 #include "TypeDefine.h"
+#include "wfDefine.h"
 #ifdef MCC30
 uint8_t wCPU_IPL;
 #endif

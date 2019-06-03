@@ -1,8 +1,7 @@
 #ifndef __SimI2C_h__
 #define __SimI2C_h__
 
-#include "main.h"
-#include "SimI2C_Conf.h"
+#include "HardwareProfile.h"
 //#define SimI2C_CLK_IO TRISB6
 //#define SimI2C_DATA_IO TRISB4
 //#define SimI2C_CLK RB6
@@ -23,7 +22,7 @@ void SimI2C_SendByte(uint8_t data);//写数据
 uint8_t SimI2C_ReadByte(void);//读数据
 
 #ifdef SimI2C_2
-#ifndef SimI2C_Delay_2
+#ifndef SimI2C_Delay_2_Ex
 #define SimI2C_Delay_2() __delay_us(1);
 #endif
 void SimI2C_Start_2(void);

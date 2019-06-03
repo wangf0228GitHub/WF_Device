@@ -1,7 +1,7 @@
 #ifndef __SimSPI_h__
 #define __SimSPI_h__
 
-#include "SimSPI_Conf.h"
+#include "HardwareProfile.h"//SimSPI_Conf.h"
 
 #ifndef SimSPI_Delay_Ex
 #define SimSPI_Delay() 

@@ -173,7 +173,6 @@
     <ClCompile Include="OneWire.c" />
     <ClCompile Include="pic\afx.c" />
     <ClCompile Include="pic\p24F_I2C2.c" />
-    <ClCompile Include="pic\Uart.c" />
     <ClCompile Include="pic\wf_flashwrite.c" />
     <ClCompile Include="PID.c" />
     <ClCompile Include="ReBiaoCP.c" />
@@ -203,6 +202,7 @@
     <ClCompile Include="GPS_GPRMC.c" />
     <ClCompile Include="DS1302.c" />
     <ClCompile Include="BCDTimeOP.c" />
+    <ClCompile Include="wfUart.c" />
     <ClCompile Include="WTH040.c" />
     <ClCompile Include="X5045.c" />
     <ClCompile Include="X9C103.c" />
@@ -241,7 +241,6 @@
     <ClInclude Include="OneWire.h" />
     <ClInclude Include="pic\afx.h" />
     <ClInclude Include="pic\p24F_I2C2.h" />
-    <ClInclude Include="pic\Uart.h" />
     <ClInclude Include="PID.h" />
     <ClInclude Include="ReBiaoCP.h" />
     <ClInclude Include="SHT25.h" />
@@ -271,6 +270,7 @@
     <ClInclude Include="DS1302.h" />
     <ClInclude Include="BCDTimeOP.h" />
     <ClInclude Include="wfDefine.h" />
+    <ClInclude Include="wfUart.h" />
     <ClInclude Include="WTH040.h" />
     <ClInclude Include="X5045.h" />
     <ClInclude Include="TypeDefine.h" />
