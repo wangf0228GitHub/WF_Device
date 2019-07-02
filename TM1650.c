@@ -59,45 +59,45 @@ uint8_t TM1650_WriteData(uint8_t Com,uint8_t Data)
 #ifdef TM1650_2
 uint8_t TM1650_Result_2;
 #ifdef SimI2C_2
-void TM1650_Init_2(void)
+void TM1650_2_Init(void)
 {
-	SimI2C_Init_2();
+	SimI2C_2_Init();
 }
-uint8_t TM1650_Read_2(void)
+uint8_t TM1650_2_Read(void)
 {
-	uint8_t ErrTimes=TM1650_RetryCount_2;	
+	uint8_t ErrTimes=TM1650_2_RetryCount;	
 	uint8_t bRight=0;
 	while(ErrTimes--)
 	{
-		SimI2C_Start_2();		
-		SimI2C_SendByte_2(0x49);//读
-		if(SimI2C_RecAck_2())
+		SimI2C_2_Start();		
+		SimI2C_2_SendByte(0x49);//读
+		if(SimI2C_2_RecAck())
 			continue;
-		TM1650_Result_2=SimI2C_ReadByte_2();
-		SimI2C_Ack_2();		
+		TM1650_Result_2=SimI2C_ReadByte();
+		SimI2C_2_Ack();		
 		bRight=1;
 		break;
 	}
-	SimI2C_Stop_2();
+	SimI2C_2_Stop();
 	return bRight;
 }
-uint8_t TM1650_WriteData_2(uint8_t Com,uint8_t Data)
+uint8_t TM1650_2_WriteData(uint8_t Com,uint8_t Data)
 {
-	uint8_t ErrTimes=TM1650_RetryCount_2;
+	uint8_t ErrTimes=TM1650_2_RetryCount;
 	uint8_t bRight=0;	
 	while(ErrTimes--)
 	{
-		SimI2C_Start_2();		
-		SimI2C_SendByte_2(Com);//写
-		if(SimI2C_RecAck_2())
+		SimI2C_2_Start();		
+		SimI2C_2_SendByte(Com);//写
+		if(SimI2C_2_RecAck())
 			continue;//无应答返回到循环
-		SimI2C_SendByte_2(Data);
-		if(SimI2C_RecAck_2())
+		SimI2C_2_SendByte(Data);
+		if(SimI2C_2_RecAck())
 			continue;
 		bRight=1;				
 		break;		
 	}
-	SimI2C_Stop_2();
+	SimI2C_2_Stop();
 	__delay_us(5);
 	return bRight;
 }

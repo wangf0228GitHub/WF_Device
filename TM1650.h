@@ -19,15 +19,15 @@ void TM1650_Init(void);
 uint8_t TM1650_WriteData(uint8_t Com,uint8_t Data);
 
 #ifdef TM1650_2
-#ifndef TM1650_RetryCount_2
-#define TM1650_RetryCount_2 2
+#ifndef TM1650_2_RetryCount
+#define TM1650_2_RetryCount 2
 #endif
 
-extern uint8_t TM1650_Result_2;
-uint8_t TM1650_Read_2(void);
-void TM1650_Init_2(void);
+extern uint8_t TM1650_2_Result;
+uint8_t TM1650_2_Read(void);
+void TM1650_2_Init(void);
 //送6位地址+TM1650_DATALENGTH位数据
-uint8_t TM1650_WriteData_2(uint8_t Com,uint8_t Data);
+uint8_t TM1650_2_WriteData(uint8_t Com,uint8_t Data);
 #endif
 
 #ifdef TM1650_3

@@ -106,6 +106,7 @@ void SimSPI_Init(void)
 	#if defined(SimSPI_SPI0)
 		for(i=0;i<8;i++)
 		{
+			SimSPI_Delay();
 			SIMSPI_SCL_Low();	//下降沿接收数据
 			ret=ret<<1;
 			SimSPI_Delay();
@@ -119,14 +120,15 @@ void SimSPI_Init(void)
 			{
 				SIMSPI_SDO_Low();	//待发送数据位是0
 			}
-			c=c<<1;	//判断待发送的数据位是0或1	
-			SimSPI_Delay();
+			c=c<<1;	//判断待发送的数据位是0或1			
 			SIMSPI_SCL_High();//上升沿发送
 		}
+		SimSPI_Delay();
 		SIMSPI_SCL_Low();	//空闲为低电平
 	#elif defined(SimSPI_SPI1) 
 		for(i=0;i<8;i++)
-		{		
+		{	
+			SimSPI_Delay();	
 			SIMSPI_SCL_High();	//上升沿接收数据
 			ret=ret<<1;
 			SimSPI_Delay();
@@ -140,13 +142,13 @@ void SimSPI_Init(void)
 			{
 				SIMSPI_SDO_Low();	//待发送数据位是0
 			}
-			c=c<<1;	//判断待发送的数据位是0或1
-			SimSPI_Delay();
+			c=c<<1;	//判断待发送的数据位是0或1			
 			SIMSPI_SCL_Low();//下降沿发送					
 		}
 	#elif defined(SimSPI_SPI2) 
 		for(i=0;i<8;i++)
 		{
+			SimSPI_Delay();
 			if((c&0x80)==0x80)	//判断待发送的数据位是0或1
 			{
 				SIMSPI_SDO_High();	//待发送数据位是1
@@ -155,8 +157,7 @@ void SimSPI_Init(void)
 			{
 				SIMSPI_SDO_Low();	//待发送数据位是0
 			}
-			c=c<<1;	//判断待发送的数据位是0或1	
-			SimSPI_Delay();
+			c=c<<1;	//判断待发送的数据位是0或1				
 			SIMSPI_SCL_Low();//下降沿发送
 			SimSPI_Delay();
 			SIMSPI_SCL_High();	//上升沿接收数据
@@ -168,6 +169,7 @@ void SimSPI_Init(void)
 	#elif defined(SimSPI_SPI3) 
 		for(i=0;i<8;i++)
 		{
+			SimSPI_Delay();
 			SIMSPI_SCL_Low();	//下降沿接收数据
 			ret=ret<<1;
 			SimSPI_Delay();
@@ -181,12 +183,11 @@ void SimSPI_Init(void)
 			{
 				SIMSPI_SDO_Low();
 			}
-			c=c<<1;	//判断待发送的数据位是0或1	
-			SimSPI_Delay();
+			c=c<<1;	//判断待发送的数据位是0或1			
 			SIMSPI_SCL_High();//上升沿发送			
-			SimSPI_Delay();
 		}
 	#endif
+		SimSPI_Delay();
 		return ret;
 	}
 #endif

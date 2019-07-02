@@ -102,11 +102,6 @@ void CP1616_Client_ProcRx(uint8_t rx)
 			if(CP1616_Client_RxList[2]!=0xff)//0xff 广播地址
 			{
 				CP1616_Client_RxCount=0;				
-#if CP1616_Client_DataBufLen==1
-				CP1616_Client_NeedRxCount=0xff;
-#else
-				CP1616_Client_NeedRxCount=0xffff;
-#endif
 			}
 		}
 	}
@@ -119,11 +114,6 @@ void CP1616_Client_ProcRx(uint8_t rx)
 			if(CP1616_Client_RxList[2]!=0xff || CP1616_Client_RxList[3]!=0xff)//0xffff 广播地址
 			{
 				CP1616_Client_RxCount=0;				
-#if CP1616_Client_DataBufLen==1
-				CP1616_Client_NeedRxCount=0xff;
-#else
-				CP1616_Client_NeedRxCount=0xffff;
-#endif
 			}
 		}
 	}
@@ -147,6 +137,7 @@ void CP1616_Client_SendData(uint8_t CommandIndex,uint8_t* pBuff,uint16_t Count)
 {
 	uint8_t sum;
 	uint16_t i;
+	Count++;
 #ifndef CP1616_Client_Tx_OneByOne
 	uint16_t txIndex=0;
 #endif
@@ -169,7 +160,8 @@ void CP1616_Client_SendData(uint8_t CommandIndex,uint8_t* pBuff,uint16_t Count)
 	CP1616_Client_TxByteWithVerify(HIGH_BYTE(Count));
 	CP1616_Client_TxByteWithVerify(LOW_BYTE(Count));
 #endif
-	for(i=0;i<Count;i++)
+	CP1616_Client_TxByteWithVerify(0x01);
+	for(i=0;i<(Count-1);i++)
 	{
 		CP1616_Client_TxByteWithVerify(pBuff[i]);
 	}
@@ -192,7 +184,8 @@ void CP1616_Client_SendData(uint8_t CommandIndex,uint8_t* pBuff,uint16_t Count)
 	CP1616_Client_TxList[txIndex++]=HIGH_BYTE(Count);
 	CP1616_Client_TxList[txIndex++]=LOW_BYTE(Count);
 #endif
-	for(i=0;i<Count;i++)
+	CP1616_Client_TxList[txIndex++]=0x01;
+	for(i=0;i<(Count-1);i++)
 	{
 		CP1616_Client_TxList[txIndex++]=pBuff[i];
 	}
@@ -516,6 +509,7 @@ void CP1717_Client_SendData(uint8_t CommandIndex,uint8_t* pBuff,uint16_t Count)
 {
 	uint8_t sum;
 	uint16_t i;
+	Count++;
 #ifndef CP1717_Client_Tx_OneByOne
 	uint16_t txIndex=0;
 #endif
@@ -538,7 +532,8 @@ void CP1717_Client_SendData(uint8_t CommandIndex,uint8_t* pBuff,uint16_t Count)
 	CP1717_Client_TxByteWithVerify(HIGH_BYTE(Count));
 	CP1717_Client_TxByteWithVerify(LOW_BYTE(Count));
 #endif
-	for(i=0;i<Count;i++)
+	CP1717_Client_TxByteWithVerify(0x01);
+	for(i=0;i<(Count-1);i++)
 	{
 		CP1717_Client_TxByteWithVerify(pBuff[i]);
 	}
@@ -561,7 +556,8 @@ void CP1717_Client_SendData(uint8_t CommandIndex,uint8_t* pBuff,uint16_t Count)
 	CP1717_Client_TxList[txIndex++]=HIGH_BYTE(Count);
 	CP1717_Client_TxList[txIndex++]=LOW_BYTE(Count);
 #endif
-	for(i=0;i<Count;i++)
+	CP1717_Client_TxList[txIndex++]=0x01;
+	for(i=0;i<(Count-1);i++)
 	{
 		CP1717_Client_TxList[txIndex++]=pBuff[i];
 	}
