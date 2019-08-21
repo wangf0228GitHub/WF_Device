@@ -83,8 +83,8 @@ typedef union
 	uint32_t AllFlag;
 } _CP1717_Client_Flags;        // general flags
 
-#define pCP1717_ClientData 2+CP1717_AddrLen+1+CP1717_DataBufLen
-#define pCP1717_CommandIndex 2+CP1717_AddrLen
+#define pCP1717_ClientData 2+CP1717_Client_AddrLen+1+CP1717_Client_DataBufLen
+#define pCP1717_CommandIndex 2+CP1717_Client_AddrLen
 
 
 
@@ -92,7 +92,7 @@ typedef union
 #define CP1717_Client_RxList_LenMax 100
 #endif
 
-#if CP1717_DataBufLen==1
+#if CP1717_Client_DataBufLen==1
 extern uint8_t CP1717_Client_RxCount;
 extern uint8_t CP1717_Client_NeedRxCount;
 #else
@@ -101,9 +101,9 @@ extern uint16_t CP1717_Client_NeedRxCount;
 #endif
 
 
-#if CP1717_AddrLen==1
+#if CP1717_Client_AddrLen==1
 extern uint8_t CP1717_Client_Addr;
-#elif CP1717_AddrLen==2
+#elif CP1717_Client_AddrLen==2
 extern uint16_t CP1717_Client_Addr;
 #endif
 
