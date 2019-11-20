@@ -54,6 +54,8 @@
 //
 //*****************************************************************************
 #include "socket.h"
+#include "main.h"
+#include "wfSys.h"
 
 //M20150401 : Typing Error
 //#define SOCK_ANY_PORT_NUM  0xC000;
@@ -255,6 +257,7 @@ int8_t listen(uint8_t sn)
 
 int8_t connect(uint8_t sn, uint8_t * addr, uint16_t port)
 {
+	uint32_t tick;
    CHECK_SOCKNUM();
    CHECK_SOCKMODE(Sn_MR_TCP);
    CHECK_SOCKINIT();
@@ -276,6 +279,7 @@ int8_t connect(uint8_t sn, uint8_t * addr, uint16_t port)
 	setSn_CR(sn,Sn_CR_CONNECT);
    while(getSn_CR(sn));
    if(sock_io_mode & (1<<sn)) return SOCK_BUSY;
+   tick=wfGetTick();
    while(getSn_SR(sn) != SOCK_ESTABLISHED)
    {
 		if (getSn_IR(sn) & Sn_IR_TIMEOUT)
@@ -288,8 +292,11 @@ int8_t connect(uint8_t sn, uint8_t * addr, uint16_t port)
 		{
 			return SOCKERR_SOCKCLOSED;
 		}
+		if(GetDeltaTick(tick)>10000)
+		{
+			return SOCK_ERROR;
+		}
 	}
-   
    return SOCK_OK;
 }
 
