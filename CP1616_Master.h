@@ -2,7 +2,7 @@
 #define __CP1616_Master_h__
 
 #include "HardwareProfile.h"
-
+#include "wfSys.h"
 typedef union   
 {
 	struct
@@ -20,10 +20,10 @@ typedef union
 #endif
 
 #ifndef CP1616_Master_WaitClientInterval_Ex
-#define CP1616_Master_WaitClientInterval() __delay_20ms(5);
+#define CP1616_Master_WaitClientInterval() wfDelay_ms(10);
 #endif
 
-#define pCP1616_MasterData 2+CP1616_Master_AddrLen+1+CP1616_Master_DataBufLen
+#define pCP1616_Master_DataIndex 2+CP1616_Master_AddrLen+1+CP1616_Master_DataBufLen
 #define pCP1616_Master_CommandIndex 2+CP1616_Master_AddrLen
 
 #ifndef CheckVerify_CP1616_Master
@@ -34,8 +34,12 @@ typedef union
 													sum=0;
 #endif
 
-#ifndef MAX_CP1616_Master_RX
-#define MAX_CP1616_Master_RX 50
+#ifndef CP1616_Master_RxListMax
+#define CP1616_Master_RxListMax 50
+#endif
+
+#ifndef CP1616_Master_TxListMax
+#define CP1616_Master_TxListMax 50
 #endif
 
 #ifndef CP1616_Master_SetRx_Ex
@@ -70,7 +74,7 @@ typedef union
 
 
 extern volatile _CP1616_Master_Flags CP1616_Master_Flags;
-extern uint8_t CP1616_Master_RxList[MAX_CP1616_Master_RX];
+extern uint8_t CP1616_Master_RxList[CP1616_Master_RxListMax];
 
 extern uint8_t CP1616_Master_WaitCommand;
 extern uint16_t CP1616_Master_WaitClientTick;

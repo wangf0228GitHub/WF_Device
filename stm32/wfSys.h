@@ -12,7 +12,7 @@
 #define nop() asm("nop")
 #endif
 
-void wfDelay_init(uint8_t SYSCLK);
+void wfDelay_init(uint32_t SYSCLK);
 void wfDelay_nNOP(uint32_t nCount);
 void wfDelay_us(uint32_t nus);
 #define NOP5()  nop();nop();nop();nop();nop()

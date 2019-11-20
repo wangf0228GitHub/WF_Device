@@ -8,7 +8,7 @@ static uint32_t fac_us=0;							//us延时倍乘数
 
 //初始化延迟函数
 //SYSCLK:系统时钟频率
-void wfDelay_init(uint8_t SYSCLK)
+void wfDelay_init(uint32_t SYSCLK)
 {
 	fac_us=SYSCLK;
 }

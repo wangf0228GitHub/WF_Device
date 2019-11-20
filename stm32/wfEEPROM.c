@@ -139,7 +139,7 @@ void wfEEPROM_WriteBytes(uint32_t WriteAddr,uint8_t *pBuffer,uint32_t NumToWrite
 	{  
 		HAL_FLASHEx_DATAEEPROM_Program(FLASH_TYPEPROGRAMDATA_BYTE,wfEEPROM_BASE_ADDR + WriteAddr + t,*(pBuffer + t));  
 	}  
-	HAL_FLASHEx_DATAEEPROM_Unlock();  
+	HAL_FLASHEx_DATAEEPROM_Lock();  
 } 
 
 void wfEEPROM_WriteHalfWords(uint32_t WriteAddr,uint16_t *pBuffer,uint32_t NumToWrite)  
@@ -150,7 +150,7 @@ void wfEEPROM_WriteHalfWords(uint32_t WriteAddr,uint16_t *pBuffer,uint32_t NumTo
 	{  
 		HAL_FLASHEx_DATAEEPROM_Program(FLASH_TYPEPROGRAMDATA_HALFWORD,wfEEPROM_BASE_ADDR + WriteAddr + t,*(pBuffer + t));  
 	}  
-	HAL_FLASHEx_DATAEEPROM_Unlock();  
+	HAL_FLASHEx_DATAEEPROM_Lock();  
 }
 
 void wfEEPROM_WriteWords(uint32_t WriteAddr,uint32_t *pBuffer,uint32_t NumToWrite)  
@@ -161,7 +161,7 @@ void wfEEPROM_WriteWords(uint32_t WriteAddr,uint32_t *pBuffer,uint32_t NumToWrit
 	{  
 		HAL_FLASHEx_DATAEEPROM_Program(FLASH_TYPEPROGRAMDATA_WORD,wfEEPROM_BASE_ADDR + WriteAddr + t,*(pBuffer + t));  
 	}  
-	HAL_FLASHEx_DATAEEPROM_Unlock();  
+	HAL_FLASHEx_DATAEEPROM_Lock();  
 }
 #endif
 

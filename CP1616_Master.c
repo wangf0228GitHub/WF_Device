@@ -1,7 +1,7 @@
 #include "CP1616_Master.h"
 #include "wfDefine.h"
 volatile _CP1616_Master_Flags CP1616_Master_Flags;
-uint8_t CP1616_Master_RxList[MAX_CP1616_Master_RX];
+uint8_t CP1616_Master_RxList[CP1616_Master_RxListMax];
 
 #if CP1616_Master_DataBufLen==1
 	uint8_t CP1616_Master_RxCount;
@@ -27,7 +27,7 @@ uint16_t CP1616_Master_WaitClientTime;
 uint8_t CP1616_Master_RetryTimes;
 
 #ifndef CP1616_Master_Tx_OneByOne
-uint8_t CP1616_Master_TxList[CP1616_Master_TxList_LenMax];
+uint8_t CP1616_Master_TxList[CP1616_Master_TxListMax];
 #endif
 void CP1616_Master_Init(void)
 {
@@ -72,7 +72,7 @@ void CP1616_Master_ProcRx(uint8_t rx)
 			CP1616_Master_NeedRxCount=0xffff;
 #endif
 		}
-		else if(CP1616_Master_RxCount>MAX_CP1616_Master_RX)
+		else if(CP1616_Master_RxCount>CP1616_Master_RxListMax)
 		{
 			CP1616_Master_RxCount=0;
 #if CP1616_Master_DataBufLen==1
@@ -82,14 +82,14 @@ void CP1616_Master_ProcRx(uint8_t rx)
 #endif				
 		}
 	}
-	else if(CP1616_Master_RxCount==pCP1616_MasterData)//生成帧长度
+	else if(CP1616_Master_RxCount==pCP1616_Master_DataIndex)//生成帧长度
 	{
 #if CP1616_Master_DataBufLen==1
-		CP1616_Master_NeedRxCount=CP1616_Master_RxList[pCP1616_MasterData-1]+pCP1616_MasterData+2;
+		CP1616_Master_NeedRxCount=CP1616_Master_RxList[pCP1616_Master_DataIndex-1]+pCP1616_Master_DataIndex+2;
 #else
-		CP1616_Master_NeedRxCount=MAKE_SHORT(CP1616_Master_RxList[pCP1616_MasterData-2],CP1616_Master_RxList[pCP1616_MasterData-1])+pCP1616_MasterData+2;
+		CP1616_Master_NeedRxCount=MAKE_SHORT(CP1616_Master_RxList[pCP1616_Master_DataIndex-2],CP1616_Master_RxList[pCP1616_Master_DataIndex-1])+pCP1616_Master_DataIndex+2;
 #endif
-		if(CP1616_Master_NeedRxCount>CP1616_Master_RxList_LenMax)
+		if(CP1616_Master_NeedRxCount>CP1616_Master_RxListMax)
 		{
 			CP1616_Master_RxCount=0;
 #if CP1616_Master_DataBufLen==1
@@ -213,7 +213,7 @@ void CP1616_MasterSendData(uint8_t Command,uint8_t* pBuff,uint16_t Count)
 	CP1616_Master_TxList[txIndex++]=HIGH_BYTE(Addr);
 	CP1616_Master_TxList[txIndex++]=LOW_BYTE(Addr);
 #endif
-	CP1616_Master_TxList[txIndex++]=CommandIndex;
+	CP1616_Master_TxList[txIndex++]=pCP1616_Master_CommandIndex;
 
 #if CP1616_Master_DataBufLen==1
 	CP1616_Master_TxList[txIndex++]=Count;
@@ -232,7 +232,7 @@ void CP1616_MasterSendData(uint8_t Command,uint8_t* pBuff,uint16_t Count)
 #endif	
 	CP1616_Master_SetRx();
 	CP1616_Master_Flags.Bits.bRx=0;
-	CP1616_Master_WaitClientTick=SystemTick;
+	CP1616_Master_WaitClientTick=GetCurTick();
 	CP1616_Master_RxCount=0;
 #if CP1616_Master_DataBufLen==1
 	CP1616_Master_NeedRxCount=0xff;
@@ -303,7 +303,7 @@ unsigned char CP1616_MasterWaitClientData(uint8_t Command,uint8_t* pBuff,uint16_
 		CP1616_Master_TxList[txIndex++]=HIGH_BYTE(Addr);
 		CP1616_Master_TxList[txIndex++]=LOW_BYTE(Addr);
 #endif
-		CP1616_Master_TxList[txIndex++]=CommandIndex;
+		CP1616_Master_TxList[txIndex++]=pCP1616_Master_CommandIndex;
 
 #if CP1616_Master_DataBufLen==1
 		CP1616_Master_TxList[txIndex++]=Count;
@@ -322,7 +322,7 @@ unsigned char CP1616_MasterWaitClientData(uint8_t Command,uint8_t* pBuff,uint16_
 #endif	
 		CP1616_Master_SetRx();
 		CP1616_Master_Flags.Bits.bRx=0;
-		CP1616_Master_WaitClientTick=SystemTick;
+		CP1616_Master_WaitClientTick=GetCurTick();
 		CP1616_Master_RxCount=0;
 #if CP1616_Master_DataBufLen==1
 		CP1616_Master_NeedRxCount=0xff;
@@ -334,7 +334,7 @@ unsigned char CP1616_MasterWaitClientData(uint8_t Command,uint8_t* pBuff,uint16_
 		{
 			if(CP1616_Master_Flags.Bits.bRx)
 				break;
-			if((SystemTick-CP1616_Master_WaitClientTick)>CP1616_Master_WaitClientTime)//200ms等待超时
+			if(GetDeltaTick(CP1616_Master_WaitClientTick)>CP1616_Master_WaitClientTime)//200ms等待超时
 				break;
 		}
 		CP1616_Master_Flags.Bits.bWaitDataFromClient=0;
