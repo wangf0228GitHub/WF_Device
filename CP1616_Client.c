@@ -46,7 +46,7 @@ void CP1616_Client_ProcRx(uint8_t rx)
 	if(CP1616_Client_Flags.Bits.bRx==1)
 		return;
 	CP1616_Client_RxList[CP1616_Client_RxCount++]=rx;
-	if(CP1616_Client_RxCount>pCP1616_ClientData)
+	if(CP1616_Client_RxCount>pCP1616_Client_DataIndex)
 	{
 		if(rx==0x0d && CP1616_Client_RxCount==CP1616_Client_NeedRxCount)
 		{			
@@ -83,12 +83,12 @@ void CP1616_Client_ProcRx(uint8_t rx)
 #endif				
 		}
 	}
-	else if(CP1616_Client_RxCount==pCP1616_ClientData)
+	else if(CP1616_Client_RxCount==pCP1616_Client_DataIndex)
 	{
 #if CP1616_Client_DataBufLen==1
-		CP1616_Client_NeedRxCount=CP1616_Client_RxList[pCP1616_ClientData-1]+pCP1616_ClientData+2;
+		CP1616_Client_NeedRxCount=CP1616_Client_RxList[pCP1616_Client_DataIndex-1]+pCP1616_Client_DataIndex+2;
 #else
-		CP1616_Client_NeedRxCount=MAKE_SHORT(CP1616_Client_RxList[pCP1616_ClientData-2],CP1616_Client_RxList[pCP1616_ClientData-1])+pCP1616_ClientData+2;
+		CP1616_Client_NeedRxCount=MAKE_SHORT(CP1616_Client_RxList[pCP1616_Client_DataIndex-2],CP1616_Client_RxList[pCP1616_Client_DataIndex-1])+pCP1616_Client_DataIndex+2;
 #endif
 		if(CP1616_Client_NeedRxCount>CP1616_Client_RxList_LenMax)
 			CP1616_Client_RxCount=0;
@@ -353,7 +353,7 @@ uint8_t CP1616_Client_SendHeader( uint8_t CommandIndex,uint16_t Count )
 	CP1616_Client_TxList[txIndex++]=HIGH_BYTE(Count);
 	CP1616_Client_TxList[txIndex++]=LOW_BYTE(Count);
 #endif
-	sum=CP1616_Client_VerifyProc(CP1616_Client_TxList,pCP1616_ClientData);
+	sum=CP1616_Client_VerifyProc(CP1616_Client_TxList,pCP1616_Client_DataIndex);
 	CP1616_Client_TxProc(CP1616_Client_TxList,txIndex);
 #endif	
 	return sum;

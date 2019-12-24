@@ -22,7 +22,7 @@ typedef union
 	uint32_t AllFlag;
 } _CP1616_Client_Flags;        // general flags
 
-#define pCP1616_ClientData 2+CP1616_Client_AddrLen+1+CP1616_Client_DataBufLen
+#define pCP1616_Client_DataIndex 2+CP1616_Client_AddrLen+1+CP1616_Client_DataBufLen
 #define pCP1616_Client_CommandIndex 2+CP1616_Client_AddrLen
 
 
