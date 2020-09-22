@@ -1,8 +1,8 @@
 #ifndef __ATCommand_h__
 #define __ATCommand_h__
 
-#include "main.h"
-#include "ATCommand_Conf.h"
+#include "HardwareProfile.h"
+
 typedef union   
 {
 	struct
