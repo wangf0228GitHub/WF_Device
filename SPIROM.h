@@ -1,7 +1,7 @@
 #ifndef __SPIROM_h__
 #define __SPIROM_h__
 
-#include "main.h"
+
 #include "HardwareProfile.h" //"SPIROM_Conf.h"
 
 //cs、wp自行初始化

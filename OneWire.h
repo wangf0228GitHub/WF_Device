@@ -1,12 +1,12 @@
 #ifndef _ONEWIRE_h_
 #define _ONEWIRE_h_
 
-#include "main.h"
-#include "OneWire_Conf.h"
+#include "HardwareProfile.h"
 
 
-#ifndef TIMESFORRETRY_OneWire
-	#define TIMESFORRETRY_OneWire 5
+
+#ifndef TIMES4RETRY_OneWire
+	#define TIMES4RETRY_OneWire 5
 #endif
 
 #ifndef OneWire_ReadDelayOffSet

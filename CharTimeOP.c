@@ -1,6 +1,6 @@
-#include "HardwareProfile.h"
-#include "BCDTimeOP.h"
-#include "afx.h"
+#include "CharTimeOP.h"
+//#include "BCDTimeOP.h"
+//#include "afx.h"
 const uint8_t MonthDaymax[] =
 //jan feb mar apr may jun jul aug sep oct nov dec
 {  31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
@@ -118,7 +118,7 @@ void DateTimeAddMinutes(_SystemCharTime* dt,uint16_t MS)
 		else
 			break;
 	}
-	(*dt).Day=CHAR2BCD(x);	
+	(*dt).Day=x;	
 }
 uint16_t GetMinutesGap(_SystemCharTime dts,_SystemCharTime dte)
 {

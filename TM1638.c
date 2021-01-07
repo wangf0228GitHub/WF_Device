@@ -1,6 +1,6 @@
 #include "HardwareProfile.h"
 
-ulong TM1638_KeyValue;
+u32_wf TM1638_KeyValue;
 void TM1638_Init(void)
 {
 	TM1638_STB_IO=0; 
@@ -57,16 +57,18 @@ uint8_t TM1638_ReadByte(void)					//读数据函数
 {
 	uint8_t i;
 	uint8_t temp=0;
-	TM1638_DIO=1;	//设置为输入
+
 	for(i=0;i<8;i++)
 	{
 		temp>>=1;
 		TM1638_CLK=0;
-		if(TM1638_DIO)
+		__delay_us(1);
+		if(TM1638_DIO==1)
 			temp|=0x80;
 		__delay_us(1);
 		TM1638_CLK=1;
 	}
+	
 	return temp;
 }
 void TM1638_ReadKey(void)
@@ -74,9 +76,12 @@ void TM1638_ReadKey(void)
 	TM1638_STB=0;
 	__delay_us(1);
 	TM1638_WriteByte(0x42);
+	TM1638_DIO_IO =1;	//设置为输入
+	__delay_us(1);
 	TM1638_KeyValue.u8s[0]=TM1638_ReadByte();
 	TM1638_KeyValue.u8s[1]=TM1638_ReadByte();
 	TM1638_KeyValue.u8s[2]=TM1638_ReadByte();
 	TM1638_KeyValue.u8s[3]=TM1638_ReadByte();	
+	TM1638_DIO_IO = 0;
 	TM1638_STB=1;					//4个字节数据合成一个字节	
 }

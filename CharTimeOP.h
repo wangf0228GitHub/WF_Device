@@ -1,6 +1,8 @@
 #ifndef TimeOP_h__
 #define TimeOP_h__
 
+#include "HardwareProfile.h"
+
 typedef union
 {	
 	uint8_t Times[8];

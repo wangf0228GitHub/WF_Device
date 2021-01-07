@@ -6,7 +6,7 @@ uint8_t OneWire_Reset(void)
 {
 	unsigned char r,Retry;
 	r=1;
-	Retry=TIMESFORRETRY_OneWire;
+	Retry=TIMES4RETRY_OneWire;
 	while(Retry--)
 	{
 		ONEWIRE_SETLOW(); 

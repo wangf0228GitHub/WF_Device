@@ -2,13 +2,18 @@
 
 void TLV56XX_Init(void)
 {
+#ifdef TLV56XX_FS_DIR
 	TLV56XX_FS_DIR=0; 
+#endif
 	TLV56XX_CLK_DIR=0;
 	TLV56XX_DIO_DIR=0;
 #ifdef TLV56XX_CS_DIR
 	TLV56XX_CS_DIR=0;
 #endif
+
+#ifdef TLV56XX_FS_DIR
 	TLV56XX_FS_W=1;
+#endif
 	TLV56XX_CLK_W=0;
 	TLV56XX_DIO_W=0;
 #ifdef TLV56XX_CS_W
@@ -22,8 +27,10 @@ void TLV56XX_WriteData(uint16_t d)
 	TLV56XX_CS_W=0;
 	__delay_us(1);
 #endif
-	TLV56XX_FS_W=0;
 
+#ifdef TLV56XX_FS_DIR
+	TLV56XX_FS_W=0;
+#endif
 	for(i=0;i<16;i++)
 	{
 		TLV56XX_CLK_W=1;
@@ -36,8 +43,9 @@ void TLV56XX_WriteData(uint16_t d)
 		TLV56XX_CLK_W=0;
 	}
 	TLV56XX_CLK_W=1;
-
+#ifdef TLV56XX_FS_DIR
 	TLV56XX_FS_W=1;
+#endif
 #ifdef TLV56XX_CS_W
 	__delay_us(1);
 	TLV56XX_CS_W=1;	

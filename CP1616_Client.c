@@ -312,7 +312,7 @@ void CP1616_Client_SendError(uint8_t CommandIndex,uint8_t errNum)
 uint8_t CP1616_Client_SendHeader( uint8_t CommandIndex,uint16_t Count )
 {
 	uint8_t sum;
-	uint16_t i;
+	//uint16_t i;
 #ifndef CP1616_Client_Tx_OneByOne
 	uint16_t txIndex=0;
 #endif
