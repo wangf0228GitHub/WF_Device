@@ -181,6 +181,12 @@
     <Filter Include="A/D\ADS8689">
       <UniqueIdentifier>{313e786a-3f6c-458d-8961-9d0e9d9f0794}</UniqueIdentifier>
     </Filter>
+    <Filter Include="D/A\DAC8830">
+      <UniqueIdentifier>{ceaad44d-5e98-4bf3-b367-3cb4c2f9378a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="A/D\MCP3201">
+      <UniqueIdentifier>{af6379d9-6d5e-4354-ae49-de3ce0058ecf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DS12C887_Intel.c">
@@ -377,6 +383,12 @@
       <Filter>算法</Filter>
     </ClCompile>
     <ClCompile Include="wfUart.c" />
+    <ClCompile Include="DAC8830.c">
+      <Filter>D/A\DAC8830</Filter>
+    </ClCompile>
+    <ClCompile Include="MCP3201.c">
+      <Filter>A/D\MCP3201</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DS12C887_Intel.h">
@@ -574,6 +586,12 @@
     </ClInclude>
     <ClInclude Include="wfDefine.h" />
     <ClInclude Include="wfUart.h" />
+    <ClInclude Include="DAC8830.h">
+      <Filter>D/A\DAC8830</Filter>
+    </ClInclude>
+    <ClInclude Include="MCP3201.h">
+      <Filter>A/D\MCP3201</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="芯片\24cxx.pdf">

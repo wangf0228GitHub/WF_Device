@@ -2,26 +2,26 @@
 #include "wfDefine.h"
 
 #if CP1616_Client_DataBufLen==1
-uint8_t CP1616_Client_RxCount;
-uint8_t CP1616_Client_NeedRxCount;
+volatile uint8_t CP1616_Client_RxCount;
+volatile uint8_t CP1616_Client_NeedRxCount;
 #else
-uint16_t CP1616_Client_RxCount;
-uint16_t CP1616_Client_NeedRxCount;
+volatile uint16_t CP1616_Client_RxCount;
+volatile uint16_t CP1616_Client_NeedRxCount;
 #endif
 
 
 #if CP1616_Client_AddrLen==1
-uint8_t CP1616_Client_Addr;
+volatile uint8_t CP1616_Client_Addr;
 #elif CP1616_Client_AddrLen==2
-uint16_t CP1616_Client_Addr;
+volatile uint16_t CP1616_Client_Addr;
 #endif
 
-_CP1616_Client_Flags CP1616_Client_Flags;
+volatile _CP1616_Client_Flags CP1616_Client_Flags;
 
 #ifndef CP1616_Client_Tx_OneByOne
-uint8_t CP1616_Client_TxList[CP1616_Client_TxList_LenMax];
+volatile uint8_t CP1616_Client_TxList[CP1616_Client_TxList_LenMax];
 #endif
-uint8_t CP1616_Client_RxList[CP1616_Client_RxList_LenMax];
+volatile uint8_t CP1616_Client_RxList[CP1616_Client_RxList_LenMax];
 void CP1616_Client_Init(void)
 {
 	CP1616_Client_SetRx();
@@ -51,8 +51,8 @@ void CP1616_Client_ProcRx(uint8_t rx)
 		if(rx==0x0d && CP1616_Client_RxCount==CP1616_Client_NeedRxCount)
 		{			
 #ifdef CP1616_Client_NeedCheckVerify
-			sum=CP1616_Client_VerifyProc(CP1616_Client_RxList,CP1616_Client_NeedRxCount-2);
-			if(sum==CP1616_Client_RxList[CP1616_Client_NeedRxCount-2])	
+			sum=CP1616_Client_VerifyProc((uint8_t*)CP1616_Client_RxList,CP1616_Client_NeedRxCount-2u);
+			if(sum==CP1616_Client_RxList[CP1616_Client_NeedRxCount-2u])	
 			{
 				CP1616_Client_Flags.Bits.bRx=1;
 			}
@@ -86,7 +86,7 @@ void CP1616_Client_ProcRx(uint8_t rx)
 	else if(CP1616_Client_RxCount==pCP1616_Client_DataIndex)
 	{
 #if CP1616_Client_DataBufLen==1
-		CP1616_Client_NeedRxCount=CP1616_Client_RxList[pCP1616_Client_DataIndex-1]+pCP1616_Client_DataIndex+2;
+		CP1616_Client_NeedRxCount=CP1616_Client_RxList[pCP1616_Client_DataIndex-1u]+pCP1616_Client_DataIndex+2u;
 #else
 		CP1616_Client_NeedRxCount=MAKE_SHORT(CP1616_Client_RxList[pCP1616_Client_DataIndex-2],CP1616_Client_RxList[pCP1616_Client_DataIndex-1])+pCP1616_Client_DataIndex+2;
 #endif
@@ -136,11 +136,11 @@ void CP1616_Client_ProcRx(uint8_t rx)
 void CP1616_Client_SendData(uint8_t CommandIndex,uint8_t* pBuff,uint16_t Count)
 {
 	uint8_t sum;
-	uint16_t i;
-	Count++;
+	uint16_t i;	
 #ifndef CP1616_Client_Tx_OneByOne
 	uint16_t txIndex=0;
 #endif
+	Count++;
 	sum=0;
 	CP1616_Client_SetTx();
 #ifdef CP1616_Client_Tx_OneByOne
@@ -197,6 +197,45 @@ void CP1616_Client_SendData(uint8_t CommandIndex,uint8_t* pBuff,uint16_t Count)
 	CP1616_Client_SetRx();
 	CP1616_Client_EndProcCommand();
 }
+#ifndef CP1616_Client_Tx_OneByOne
+void CP1616_Client_SendAllData(uint8_t CommandIndex, uint16_t Count)
+{
+	uint8_t sum;
+	uint16_t i;
+	uint16_t txIndex = 0;
+	Count++;
+	sum = 0;
+	CP1616_Client_SetTx();
+	CP1616_Client_TxList[txIndex++] = 0x16;
+	CP1616_Client_TxList[txIndex++] = 0x16;
+#if CP1616_Client_AddrLen==1
+	CP1616_Client_TxList[txIndex++] = CP1616_Client_Addr;
+#elif CP1616_Client_AddrLen==2
+	CP1616_Client_TxList[txIndex++] = HIGH_BYTE(CP1616_Client_Addr);
+	CP1616_Client_TxList[txIndex++] = LOW_BYTE(CP1616_Client_Addr);
+#endif
+	CP1616_Client_TxList[txIndex++] = CommandIndex;
+
+#if CP1616_Client_DataBufLen==1
+	CP1616_Client_TxList[txIndex++] = Count;
+#else
+	CP1616_Client_TxList[txIndex++] = HIGH_BYTE(Count);
+	CP1616_Client_TxList[txIndex++] = LOW_BYTE(Count);
+#endif
+	CP1616_Client_TxList[txIndex++] = 0x01;
+	txIndex += Count;
+	// 	for (i = 0; i < (Count - 1); i++)
+	// 	{
+	// 		CP1616_Client_TxList[txIndex++] = pBuff[i];
+	// 	}
+	sum = CP1616_Client_VerifyProc(CP1616_Client_TxList, txIndex);
+	CP1616_Client_TxList[txIndex++] = sum;
+	CP1616_Client_TxList[txIndex++] = 0x0d;
+	CP1616_Client_TxProc(CP1616_Client_TxList, txIndex);
+	CP1616_Client_SetRx();
+	CP1616_Client_EndProcCommand();
+}
+#endif
 void CP1616_Client_SendOK(uint8_t CommandIndex)
 {
 	uint8_t sum;
@@ -253,7 +292,6 @@ void CP1616_Client_SendOK(uint8_t CommandIndex)
 	CP1616_Client_SetRx();
 	CP1616_Client_EndProcCommand();
 }
-
 void CP1616_Client_SendError(uint8_t CommandIndex,uint8_t errNum)
 {
 	uint8_t sum;

@@ -2,10 +2,16 @@
 #include "Verify.h"
 
 #ifdef Verify_Sum
-uint8_t GetVerify_Sum(uint8_t* pBuff,uint32_t Count)
-{
-	uint8_t sum;
+#ifdef MCU32
+	uint8_t GetVerify_Sum(uint8_t* pBuff,uint32_t Count)
+{	
 	uint32_t i;
+#else
+    uint8_t GetVerify_Sum(uint8_t* pBuff,uint8_t Count)
+{	
+	uint8_t i;
+#endif
+    uint8_t sum;
 	sum=0;
 	for(i=0;i<Count;i++)
 	{
@@ -18,10 +24,16 @@ uint8_t GetVerify_Sum(uint8_t* pBuff,uint32_t Count)
 #ifdef Verify_CRC8
 #define CRC8INIT	0x00
 #define CRC8POLY	0x18              //0X18 = X^8+X^5+X^4+X^0
-uint8_t GetVerify_CRC8( uint8_t* pBuff, uint32_t Count )
-{
-	uint8_t crc;
+#ifdef MCU32
+	uint8_t GetVerify_CRC8( uint8_t* pBuff, uint32_t Count )
+{	
 	uint32_t i;
+#else
+    uint8_t GetVerify_CRC8( uint8_t* pBuff, uint8_t Count )
+{	
+	uint8_t i;
+#endif
+    uint8_t crc;
 	uint8_t bit_counter;
 	uint8_t data;
 	uint8_t feedback_bit;
@@ -107,7 +119,11 @@ const uint8_t auchCRCLo[] = {
 	0x44, 0x84, 0x85, 0x45, 0x87, 0x47, 0x46, 0x86, 0x82, 0x42,
 	0x43, 0x83, 0x41, 0x81, 0x80, 0x40
 };
-u16_wf GetVerify_CRC16(uint8_t *puchMsg,uint32_t usDataLen)
+#ifdef MCU32
+	u16_wf GetVerify_CRC16(uint8_t *puchMsg,uint32_t usDataLen)
+#else
+    u16_wf GetVerify_CRC16(uint8_t *puchMsg,uint8_t usDataLen)
+#endif
 {
 	u16_wf ret;
 	ret.u16=Verify_CRC16_Init;
@@ -123,7 +139,11 @@ u16_wf GetVerify_CRC16(uint8_t *puchMsg,uint32_t usDataLen)
 #endif
 
 #ifdef Verify_byteXOR
-uint8_t GetVerify_byteXOR(uint8_t* pBuff, uint32_t Count)
+#ifdef MCU32
+	uint8_t GetVerify_byteXOR(uint8_t* pBuff, uint32_t Count)
+#else
+    uint8_t GetVerify_byteXOR(uint8_t* pBuff, uint8_t Count)
+#endif
 {
 	uint8_t ret,i;
 	ret=*pBuff;
@@ -133,7 +153,11 @@ uint8_t GetVerify_byteXOR(uint8_t* pBuff, uint32_t Count)
 	}
 	return ret;
 }
-uint8_t GetVerify_byteXOR_WithOrigV(uint8_t origV,uint8_t* pBuff, uint32_t Count)
+#ifdef MCU32
+	uint8_t GetVerify_byteXOR_WithOrigV(uint8_t origV,uint8_t* pBuff, uint32_t Count)
+#else
+    uint8_t GetVerify_byteXOR_WithOrigV(uint8_t origV,uint8_t* pBuff, uint8_t Count)
+#endif
 {
 	uint8_t ret,i;
 	ret=origV;

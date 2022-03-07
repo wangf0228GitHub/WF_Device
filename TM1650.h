@@ -31,15 +31,28 @@ uint8_t TM1650_2_WriteData(uint8_t Com,uint8_t Data);
 #endif
 
 #ifdef TM1650_3
-#ifndef TM1650_RetryCount_3
-#define TM1650_RetryCount_3 2
+#ifndef TM1650_3_RetryCount
+#define TM1650_3_RetryCount 2
 #endif
 
-extern uint8_t TM1650_Result_3;
-uint8_t TM1650_Read_3(void);
-void TM1650_Init_3(void);
+extern uint8_t TM1650_3_Result;
+uint8_t TM1650_3_Read(void);
+void TM1650_3_Init(void);
 //送6位地址+TM1650_DATALENGTH位数据
-uint8_t TM1650_WriteData_3(uint8_t Com,uint8_t Data);
+uint8_t TM1650_3_WriteData(uint8_t Com,uint8_t Data);
 #endif
+
+#ifdef TM1650_4
+#ifndef TM1650_4_RetryCount
+#define TM1650_4_RetryCount 2
+#endif
+
+extern uint8_t TM1650_4_Result;
+uint8_t TM1650_4_Read(void);
+void TM1650_4_Init(void);
+//送6位地址+TM1650_DATALENGTH位数据
+uint8_t TM1650_4_WriteData(uint8_t Com, uint8_t Data);
+#endif
+
 
 #endif

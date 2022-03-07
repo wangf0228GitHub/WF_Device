@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="2.0|Win32">
       <Configuration>2.0</Configuration>
@@ -32,14 +32,17 @@
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='2.0|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -151,6 +154,7 @@
     <ClCompile Include="CP1616_Client.c" />
     <ClCompile Include="CP1616_Master.c" />
     <ClCompile Include="CP68_Client.c" />
+    <ClCompile Include="DAC8830.c" />
     <ClCompile Include="DS12C887_Intel.c" />
     <ClCompile Include="DS18x20.c" />
     <ClCompile Include="FM_TEA5767.c" />
@@ -162,6 +166,7 @@
     <ClCompile Include="lcyIRDecode.c" />
     <ClCompile Include="M24XX.c" />
     <ClCompile Include="Max7221.c" />
+    <ClCompile Include="MCP3201.c" />
     <ClCompile Include="ModbusRTU_Client.c" />
     <ClCompile Include="MS5536c.c" />
     <ClCompile Include="MS5803_02ba.c" />
@@ -219,6 +224,7 @@
     <ClInclude Include="CP1616_Client.h" />
     <ClInclude Include="CP1616_Master.h" />
     <ClInclude Include="CP68_Client.h" />
+    <ClInclude Include="DAC8830.h" />
     <ClInclude Include="DS12C887_Intel.h" />
     <ClInclude Include="DS18x20.h" />
     <ClInclude Include="FM_TEA5767.h" />
@@ -230,6 +236,7 @@
     <ClInclude Include="lcyIRDecode.h" />
     <ClInclude Include="M24XX.h" />
     <ClInclude Include="Max7221.h" />
+    <ClInclude Include="MCP3201.h" />
     <ClInclude Include="ModbusRTU_Client.h" />
     <ClInclude Include="MS5536c.h" />
     <ClInclude Include="MS5803_02ba.h" />

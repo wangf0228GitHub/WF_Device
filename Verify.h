@@ -9,11 +9,21 @@
 
 
 #ifdef Verify_Sum
-uint8_t GetVerify_Sum(uint8_t* pBuff,uint32_t Count);
+#ifdef MCU32
+	uint8_t GetVerify_Sum(uint8_t* pBuff,uint32_t Count);
+#else
+    uint8_t GetVerify_Sum(uint8_t* pBuff,uint8_t Count);
+#endif
+
 #endif
 
 #ifdef Verify_CRC8
-uint8_t GetVerify_CRC8(uint8_t* pBuff, uint32_t Count);
+#ifdef MCU32
+	uint8_t GetVerify_CRC8(uint8_t* pBuff, uint32_t Count);
+#else
+    uint8_t GetVerify_CRC8(uint8_t* pBuff, uint8_t Count);
+#endif
+
 #endif
 
 
@@ -24,7 +34,12 @@ uint8_t GetVerify_CRC8(uint8_t* pBuff, uint32_t Count);
 	crc.u8L = auchCRCLo[uIndex] ;
 extern const uint8_t auchCRCHi[];
 extern const uint8_t auchCRCLo[];
-u16_wf GetVerify_CRC16(uint8_t *puchMsg,uint32_t usDataLen);
+#ifdef MCU32
+	u16_wf GetVerify_CRC16(uint8_t *puchMsg,uint32_t usDataLen);
+#else
+    u16_wf GetVerify_CRC16(uint8_t *puchMsg,uint8_t usDataLen);
+#endif
+
 
 #ifndef Verify_CRC16_Init
 #define Verify_CRC16_Init 0xffff
@@ -33,8 +48,14 @@ u16_wf GetVerify_CRC16(uint8_t *puchMsg,uint32_t usDataLen);
 #endif
 
 #ifdef Verify_byteXOR
-uint8_t GetVerify_byteXOR(uint8_t* pBuff, uint32_t Count);
+#ifdef MCU32
+	uint8_t GetVerify_byteXOR(uint8_t* pBuff, uint32_t Count);
 uint8_t GetVerify_byteXOR_WithOrigV(uint8_t origV,uint8_t* pBuff, uint32_t Count);
+#else
+    uint8_t GetVerify_byteXOR(uint8_t* pBuff, uint8_t Count);
+uint8_t GetVerify_byteXOR_WithOrigV(uint8_t origV,uint8_t* pBuff, uint8_t Count);
+#endif
+
 #endif
 
 #endif

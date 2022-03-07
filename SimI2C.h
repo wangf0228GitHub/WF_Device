@@ -54,5 +54,24 @@ void SimI2C_3_Init( void );
 void SimI2C_3_SendByte(uint8_t data);//写数据
 uint8_t SimI2C_3_ReadByte(void);//读数据
 #endif
+
+#ifdef SimI2C_4
+#ifndef SimI2C_4_Delay_Ex
+#define SimI2C_4_Delay()
+#endif
+
+
+void SimI2C_4_Start(void);
+void SimI2C_4_Stop(void);
+uint8_t SimI2C_4_RecAck(void);
+void SimI2C_4_Ack(void);
+void SimI2C_4_NoAck(void);
+
+void SimI2C_4_Init(void);
+void SimI2C_4_SendByte(uint8_t data);//写数据
+uint8_t SimI2C_4_ReadByte(void);//读数据
+#endif
+
+
 #endif // __SimI2C_h__
 
